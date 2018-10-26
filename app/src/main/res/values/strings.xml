@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TacheMun</string>
+    <string name="connexion_txt">Connexion requise</string>
+    <string name="connexion_button">Se connecter</string>
+    <string name="inscription_button">S\'inscrire</string>
+    <string name="password_hint">mot de passe</string>
+    <string name="pseudo_hint">Nom d\'utilisateur</string>
 </resources>
