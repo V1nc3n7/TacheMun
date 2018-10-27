@@ -19,6 +19,10 @@
         <activity
             android:name=".Listeliste"
             android:label="@string/title_activity_listeliste"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TestScrollingActivity"
+            android:label="@string/title_activity_test_scrolling"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
