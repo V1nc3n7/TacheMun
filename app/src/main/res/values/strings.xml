@@ -5,4 +5,11 @@
     <string name="inscription_button">S\'inscrire</string>
     <string name="password_hint">mot de passe</string>
     <string name="pseudo_hint">Nom d\'utilisateur</string>
+    <string name="title_activity_listeliste">Listeliste</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
