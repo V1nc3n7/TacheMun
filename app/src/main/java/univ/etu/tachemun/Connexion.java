@@ -6,6 +6,7 @@ import android.os.Bundle;
 public class Connexion extends AppCompatActivity {
 
     //test
+    //TEST DE LANES
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
