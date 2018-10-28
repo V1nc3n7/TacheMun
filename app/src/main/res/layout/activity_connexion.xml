@@ -20,29 +20,29 @@
         app:layout_constraintVertical_bias="0.032" />
 
     <Button
-        android:id="@+id/buttonConnexion"
+        android:id="@+id/buttonInscription"
         android:layout_width="173dp"
         android:layout_height="52dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="154dp"
-        android:text="@string/connexion_button"
+        android:text="@string/inscription_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonInscription"
+        app:layout_constraintEnd_toStartOf="@+id/buttonConnexion"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonInscription"
+        android:id="@+id/buttonConnexion"
         android:layout_width="168dp"
         android:layout_height="53dp"
         android:layout_marginStart="28dp"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="153dp"
-        android:text="@string/inscription_button"
+        android:text="@string/connexion_button"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonConnexion" />
+        app:layout_constraintStart_toEndOf="@+id/buttonInscription" />
 
     <EditText
         android:id="@+id/input_pseudo"
