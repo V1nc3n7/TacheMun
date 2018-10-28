@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class Connexion extends AppCompatActivity {
     private Button inscriptionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

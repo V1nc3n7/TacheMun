@@ -31,15 +31,6 @@ public class Inscription extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
-/*
-        confirmation=new Button(this);
-        messageErrorOutput=new TextView(this);
-        pseudoInput=new EditText(this);
-        password1Input=new EditText(this);
-        password2Input=new EditText(this);
-        mailInput=new EditText(this);
-
-*/
 
         confirmation = (Button) findViewById(R.id.inscription_confirmation_button);
         messageErrorOutput = (TextView) findViewById(R.id.inscription_error_ouptut);
