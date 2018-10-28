@@ -15,7 +15,6 @@ import univ.etu.tachemun.validators.MailValidator;
 import univ.etu.tachemun.validators.Validator;
 
 public class Inscription extends AppCompatActivity {
-    private static final String CHARACCEPTED = "AZERTYUIOPQSDFGHJKLMWXCVBNazertyuiopqsdfghjkklmwxcvbn1234567890&é(§è!çà)_-";
 
 
     private Button confirmation;

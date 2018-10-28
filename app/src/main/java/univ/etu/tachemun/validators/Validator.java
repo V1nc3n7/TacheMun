@@ -8,11 +8,11 @@ import java.util.regex.Pattern;
 public class Validator {
 
 
-    private String regex;
-    private int lmin;
-    private int lmax;
+    private final String regex;
+    private int limiteMin;
+    private int limiteMax;
     private boolean borne;
-    private Pattern pattern;
+    private final Pattern pattern;
 
     /**
      * @param trueregex UNE VRAIE REGEX
@@ -24,17 +24,17 @@ public class Validator {
     }
 
     /**
-     * @param regexmin les valeur de la chaine à valider entre []
+     * @param regexmin les valeurs acceptables de la chaine à valider
      * @param min      longueur min de la chaine à valider
      * @param max      longueur max de la chaine à valider
      */
     public Validator(String regexmin, int min, int max) {
         borne = true;
 
-        this.lmin = Math.min(min, max);
-        this.lmax = Math.max(min, max);
-        ;
-        this.regex = "^" + regexmin + "{" + String.valueOf(lmin) + "," + String.valueOf(lmax) + "}$";
+        this.limiteMin = Math.min(min, max);
+        this.limiteMax = Math.max(min, max);
+
+        this.regex = "^[" + regexmin + "]{" + String.valueOf(limiteMin) + "," + String.valueOf(limiteMax) + "}$";
 
         pattern = Pattern.compile(this.regex);
     }
@@ -42,19 +42,19 @@ public class Validator {
     /**
      * Validate sequence with regular expression
      *
-     * @param s String for validation
+     * @param input String for validation
      * @return true valid s, false invalid s
      */
-    public boolean validate(final String s) {
+    public boolean validate(final String input) {
 
         if (borne) {
-            if (s.length() < lmin)
+            if (input.length() < limiteMin)
                 return false;
-            else if (s.length() > lmax)
+            else if (input.length() > limiteMax)
                 return false;
 
         }
-        return pattern.matcher(s).matches();
+        return pattern.matcher(input).matches();
     }
 
 }
