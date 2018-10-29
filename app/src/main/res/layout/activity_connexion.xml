@@ -1,84 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Connexion">
+    android:orientation="vertical">
+
 
     <TextView
         android:id="@+id/message_connexion"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="0dp"
         android:text="@string/connexion_txt"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032" />
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/buttonInscription"
-        android:layout_width="173dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="154dp"
-        android:text="@string/inscription_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonConnexion"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonConnexion"
-        android:layout_width="168dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="153dp"
-        android:text="@string/connexion_button"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonInscription" />
-
-    <EditText
-        android:id="@+id/input_pseudo"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/message_connexion_error"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="153dp"
-        android:layout_marginBottom="21dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/pseudo_hint"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/connexion_password_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:layout_margin="10dp"
+        android:layout_marginTop="0dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textColor="@color/colorAccent" />
     <EditText
         android:id="@+id/connexion_password_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="153dp"
+        android:layout_margin="10dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/password_hint"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_pseudo" />
+        android:inputType="textPassword" />
 
-    <android.support.constraint.Group
-        android:id="@+id/group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/input_pseudo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/pseudo_hint"
+        android:inputType="textPersonName" />
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+
+        <Button
+            android:id="@+id/buttonInscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/inscription_button" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/buttonConnexion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:text="@string/connexion_button" />
+    </LinearLayout>
+
+</LinearLayout>
