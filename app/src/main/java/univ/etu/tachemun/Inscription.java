@@ -56,10 +56,13 @@ public class Inscription extends AppCompatActivity {
                 }
                 if (!checkPassword()) {
                     messagesErrors.add("Mot de passe trop petit");
-                    messageErrorOutput.setText(messagesErrors.toString());
-                } else {
+
+                }
+                if (messagesErrors.isEmpty()) {
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     startActivity(i);
+                } else {
+                    messageErrorOutput.setText(messagesErrors.toString());
                 }
             }
         });

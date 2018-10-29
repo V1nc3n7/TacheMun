@@ -18,7 +18,7 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/message_connexion_error"
+        android:id="@+id/connexion_message_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -26,8 +26,19 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textColor="@color/colorAccent" />
+
     <EditText
-        android:id="@+id/connexion_password_text"
+        android:id="@+id/connexion_input_pseudo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/pseudo_hint"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/connexion_input_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -36,15 +47,6 @@
         android:hint="@string/password_hint"
         android:inputType="textPassword" />
 
-    <EditText
-        android:id="@+id/input_pseudo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/pseudo_hint"
-        android:inputType="textPersonName" />
 
 
     <LinearLayout
