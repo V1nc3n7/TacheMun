@@ -24,7 +24,8 @@
             android:name=".TestScrollingActivity"
             android:label="@string/title_activity_test_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Inscription"></activity>
+        <activity android:name=".Inscription" />
+        <activity android:name=".NouvelleListeDeTache"></activity>
     </application>
 
 </manifest>

@@ -63,7 +63,7 @@
         <TextView
             android:id="@+id/inscription_error_ouptut"
             android:layout_width="match_parent"
-            android:layout_height="43dp" />
+            android:layout_height="220dp" />
 
         <Button
             android:id="@+id/inscription_confirmation_button"

@@ -59,7 +59,7 @@ public class Inscription extends AppCompatActivity {
 
                 }
                 if (messagesErrors.isEmpty()) {
-                    Intent i = new Intent(Inscription.this, Listeliste.class);
+                    Intent i = new Intent(Inscription.this, Connexion.class);
                     startActivity(i);
                 } else {
                     messageErrorOutput.setText(messagesErrors.toString());
