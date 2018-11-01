@@ -1,13 +1,12 @@
 package univ.etu.tachemun;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +23,11 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private String choixc;
     private ColorFilter coul;
     private int cc;
-
+    private EditText date;
+    private EditText time;
+    private boolean echeance;
+    private EditText descListe;
+    private boolean isDescrListe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +119,9 @@ public class NouvelleListeDeTache extends AppCompatActivity {
             });
         }
 
-
+        date = (EditText) findViewById(R.id.nouvListe_date_input);
+        time = (EditText) findViewById(R.id.nouvListe_time_input);
+        descListe = (EditText) findViewById(R.id.nouvListeTache_descr_input);
         c = (Button) findViewById(R.id.check);
         c.setOnClickListener(new View.OnClickListener() {
             @Override
