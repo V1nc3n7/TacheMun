@@ -3,6 +3,7 @@ package univ.etu.tachemun;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,10 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private LinearLayout linearLayout;
     private EditText NomListeTache;
     private Button cree;
+    private Button c;
+    private String choixc;
+    private ColorFilter coul;
+    private int cc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +32,17 @@ public class NouvelleListeDeTache extends AppCompatActivity {
 
         linearLayout = (LinearLayout) findViewById(R.id.couleurs);
         for(int i = 0;i<10;i++){
-            ImageView imageView = new ImageView(this);
+            final ImageView imageView = new ImageView(this);
             imageView.setImageResource(R.drawable.carreblanc);
+            imageView.setClickable(true);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    choixc = imageView.getColorFilter().toString();
+                    coul = imageView.getColorFilter();
+                    cc = imageView.getColorFilter().hashCode();
+                }
+            });
             switch(i){
                 case 0:
                     imageView.setColorFilter(Color.BLACK);
@@ -101,5 +115,15 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                 }
             });
         }
+
+
+        c = (Button) findViewById(R.id.check);
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "info : "+NomListeTache.getText().toString()+" et "+choixc+"......"+cc, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 }
