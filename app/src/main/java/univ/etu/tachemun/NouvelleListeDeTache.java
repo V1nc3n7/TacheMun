@@ -1,8 +1,10 @@
 package univ.etu.tachemun;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class NouvelleListeDeTache extends AppCompatActivity {
 
@@ -69,17 +72,34 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //ajouter l'ajout à la base de donnee
-                    if(NomListeTache.getText().equals("")){
-                        Snackbar.make(v, "Le nom de votre tache est invalide", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                    if(NomListeTache.getText().toString().equals("")){
+                        /*Snackbar.make(v, "Le nom de votre tache est invalide", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();*/
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(NouvelleListeDeTache.this);
+                        builder.setMessage("Le nom de votre liste de tache est incorrect.");
+                        builder.setCancelable(true);
+                        builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(), "Activity will continue",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        /*builder.setNegativeButton("No, no", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });*/
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     }
                     else{
                         finish();
                     }
                 }
             });
-
-
         }
     }
 }
