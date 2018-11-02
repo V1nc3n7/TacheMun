@@ -14,12 +14,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.Date;
+
+
 public class NouvelleListeDeTache extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     private EditText NomListeTache;
-    private Button cree;
-    private Button c;
+    private Button createButton;
+    private Button checkButton;
     private String choixc;
     private ColorFilter coul;
     private int cc;
@@ -84,8 +87,8 @@ public class NouvelleListeDeTache extends AppCompatActivity {
 
             NomListeTache = (EditText) findViewById(R.id.nomListTache);
 
-            cree = (Button) findViewById(R.id.cree);
-            cree.setOnClickListener(new View.OnClickListener() {
+            createButton = (Button) findViewById(R.id.cree_nouvListe);
+            createButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //ajouter l'ajout à la base de donnee
@@ -122,13 +125,38 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         date = (EditText) findViewById(R.id.nouvListe_date_input);
         time = (EditText) findViewById(R.id.nouvListe_time_input);
         descListe = (EditText) findViewById(R.id.nouvListeTache_descr_input);
-        c = (Button) findViewById(R.id.check);
-        c.setOnClickListener(new View.OnClickListener() {
+        checkButton = (Button) findViewById(R.id.check);
+        checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar.make(v, "info : "+NomListeTache.getText().toString()+" et "+choixc+"......"+cc, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+    }
+
+
+    private boolean hasEcheance() {
+        return this.echeance;
+    }
+
+    private long getDateEcheance() {
+
+        final long t = Long.parseLong(this.time.getText().toString());
+        final long d = Long.parseLong(this.date.getText().toString());
+
+        return new Date(d + t).getTime();
+    }
+
+    private boolean hasDescription() {
+        return this.isDescrListe;
+    }
+
+    private String getDescription() {
+        return this.descListe.getText().toString();
+    }
+
+    private String getNomListe() {
+        return this.NomListeTache.getText().toString();
     }
 }
