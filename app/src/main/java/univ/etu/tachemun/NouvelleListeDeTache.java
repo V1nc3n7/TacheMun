@@ -1,20 +1,31 @@
 package univ.etu.tachemun;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.sql.Time;
+import java.util.Calendar;
 import java.util.Date;
+
+import univ.etu.tachemun.TimeDate.DatePickerFragment;
+import univ.etu.tachemun.TimeDate.TimePickerFragment;
 
 
 public class NouvelleListeDeTache extends AppCompatActivity {
@@ -26,11 +37,10 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private String choixc;
     private ColorFilter coul;
     private int cc;
-    private EditText date;
-    private EditText time;
-    private boolean echeance;
-    private EditText descListe;
-    private boolean isDescrListe;
+    private Button time;
+    private Button date;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,9 +133,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
             });
         }
 
-        date = (EditText) findViewById(R.id.nouvListe_date_input);
-        time = (EditText) findViewById(R.id.nouvListe_time_input);
-        descListe = (EditText) findViewById(R.id.nouvListeTache_descr_input);
         checkButton = (Button) findViewById(R.id.check);
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,28 +143,18 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         });
     }
 
+    public void showTimePickerDialog(View v) {
+        time = (Button) findViewById(R.id.settime);
+        DialogFragment newFragment = new TimePickerFragment(time);
+        newFragment.show(getSupportFragmentManager(), "timePicker");
 
-    private boolean hasEcheance() {
-        return this.echeance;
     }
 
-    private long getDateEcheance() {
-
-        final long t = Long.parseLong(this.time.getText().toString());
-        final long d = Long.parseLong(this.date.getText().toString());
-
-        return new Date(d + t).getTime();
-    }
-
-    private boolean hasDescription() {
-        return this.isDescrListe;
-    }
-
-    private String getDescription() {
-        return this.descListe.getText().toString();
-    }
-
-    private String getNomListe() {
-        return this.NomListeTache.getText().toString();
+    public void showDatePickerDialog(View v) {
+        date = (Button) findViewById(R.id.setdate);
+        DialogFragment newFragment = new DatePickerFragment(date);
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
+
+
