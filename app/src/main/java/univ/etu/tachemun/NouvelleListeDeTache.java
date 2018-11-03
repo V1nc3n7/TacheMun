@@ -21,6 +21,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,6 +41,8 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private Button time;
     private Button date;
 
+    private ArrayList<ImageView> li;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
             final ImageView imageView = new ImageView(this);
             imageView.setImageResource(R.drawable.carreblanc);
             imageView.setClickable(true);
+            //li.add(imageView);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -58,6 +62,10 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     choixc = imageView.getColorFilter().toString();
                     coul = imageView.getColorFilter();
                     cc = imageView.getColorFilter().hashCode();
+                    /*for(int i = 0;i<li.size();i++){
+                        li.get(i).setPadding(0,0,0,0);
+                    }*/
+                    imageView.setPadding(10,10,10,10);
                 }
             });
             switch(i){
