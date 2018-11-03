@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.net.IDN;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,7 +43,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private Button time;
     private Button date;
 
-    private ArrayList<ImageView> li;
 
 
     @Override
@@ -49,12 +50,13 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nouvelle_liste_de_tache);
 
+        int nbimage = 10;
         linearLayout = (LinearLayout) findViewById(R.id.couleurs);
-        for(int i = 0;i<10;i++){
+        for(int i = 0;i<nbimage;i++) {
             final ImageView imageView = new ImageView(this);
             imageView.setImageResource(R.drawable.carreblanc);
+            imageView.setId(i);
             imageView.setClickable(true);
-            //li.add(imageView);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,13 +64,11 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     choixc = imageView.getColorFilter().toString();
                     coul = imageView.getColorFilter();
                     cc = imageView.getColorFilter().hashCode();
-                    /*for(int i = 0;i<li.size();i++){
-                        li.get(i).setPadding(0,0,0,0);
-                    }*/
-                    imageView.setPadding(10,10,10,10);
+                    //selection de l'image
+                    imageView.setPadding(10, 10, 10, 10);
                 }
             });
-            switch(i){
+            switch (i) {
                 case 0:
                     imageView.setColorFilter(Color.BLACK);
                     break;
@@ -102,44 +102,43 @@ public class NouvelleListeDeTache extends AppCompatActivity {
             }
             imageView.setAdjustViewBounds(true);
             linearLayout.addView(imageView);
+        }
 
+        NomListeTache = (EditText) findViewById(R.id.nomListTache);
 
-            NomListeTache = (EditText) findViewById(R.id.nomListTache);
-
-            createButton = (Button) findViewById(R.id.cree_nouvListe);
-            createButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //ajouter l'ajout à la base de donnee
-                    if(NomListeTache.getText().toString().equals("")){
-                        /*Snackbar.make(v, "Le nom de votre tache est invalide", Snackbar.LENGTH_LONG)
+        createButton = (Button) findViewById(R.id.cree_nouvListe);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ajouter l'ajout à la base de donnee
+                if(NomListeTache.getText().toString().equals("")){
+                    /*Snackbar.make(v, "Le nom de votre tache est invalide", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();*/
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(NouvelleListeDeTache.this);
-                        builder.setMessage("Le nom de votre liste de tache est incorrect.");
-                        builder.setCancelable(true);
-                        builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(), "Activity will continue",
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        /*builder.setNegativeButton("No, no", new DialogInterface.OnClickListener() {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(NouvelleListeDeTache.this);
+                    builder.setMessage("Le nom de votre liste de tache est incorrect.");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Activity will continue",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    /*builder.setNegativeButton("No, no", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
                             }
-                        });*/
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                    }
-                    else{
-                        finish();
-                    }
+                    });*/
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
-            });
-        }
+                else{
+                    finish();
+                }
+            }
+        });
 
         checkButton = (Button) findViewById(R.id.check);
         checkButton.setOnClickListener(new View.OnClickListener() {
