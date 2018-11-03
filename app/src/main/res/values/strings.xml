@@ -108,4 +108,11 @@
     <string name="password2_input_hint">Reppetez le mot de passe</string>
     <string name="inscription_mail_input_hint">Entrez un mail</string>
     <string name="inscription_confirmation_button_txt">Confirmer</string>
+    <string name="cree_nouv_listeTache_nomTache_input_hint">Nom de votre liste</string>
+    <string name="nouvListe_descrListe_hint">Description de la liste (Facultatif)</string>
+    <string name="nouvListe_dateHeure_txt_view">Entrer une échéance (facultatif)</string>
+    <string name="cree_un_nouvelle_tache">Cree un nouvelle tache</string>
+    <string name="check">check</string>
+    <string name="associer_une_couleur">Associer une couleur :</string>
+    <string name="nouvelle_liste_de_tache">Nouvelle Liste de Tache</string>
 </resources>

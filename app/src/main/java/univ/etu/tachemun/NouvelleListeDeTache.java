@@ -1,13 +1,12 @@
 package univ.etu.tachemun;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,16 +14,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.Date;
+
+
 public class NouvelleListeDeTache extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     private EditText NomListeTache;
-    private Button cree;
-    private Button c;
+    private Button createButton;
+    private Button checkButton;
     private String choixc;
     private ColorFilter coul;
     private int cc;
-
+    private EditText date;
+    private EditText time;
+    private boolean echeance;
+    private EditText descListe;
+    private boolean isDescrListe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,8 +88,8 @@ public class NouvelleListeDeTache extends AppCompatActivity {
 
             NomListeTache = (EditText) findViewById(R.id.nomListTache);
 
-            cree = (Button) findViewById(R.id.cree);
-            cree.setOnClickListener(new View.OnClickListener() {
+            createButton = (Button) findViewById(R.id.cree_nouvListe);
+            createButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //ajouter l'ajout à la base de donnee
@@ -117,14 +123,41 @@ public class NouvelleListeDeTache extends AppCompatActivity {
             });
         }
 
-
-        c = (Button) findViewById(R.id.check);
-        c.setOnClickListener(new View.OnClickListener() {
+        date = (EditText) findViewById(R.id.nouvListe_date_input);
+        time = (EditText) findViewById(R.id.nouvListe_time_input);
+        descListe = (EditText) findViewById(R.id.nouvListeTache_descr_input);
+        checkButton = (Button) findViewById(R.id.check);
+        checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar.make(v, "info : "+NomListeTache.getText().toString()+" et "+choixc+"......"+cc, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+    }
+
+
+    private boolean hasEcheance() {
+        return this.echeance;
+    }
+
+    private long getDateEcheance() {
+
+        final long t = Long.parseLong(this.time.getText().toString());
+        final long d = Long.parseLong(this.date.getText().toString());
+
+        return new Date(d + t).getTime();
+    }
+
+    private boolean hasDescription() {
+        return this.isDescrListe;
+    }
+
+    private String getDescription() {
+        return this.descListe.getText().toString();
+    }
+
+    private String getNomListe() {
+        return this.NomListeTache.getText().toString();
     }
 }
