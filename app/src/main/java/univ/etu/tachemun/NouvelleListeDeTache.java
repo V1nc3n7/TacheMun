@@ -38,6 +38,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //savoir quelle méthode utiliser pour pouvoir réutiliser les filtres de couleurs.
                     choixc = imageView.getColorFilter().toString();
                     coul = imageView.getColorFilter();
                     cc = imageView.getColorFilter().hashCode();
