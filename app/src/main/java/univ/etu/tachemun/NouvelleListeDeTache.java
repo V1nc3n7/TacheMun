@@ -1,31 +1,18 @@
 package univ.etu.tachemun;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TimePicker;
 import android.widget.Toast;
-
-import java.net.IDN;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import univ.etu.tachemun.TimeDate.DatePickerFragment;
 import univ.etu.tachemun.TimeDate.TimePickerFragment;
@@ -43,7 +30,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private int choix;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +44,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //ajouter l'ajout à la base de donnee
-                if(NomListeTache.getText().toString().equals("")){
+                if (NomListeTache.getText().toString().equals("")) {
                     /*Snackbar.make(v, "Le nom de votre tache est invalide", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();*/
 
@@ -80,8 +66,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     });*/
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }
-                else{
+                } else {
                     finish();
                 }
             }
@@ -91,7 +76,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "info : "+NomListeTache.getText().toString()+" et "+choix, Snackbar.LENGTH_LONG)
+                Snackbar.make(v, "info : " + NomListeTache.getText().toString() + " et " + choix, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -111,84 +96,84 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     }
 
 
-    public void creationImage(){
+    public void creationImage() {
         linearLayout = (LinearLayout) findViewById(R.id.couleurs);
         //création image
         //noir
         final ImageView imageView0 = new ImageView(this);
         imageView0.setImageResource(R.drawable.carreblanc);
         imageView0.setClickable(true);
-        imageView0.setColorFilter(Color.argb(255,0,0,0));
+        imageView0.setColorFilter(Color.argb(255, 0, 0, 0));
 
 
         //gris
         final ImageView imageView1 = new ImageView(this);
         imageView1.setImageResource(R.drawable.carreblanc);
         imageView1.setClickable(true);
-        imageView1.setColorFilter(Color.argb(255,64,64,64));
+        imageView1.setColorFilter(Color.argb(255, 64, 64, 64));
 
 
         //rouge
         final ImageView imageView2 = new ImageView(this);
         imageView2.setImageResource(R.drawable.carreblanc);
         imageView2.setClickable(true);
-        imageView2.setColorFilter(Color.argb(255,255,0,0));
+        imageView2.setColorFilter(Color.argb(255, 255, 0, 0));
 
 
         //orange
         final ImageView imageView3 = new ImageView(this);
         imageView3.setImageResource(R.drawable.carreblanc);
         imageView3.setClickable(true);
-        imageView3.setColorFilter(Color.argb(255,255,106,0));
+        imageView3.setColorFilter(Color.argb(255, 255, 106, 0));
 
 
         //jaune
         final ImageView imageView4 = new ImageView(this);
         imageView4.setImageResource(R.drawable.carreblanc);
         imageView4.setClickable(true);
-        imageView4.setColorFilter(Color.argb(255,255,255,0));
+        imageView4.setColorFilter(Color.argb(255, 255, 255, 0));
 
 
         //vert
         final ImageView imageView5 = new ImageView(this);
         imageView5.setImageResource(R.drawable.carreblanc);
         imageView5.setClickable(true);
-        imageView5.setColorFilter(Color.argb(255,0,255,0));
+        imageView5.setColorFilter(Color.argb(255, 0, 255, 0));
 
 
         //tur
         final ImageView imageView6 = new ImageView(this);
         imageView6.setImageResource(R.drawable.carreblanc);
         imageView6.setClickable(true);
-        imageView6.setColorFilter(Color.argb(255,0,255,255));
+        imageView6.setColorFilter(Color.argb(255, 0, 255, 255));
 
 
         //bleu cobalte
         final ImageView imageView7 = new ImageView(this);
         imageView7.setImageResource(R.drawable.carreblanc);
         imageView7.setClickable(true);
-        imageView7.setColorFilter(Color.argb(255,0,148,255));
+        imageView7.setColorFilter(Color.argb(255, 0, 148, 255));
 
 
         //bleu
         final ImageView imageView8 = new ImageView(this);
         imageView8.setImageResource(R.drawable.carreblanc);
         imageView8.setClickable(true);
-        imageView8.setColorFilter(Color.argb(255,0,0,255));
+        imageView8.setColorFilter(Color.argb(255, 0, 0, 255));
 
 
         //violet
         final ImageView imageView9 = new ImageView(this);
         imageView9.setImageResource(R.drawable.carreblanc);
         imageView9.setClickable(true);
-        imageView9.setColorFilter(Color.argb(255,178,0,255));
+        imageView9.setColorFilter(Color.argb(255, 178, 0, 255));
 
 
         //magenta
         final ImageView imageView10 = new ImageView(this);
         imageView10.setImageResource(R.drawable.carreblanc);
         imageView10.setClickable(true);
-        imageView10.setColorFilter(Color.argb(255,255,0,255));
+        imageView10.setColorFilter(Color.argb(255, 255, 0, 255));
 
         //click image
 

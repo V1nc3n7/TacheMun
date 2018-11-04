@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Connexion extends AppCompatActivity {
+    List<String> messagesErrors;
     private Button inscriptionButton;
     private Button connexionButton;
     private TextView messageErrorConnexion;
     private EditText inputPseudo;
     private EditText inputPassword;
-    List<String> messagesErrors;
 
     public static String getSHA256(String input) {
 
@@ -36,6 +36,7 @@ public class Connexion extends AppCompatActivity {
 
         return toReturn;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

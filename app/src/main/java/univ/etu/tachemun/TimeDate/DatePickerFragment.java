@@ -12,7 +12,7 @@ import java.util.Calendar;
 
 @SuppressLint("ValidFragment")
 public class DatePickerFragment extends DialogFragment
-        implements DatePickerDialog.OnDateSetListener{
+        implements DatePickerDialog.OnDateSetListener {
 
     private Button d;
 

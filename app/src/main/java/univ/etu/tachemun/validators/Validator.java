@@ -9,13 +9,13 @@ public class Validator {
 
 
     private final String regex;
+    private final Pattern pattern;
     private int limiteMin;
     private int limiteMax;
     private boolean borne;
-    private final Pattern pattern;
 
     /**
-     * @param trueregex UNE VRAIE REGEX
+     * @param trueregex UNE VRAIE REGEX !
      */
     public Validator(String trueregex) {
         borne = false;
