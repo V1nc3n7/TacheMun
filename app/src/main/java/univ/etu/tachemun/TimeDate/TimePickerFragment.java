@@ -3,7 +3,6 @@ package univ.etu.tachemun.TimeDate;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
@@ -11,9 +10,6 @@ import android.widget.Button;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
-
-import univ.etu.tachemun.NouvelleListeDeTache;
-import univ.etu.tachemun.R;
 
 @SuppressLint("ValidFragment")
 public class TimePickerFragment extends DialogFragment
@@ -40,7 +36,7 @@ public class TimePickerFragment extends DialogFragment
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
-        t.setText(""+hourOfDay+"h "+minute);
+        t.setText(new StringBuilder().append("").append(hourOfDay).append("h ").append(minute).toString());
     }
 
 
