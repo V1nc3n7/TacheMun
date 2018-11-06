@@ -17,6 +17,7 @@ public class Tache {
     private int ID;
     private int idLsteTache;
     private String createur;
+    private String libelle;
     private String description;
     private Date dateHeureCreation;
     private int numero;
@@ -34,10 +35,11 @@ public class Tache {
      * @param priorite
      * @param dateHeureEcheance si = -1 alors pas d'echeance
      */
-    public Tache(int ID, int idLsteTache, String createur, String description, long dateHeureCreation, int numero, int priorite, long dateHeureEcheance) {
+    public Tache(int ID, int idLsteTache, String createur, String libelle, String description, long dateHeureCreation, int numero, int priorite, long dateHeureEcheance) {
         this.ID = ID;
         this.idLsteTache = idLsteTache;
         this.createur = createur;
+        this.libelle = libelle;
         this.description = description;
         this.dateHeureCreation = new Date(dateHeureCreation);
         this.numero = numero;
@@ -49,6 +51,10 @@ public class Tache {
             this.dateHeureEcheance = new Date(dateHeureEcheance);
             this.echeance = true;
         }
+
+    }
+
+    public Tache() {
 
     }
 
@@ -77,6 +83,14 @@ public class Tache {
         this.createur = createur;
     }
 
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -91,6 +105,11 @@ public class Tache {
 
     public void setDateHeureCreation(Date dateHeureCreation) {
         this.dateHeureCreation = dateHeureCreation;
+    }
+
+    public void setDateHeureCreation(int dateHeureCreation) {
+
+        this.dateHeureCreation = new Date(dateHeureCreation);
     }
 
     public int getNumero() {
@@ -115,6 +134,10 @@ public class Tache {
 
     public void setDateHeureEcheance(Date dateHeureEcheance) {
         this.dateHeureEcheance = dateHeureEcheance;
+    }
+
+    public void setDateHeureEcheance(int dateHeureEcheance) {
+        this.dateHeureEcheance = new Date(dateHeureEcheance);
     }
 
     public boolean isEcheance() {

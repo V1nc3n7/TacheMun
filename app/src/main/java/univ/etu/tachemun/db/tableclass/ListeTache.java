@@ -18,8 +18,9 @@ public class ListeTache {
     private Date dateHeureCreation;
     private boolean hasEcheance;
     private Date dateHeureEcheance;
+    private int couleur;
 
-    public ListeTache(int ID, String nom, int isPerso, String description, long dateHeureCreation, int hasEcheance, long dateHeureEcheance) {
+    public ListeTache(int ID, String nom, int isPerso, String description, long dateHeureCreation, int hasEcheance, long dateHeureEcheance, int couleur) {
         this.ID = ID;
         this.nom = nom;
         this.isPerso = isPerso == 1;
@@ -32,6 +33,7 @@ public class ListeTache {
         } else {
             this.dateHeureEcheance = null;
         }
+        this.couleur = couleur;
     }
 
     public int getID() {
@@ -91,5 +93,13 @@ public class ListeTache {
 
     public void setDateHeureEcheance(Date dateHeureEcheance) {
         this.dateHeureEcheance = dateHeureEcheance;
+    }
+
+    public int getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(int couleur) {
+        this.couleur = couleur;
     }
 }

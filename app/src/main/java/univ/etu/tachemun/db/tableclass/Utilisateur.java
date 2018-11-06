@@ -22,6 +22,9 @@ public class Utilisateur {
         this.mail = mail;
     }
 
+    public Utilisateur() {
+    }
+
     public String getPseudo() {
         return pseudo;
     }
@@ -34,6 +37,9 @@ public class Utilisateur {
         return dateInscription;
     }
 
+    public void setDateInscription(int dateInscription) {
+        this.dateInscription = new Date(dateInscription);
+    }
     public void setDateInscription(Date dateInscription) {
         this.dateInscription = dateInscription;
     }
