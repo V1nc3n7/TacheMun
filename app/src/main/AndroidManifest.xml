@@ -21,7 +21,8 @@
             android:label="@string/title_activity_listeliste"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Inscription" />
-        <activity android:name=".NouvelleListeDeTache"></activity>
+        <activity android:name=".NouvelleListeDeTache" />
+        <activity android:name=".CreationGroupe"></activity>
     </application>
 
 </manifest>

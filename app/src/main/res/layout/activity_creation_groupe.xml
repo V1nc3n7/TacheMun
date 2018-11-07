@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inscription">
+    tools:context=".CreationGroupe">
+    <?xml version="1.0" encoding="utf-8"?>
+
 
     <LinearLayout
         android:layout_width="366dp"
@@ -20,47 +22,48 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.51">
 
-        <EditText
-            android:id="@+id/inscription_pseudo_input"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/creation_groupe_titre"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/pseudo_input_hint"
-            android:inputType="textPersonName" />
+            android:text="@string/creationgroupe_titre"
+            android:textAlignment="center"
+            android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/inscription_password1_input"
+            android:id="@+id/creation_groupe__input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/password1_input_hint"
-            android:inputType="textPassword" />
+            android:hint="@string/creation_groupe_nom_input_hint"
+            android:inputType="text"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/inscription_password2_input"
+            android:id="@+id/creation_groupe_description_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/password2_input_hint"
-            android:inputType="textPassword" />
+            android:hint="@string/creation_groupe_description_input_hint"
+            android:inputType="text" />
 
-        <EditText
-            android:id="@+id/inscription_mail_input"
+        <Switch
+            android:id="@+id/creation_groupe_switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/inscription_mail_input_hint"
-            android:inputType="textEmailAddress" />
+            android:layout_weight="1"
+            android:checked="false"
+            android:splitTrack="false"
+            android:text="@string/creation_groupe_prive_switch_text" />
 
         <TextView
-            android:id="@+id/inscription_error_ouptut"
+            android:id="@+id/creation_groupe_error_ouptut"
             android:layout_width="match_parent"
             android:layout_height="220dp" />
 
         <Button
-            android:id="@+id/inscription_confirmation_button"
+            android:id="@+id/creation_groupe_confirmation_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"

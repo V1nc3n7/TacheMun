@@ -20,11 +20,11 @@ public class Groupe {
     private String description;
     private Date dateHeureCreation;
 
-    public Groupe(int ID, String nom, String createur, int isPrivate, String description, long dateHeureCreation) {
+    public Groupe(int ID, String nom, String createur, boolean isPrivate, String description, long dateHeureCreation) {
         this.ID = ID;
         this.nom = nom;
         this.createur = createur;
-        this.isPrivate = isPrivate == 1;
+        this.isPrivate = isPrivate;
         this.description = description;
         this.dateHeureCreation = new Date(dateHeureCreation);
     }

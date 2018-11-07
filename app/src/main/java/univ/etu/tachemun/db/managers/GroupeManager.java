@@ -50,7 +50,7 @@ public class GroupeManager extends TableManager {
 
     public long insert(Groupe groupe) {
         ContentValues v = putInContent(groupe);
-
+        v.remove(ID_GROUPE);
         return db.insert(tableName, null, v);
 
     }

@@ -8,9 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
+import univ.etu.tachemun.db.managers.UtilisateurManager;
+import univ.etu.tachemun.db.tableclass.Utilisateur;
 import univ.etu.tachemun.validators.MailValidator;
 import univ.etu.tachemun.validators.Validator;
 
@@ -26,6 +31,20 @@ public class Inscription extends AppCompatActivity {
     private EditText mailInput;
     private List<String> messagesErrors;
 
+    public static String getSHA256(String input) {
+
+        String toReturn = null;
+        try {
+            final MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.reset();
+            digest.update(input.getBytes(StandardCharsets.UTF_8));
+            toReturn = String.format("%040x", new BigInteger(1, digest.digest()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return toReturn;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +59,7 @@ public class Inscription extends AppCompatActivity {
         confirmation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 messagesErrors = new ArrayList<>();
                 if (!(pseudoAvailiable())) {
                     messagesErrors.add("Ce pseudo est deja pris");
@@ -52,18 +72,25 @@ public class Inscription extends AppCompatActivity {
                     messagesErrors.add("Mail Invalide");
                 }
                 if (!checkSamePassword()) {
-                    messagesErrors.add("Les mots de passe doivent etre les memes");
+                    messagesErrors.add("Les mots de passe doivent etre les mêmes");
                 }
                 if (!checkPassword()) {
                     messagesErrors.add("Mot de passe trop petit");
 
                 }
                 if (messagesErrors.isEmpty()) {
+                    UtilisateurManager manager = new UtilisateurManager(Inscription.this);
+
+                    Utilisateur user = new Utilisateur(getPseudoInput(), getSHA256(getPassword1Input()), getMailInput(), System.currentTimeMillis());
+
+                    manager.insert(user);
+
                     Intent i = new Intent(Inscription.this, Connexion.class);
                     startActivity(i);
                 } else {
                     messageErrorOutput.setText(messagesErrors.toString());
                 }
+
             }
         });
 
