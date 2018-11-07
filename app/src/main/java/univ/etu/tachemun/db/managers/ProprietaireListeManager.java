@@ -6,32 +6,7 @@ import univ.etu.tachemun.db.tableclass.ProprietaireListe;
 
 public class ProprietaireListeManager extends TableManager {
 
-    /*
 
-
-    CREATE TABLE ProprietaireListe (
-      ID_ProprietaireListe int(11) NOT NULL,
-      pseudo_Utilisateur_Proprietaire varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-      ID_ListeTache int(11) NOT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-    ALTER TABLE ProprietaireListe
-      ADD PRIMARY KEY (ID_ProprietaireListe),
-      ADD KEY fk_proprietaireListe_Liste_idx (ID_ListeTache),
-      ADD KEY fk_ProprietaireListe_Utilisateur_idx (pseudo_Utilisateur_Proprietaire);
-
-
-    ALTER TABLE ProprietaireListe
-      MODIFY ID_ProprietaireListe int(11) NOT NULL AUTO_INCREMENT;
-
-
-    ALTER TABLE ProprietaireListe
-      ADD CONSTRAINT fk_ProprietaireListe_ListeTache FOREIGN KEY (ID_ListeTache) REFERENCES ListeTache (ID_ListeTache) ON DELETE CASCADE ON UPDATE CASCADE,
-      ADD CONSTRAINT fk_ProprietaireListe_Utilisateur FOREIGN KEY (pseudo_Utilisateur_Proprietaire) REFERENCES Utilisateur (pseudo_Utilisateur) ON DELETE CASCADE ON UPDATE CASCADE;
-    COMMIT;
-
-     */
     static final String tableName = "ProprietaireListe";
     static final String ID_ProprietaireListe = "ID_ProprietaireListe";
     static final String PSEUDO = "pseudo";
@@ -52,6 +27,26 @@ public class ProprietaireListeManager extends TableManager {
     public ProprietaireListeManager(Context context) {
         super(context);
     }
+
+
+        /*
+     ContentValues v = putInContent(e);
+
+      // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
+      return db.insert(tableName, null, v);
+
+
+      ContentValues values = putInContent(e);
+      String where = ID_Tache + " = ?";
+      String[] whereArgs = {e.getID() + ""};
+      return db.update(tableName, values, where, whereArgs);
+
+
+      String where = ID_Tache + " = ?";
+      String[] whereArgs = {e.getID() + ""};
+      return db.delete(tableName, where, whereArgs);
+  */
+
 
     public long insert(ProprietaireListe e) {
         return 0;

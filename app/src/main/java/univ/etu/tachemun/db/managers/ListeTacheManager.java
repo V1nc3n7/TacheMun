@@ -55,23 +55,6 @@ COMMIT;
         super(context);
     }
 
-    /*
-     ContentValues v = putInContent(l);
-
-      // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
-      return db.insert(tableName, null, v);
-
-
-      ContentValues values = putInContent(e);
-      String where = ID_Tache + " = ?";
-      String[] whereArgs = {l.getID() + ""};
-      return db.update(tableName, values, where, whereArgs);
-
-
-      String where = ID_Tache + " = ?";
-      String[] whereArgs = {t.getID() + ""};
-      return db.delete(tableName, where, whereArgs);
-  */
 
     private ContentValues putInContent(ListeTache l) {
         ContentValues c = new ContentValues();

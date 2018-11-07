@@ -67,6 +67,9 @@ public class PartageListe {
         this.dateHeurePartage = dateHeurePartage;
     }
 
+    public void setDateHeurePartage(int dateHeurePartage) {
+        this.dateHeurePartage = new Date(dateHeurePartage);
+    }
     public String getMessage() {
         return message;
     }

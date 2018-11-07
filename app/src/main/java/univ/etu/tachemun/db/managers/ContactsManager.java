@@ -7,12 +7,6 @@ import univ.etu.tachemun.db.tableclass.Contacts;
 
 public class ContactsManager extends TableManager {
 
- /*
-     `ID_Contact` int(11) NOT NULL,
-  `ID_Proprietaire` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `ID_Utilisateur` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `DateHeure_Contact` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-     */
 
     static final String tableName = "Contacts";
     static final String ID_CONTACT = "ID_Contact";

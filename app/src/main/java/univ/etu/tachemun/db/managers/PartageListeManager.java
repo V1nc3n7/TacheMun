@@ -1,39 +1,11 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.PartageListe;
 
 public class PartageListeManager extends TableManager {
-/*
-
-CREATE TABLE PartageListe (
-  ID_PartageListe int(11) NOT NULL,
-  ID_ProprietaireListe varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  ID_ListeTache int(11) NOT NULL,
-  ID_UtilisateurInvite varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  dateHeurePartage timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  messagePartage varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-ALTER TABLE PartageListe
-  ADD PRIMARY KEY (ID_PartageListe),
-  ADD KEY fk_PartageListe_ListeTache (ID_ListeTache),
-  ADD KEY fk_PartageListe_Utilisateur_Proprio (ID_ProprietaireListe),
-  ADD KEY fk_PartageListe_Utilisateur_Invite (ID_UtilisateurInvite);
-
-
-ALTER TABLE PartageListe
-  MODIFY ID_PartageListe int(11) NOT NULL AUTO_INCREMENT;
-
-
-ALTER TABLE PartageListe
-  ADD CONSTRAINT fk_PartageListe_ListeTache FOREIGN KEY (ID_ListeTache) REFERENCES ListeTache (ID_ListeTache),
-  ADD CONSTRAINT fk_PartageListe_Utilisateur_Invite FOREIGN KEY (ID_UtilisateurInvite) REFERENCES Utilisateur (pseudo_Utilisateur),
-  ADD CONSTRAINT fk_PartageListe_Utilisateur_Proprio FOREIGN KEY (ID_ProprietaireListe) REFERENCES ProprietaireListe (pseudo_Utilisateur_Proprietaire);
-COMMIT;
- */
 
     static final String tableName = "PartageListe";
     static final String ID_PartageListe = "ID_PartageListe";
@@ -64,16 +36,37 @@ COMMIT;
         super(context);
     }
 
-    public long insert(PartageListe e) {
-        return 0;
+
+    private ContentValues putInContent(PartageListe p) {
+        ContentValues c = new ContentValues();
+        c.put(ID_PartageListe, p.getID());
+        c.put(ID_Proprietaire, p.getID());
+        c.put(ID_ListeTache, p.getID());
+        c.put(ID_Invite, p.getID());
+        c.put(DateHeure_Partage, p.getID());
+        c.put(MESSAGE, p.getID());
+
+        return c;
     }
 
-    public int update(PartageListe e) {
-        return 0;
+    public long insert(PartageListe p) {
+
+        ContentValues v = putInContent(p);
+        return db.insert(tableName, null, v);
     }
 
-    public int delete(PartageListe e) {
-        return 0;
+
+    public int update(PartageListe p) {
+        ContentValues values = putInContent(p);
+        String where = ID_PartageListe + " = ?";
+        String[] whereArgs = {p.getID() + ""};
+        return db.update(tableName, values, where, whereArgs);
+    }
+
+    public int delete(PartageListe p) {
+        String where = ID_PartageListe + " = ?";
+        String[] whereArgs = {p.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
     }
 
     public PartageListe getFromId(int id) {
