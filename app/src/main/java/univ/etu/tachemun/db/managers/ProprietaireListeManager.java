@@ -1,5 +1,6 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.ProprietaireListe;
@@ -28,36 +29,33 @@ public class ProprietaireListeManager extends TableManager {
         super(context);
     }
 
+    public long insert(ProprietaireListe p) {
 
-        /*
-     ContentValues v = putInContent(e);
-
-      // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
-      return db.insert(tableName, null, v);
-
-
-      ContentValues values = putInContent(e);
-      String where = ID_Tache + " = ?";
-      String[] whereArgs = {e.getID() + ""};
-      return db.update(tableName, values, where, whereArgs);
-
-
-      String where = ID_Tache + " = ?";
-      String[] whereArgs = {e.getID() + ""};
-      return db.delete(tableName, where, whereArgs);
-  */
-
-
-    public long insert(ProprietaireListe e) {
-        return 0;
+        ContentValues v = putInContent(p);
+        return db.insert(tableName, null, v);
     }
 
-    public int update(ProprietaireListe e) {
-        return 0;
+    public int update(ProprietaireListe p) {
+
+        ContentValues values = putInContent(p);
+        String where = ID_ProprietaireListe + " = ?";
+        String[] whereArgs = {p.getID() + ""};
+        return db.update(tableName, values, where, whereArgs);
     }
 
-    public int delete(ProprietaireListe e) {
-        return 0;
+    private ContentValues putInContent(ProprietaireListe p) {
+        ContentValues c = new ContentValues();
+        c.put(ID_ProprietaireListe, p.getID());
+        c.put(PSEUDO, p.getProprietaire());
+        c.put(ID_ListeTache, p.getIdListe());
+        return c;
+    }
+
+    public int delete(ProprietaireListe p) {
+
+        String where = ID_ProprietaireListe + " = ?";
+        String[] whereArgs = {p.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
     }
 
     public ProprietaireListe getFromId(int id) {
