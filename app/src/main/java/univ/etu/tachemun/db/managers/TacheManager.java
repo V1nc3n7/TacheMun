@@ -115,8 +115,7 @@ COMMIT;
     }
 
     public int update(Tache t) {
-        ContentValues values = new ContentValues();
-        ContentValues v = putInContent(t);
+        ContentValues values = putInContent(t);
         String where = ID_Tache + " = ?";
         String[] whereArgs = {t.getID() + ""};
 

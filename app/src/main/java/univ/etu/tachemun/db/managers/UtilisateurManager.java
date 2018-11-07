@@ -86,8 +86,7 @@ public class UtilisateurManager extends TableManager {
      */
     public int updateOnPseudo(String ancienPseudo, Utilisateur u) {
 
-        ContentValues values = new ContentValues();
-        ContentValues v = putInContent(u);
+        ContentValues values = putInContent(u);
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {ancienPseudo + ""};
 

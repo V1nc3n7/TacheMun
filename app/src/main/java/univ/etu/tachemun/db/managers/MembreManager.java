@@ -1,5 +1,6 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.Membre;
@@ -49,20 +50,49 @@ public class MembreManager extends TableManager {
             "  ON UPDATE CASCADE ON DELETE CASCADE"
             + ");";
 
+
     public MembreManager(Context context) {
         super(context);
     }
 
-    public long insert(Membre m) {
-        return 0;
+    private ContentValues putInContent(Membre m) {
+        ContentValues c = new ContentValues();
+        c.put(ID_MEMBRE, m.getID());
+        c.put(PSEUDO, m.getPseudoUtilisteur());
+        c.put(DateHeure_Adhesion, m.getDateHeureAdhesion().getTime());
+        c.put(ID_GROUPE, m.getIdGroupe());
+
+        return c;
     }
 
+
+    public long insert(Membre m) {
+        ContentValues v = putInContent(m);
+
+        return db.insert(tableName, null, v);
+
+
+    }
+
+
     public int update(Membre m) {
-        return 0;
+
+        ContentValues values = putInContent(m);
+        String where = ID_MEMBRE + " = ?";
+        String[] whereArgs = {m.getID() + ""};
+
+
+        return db.update(tableName, values, where, whereArgs);
+
+
     }
 
     public int delete(Membre m) {
-        return 0;
+
+
+        String where = ID_MEMBRE + " = ?";
+        String[] whereArgs = {m.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
     }
 
     public Membre getFromId(int id) {
