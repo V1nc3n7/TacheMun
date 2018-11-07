@@ -1,5 +1,6 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.Droits;
@@ -21,16 +22,35 @@ public class DroitsManager extends TableManager {
 
     }
 
+    private ContentValues putInContent(Droits d) {
+        ContentValues c = new ContentValues();
+        c.put(ID_DROIT, d.getID());
+
+        return c;
+    }
+
     public long insert(Droits d) {
-        return 0;
+        ContentValues c = putInContent(d);
+
+        return db.insert(tableName, null, c);
     }
 
     public int update(Droits d) {
-        return 0;
+
+        ContentValues values = putInContent(d);
+        String where = ID_DROIT + " = ?";
+        String[] whereArgs = {d.getID() + ""};
+
+
+        return db.update(tableName, values, where, whereArgs);
     }
 
     public int delete(Droits d) {
-        return 0;
+
+
+        String where = ID_DROIT + " = ?";
+        String[] whereArgs = {d.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
     }
 
     public Droits getFromId(int id) {
