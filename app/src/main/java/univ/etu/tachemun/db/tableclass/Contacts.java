@@ -58,5 +58,15 @@ public class Contacts {
 
     public void setDateHeureContact(int dateHeureContact) {
         this.dateHeureContact = new Date(dateHeureContact);
+
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                ID +
+                "} " + pseudoProprietaire +
+                ", " + peudoContact +
+                ", " + dateHeureContact;
     }
 }

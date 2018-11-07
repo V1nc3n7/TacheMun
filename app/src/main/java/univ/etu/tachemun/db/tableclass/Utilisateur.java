@@ -11,11 +11,12 @@ public class Utilisateur {
   */
 
     private String pseudo;
-    private Date dateInscription;
+
     private String motDePasse;
     private String mail;
+    private Date dateInscription;
 
-    public Utilisateur(String pseudo, long dateInscription, String motDePasse, String mail) {
+    public Utilisateur(String pseudo, String motDePasse, String mail, long dateInscription) {
         this.pseudo = pseudo;
         this.dateInscription = new Date(dateInscription);
         this.motDePasse = motDePasse;
@@ -60,5 +61,11 @@ public class Utilisateur {
         this.mail = mail;
     }
 
-
+    @Override
+    public String toString() {
+        return "{" + pseudo +
+                " }, " + dateInscription.toString() +
+                ", " + motDePasse +
+                ", " + mail;
+    }
 }

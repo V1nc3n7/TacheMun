@@ -88,4 +88,14 @@ public class AssigneTache {
     public void setDateHeureAssignation(int dateHeureAssignation) {
         this.dateHeureAssignation = new Date(dateHeureAssignation);
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "}, " + idTache +
+                ", '" + assigneur + '\'' +
+                ", '" + esclave + '\'' +
+                ", '" + message + '\'' +
+                ", " + dateHeureAssignation.toString();
+    }
 }

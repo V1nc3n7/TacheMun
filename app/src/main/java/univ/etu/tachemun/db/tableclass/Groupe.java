@@ -76,4 +76,14 @@ public class Groupe {
     public void setDateHeureCreation(Date dateHeureCreation) {
         this.dateHeureCreation = dateHeureCreation;
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "}, " + nom +
+                ", " + createur +
+                ", " + isPrivate +
+                ", " + description +
+                ", " + dateHeureCreation;
+    }
 }

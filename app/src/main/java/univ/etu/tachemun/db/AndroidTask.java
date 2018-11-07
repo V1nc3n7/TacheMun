@@ -27,7 +27,7 @@ import univ.etu.tachemun.db.managers.TacheManager;
 import univ.etu.tachemun.db.managers.UtilisateurManager;
 
 public class AndroidTask extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "db.sqlite";
+    private static final String DATABASE_NAME = "androidTask";
     private static final int DATABASE_VERSION = 1;
     private static AndroidTask sInstance;
     private final Context context;
@@ -37,7 +37,6 @@ public class AndroidTask extends SQLiteOpenHelper {
     private AndroidTask(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-
         String filesDir = context.getFilesDir().getPath(); // /data/data/com.package.nom/files/
         DATABASE_PATH = filesDir.substring(0, filesDir.lastIndexOf("/")) + "/databases/";
         // /data/data/com.package.nom/databases/
@@ -136,11 +135,12 @@ public class AndroidTask extends SQLiteOpenHelper {
 
     }
     @Override
-    public void onUpgrade(
-            SQLiteDatabase sqLiteDatabase, int i, int i2) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
+
         // Mise à jour de la base de données
         // méthode appelée sur incrémentation de DATABASE_VERSION
         // on peut faire ce qu'on veut ici, comme recréer la base :
+
         onCreate(sqLiteDatabase);
     }
 

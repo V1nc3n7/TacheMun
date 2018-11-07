@@ -147,4 +147,18 @@ public class Tache {
     public void setEcheance(boolean echeance) {
         this.echeance = echeance;
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "} " + idLsteTache +
+                ", " + createur +
+                ", " + libelle +
+                ", " + description +
+                ", " + dateHeureCreation +
+                ", " + numero +
+                ", " + priorite +
+                ", " + dateHeureEcheance +
+                ", " + echeance;
+    }
 }
