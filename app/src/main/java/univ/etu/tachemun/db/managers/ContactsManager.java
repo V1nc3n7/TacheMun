@@ -1,5 +1,6 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.Contacts;
@@ -38,16 +39,40 @@ public class ContactsManager extends TableManager {
 
     }
 
+    private ContentValues putInContent(Contacts c) {
+        ContentValues content = new ContentValues();
+
+        content.put(ID_CONTACT, c.getID());
+        content.put(ID_Proprietaire, c.getPseudoProprietaire());
+        content.put(ID_Utilisateur, c.getPeudoContact());
+        content.put(DateHeure_Contact, c.getDateHeureContact().getTime());
+
+
+        return content;
+    }
     public long insert(Contacts c) {
-        return 0;
+        ContentValues v = putInContent(c);
+
+        return db.insert(tableName, null, v);
     }
 
     public int update(Contacts c) {
-        return 0;
+
+
+        ContentValues values = putInContent(c);
+        String where = ID_CONTACT + " = ?";
+        String[] whereArgs = {c.getID() + ""};
+
+
+        return db.update(tableName, values, where, whereArgs);
+
     }
 
     public int delete(Contacts c) {
-        return 0;
+
+        String where = ID_CONTACT + " = ?";
+        String[] whereArgs = {c.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
     }
 
     public Contacts getFromId(int id) {

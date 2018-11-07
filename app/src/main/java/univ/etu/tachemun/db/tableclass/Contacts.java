@@ -55,4 +55,8 @@ public class Contacts {
     public void setDateHeureContact(Date dateHeureContact) {
         this.dateHeureContact = dateHeureContact;
     }
+
+    public void setDateHeureContact(int dateHeureContact) {
+        this.dateHeureContact = new Date(dateHeureContact);
+    }
 }
