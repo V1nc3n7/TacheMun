@@ -43,4 +43,8 @@ public class EmailDisposable {
     public void setDateHeureAjout(Date dateHeureAjout) {
         this.dateHeureAjout = dateHeureAjout;
     }
+
+    public void setDateHeureAjout(int dateHeureAjout) {
+        this.dateHeureAjout = new Date(dateHeureAjout);
+    }
 }
