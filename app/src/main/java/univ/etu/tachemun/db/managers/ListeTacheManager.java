@@ -1,5 +1,6 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.ListeTache;
@@ -54,16 +55,57 @@ COMMIT;
         super(context);
     }
 
+    /*
+     ContentValues v = putInContent(l);
+
+      // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
+      return db.insert(tableName, null, v);
+
+
+      ContentValues values = putInContent(e);
+      String where = ID_Tache + " = ?";
+      String[] whereArgs = {l.getID() + ""};
+      return db.update(tableName, values, where, whereArgs);
+
+
+      String where = ID_Tache + " = ?";
+      String[] whereArgs = {t.getID() + ""};
+      return db.delete(tableName, where, whereArgs);
+  */
+
+    private ContentValues putInContent(ListeTache l) {
+        ContentValues c = new ContentValues();
+        c.put(ID_LISTETACHE, l.getID());
+        c.put(nom_ListeTache, l.getNom());
+        c.put(IS_PRIVE, (l.isPerso() ? 1 : 0));
+        c.put(DESCRIPTION, l.getDescription());
+        c.put(DateHeure_Creation, l.getDateHeureCreation().getTime());
+        c.put(HAS_ECHEANCE, (l.HasEcheance() ? 1 : 0));
+
+        c.put(ECHEANCE, l.getDateHeureEcheance().getTime());
+        c.put(COULEUR, l.getCouleur());
+
+
+        return c;
+    }
+
     public long insert(ListeTache l) {
-        return 0;
+        ContentValues v = putInContent(l);
+        return db.insert(tableName, null, v);
     }
 
     public int update(ListeTache l) {
-        return 0;
+
+        ContentValues values = putInContent(l);
+        String where = ID_LISTETACHE + " = ?";
+        String[] whereArgs = {l.getID() + ""};
+        return db.update(tableName, values, where, whereArgs);
     }
 
     public int delete(ListeTache l) {
-        return 0;
+        String where = ID_LISTETACHE + " = ?";
+        String[] whereArgs = {l.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
     }
 
     public ListeTache getFromId(int id) {

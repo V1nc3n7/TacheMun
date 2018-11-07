@@ -76,7 +76,7 @@ public class ListeTache {
         this.dateHeureCreation = dateHeureCreation;
     }
 
-    public boolean isHasEcheance() {
+    public boolean HasEcheance() {
         return hasEcheance;
     }
 
@@ -93,6 +93,10 @@ public class ListeTache {
 
     public void setDateHeureEcheance(Date dateHeureEcheance) {
         this.dateHeureEcheance = dateHeureEcheance;
+    }
+
+    public void setDateHeureEcheance(int dateHeureEcheance) {
+        this.dateHeureEcheance = new Date(dateHeureEcheance);
     }
 
     public int getCouleur() {
