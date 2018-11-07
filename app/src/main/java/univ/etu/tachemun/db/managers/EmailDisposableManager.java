@@ -1,5 +1,6 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.EmailDisposable;
@@ -31,16 +32,41 @@ CREATE TABLE email_disposable (
         super(context);
     }
 
+    private ContentValues putInContent(EmailDisposable e) {
+        ContentValues v = new ContentValues();
+
+        v.put(ID_EMAILDISPOSABLE, e.getID());
+        v.put(DOMAINE, e.getDomaine());
+        v.put(DateHeure_Ajout, e.getDateHeureAjout().getTime());
+
+
+        return v;
+    }
+
     public long insert(EmailDisposable e) {
-        return 0;
+
+        ContentValues v = putInContent(e);
+
+        // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
+        return db.insert(tableName, null, v);
     }
 
     public int update(EmailDisposable e) {
-        return 0;
+
+
+        ContentValues values = putInContent(e);
+        String where = ID_EMAILDISPOSABLE + " = ?";
+        String[] whereArgs = {e.getID() + ""};
+        return db.update(tableName, values, where, whereArgs);
     }
 
     public int delete(EmailDisposable e) {
-        return 0;
+
+
+        String where = ID_EMAILDISPOSABLE + " = ?";
+        String[] whereArgs = {e.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
+
     }
 
     public EmailDisposable getFromId(int id) {
