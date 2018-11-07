@@ -1,8 +1,9 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
-import univ.etu.tachemun.db.tableclass.EmailDisposable;
+import univ.etu.tachemun.db.tableclass.Groupe;
 
 public class GroupeManager extends TableManager {
     /*
@@ -53,19 +54,47 @@ COMMIT;
         super(context);
     }
 
-    public long insert(EmailDisposable e) {
-        return 0;
+    private ContentValues putInContent(Groupe groupe) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ID_GROUPE, groupe.getID());
+        contentValues.put(ID_createur, groupe.getCreateur());
+        contentValues.put(nom_Groupe, groupe.getNom());
+        contentValues.put(DateHeure_Creation, groupe.getDateHeureCreation().getTime());
+        contentValues.put(DESCRIPTION, groupe.getDescription());
+        contentValues.put(IS_PRIVE, (groupe.isPrivate() ? 1 : 0));
+
+        return contentValues;
+
+
     }
 
-    public int update(EmailDisposable e) {
-        return 0;
+    public long insert(Groupe groupe) {
+        ContentValues v = putInContent(groupe);
+
+        return db.insert(tableName, null, v);
+
     }
 
-    public int delete(EmailDisposable e) {
-        return 0;
+    public int update(Groupe groupe) {
+
+
+        ContentValues v = putInContent(groupe);
+        String where = ID_GROUPE + " = ?";
+        String[] whereArgs = {groupe.getID() + ""};
+
+
+        return db.update(tableName, v, where, whereArgs);
     }
 
-    public EmailDisposable getFromId(int id) {
+    public int delete(Groupe groupe) {
+
+
+        String where = ID_GROUPE + " = ?";
+        String[] whereArgs = {groupe.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
+    }
+
+    public Groupe getFromId(int id) {
         return null;
     }
 

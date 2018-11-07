@@ -140,7 +140,7 @@ public class Tache {
         this.dateHeureEcheance = new Date(dateHeureEcheance);
     }
 
-    public boolean isEcheance() {
+    public boolean hasEcheance() {
         return echeance;
     }
 

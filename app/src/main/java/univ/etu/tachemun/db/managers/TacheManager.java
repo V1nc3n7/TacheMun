@@ -97,6 +97,7 @@ COMMIT;
         values.put(DateHeure_Creation, tache.getDateHeureCreation().getTime());
         values.put(NUMERO, tache.getNumero());
         values.put(PRIORITE, tache.getPriorite());
+        values.put(HAS_ECHEANCE, (tache.hasEcheance() ? 1 : 0));
         values.put(ECHEANCE, tache.getDateHeureEcheance().getTime());
 
 

@@ -35,11 +35,18 @@ public class UtilisateurManager extends TableManager {
             + ");";
 
 
+    /**
+     * @param context
+     */
     public UtilisateurManager(Context context) {
         super(context);
     }
 
 
+    /**
+     * @param u
+     * @return
+     */
     private ContentValues putInContent(Utilisateur u) {
 
         ContentValues values = new ContentValues();
@@ -55,8 +62,6 @@ public class UtilisateurManager extends TableManager {
     public long insert(Utilisateur u) {
 
         ContentValues v = putInContent(u);
-
-        // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(tableName, null, v);
 
 
@@ -64,13 +69,12 @@ public class UtilisateurManager extends TableManager {
 
     public int update(Utilisateur u) {
 
-        ContentValues values = new ContentValues();
         ContentValues v = putInContent(u);
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {u.getPseudo() + ""};
 
 
-        return db.update(tableName, values, where, whereArgs);
+        return db.update(tableName, v, where, whereArgs);
     }
 
     /**
