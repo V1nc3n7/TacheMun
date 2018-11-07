@@ -6,36 +6,7 @@ import android.content.Context;
 import univ.etu.tachemun.db.tableclass.ListeTacheGroupe;
 
 public class ListeTacheGroupeManager extends TableManager {
-    /*
 
-
-
-CREATE TABLE `ListeTacheGroupe` (
-  ID_ListeTacheGroupe int(11) NOT NULL,
-  ID_Groupe varchar(16) COLLATE utf8_unicode_ci NOT NULL,
-  ID_ListeTache int(11) NOT NULL,
-  ID_CreateurMembre varchar(32) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-ALTER TABLE ListeTacheGroupe
-  ADD PRIMARY KEY (ID_ListeTacheGroupe),
-  ADD KEY fk_ListeTacheGroupe_Utilisateur_idx (ID_CreateurMembre),
-  ADD KEY fk_ListeTacheGroupe_Groupe_idx (ID_Groupe),
-  ADD KEY fk_ListeTacheGroupe_ListeTache_idx (ID_ListeTache);
-
-
-ALTER TABLE ListeTacheGroupe
-  MODIFY ID_ListeTacheGroupe int(11) NOT NULL AUTO_INCREMENT;
-
-
-ALTER TABLE ListeTacheGroupe
-  ADD CONSTRAINT fk_ListeTacheGroupe_Groupe FOREIGN KEY (ID_Groupe) REFERENCES `Groupe` (ID_Groupe) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT fk_ListeTacheGroupe_ListeTache FOREIGN KEY (ID_ListeTache) REFERENCES `ListeTache` (ID_ListeTache) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT fk_ListeTacheGroupe_Utilisateur FOREIGN KEY (ID_CreateurMembre) REFERENCES `Utilisateur` (pseudo_Utilisateur) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
-
-     */
 
     static final String tableName = "ListeTacheGroupe";
     static final String ID_ListeTacheGroupe = "ID_ListeTacheGroupe";
@@ -75,8 +46,6 @@ COMMIT;
 
     public long insert(ListeTacheGroupe e) {
         ContentValues v = putInContent(e);
-
-        // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(tableName, null, v);
 
     }

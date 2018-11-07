@@ -48,10 +48,7 @@ public class UtilisateurManager extends TableManager {
      * @return
      */
     private ContentValues putInContent(Utilisateur u) {
-
         ContentValues values = new ContentValues();
-
-
         values.put(ID_UTILISATEUR, u.getPseudo());
         values.put(PASSWORD, u.getMotDePasse());
         values.put(MAIL, u.getMail());
@@ -60,20 +57,14 @@ public class UtilisateurManager extends TableManager {
     }
 
     public long insert(Utilisateur u) {
-
         ContentValues v = putInContent(u);
         return db.insert(tableName, null, v);
-
-
     }
 
     public int update(Utilisateur u) {
-
         ContentValues v = putInContent(u);
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {u.getPseudo() + ""};
-
-
         return db.update(tableName, v, where, whereArgs);
     }
 
@@ -86,28 +77,20 @@ public class UtilisateurManager extends TableManager {
      */
     public int updateOnPseudo(String ancienPseudo, Utilisateur u) {
 
+
         ContentValues values = putInContent(u);
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {ancienPseudo + ""};
-
-
         return db.update(tableName, values, where, whereArgs);
     }
 
 
     public int delete(Utilisateur u) {
 
-
-        // suppression d'un enregistrement
-        // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
-
-
         return delete(u.getPseudo());
-
     }
 
     private int delete(String pseudo) {
-
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {pseudo + ""};
         return db.delete(tableName, where, whereArgs);

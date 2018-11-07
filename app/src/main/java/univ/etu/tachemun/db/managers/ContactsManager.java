@@ -35,29 +35,21 @@ public class ContactsManager extends TableManager {
 
     private ContentValues putInContent(Contacts c) {
         ContentValues content = new ContentValues();
-
         content.put(ID_CONTACT, c.getID());
         content.put(ID_Proprietaire, c.getPseudoProprietaire());
         content.put(ID_Utilisateur, c.getPeudoContact());
         content.put(DateHeure_Contact, c.getDateHeureContact().getTime());
-
-
         return content;
     }
     public long insert(Contacts c) {
         ContentValues v = putInContent(c);
-
         return db.insert(tableName, null, v);
     }
 
     public int update(Contacts c) {
-
-
         ContentValues values = putInContent(c);
         String where = ID_CONTACT + " = ?";
         String[] whereArgs = {c.getID() + ""};
-
-
         return db.update(tableName, values, where, whereArgs);
 
     }

@@ -7,26 +7,6 @@ import univ.etu.tachemun.db.tableclass.ListeTache;
 
 public class ListeTacheManager extends TableManager {
 
-    /*
-
-CREATE TABLE ListeTache (
-  ID_ListeTache int(11) NOT NULL,
-  nom_ListeTache varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  boolPerso_ListeTache tinyint(1) NOT NULL COMMENT '1= liste Perso ,0=liste groupe',
-  description_ListeTache varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  dateHeureCreation_ListeTache timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  echeanceTotale_ListeTache datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-ALTER TABLE ListeTache
-  ADD PRIMARY KEY (ID_ListeTache);
-
-
-ALTER TABLE ListeTache
-  MODIFY ID_ListeTache int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-     */
     static final String tableName = "ListeTache";
     static final String ID_LISTETACHE = "ID_ListeTache";
     static final String nom_ListeTache = "nom";

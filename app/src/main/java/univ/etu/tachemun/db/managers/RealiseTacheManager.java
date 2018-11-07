@@ -1,5 +1,6 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.RealiseTache;
@@ -50,20 +51,39 @@ COMMIT;
             "  ON UPDATE CASCADE ON DELETE CASCADE"
             + ");";
 
+    private ContentValues putInContent(RealiseTache r) {
+        ContentValues c = new ContentValues();
+        c.put(ID_RealiseTache, r.getID());
+        c.put(ID_Realisateur, r.getRealiseurTache());
+        c.put(ID_Tache, r.getIdTache());
+        c.put(DateHeure_Realisation, r.getDateHeurRealisation().getTime());
+        c.put(DETAILS, r.getDetails());
+
+        return c;
+    }
     public RealiseTacheManager(Context context) {
         super(context);
     }
 
-    public long insert(RealiseTache e) {
-        return 0;
+    public long insert(RealiseTache r) {
+
+        ContentValues v = putInContent(r);
+        return db.insert(tableName, null, v);
     }
 
-    public int update(RealiseTache e) {
-        return 0;
+    public int update(RealiseTache r) {
+
+        ContentValues values = putInContent(r);
+        String where = ID_Tache + " = ?";
+        String[] whereArgs = {r.getID() + ""};
+        return db.update(tableName, values, where, whereArgs);
     }
 
-    public int delete(RealiseTache e) {
-        return 0;
+    public int delete(RealiseTache r) {
+
+        String where = ID_Tache + " = ?";
+        String[] whereArgs = {r.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
     }
 
     public RealiseTache getFromId(int id) {

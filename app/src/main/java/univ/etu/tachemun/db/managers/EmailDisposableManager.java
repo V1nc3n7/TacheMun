@@ -38,8 +38,6 @@ public class EmailDisposableManager extends TableManager {
     public long insert(EmailDisposable e) {
 
         ContentValues v = putInContent(e);
-
-        // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(tableName, null, v);
     }
 

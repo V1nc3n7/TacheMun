@@ -84,4 +84,8 @@ public class AssigneTache {
     public void setDateHeureAssignation(Date dateHeureAssignation) {
         this.dateHeureAssignation = dateHeureAssignation;
     }
+
+    public void setDateHeureAssignation(int dateHeureAssignation) {
+        this.dateHeureAssignation = new Date(dateHeureAssignation);
+    }
 }

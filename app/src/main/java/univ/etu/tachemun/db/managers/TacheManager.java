@@ -100,41 +100,28 @@ COMMIT;
         values.put(HAS_ECHEANCE, (tache.hasEcheance() ? 1 : 0));
         values.put(ECHEANCE, tache.getDateHeureEcheance().getTime());
 
-
         return values;
     }
 
     public long insert(Tache t) {
-
         ContentValues v = putInContent(t);
-
-        // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(tableName, null, v);
-
-
     }
 
     public int update(Tache t) {
         ContentValues values = putInContent(t);
         String where = ID_Tache + " = ?";
         String[] whereArgs = {t.getID() + ""};
-
-
         return db.update(tableName, values, where, whereArgs);
-
-
     }
 
     public int delete(Tache t) {
-
-
         String where = ID_Tache + " = ?";
         String[] whereArgs = {t.getID() + ""};
         return db.delete(tableName, where, whereArgs);
     }
 
     public Tache getFromId(int id) {
-
 
         Tache t = new Tache();
 

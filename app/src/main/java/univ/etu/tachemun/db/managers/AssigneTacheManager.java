@@ -1,5 +1,6 @@
 package univ.etu.tachemun.db.managers;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.AssigneTache;
@@ -36,16 +37,35 @@ public class AssigneTacheManager extends TableManager {
 
     }
 
-    public long insert(AssigneTache a) {
-        return 0;
+    private ContentValues putInContent(AssigneTache a) {
+        ContentValues c = new ContentValues();
+        c.put(ID_ASSIGNE, a.getID());
+        c.put(ID_ASSIGNEUR, a.getAssigneur());
+        c.put(ID_TACHE, a.getIdTache());
+        c.put(ID_ESCLAVE, a.getEsclave());
+        c.put(MESSAGE, a.getMessage());
+        c.put(TIMESTAMP_ASSIGNATION, a.getDateHeureAssignation().getTime());
+        return c;
     }
 
+    public long insert(AssigneTache a) {
+        ContentValues v = putInContent(a);
+        return db.insert(tableName, null, v);
+    }
+
+
     public int update(AssigneTache a) {
-        return 0;
+        ContentValues v = putInContent(a);
+        String where = ID_ASSIGNE + " = ?";
+        String[] whereArgs = {a.getID() + ""};
+        return db.update(tableName, v, where, whereArgs);
     }
 
     public int delete(AssigneTache a) {
-        return 0;
+
+        String where = ID_ASSIGNE + " = ?";
+        String[] whereArgs = {a.getID() + ""};
+        return db.delete(tableName, where, whereArgs);
     }
 
     public AssigneTache getFromId(int id) {
