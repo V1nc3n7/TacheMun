@@ -52,6 +52,7 @@ public class Connexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Connexion.this, Inscription.class);
+                i.putExtra("id",getInputPseudo());
                 startActivity(i);
             }
         });
