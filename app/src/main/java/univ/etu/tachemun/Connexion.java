@@ -40,6 +40,9 @@ public class Connexion extends AppCompatActivity {
                 Intent i = new Intent(Connexion.this, Inscription.class);
 
                 //ce qui a été mis dans les champs doit etre transmis à l'activity Inscription
+                String userName = getInputPseudo();
+                if (!userName.isEmpty())
+                    i.putExtra("PSEUDO", userName);
                 startActivity(i);
             }
         });

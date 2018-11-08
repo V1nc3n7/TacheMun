@@ -56,6 +56,9 @@ public class Inscription extends AppCompatActivity {
         password1Input = (EditText) findViewById(R.id.inscription_password1_input);
         password2Input = (EditText) findViewById(R.id.inscription_password2_input);
         mailInput = (EditText) findViewById(R.id.inscription_mail_input);
+        if (getIntent().hasExtra("PSEUDO"))
+            pseudoInput.setText(getIntent().getStringExtra("PSEUDO"));
+
         confirmation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
