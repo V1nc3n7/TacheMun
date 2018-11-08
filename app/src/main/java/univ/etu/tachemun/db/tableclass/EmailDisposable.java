@@ -47,4 +47,11 @@ public class EmailDisposable {
     public void setDateHeureAjout(int dateHeureAjout) {
         this.dateHeureAjout = new Date(dateHeureAjout);
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "} " + domaine +
+                ", " + dateHeureAjout;
+    }
 }

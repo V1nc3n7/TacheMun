@@ -106,4 +106,16 @@ public class ListeTache {
     public void setCouleur(int couleur) {
         this.couleur = couleur;
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "} " + nom +
+                ", " + isPerso +
+                ", " + description +
+                ", " + dateHeureCreation +
+                ", " + hasEcheance +
+                ", " + dateHeureEcheance +
+                ", " + couleur;
+    }
 }

@@ -77,4 +77,14 @@ public class PartageListe {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "} ," + proprietaireListe +
+                ", idListe=" + idListe +
+                ", " + utilisateurInvite +
+                ", " + dateHeurePartage +
+                "," + message;
+    }
 }

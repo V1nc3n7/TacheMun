@@ -56,4 +56,12 @@ public class Membre {
     public void setIdGroupe(int idGroupe) {
         this.idGroupe = idGroupe;
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "} " + pseudoUtilisteur +
+                ", " + dateHeureAdhesion +
+                ", " + idGroupe;
+    }
 }

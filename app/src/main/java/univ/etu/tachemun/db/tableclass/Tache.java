@@ -3,17 +3,7 @@ package univ.etu.tachemun.db.tableclass;
 import java.util.Date;
 
 public class Tache {
-    /*
-    `ID_Tache` int(11) NOT NULL,
-  `ID_ListeTache` int(11) NOT NULL,
-  `ID_createurTache` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `libelle_Tache` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `description_Tache` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dateHeureCreation_Tache` timestamp NULL DEFAULT NULL,
-  `numero_Tache` int(11) NOT NULL,
-  `prioriteTache` int(11) NOT NULL,
-  `echeance_Tache` datetime DEFAULT NULL
-    */
+
     private int ID;
     private int idLsteTache;
     private String createur;

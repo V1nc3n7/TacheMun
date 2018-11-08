@@ -41,4 +41,11 @@ public class ProprietaireListe {
     public void setIdListe(int idListe) {
         this.idListe = idListe;
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "}, " + proprietaire +
+                ", " + idListe;
+    }
 }

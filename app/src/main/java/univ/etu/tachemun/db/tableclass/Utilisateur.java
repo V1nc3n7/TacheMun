@@ -3,15 +3,8 @@ package univ.etu.tachemun.db.tableclass;
 import java.util.Date;
 
 public class Utilisateur {
-/*
-    `pseudo_Utilisateur` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `dateInscription_Utilisateur` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `motDePasse_Utilisateur` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `mail_Utilisateur` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-  */
 
     private String pseudo;
-
     private String motDePasse;
     private String mail;
     private Date dateInscription;

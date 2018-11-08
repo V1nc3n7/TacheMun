@@ -50,4 +50,12 @@ public class ListeTacheGroupe {
     public void setCreateurListe(String createurListe) {
         this.createurListe = createurListe;
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "} , " + idGroupe +
+                ", " + idListeTache +
+                ", " + createurListe;
+    }
 }

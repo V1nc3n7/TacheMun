@@ -92,10 +92,10 @@ public class AssigneTache {
     @Override
     public String toString() {
         return "{" + ID +
-                "}, " + idTache +
-                ", '" + assigneur + '\'' +
-                ", '" + esclave + '\'' +
-                ", '" + message + '\'' +
-                ", " + dateHeureAssignation.toString();
+                "} " + idTache +
+                ", '" + assigneur +
+                ", '" + esclave +
+                ", '" + message +
+                ", " + dateHeureAssignation;
     }
 }

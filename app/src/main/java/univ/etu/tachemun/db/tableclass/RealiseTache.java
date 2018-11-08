@@ -63,4 +63,13 @@ public class RealiseTache {
     public void setDetails(String details) {
         this.details = details;
     }
+
+    @Override
+    public String toString() {
+        return "{" + ID +
+                "} " + realiseurTache +
+                ", " + idTache +
+                ", " + dateHeurRealisation +
+                ", " + details;
+    }
 }
