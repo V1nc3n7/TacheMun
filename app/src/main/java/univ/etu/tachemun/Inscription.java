@@ -17,11 +17,14 @@ import java.util.List;
 import univ.etu.tachemun.db.managers.UtilisateurManager;
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 import univ.etu.tachemun.validators.MailValidator;
+import univ.etu.tachemun.validators.PasswordValidator;
 import univ.etu.tachemun.validators.Validator;
 
 public class Inscription extends AppCompatActivity {
 
 
+    public static final int MAX_LENGHT_PASSWORD = 120;
+    private static final int MIN_LENGHT_PASSWORD = 3;
     private Button confirmation;
     private TextView messageErrorOutput;
     private EditText pseudoInput;
@@ -31,7 +34,7 @@ public class Inscription extends AppCompatActivity {
     private EditText mailInput;
     private List<String> messagesErrors;
 
-    public static String getSHA256(String input) {
+    private static String getSHA256(String input) {
 
         String toReturn = null;
         try {
@@ -62,7 +65,7 @@ public class Inscription extends AppCompatActivity {
         confirmation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+// faire un aletDialog
                 messagesErrors = new ArrayList<>();
                 if (!(pseudoAvailiable())) {
                     messagesErrors.add("Ce pseudo est deja pris");
@@ -107,8 +110,8 @@ public class Inscription extends AppCompatActivity {
      * @return
      */
     public boolean pseudoAvailiable() {
-        //TODO
-        return true;
+        UtilisateurManager u = new UtilisateurManager(Inscription.this);
+        return !u.isPseudoInDb(getPseudoInput());
     }
 
     public String getPseudoInput() {
@@ -132,6 +135,7 @@ public class Inscription extends AppCompatActivity {
     }
 
     public boolean checkPassword() {
-        return getPassword1Input().length() > 3;
+        PasswordValidator p = new PasswordValidator(MIN_LENGHT_PASSWORD, MAX_LENGHT_PASSWORD);
+        return p.validate(getPassword1Input());
     }
 }
