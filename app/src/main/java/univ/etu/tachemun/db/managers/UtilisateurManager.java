@@ -4,6 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 
 public class UtilisateurManager extends TableManager {
@@ -43,6 +47,21 @@ public class UtilisateurManager extends TableManager {
     }
 
 
+    private static String getSHA256(String input) {
+
+        String toReturn = null;
+        try {
+            final MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.reset();
+            digest.update(input.getBytes(StandardCharsets.UTF_8));
+            toReturn = String.format("%040x", new BigInteger(1, digest.digest()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return toReturn;
+    }
+
     /**
      * @param u
      * @return
@@ -74,7 +93,7 @@ public class UtilisateurManager extends TableManager {
      * @param u
      * @return
      */
-    public int updateOnPseudo(String ancienPseudo, Utilisateur u) {
+    public int updatePseudoUser(String ancienPseudo, Utilisateur u) {
 
 
         ContentValues values = putInContent(u);
@@ -96,6 +115,23 @@ public class UtilisateurManager extends TableManager {
     }
 
 
+    public boolean connectUser(String userName, String password) {
+
+
+        Utilisateur u = new Utilisateur();
+
+        Cursor c = db.rawQuery(
+                "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
+                        ID_UTILISATEUR + "=" + userName + " AND " + PASSWORD + "=" + getSHA256(password), null);
+        if (c.moveToFirst()) {
+
+            c.close();
+            return true;
+        } else {
+            return false;
+        }
+
+    }
     public Utilisateur getFromId(String id) {
 
 
@@ -113,6 +149,20 @@ public class UtilisateurManager extends TableManager {
             return u;
         } else {
             return null;
+        }
+
+    }
+
+    public boolean isPseudoInDb(String pseudo) {
+        Cursor c = db.rawQuery(
+                "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
+                        ID_UTILISATEUR + "=" + pseudo, null);
+        if (c.moveToFirst()) {
+
+            c.close();
+            return true;
+        } else {
+            return false;
         }
 
     }

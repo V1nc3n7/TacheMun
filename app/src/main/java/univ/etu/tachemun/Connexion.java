@@ -8,11 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
+
+import univ.etu.tachemun.db.managers.UtilisateurManager;
 
 public class Connexion extends AppCompatActivity {
     List<String> messagesErrors;
@@ -22,20 +21,7 @@ public class Connexion extends AppCompatActivity {
     private EditText inputPseudo;
     private EditText inputPassword;
 
-    public static String getSHA256(String input) {
-
-        String toReturn = null;
-        try {
-            final MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            digest.reset();
-            digest.update(input.getBytes(StandardCharsets.UTF_8));
-            toReturn = String.format("%040x", new BigInteger(1, digest.digest()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return toReturn;
-    }
+    UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +38,8 @@ public class Connexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Connexion.this, Inscription.class);
+
+                //ce qui a été mis dans les champs doit etre transmis à l'activity Inscription
                 startActivity(i);
             }
         });
@@ -65,7 +53,7 @@ public class Connexion extends AppCompatActivity {
                 if (!(checkPseudoReconized(getInputPseudo()))) {
                     messagesErrors.add("Pseudo inconnu");
                 }
-                if (!(checkPseudoPassword(getInputPseudo(), getSHA256(getInputPassword())))) {
+                if (!(checkPseudoPassword(getInputPseudo(), getInputPassword()))) {
                     messagesErrors.add("Le pseudo/mot de passe ne concordent pas");
                 }
 
@@ -91,16 +79,15 @@ public class Connexion extends AppCompatActivity {
 
 
     private boolean checkPseudoReconized(String pseudo) {
-        //TODO
 
-        return true;
+        return utilisateurManager.isPseudoInDb(pseudo);
     }
 
 
     private boolean checkPseudoPassword(String pseudo, String password) {
-        //TODO
 
-        return true;
+
+        return utilisateurManager.connectUser(pseudo, password);
     }
 
 }

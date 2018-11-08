@@ -47,9 +47,7 @@ public class ListeTacheGroupeManager extends TableManager {
     public long insert(ListeTacheGroupe e) {
 
         ContentValues v = putInContent(e);
-        if (v.get(ID_ListeTacheGroupe) == -1) {
-            v.put(ID_ListeTacheGroupe, 0);
-        }
+        v.remove(ID_ListeTacheGroupe);
         return db.insert(tableName, null, v);
 
     }

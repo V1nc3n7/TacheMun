@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import univ.etu.tachemun.db.managers.GroupeManager;
+import univ.etu.tachemun.db.tableclass.Groupe;
 
 public class CreationGroupe extends AppCompatActivity {
 
@@ -32,8 +33,11 @@ public class CreationGroupe extends AppCompatActivity {
             public void onClick(View v) {
                 GroupeManager manager = new GroupeManager(CreationGroupe.this);
                 //il faut pseudoUtilisateur
-                //Groupe g = new Groupe(0,getNomGroupeText(),getDescriptionText(),getPriveSwitch(),System.currentTimeMillis());
-                //manager.insert(g);
+                String pseudo = getIntent().getStringExtra("ID_USER");
+                Groupe g = new Groupe(-1, getNomGroupeText(), pseudo, getPriveSwitch(), getDescriptionText(), System.currentTimeMillis());
+                manager.insert(g);
+
+
             }
         });
 

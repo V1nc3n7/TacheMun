@@ -86,6 +86,8 @@ public class Inscription extends AppCompatActivity {
                     manager.insert(user);
 
                     Intent i = new Intent(Inscription.this, Connexion.class);
+                    i.putExtra("ID_USER", user.getPseudo());
+
                     startActivity(i);
                 } else {
                     messageErrorOutput.setText(messagesErrors.toString());
