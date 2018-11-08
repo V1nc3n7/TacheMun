@@ -38,6 +38,7 @@ public class EmailDisposableManager extends TableManager {
     public long insert(EmailDisposable e) {
 
         ContentValues v = putInContent(e);
+        v.remove(ID_EMAILDISPOSABLE);
         return db.insert(tableName, null, v);
     }
 

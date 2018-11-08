@@ -68,6 +68,7 @@ COMMIT;
     public long insert(RealiseTache r) {
 
         ContentValues v = putInContent(r);
+        v.remove(ID_RealiseTache);
         return db.insert(tableName, null, v);
     }
 

@@ -44,7 +44,7 @@ public class MembreManager extends TableManager {
 
     public long insert(Membre m) {
         ContentValues v = putInContent(m);
-
+        v.remove(ID_MEMBRE);
         return db.insert(tableName, null, v);
 
 

@@ -32,6 +32,7 @@ public class ProprietaireListeManager extends TableManager {
     public long insert(ProprietaireListe p) {
 
         ContentValues v = putInContent(p);
+        v.remove(ID_ProprietaireListe);
         return db.insert(tableName, null, v);
     }
 

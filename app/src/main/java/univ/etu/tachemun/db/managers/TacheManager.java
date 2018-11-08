@@ -105,6 +105,7 @@ COMMIT;
 
     public long insert(Tache t) {
         ContentValues v = putInContent(t);
+        v.remove(ID_Tache);
         return db.insert(tableName, null, v);
     }
 

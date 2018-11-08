@@ -52,6 +52,7 @@ public class PartageListeManager extends TableManager {
     public long insert(PartageListe p) {
 
         ContentValues v = putInContent(p);
+        v.remove(ID_PartageListe);
         return db.insert(tableName, null, v);
     }
 

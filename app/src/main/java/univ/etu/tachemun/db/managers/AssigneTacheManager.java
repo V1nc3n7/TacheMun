@@ -50,6 +50,7 @@ public class AssigneTacheManager extends TableManager {
 
     public long insert(AssigneTache a) {
         ContentValues v = putInContent(a);
+        v.remove(ID_ASSIGNE);
         return db.insert(tableName, null, v);
     }
 

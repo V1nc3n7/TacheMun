@@ -43,6 +43,7 @@ public class ContactsManager extends TableManager {
     }
     public long insert(Contacts c) {
         ContentValues v = putInContent(c);
+        v.remove(ID_CONTACT);
         return db.insert(tableName, null, v);
     }
 

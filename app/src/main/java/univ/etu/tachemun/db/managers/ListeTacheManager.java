@@ -54,6 +54,7 @@ public class ListeTacheManager extends TableManager {
 
     public long insert(ListeTache l) {
         ContentValues v = putInContent(l);
+        v.remove(ID_LISTETACHE);
         return db.insert(tableName, null, v);
     }
 

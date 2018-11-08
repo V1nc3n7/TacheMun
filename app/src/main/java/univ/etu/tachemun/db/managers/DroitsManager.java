@@ -31,7 +31,7 @@ public class DroitsManager extends TableManager {
 
     public long insert(Droits d) {
         ContentValues c = putInContent(d);
-
+        c.remove(ID_DROIT);
         return db.insert(tableName, null, c);
     }
 

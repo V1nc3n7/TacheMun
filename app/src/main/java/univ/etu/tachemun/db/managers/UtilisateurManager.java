@@ -55,7 +55,6 @@ public class UtilisateurManager extends TableManager {
         values.put(DateHeure_INSCRIPTION, u.getDateInscription().getTime());
         return values;
     }
-
     public long insert(Utilisateur u) {
         ContentValues v = putInContent(u);
         return db.insert(tableName, null, v);
