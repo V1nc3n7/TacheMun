@@ -77,6 +77,7 @@ public class UtilisateurManager extends TableManager {
 
     public long insertRaw(Utilisateur u) {
         ContentValues v = putInContent(u);
+
         return db.insert(tableName, null, v);
     }
 
@@ -84,6 +85,7 @@ public class UtilisateurManager extends TableManager {
         ContentValues v = putInContent(u);
         v.remove(PASSWORD);
         v.put(PASSWORD, getSHA256(u.getMotDePasse()));
+        this.open();
         if(db.isOpen()){
             return db.insert(tableName, null, v);
         }
@@ -97,6 +99,7 @@ public class UtilisateurManager extends TableManager {
         ContentValues v = putInContent(u);
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {u.getPseudo() + ""};
+        this.open();
         return db.update(tableName, v, where, whereArgs);
     }
 
@@ -113,18 +116,21 @@ public class UtilisateurManager extends TableManager {
         ContentValues values = putInContent(u);
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {ancienPseudo + ""};
+        this.open();
         return db.update(tableName, values, where, whereArgs);
     }
 
 
     public int delete(Utilisateur u) {
-
+        this.close();
         return delete(u.getPseudo());
     }
 
     private int delete(String pseudo) {
+
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {pseudo + ""};
+        this.open();
         return db.delete(tableName, where, whereArgs);
     }
 
@@ -133,10 +139,11 @@ public class UtilisateurManager extends TableManager {
 
 
         Utilisateur u = new Utilisateur();
-
+        this.open();
         Cursor c = db.rawQuery(
                     "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
                             ID_UTILISATEUR + "=" + userName + " AND " + PASSWORD + "=" + getSHA256(password), null);
+        this.close();
         if (c.moveToFirst()) {
 
             c.close();
@@ -150,16 +157,18 @@ public class UtilisateurManager extends TableManager {
 
 
         Utilisateur u = new Utilisateur();
-
+        this.open();
         Cursor c = db.rawQuery(
                 "SELECT " + ID_UTILISATEUR + ", " + PASSWORD + ", " + MAIL + " , " + DateHeure_INSCRIPTION + " FROM " + tableName + " WHERE " +
                         ID_UTILISATEUR + "=" + id, null);
+        this.close();
         if (c.moveToFirst()) {
             u.setPseudo(c.getString(c.getColumnIndex(ID_UTILISATEUR)));
             u.setMotDePasse(c.getString(c.getColumnIndex(PASSWORD)));
             u.setMail(c.getString(c.getColumnIndex(MAIL)));
             u.setDateInscription(c.getInt(c.getColumnIndex(DateHeure_INSCRIPTION)));
             c.close();
+
             return u;
         } else {
             return null;
@@ -168,13 +177,14 @@ public class UtilisateurManager extends TableManager {
     }
 
     public boolean isPseudoInDb(String pseudo) {
-
+        this.open();
         Cursor c = null;
         if(db.isOpen()) {
             c = db.rawQuery(
                     "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
                             ID_UTILISATEUR + "= \"" + pseudo +"\"", null);
         }
+        this.close();
         if (c.moveToFirst()) {
 
             c.close();

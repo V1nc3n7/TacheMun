@@ -101,10 +101,7 @@ public class Inscription extends AppCompatActivity {
      */
     public boolean pseudoAvailiable() {
         UtilisateurManager u = new UtilisateurManager(this);
-        u.open();
-        boolean res = !u.isPseudoInDb(getPseudoInput());
-        u.close();
-        return res;
+        return !u.isPseudoInDb(getPseudoInput());
     }
 
     public String getPseudoInput() {
