@@ -143,7 +143,5 @@ public class AndroidTask extends SQLiteOpenHelper {
 
         onCreate(sqLiteDatabase);
     }
-
-
 }
 

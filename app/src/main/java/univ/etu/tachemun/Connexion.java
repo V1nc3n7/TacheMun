@@ -21,7 +21,7 @@ public class Connexion extends AppCompatActivity {
     private EditText inputPseudo;
     private EditText inputPassword;
 
-    UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
+    //UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,11 @@ public class Connexion extends AppCompatActivity {
                     startActivity(i);
                 } else {
                     messageErrorConnexion.setText(messagesErrors.toString());
+
+                    //test a supp
+                    Intent i = new Intent(Connexion.this, Listeliste.class);
+                    startActivity(i);
+
                 }
 
             }
@@ -83,14 +88,16 @@ public class Connexion extends AppCompatActivity {
 
     private boolean checkPseudoReconized(String pseudo) {
 
-        return utilisateurManager.isPseudoInDb(pseudo);
+        //return utilisateurManager.isPseudoInDb(pseudo);
+        return false;
     }
 
 
     private boolean checkPseudoPassword(String pseudo, String password) {
 
 
-        return utilisateurManager.connectUser(pseudo, password);
+        //return utilisateurManager.connectUser(pseudo, password);
+        return false;
     }
 
 }

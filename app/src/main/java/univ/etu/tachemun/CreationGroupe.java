@@ -23,7 +23,7 @@ public class CreationGroupe extends AppCompatActivity {
         setContentView(R.layout.activity_creation_groupe);
 
         priveSwitch = (Switch) findViewById(R.id.creation_groupe_switch);
-        nomGroupeText = (EditText) findViewById(R.id.creation_groupe__input);
+        nomGroupeText = (EditText) findViewById(R.id.creation_groupe_input);
         descriptionText = (EditText) findViewById(R.id.creation_groupe_description_input);
         confButton = (Button) findViewById(R.id.creation_groupe_confirmation_button);
 

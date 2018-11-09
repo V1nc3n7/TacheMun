@@ -9,12 +9,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import univ.etu.tachemun.db.tableclass.ListeTache;
 
 public class Listeliste extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ListView listView;
+    private TextView textView;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,23 @@ public class Listeliste extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //affichage listeliste
+        linearLayout = (LinearLayout) findViewById(R.id.layoutprincipal);
+        ArrayList<ListeTache> listeTaches = recupListeListe();
+        if(listeTaches.size() == 0){
+            textView = new TextView(this);
+            textView.setText("Vous n'avez aucune liste de tache.");
+//            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+//            textView.setLayoutParams(lp);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            linearLayout.addView(textView);
+        }
+        else{
+            listView = new ListView(this);
+            linearLayout.addView(listView);
+        }
+
     }
 
     @Override
@@ -103,5 +132,10 @@ public class Listeliste extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private ArrayList<ListeTache> recupListeListe(){
+        ArrayList<ListeTache> listeTaches = new ArrayList<>();
+        return listeTaches;
     }
 }
