@@ -74,8 +74,16 @@ public class UtilisateurManager extends TableManager {
         values.put(DateHeure_INSCRIPTION, u.getDateInscription().getTime());
         return values;
     }
-    public long insert(Utilisateur u) {
+
+    public long insertRaw(Utilisateur u) {
         ContentValues v = putInContent(u);
+        return db.insert(tableName, null, v);
+    }
+
+    public long insertNew(Utilisateur u) {
+        ContentValues v = putInContent(u);
+        v.remove(PASSWORD);
+        v.put(PASSWORD, getSHA256(u.getMotDePasse()));
         return db.insert(tableName, null, v);
     }
 
