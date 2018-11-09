@@ -50,27 +50,36 @@ public class GroupeManager extends TableManager {
 
     public long insert(Groupe groupe) {
         ContentValues v = putInContent(groupe);
-        return db.insert(tableName, null, v);
+
+        this.open();
+        long l = db.insert(tableName, null, v);
+        this.close();
+        return l;
 
     }
 
-    public int update(Groupe groupe) {
+    public long update(Groupe groupe) {
 
 
         ContentValues v = putInContent(groupe);
         String where = ID_GROUPE + " = ?";
         String[] whereArgs = {groupe.getID() + ""};
+        this.open();
+        long l = db.update(tableName, v, where, whereArgs);
+        this.close();
+        return l;
 
-
-        return db.update(tableName, v, where, whereArgs);
     }
 
-    public int delete(Groupe groupe) {
+    public long delete(Groupe groupe) {
 
 
         String where = ID_GROUPE + " = ?";
         String[] whereArgs = {groupe.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long l = db.delete(tableName, where, whereArgs);
+        this.close();
+        return l;
     }
 
     public Groupe getFromId(int id) {
