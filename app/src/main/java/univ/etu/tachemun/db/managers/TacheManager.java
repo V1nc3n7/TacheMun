@@ -8,44 +8,6 @@ import univ.etu.tachemun.db.tableclass.Tache;
 
 public class TacheManager extends TableManager {
 
-    /*
-`ID_Tache` int(11) NOT NULL,
-`ID_ListeTache` int(11) NOT NULL,
-`ID_createurTache` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-`libelle_Tache` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-`description_Tache` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-`dateHeureCreation_Tache` timestamp NULL DEFAULT NULL,
-`numero_Tache` int(11) NOT NULL,
-`prioriteTache` int(11) NOT NULL,
-`echeance_Tache` datetime DEFAULT NULL
-*/
-    /*
-
-CREATE TABLE Tache (
-  ID_Tache int(11) NOT NULL,
-  ID_ListeTache int(11) NOT NULL,
-  ID_createurTache varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  libelle_Tache varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  description_Tache varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  dateHeureCreation_Tache timestamp NULL DEFAULT NULL,
-  numero_Tache int(11) NOT NULL,
-  prioriteTache int(11) NOT NULL,
-  echeance_Tache datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-ALTER TABLE Tache
-  ADD PRIMARY KEY (ID_Tache),
-  ADD KEY fk_Tache_ListeTache_idx (ID_ListeTache),
-  ADD KEY fk_Tache_Utilisateur (ID_createurTache);
-
-
-ALTER TABLE Tache
-  ADD CONSTRAINT fk_Tache_ListeTache FOREIGN KEY (ID_ListeTache) REFERENCES ListeTache (ID_ListeTache),
-  ADD CONSTRAINT fk_Tache_Utilisateur FOREIGN KEY (ID_createurTache) REFERENCES Utilisateur (pseudo_Utilisateur);
-COMMIT;
-
-    */
     static final String tableName = "Tache";
     static final String ID_Tache = "ID_Tache";
     static final String ID_ListeTache = "ID_ListeTache";
@@ -106,26 +68,37 @@ COMMIT;
     public long insert(Tache t) {
         ContentValues v = putInContent(t);
         v.remove(ID_Tache);
-        return db.insert(tableName, null, v);
+        this.open();
+        long r = db.insert(tableName, null, v);
+        this.close();
+        return r;
     }
 
-    public int update(Tache t) {
+    public long update(Tache t) {
         ContentValues values = putInContent(t);
         String where = ID_Tache + " = ?";
         String[] whereArgs = {t.getID() + ""};
-        return db.update(tableName, values, where, whereArgs);
+        this.open();
+        long r = db.update(tableName, values, where, whereArgs);
+        this.close();
+        return r;
+
     }
 
-    public int delete(Tache t) {
+    public long delete(Tache t) {
         String where = ID_Tache + " = ?";
         String[] whereArgs = {t.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long r = db.delete(tableName, where, whereArgs);
+        this.close();
+        return r;
+
     }
 
     public Tache getFromId(int id) {
 
         Tache t = new Tache();
-
+        this.open();
         Cursor c = db.rawQuery(
                 "SELECT " + ID_Tache + ", " + ID_ListeTache + ", " + ID_Createur
                         + " , " + LIBELLE + " , " + DESCRIPTION + " , "
@@ -148,10 +121,11 @@ COMMIT;
             else
                 t.setDateHeureEcheance(c.getInt(c.getColumnIndex(ECHEANCE)));
 
-
+            this.close();
             c.close();
             return t;
         } else {
+            this.close();
             return null;
         }
 

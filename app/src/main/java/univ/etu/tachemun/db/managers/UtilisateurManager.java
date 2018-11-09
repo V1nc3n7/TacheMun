@@ -169,7 +169,6 @@ public class UtilisateurManager extends TableManager {
             u.setMail(c.getString(c.getColumnIndex(MAIL)));
             u.setDateInscription(c.getInt(c.getColumnIndex(DateHeure_INSCRIPTION)));
             c.close();
-
             return u;
         } else {
             return null;

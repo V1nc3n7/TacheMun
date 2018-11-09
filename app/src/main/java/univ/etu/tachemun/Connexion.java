@@ -88,14 +88,12 @@ public class Connexion extends AppCompatActivity {
     private boolean checkPseudoReconized(String pseudo) {
 
         return utilisateurManager.isPseudoInDb(pseudo);
-        //return false;
     }
 
 
     private boolean checkPseudoPassword(String pseudo, String password) {
 
         return utilisateurManager.connectUser(pseudo, password);
-        //return false;
     }
 
 }
