@@ -51,22 +51,31 @@ public class AssigneTacheManager extends TableManager {
     public long insert(AssigneTache a) {
         ContentValues v = putInContent(a);
         v.remove(ID_ASSIGNE);
-        return db.insert(tableName, null, v);
+        this.open();
+        long l = db.insert(tableName, null, v);
+        this.close();
+        return l;
     }
 
 
-    public int update(AssigneTache a) {
+    public long update(AssigneTache a) {
         ContentValues v = putInContent(a);
         String where = ID_ASSIGNE + " = ?";
         String[] whereArgs = {a.getID() + ""};
-        return db.update(tableName, v, where, whereArgs);
+        this.open();
+        long l = db.update(tableName, v, where, whereArgs);
+        this.close();
+        return l;
     }
 
-    public int delete(AssigneTache a) {
+    public long delete(AssigneTache a) {
 
         String where = ID_ASSIGNE + " = ?";
         String[] whereArgs = {a.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long l = db.delete(tableName, where, whereArgs);
+        this.close();
+        return l;
     }
 
     public AssigneTache getFromId(int id) {
