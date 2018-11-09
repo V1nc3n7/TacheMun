@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import univ.etu.tachemun.db.managers.ListeTacheManager;
 import univ.etu.tachemun.db.tableclass.ListeTache;
 
 public class Listeliste extends AppCompatActivity
@@ -58,7 +59,9 @@ public class Listeliste extends AppCompatActivity
         //affichage listeliste
         linearLayout = (LinearLayout) findViewById(R.id.layoutprincipal);
         ArrayList<ListeTache> listeTaches = recupListeListe();
-        if(listeTaches.size() == 0){
+        System.out.println(listeTaches == null);
+        //System.out.println(listeTaches.toString());
+        if (listeTaches == null) {
             textView = new TextView(this);
             textView.setText(R.string.liste_listestache_no_lists);
 //            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
@@ -135,7 +138,7 @@ public class Listeliste extends AppCompatActivity
     }
 
     private ArrayList<ListeTache> recupListeListe(){
-        ArrayList<ListeTache> listeTaches = new ArrayList<>();
-        return listeTaches;
+        ListeTacheManager lm = new ListeTacheManager(Listeliste.this);
+        return lm.getListesOfUser(getIntent().getStringExtra("PSEUDO"));
     }
 }

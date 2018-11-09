@@ -2,8 +2,9 @@ package univ.etu.tachemun.db.managers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 import univ.etu.tachemun.db.tableclass.ListeTache;
 
@@ -84,11 +85,42 @@ public class ListeTacheManager extends TableManager {
         return m;
     }
 
-    public Collection<ListeTache> getListesOfUser(String username) {
+    public ArrayList<ListeTache> getListesOfUser(String username) {
 //TODO
-        Collection<ListeTache> collection;
+        ArrayList<ListeTache> listes = new ArrayList<>();
 
-        return null;
+        this.open();
+        String aliasID_LISTE_TACHE = "idlstch";
+        Cursor cursor = db.rawQuery("SELECT " + tableName + "." + ID_LISTETACHE + " AS " + aliasID_LISTE_TACHE + " ," + nom_ListeTache + " ,"
+                + IS_PRIVE + " ," + DESCRIPTION + " ," + DateHeure_Creation + " ," + HAS_ECHEANCE + " ," + ECHEANCE +
+                " ," + COULEUR + " FROM " + tableName + " INNER JOIN " + ProprietaireListeManager.tableName
+                + " ON " + aliasID_LISTE_TACHE + " = " + ProprietaireListeManager.tableName + "." + ProprietaireListeManager.ID_ListeTache + " WHERE "
+                + aliasID_LISTE_TACHE + "=\"" + username + "\"", null);
+
+
+        System.out.println(cursor.getCount());
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                //    public ListeTache(int ID, String nom, boolean isPerso, String description,
+                // long dateHeureCreation, boolean hasEcheance, long dateHeureEcheance, int couleur) {
+                ListeTache li = new ListeTache(cursor.getInt(cursor.getColumnIndex(ID_LISTETACHE)),
+                        cursor.getString(cursor.getColumnIndex(nom_ListeTache)),
+                        true, cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
+                        cursor.getInt(cursor.getColumnIndex(DateHeure_Creation)),
+                        (cursor.getInt(cursor.getColumnIndex(HAS_ECHEANCE)) == 1)
+                        , cursor.getInt(cursor.getColumnIndex(ECHEANCE))
+                        , cursor.getInt(cursor.getColumnIndex(COULEUR)));
+                System.out.println(li.toString());
+                listes.add(li);
+
+            }
+            this.close();
+
+        } else {
+            listes = null;
+        }
+        cursor.close();
+        return listes;
     }
     public ListeTache getFromId(int id) {
         return null;
