@@ -1,6 +1,7 @@
 package univ.etu.tachemun;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -14,20 +15,28 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.Date;
+import java.util.Random;
+
 import univ.etu.tachemun.TimeDate.DatePickerFragment;
 import univ.etu.tachemun.TimeDate.TimePickerFragment;
+import univ.etu.tachemun.db.managers.ListeTacheManager;
+import univ.etu.tachemun.db.managers.ProprietaireListeManager;
+import univ.etu.tachemun.db.tableclass.ListeTache;
+import univ.etu.tachemun.db.tableclass.ProprietaireListe;
 
 
 public class NouvelleListeDeTache extends AppCompatActivity {
 
     private LinearLayout linearLayout;
-    private EditText NomListeTache;
+    private EditText nomListeTache;
+    private EditText descriptionListeTache;
     private Button createButton;
     private Button checkButton;
-    private Button time;
-    private Button date;
+    private Button timePicker;
+    private Button datePicker;
 
-    private int choix;
+    private int choixCouleur;
 
 
     @Override
@@ -37,14 +46,14 @@ public class NouvelleListeDeTache extends AppCompatActivity {
 
         creationImage();
 
-        NomListeTache = (EditText) findViewById(R.id.nomListTache);
+        nomListeTache = (EditText) findViewById(R.id.nomListTache);
 
         createButton = (Button) findViewById(R.id.cree_nouvListe);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ajouter l'ajout à la base de donnee
-                if (NomListeTache.getText().toString().equals("")) {
+                if (checkTitre(getTitreListe())) {
                     /*Snackbar.make(v, "Le nom de votre tache est invalide", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();*/
 
@@ -66,7 +75,22 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     });*/
                     AlertDialog dialog = builder.create();
                     dialog.show();
+
                 } else {
+                    Intent intent = new Intent(NouvelleListeDeTache.this, Listeliste.class);
+                    String userName = getIntent().getStringExtra("PSEUDO");
+                    Random random = new Random();
+
+                    ListeTache listeTache = new ListeTache(-1, getTitreListe(), true,
+                            getDescriptionListe(), System.currentTimeMillis()
+                            , false, 0, random.nextInt(10));
+                    ListeTacheManager lm = new ListeTacheManager(NouvelleListeDeTache.this);
+                    long id = lm.insert(listeTache);
+                    ProprietaireListe proprietaireListe = new ProprietaireListe(-1, userName, (int) id);
+                    ProprietaireListeManager pmanager = new ProprietaireListeManager(NouvelleListeDeTache.this);
+                    pmanager.insert(proprietaireListe);
+                    intent.putExtra("PSEUDO", userName);
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -76,22 +100,38 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "info : " + NomListeTache.getText().toString() + " et " + choix, Snackbar.LENGTH_LONG)
+                Snackbar.make(v, "info : " + nomListeTache.getText().toString() + " et " + choixCouleur, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
 
+    private Date getDateOfPickers() {
+        return null;
+    }
+
+    private boolean checkTitre(String titreListe) {
+        return titreListe.length() < 16;
+    }
+
+    private String getTitreListe() {
+        return this.nomListeTache.getText().toString();
+    }
+
+    private String getDescriptionListe() {
+        return this.descriptionListeTache.getText().toString();
+    }
+
     public void showTimePickerDialog(View v) {
-        time = (Button) findViewById(R.id.settime);
-        DialogFragment newFragment = new TimePickerFragment(time);
+        timePicker = (Button) findViewById(R.id.settime);
+        DialogFragment newFragment = new TimePickerFragment(timePicker);
         newFragment.show(getSupportFragmentManager(), "timePicker");
 
     }
 
     public void showDatePickerDialog(View v) {
-        date = (Button) findViewById(R.id.setdate);
-        DialogFragment newFragment = new DatePickerFragment(date);
+        datePicker = (Button) findViewById(R.id.setdate);
+        DialogFragment newFragment = new DatePickerFragment(datePicker);
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
@@ -180,7 +220,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 0;
+                choixCouleur = 0;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -202,7 +242,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 1;
+                choixCouleur = 1;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -223,7 +263,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 2;
+                choixCouleur = 2;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -244,7 +284,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 3;
+                choixCouleur = 3;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -265,7 +305,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 4;
+                choixCouleur = 4;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -286,7 +326,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 5;
+                choixCouleur = 5;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -307,7 +347,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 6;
+                choixCouleur = 6;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -328,7 +368,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 7;
+                choixCouleur = 7;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -349,7 +389,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 8;
+                choixCouleur = 8;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -370,7 +410,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 9;
+                choixCouleur = 9;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);
@@ -391,7 +431,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         imageView10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choix = 10;
+                choixCouleur = 10;
                 //deselection autre image
                 imageView0.setPadding(0, 0, 0, 0);
                 imageView1.setPadding(0, 0, 0, 0);

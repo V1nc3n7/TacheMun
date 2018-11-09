@@ -20,13 +20,13 @@ public class ListeTache {
     private Date dateHeureEcheance;
     private int couleur;
 
-    public ListeTache(int ID, String nom, int isPerso, String description, long dateHeureCreation, int hasEcheance, long dateHeureEcheance, int couleur) {
+    public ListeTache(int ID, String nom, boolean isPerso, String description, long dateHeureCreation, boolean hasEcheance, long dateHeureEcheance, int couleur) {
         this.ID = ID;
         this.nom = nom;
-        this.isPerso = isPerso == 1;
+        this.isPerso = isPerso;
         this.description = description;
         this.dateHeureCreation = new Date(dateHeureCreation);
-        this.hasEcheance = hasEcheance == 1;
+        this.hasEcheance = hasEcheance;
 
         if (this.hasEcheance) {
             this.dateHeureEcheance = new Date(dateHeureEcheance);

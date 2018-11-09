@@ -65,6 +65,7 @@ public class Connexion extends AppCompatActivity {
 
                 if (messagesErrors.isEmpty()) {
                     Intent i = new Intent(Connexion.this, Listeliste.class);
+                    i.putExtra("PSEUDO", getInputPseudo());
                     startActivity(i);
                     finish();
                 } else {

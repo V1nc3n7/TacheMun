@@ -41,6 +41,7 @@ public class Listeliste extends AppCompatActivity
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
                 Intent intent = new Intent(Listeliste.this, NouvelleListeDeTache.class);
+                intent.putExtra("PSEUDO", getIntent().getStringExtra("PSEUDO"));
                 startActivity(intent);
             }
         });
