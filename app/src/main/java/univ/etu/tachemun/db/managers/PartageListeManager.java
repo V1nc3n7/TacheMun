@@ -53,21 +53,31 @@ public class PartageListeManager extends TableManager {
 
         ContentValues v = putInContent(p);
         v.remove(ID_PartageListe);
-        return db.insert(tableName, null, v);
+        this.open();
+        long l = db.insert(tableName, null, v);
+        this.close();
+        return l;
     }
 
 
-    public int update(PartageListe p) {
+    public long update(PartageListe p) {
         ContentValues values = putInContent(p);
         String where = ID_PartageListe + " = ?";
         String[] whereArgs = {p.getID() + ""};
-        return db.update(tableName, values, where, whereArgs);
+        this.open();
+        long l = db.update(tableName, values, where, whereArgs);
+        this.close();
+        return l;
+
     }
 
-    public int delete(PartageListe p) {
+    public long delete(PartageListe p) {
         String where = ID_PartageListe + " = ?";
         String[] whereArgs = {p.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long l = db.delete(tableName, where, whereArgs);
+        this.close();
+        return l;
     }
 
     public PartageListe getFromId(int id) {

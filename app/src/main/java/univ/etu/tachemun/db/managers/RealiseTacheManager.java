@@ -69,22 +69,31 @@ COMMIT;
 
         ContentValues v = putInContent(r);
         v.remove(ID_RealiseTache);
-        return db.insert(tableName, null, v);
+        this.open();
+        long m = db.insert(tableName, null, v);
+        this.close();
+        return m;
     }
 
-    public int update(RealiseTache r) {
+    public long update(RealiseTache r) {
 
         ContentValues values = putInContent(r);
         String where = ID_Tache + " = ?";
         String[] whereArgs = {r.getID() + ""};
-        return db.update(tableName, values, where, whereArgs);
+        this.open();
+        long l = db.update(tableName, values, where, whereArgs);
+        this.close();
+        return l;
     }
 
-    public int delete(RealiseTache r) {
+    public long delete(RealiseTache r) {
 
         String where = ID_Tache + " = ?";
         String[] whereArgs = {r.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long m = db.delete(tableName, where, whereArgs);
+        this.close();
+        return m;
     }
 
     public RealiseTache getFromId(int id) {

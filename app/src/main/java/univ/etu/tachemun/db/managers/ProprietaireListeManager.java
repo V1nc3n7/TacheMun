@@ -29,21 +29,6 @@ public class ProprietaireListeManager extends TableManager {
         super(context);
     }
 
-    public long insert(ProprietaireListe p) {
-
-        ContentValues v = putInContent(p);
-        v.remove(ID_ProprietaireListe);
-        return db.insert(tableName, null, v);
-    }
-
-    public int update(ProprietaireListe p) {
-
-        ContentValues values = putInContent(p);
-        String where = ID_ProprietaireListe + " = ?";
-        String[] whereArgs = {p.getID() + ""};
-        return db.update(tableName, values, where, whereArgs);
-    }
-
     private ContentValues putInContent(ProprietaireListe p) {
         ContentValues c = new ContentValues();
         c.put(ID_ProprietaireListe, p.getID());
@@ -51,12 +36,36 @@ public class ProprietaireListeManager extends TableManager {
         c.put(ID_ListeTache, p.getIdListe());
         return c;
     }
+    public long insert(ProprietaireListe p) {
 
-    public int delete(ProprietaireListe p) {
+        ContentValues v = putInContent(p);
+        v.remove(ID_ProprietaireListe);
+        this.open();
+        long l = db.insert(tableName, null, v);
+        this.close();
+        return l;
+    }
+
+    public long update(ProprietaireListe p) {
+
+        ContentValues values = putInContent(p);
+        String where = ID_ProprietaireListe + " = ?";
+        String[] whereArgs = {p.getID() + ""};
+        this.open();
+        long l = db.update(tableName, values, where, whereArgs);
+        this.close();
+        return l;
+    }
+
+
+    public long delete(ProprietaireListe p) {
 
         String where = ID_ProprietaireListe + " = ?";
         String[] whereArgs = {p.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long l = db.delete(tableName, where, whereArgs);
+        this.close();
+        return l;
     }
 
     public ProprietaireListe getFromId(int id) {

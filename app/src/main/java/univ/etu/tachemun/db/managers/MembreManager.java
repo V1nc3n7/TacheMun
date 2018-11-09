@@ -45,30 +45,36 @@ public class MembreManager extends TableManager {
     public long insert(Membre m) {
         ContentValues v = putInContent(m);
         v.remove(ID_MEMBRE);
-        return db.insert(tableName, null, v);
+        this.open();
+        long l = db.insert(tableName, null, v);
+        this.close();
+        return l;
 
 
     }
 
 
-    public int update(Membre m) {
+    public long update(Membre m) {
 
         ContentValues values = putInContent(m);
         String where = ID_MEMBRE + " = ?";
         String[] whereArgs = {m.getID() + ""};
-
-
-        return db.update(tableName, values, where, whereArgs);
-
+        this.open();
+        long l = db.update(tableName, values, where, whereArgs);
+        this.close();
+        return l;
 
     }
 
-    public int delete(Membre m) {
+    public long delete(Membre m) {
 
 
         String where = ID_MEMBRE + " = ?";
         String[] whereArgs = {m.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long l = db.delete(tableName, where, whereArgs);
+        this.close();
+        return l;
     }
 
     public Membre getFromId(int id) {
