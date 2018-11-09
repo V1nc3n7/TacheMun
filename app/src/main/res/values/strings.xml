@@ -111,7 +111,7 @@
     <string name="cree_nouv_listeTache_nomTache_input_hint">Nom de votre liste</string>
     <string name="nouvListe_descrListe_hint">Description de la liste (Facultatif)</string>
     <string name="nouvListe_dateHeure_txt_view">Entrez une échéance (facultatif)</string>
-    <string name="cree_une_nouvelle_liste">Creer une nouvelle tâche</string>
+    <string name="cree_une_nouvelle_liste">Creer une nouvelle liste de tâches</string>
     <string name="check">Creer une nouvelle liste</string>
     <string name="associer_une_couleur">Associer une couleur :</string>
     <string name="nouvelle_liste_de_tache">Nouvelle Liste de Tache</string>
@@ -120,4 +120,7 @@
     <string name="creation_groupe_nom_input_hint">Entrez un nom de groupe (16 caractères max)</string>
     <string name="creation_groupe_description_input_hint">Description du groupe (facultatif)</string>
     <string name="creation_groupe_prive_switch_text">Groupe privé</string>
+    <string name="liste_listestache_no_lists">Vous n\'avez aucune liste de tache.</string>
+    <string name="new_listetache_datepicker">date</string>
+    <string name="new_listetache_hourpicker">heure</string>
 </resources>

@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,7 +59,7 @@ public class Listeliste extends AppCompatActivity
         ArrayList<ListeTache> listeTaches = recupListeListe();
         if(listeTaches.size() == 0){
             textView = new TextView(this);
-            textView.setText("Vous n'avez aucune liste de tache.");
+            textView.setText(R.string.liste_listestache_no_lists);
 //            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
 //            textView.setLayoutParams(lp);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
