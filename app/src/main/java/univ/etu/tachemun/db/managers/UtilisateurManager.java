@@ -142,13 +142,14 @@ public class UtilisateurManager extends TableManager {
         this.open();
         Cursor c = db.rawQuery(
                     "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
-                            ID_UTILISATEUR + "=" + userName + " AND " + PASSWORD + "=" + getSHA256(password), null);
-        this.close();
-        if (c.moveToFirst()) {
+                            ID_UTILISATEUR + "=\"" + userName + "\" AND " + PASSWORD + "=\"" + getSHA256(password) + "\"", null);
 
+        if (c.moveToFirst()) {
+            this.close();
             c.close();
             return true;
         } else {
+            this.close();
             return false;
         }
 
@@ -184,12 +185,13 @@ public class UtilisateurManager extends TableManager {
                     "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
                             ID_UTILISATEUR + "= \"" + pseudo +"\"", null);
         }
-        this.close();
-        if (c.moveToFirst()) {
 
+        if (c.moveToFirst()) {
+            this.close();
             c.close();
             return true;
         } else {
+            this.close();
             return false;
         }
 

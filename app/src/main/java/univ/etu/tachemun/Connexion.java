@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import univ.etu.tachemun.db.managers.UtilisateurManager;
-import univ.etu.tachemun.db.tableclass.Utilisateur;
 
 public class Connexion extends AppCompatActivity {
     List<String> messagesErrors;
@@ -67,13 +66,9 @@ public class Connexion extends AppCompatActivity {
                 if (messagesErrors.isEmpty()) {
                     Intent i = new Intent(Connexion.this, Listeliste.class);
                     startActivity(i);
+                    finish();
                 } else {
                     messageErrorConnexion.setText(messagesErrors.toString());
-
-                    //test a supp
-                    Intent i = new Intent(Connexion.this, Listeliste.class);
-                    startActivity(i);
-
                 }
 
             }
@@ -98,7 +93,6 @@ public class Connexion extends AppCompatActivity {
 
 
     private boolean checkPseudoPassword(String pseudo, String password) {
-
 
         return utilisateurManager.connectUser(pseudo, password);
         //return false;
