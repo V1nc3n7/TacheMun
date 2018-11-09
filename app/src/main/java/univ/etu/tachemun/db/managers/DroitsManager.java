@@ -25,32 +25,38 @@ public class DroitsManager extends TableManager {
     private ContentValues putInContent(Droits d) {
         ContentValues c = new ContentValues();
         c.put(ID_DROIT, d.getID());
-
         return c;
     }
 
     public long insert(Droits d) {
         ContentValues c = putInContent(d);
         c.remove(ID_DROIT);
-        return db.insert(tableName, null, c);
+        this.open();
+        long l = db.insert(tableName, null, c);
+        this.close();
+        return l;
     }
 
-    public int update(Droits d) {
+    public long update(Droits d) {
 
         ContentValues values = putInContent(d);
         String where = ID_DROIT + " = ?";
         String[] whereArgs = {d.getID() + ""};
-
-
-        return db.update(tableName, values, where, whereArgs);
+        this.open();
+        long l = db.update(tableName, values, where, whereArgs);
+        this.close();
+        return l;
     }
 
-    public int delete(Droits d) {
+    public long delete(Droits d) {
 
 
         String where = ID_DROIT + " = ?";
         String[] whereArgs = {d.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long l = db.delete(tableName, where, whereArgs);
+        this.close();
+        return l;
     }
 
     public Droits getFromId(int id) {
