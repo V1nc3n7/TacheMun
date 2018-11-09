@@ -91,19 +91,20 @@ public class ListeTacheManager extends TableManager {
 
         this.open();
         String aliasID_LISTE_TACHE = "idlstch";
+
         Cursor cursor = db.rawQuery("SELECT " + tableName + "." + ID_LISTETACHE + " AS " + aliasID_LISTE_TACHE + " ," + nom_ListeTache + " ,"
                 + IS_PRIVE + " ," + DESCRIPTION + " ," + DateHeure_Creation + " ," + HAS_ECHEANCE + " ," + ECHEANCE +
                 " ," + COULEUR + " FROM " + tableName + " INNER JOIN " + ProprietaireListeManager.tableName
                 + " ON " + aliasID_LISTE_TACHE + " = " + ProprietaireListeManager.tableName + "." + ProprietaireListeManager.ID_ListeTache + " WHERE "
-                + aliasID_LISTE_TACHE + "=\"" + username + "\"", null);
+                + ProprietaireListeManager.tableName + "." + ProprietaireListeManager.PSEUDO + "=\"" + username + "\"", null);
 
 
-        System.out.println(cursor.getCount());
+        // System.out.println(cursor.getCount());
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
                 //    public ListeTache(int ID, String nom, boolean isPerso, String description,
                 // long dateHeureCreation, boolean hasEcheance, long dateHeureEcheance, int couleur) {
-                ListeTache li = new ListeTache(cursor.getInt(cursor.getColumnIndex(ID_LISTETACHE)),
+                ListeTache li = new ListeTache(cursor.getInt(cursor.getColumnIndex(aliasID_LISTE_TACHE)),
                         cursor.getString(cursor.getColumnIndex(nom_ListeTache)),
                         true, cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
                         cursor.getInt(cursor.getColumnIndex(DateHeure_Creation)),

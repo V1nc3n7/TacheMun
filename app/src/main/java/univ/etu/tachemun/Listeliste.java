@@ -59,7 +59,8 @@ public class Listeliste extends AppCompatActivity
         //affichage listeliste
         linearLayout = (LinearLayout) findViewById(R.id.layoutprincipal);
         ArrayList<ListeTache> listeTaches = recupListeListe();
-        System.out.println(listeTaches == null);
+
+
         //System.out.println(listeTaches.toString());
         if (listeTaches == null) {
             textView = new TextView(this);
@@ -71,6 +72,7 @@ public class Listeliste extends AppCompatActivity
         }
         else{
             listView = new ListView(this);
+
             linearLayout.addView(listView);
         }
 
