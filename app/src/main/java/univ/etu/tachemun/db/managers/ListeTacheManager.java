@@ -3,6 +3,8 @@ package univ.etu.tachemun.db.managers;
 import android.content.ContentValues;
 import android.content.Context;
 
+import java.util.Collection;
+
 import univ.etu.tachemun.db.tableclass.ListeTache;
 
 public class ListeTacheManager extends TableManager {
@@ -44,8 +46,9 @@ public class ListeTacheManager extends TableManager {
         c.put(DESCRIPTION, l.getDescription());
         c.put(DateHeure_Creation, l.getDateHeureCreation().getTime());
         c.put(HAS_ECHEANCE, (l.HasEcheance() ? 1 : 0));
-
-        c.put(ECHEANCE, l.getDateHeureEcheance().getTime());
+        if (l.HasEcheance()) {
+            c.put(ECHEANCE, l.getDateHeureEcheance().getTime());
+        }
         c.put(COULEUR, l.getCouleur());
 
 
@@ -81,6 +84,12 @@ public class ListeTacheManager extends TableManager {
         return m;
     }
 
+    public Collection<ListeTache> getListesOfUser(String username) {
+//TODO
+        Collection<ListeTache> collection;
+
+        return null;
+    }
     public ListeTache getFromId(int id) {
         return null;
     }

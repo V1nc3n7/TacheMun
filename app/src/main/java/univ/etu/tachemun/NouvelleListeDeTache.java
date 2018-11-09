@@ -47,13 +47,13 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         creationImage();
 
         nomListeTache = (EditText) findViewById(R.id.nomListTache);
-
+        descriptionListeTache = (EditText) findViewById(R.id.nouvListeTache_descr_input);
         createButton = (Button) findViewById(R.id.cree_nouvListe);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ajouter l'ajout à la base de donnee
-                if (checkTitre(getTitreListe())) {
+                if (!checkTitre(getTitreListe())) {
                     /*Snackbar.make(v, "Le nom de votre tache est invalide", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();*/
 
@@ -111,7 +111,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     }
 
     private boolean checkTitre(String titreListe) {
-        return titreListe.length() < 16;
+        return !titreListe.equals("");
     }
 
     private String getTitreListe() {
