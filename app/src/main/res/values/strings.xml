@@ -112,7 +112,7 @@
     <string name="nouvListe_descrListe_hint">Description de la liste (Facultatif)</string>
     <string name="nouvListe_dateHeure_txt_view">Entrez une échéance (facultatif)</string>
     <string name="cree_une_nouvelle_liste">Creer une nouvelle liste de tâches</string>
-    <string name="check">Creer une nouvelle liste</string>
+    <string name="check">Vérifier</string>
     <string name="associer_une_couleur">Associer une couleur :</string>
     <string name="nouvelle_liste_de_tache">Nouvelle Liste de Tache</string>
     <string name="listeliste_titre">Vos listes de tâches</string>
