@@ -55,21 +55,30 @@ public class ListeTacheManager extends TableManager {
     public long insert(ListeTache l) {
         ContentValues v = putInContent(l);
         v.remove(ID_LISTETACHE);
-        return db.insert(tableName, null, v);
+        this.open();
+        long m = db.insert(tableName, null, v);
+        this.close();
+        return m;
     }
 
-    public int update(ListeTache l) {
+    public long update(ListeTache l) {
 
         ContentValues values = putInContent(l);
         String where = ID_LISTETACHE + " = ?";
         String[] whereArgs = {l.getID() + ""};
-        return db.update(tableName, values, where, whereArgs);
+        this.open();
+        long m = db.update(tableName, values, where, whereArgs);
+        this.close();
+        return m;
     }
 
-    public int delete(ListeTache l) {
+    public long delete(ListeTache l) {
         String where = ID_LISTETACHE + " = ?";
         String[] whereArgs = {l.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long m = db.delete(tableName, where, whereArgs);
+        this.close();
+        return m;
     }
 
     public ListeTache getFromId(int id) {
