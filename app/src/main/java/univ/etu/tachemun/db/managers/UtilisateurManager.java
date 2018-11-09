@@ -84,7 +84,13 @@ public class UtilisateurManager extends TableManager {
         ContentValues v = putInContent(u);
         v.remove(PASSWORD);
         v.put(PASSWORD, getSHA256(u.getMotDePasse()));
-        return db.insert(tableName, null, v);
+        if(db.isOpen()){
+            return db.insert(tableName, null, v);
+        }
+        else{
+            return 0;
+        }
+
     }
 
     public int update(Utilisateur u) {

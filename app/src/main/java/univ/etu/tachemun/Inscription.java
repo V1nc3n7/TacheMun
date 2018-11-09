@@ -77,7 +77,9 @@ public class Inscription extends AppCompatActivity {
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput(), System.currentTimeMillis());
 
+                    manager.open();
                     manager.insertNew(user);
+                    manager.close();
 
                     Intent i = new Intent(Inscription.this, Connexion.class);
                     i.putExtra("ID_USER", user.getPseudo());
