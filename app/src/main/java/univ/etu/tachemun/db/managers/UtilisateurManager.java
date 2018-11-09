@@ -88,7 +88,6 @@ public class UtilisateurManager extends TableManager {
     }
 
     public int update(Utilisateur u) {
-        //verifier
         ContentValues v = putInContent(u);
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {u.getPseudo() + ""};
@@ -103,7 +102,7 @@ public class UtilisateurManager extends TableManager {
      * @return
      */
     public int updatePseudoUser(String ancienPseudo, Utilisateur u) {
-//verifier
+
 
         ContentValues values = putInContent(u);
         String where = ID_UTILISATEUR + " = ?";
@@ -118,7 +117,6 @@ public class UtilisateurManager extends TableManager {
     }
 
     private int delete(String pseudo) {
-        //verifier
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {pseudo + ""};
         return db.delete(tableName, where, whereArgs);
@@ -131,8 +129,8 @@ public class UtilisateurManager extends TableManager {
         Utilisateur u = new Utilisateur();
 
         Cursor c = db.rawQuery(
-                "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
-                        ID_UTILISATEUR + "=\"" + userName + "\" AND " + PASSWORD + "=\"" + getSHA256(password) + "\"", null);
+                    "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
+                            ID_UTILISATEUR + "=" + userName + " AND " + PASSWORD + "=" + getSHA256(password), null);
         if (c.moveToFirst()) {
 
             c.close();
@@ -164,9 +162,13 @@ public class UtilisateurManager extends TableManager {
     }
 
     public boolean isPseudoInDb(String pseudo) {
-        Cursor c = db.rawQuery(
-                "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
-                        ID_UTILISATEUR + "=" + pseudo, null);
+
+        Cursor c = null;
+        if(db.isOpen()) {
+            c = db.rawQuery(
+                    "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
+                            ID_UTILISATEUR + "= \"" + pseudo +"\"", null);
+        }
         if (c.moveToFirst()) {
 
             c.close();

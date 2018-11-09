@@ -129,7 +129,7 @@ public class AndroidTask extends SQLiteOpenHelper {
         db.execSQL(ProprietaireListeManager.createTableScript);
         db.execSQL(DroitsManager.createTableScript);
         db.execSQL(PartageListeManager.createTableScript);
-        db.execSQL(AssigneTacheManager.createTableScript);
+        //db.execSQL(AssigneTacheManager.createTableScript);
         db.execSQL(ListeTacheGroupeManager.createTableScript);
 
 

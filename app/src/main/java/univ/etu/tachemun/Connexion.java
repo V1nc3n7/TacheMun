@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import univ.etu.tachemun.db.managers.UtilisateurManager;
+import univ.etu.tachemun.db.tableclass.Utilisateur;
 
 public class Connexion extends AppCompatActivity {
     List<String> messagesErrors;
@@ -20,8 +21,8 @@ public class Connexion extends AppCompatActivity {
     private TextView messageErrorConnexion;
     private EditText inputPseudo;
     private EditText inputPassword;
+    private UtilisateurManager utilisateurManager;
 
-    //UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,9 @@ public class Connexion extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.connexion_input_password);
         messageErrorConnexion = (TextView) findViewById(R.id.connexion_message_error);
         connexionButton = (Button) findViewById(R.id.buttonConnexion);
+
+
+        utilisateurManager = new UtilisateurManager(Connexion.this);
 
 
         inscriptionButton.setOnClickListener(new View.OnClickListener() {
@@ -88,16 +92,16 @@ public class Connexion extends AppCompatActivity {
 
     private boolean checkPseudoReconized(String pseudo) {
 
-        //return utilisateurManager.isPseudoInDb(pseudo);
-        return false;
+        return utilisateurManager.isPseudoInDb(pseudo);
+        //return false;
     }
 
 
     private boolean checkPseudoPassword(String pseudo, String password) {
 
 
-        //return utilisateurManager.connectUser(pseudo, password);
-        return false;
+        return utilisateurManager.connectUser(pseudo, password);
+        //return false;
     }
 
 }

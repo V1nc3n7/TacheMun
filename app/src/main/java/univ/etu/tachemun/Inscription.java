@@ -43,13 +43,17 @@ public class Inscription extends AppCompatActivity {
         password1Input = (EditText) findViewById(R.id.inscription_password1_input);
         password2Input = (EditText) findViewById(R.id.inscription_password2_input);
         mailInput = (EditText) findViewById(R.id.inscription_mail_input);
+
         if (getIntent().hasExtra("PSEUDO"))
             pseudoInput.setText(getIntent().getStringExtra("PSEUDO"));
 
         confirmation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-// faire un aletDialog
+                // faire un aletDialog
+
+                //Utilisateur utilisateur = new Utilisateur(pseudoInput.getText().toString(),password2Input.getText().toString(),mailInput.getText().toString(),System.currentTimeMillis());
+
                 messagesErrors = new ArrayList<>();
                 if (!(pseudoAvailiable())) {
                     messagesErrors.add("Ce pseudo est deja pris");
@@ -94,8 +98,11 @@ public class Inscription extends AppCompatActivity {
      * @return
      */
     public boolean pseudoAvailiable() {
-        UtilisateurManager u = new UtilisateurManager(Inscription.this);
-        return !u.isPseudoInDb(getPseudoInput());
+        UtilisateurManager u = new UtilisateurManager(this);
+        u.open();
+        boolean res = !u.isPseudoInDb(getPseudoInput());
+        u.close();
+        return res;
     }
 
     public String getPseudoInput() {

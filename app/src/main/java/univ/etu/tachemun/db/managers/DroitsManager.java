@@ -12,7 +12,7 @@ public class DroitsManager extends TableManager {
 
     public static final String createTableScript = "CREATE TABLE " + tableName +
             " (" +
-            " " + ID_DROIT + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            " " + ID_DROIT + " INTEGER PRIMARY KEY AUTOINCREMENT"
             + ");";
 
 
