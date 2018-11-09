@@ -118,20 +118,20 @@ public class AndroidTask extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(AssigneTacheManager.createTableScript);
-        db.execSQL(AssigneTacheManager.createTableScript);
-        db.execSQL(ContactsManager.createTableScript);
-        db.execSQL(DroitsManager.createTableScript);
         db.execSQL(EmailDisposableManager.createTableScript);
-        db.execSQL(GroupeManager.createTableScript);
-        db.execSQL(ListeTacheGroupeManager.createTableScript);
-        db.execSQL(ListeTacheManager.createTableScript);
-        db.execSQL(MembreManager.createTableScript);
-        db.execSQL(PartageListeManager.createTableScript);
-        db.execSQL(ProprietaireListeManager.createTableScript);
-        db.execSQL(RealiseTacheManager.createTableScript);
-        db.execSQL(TacheManager.createTableScript);
         db.execSQL(UtilisateurManager.createTableScript);
+        db.execSQL(ContactsManager.createTableScript);
+        db.execSQL(ListeTacheManager.createTableScript);
+        db.execSQL(TacheManager.createTableScript);
+        db.execSQL(RealiseTacheManager.createTableScript);
+        db.execSQL(GroupeManager.createTableScript);
+        db.execSQL(MembreManager.createTableScript);
+        db.execSQL(ProprietaireListeManager.createTableScript);
+        db.execSQL(DroitsManager.createTableScript);
+        db.execSQL(PartageListeManager.createTableScript);
+        db.execSQL(AssigneTacheManager.createTableScript);
+        db.execSQL(ListeTacheGroupeManager.createTableScript);
+
 
     }
     @Override
