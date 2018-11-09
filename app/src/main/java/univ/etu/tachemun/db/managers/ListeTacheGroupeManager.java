@@ -48,23 +48,32 @@ public class ListeTacheGroupeManager extends TableManager {
 
         ContentValues v = putInContent(e);
         v.remove(ID_ListeTacheGroupe);
-        return db.insert(tableName, null, v);
+        this.open();
+        long l = db.insert(tableName, null, v);
+        this.close();
+        return l;
 
     }
 
-    public int update(ListeTacheGroupe e) {
+    public long update(ListeTacheGroupe e) {
 
 
         ContentValues values = putInContent(e);
         String where = ID_ListeTacheGroupe + " = ?";
         String[] whereArgs = {e.getID() + ""};
-        return db.update(tableName, values, where, whereArgs);
+        this.open();
+        long l = db.update(tableName, values, where, whereArgs);
+        this.close();
+        return l;
     }
 
-    public int delete(ListeTacheGroupe e) {
+    public long delete(ListeTacheGroupe e) {
         String where = ID_ListeTacheGroupe + " = ?";
         String[] whereArgs = {e.getID() + ""};
-        return db.delete(tableName, where, whereArgs);
+        this.open();
+        long l = db.delete(tableName, where, whereArgs);
+        this.close();
+        return l;
     }
 
     public ListeTacheGroupe getFromId(int id) {
