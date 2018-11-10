@@ -11,7 +11,7 @@ public class Utilisateur {
 
     public Utilisateur(String pseudo, String motDePasse, String mail, long dateInscription) {
         this.pseudo = pseudo;
-        this.dateInscription = new Date(dateInscription);
+        this.dateInscription = new Date(dateInscription / 1000);
         this.motDePasse = motDePasse;
         this.mail = mail;
     }

@@ -99,7 +99,6 @@ public class ListeTacheManager extends TableManager {
                 + ProprietaireListeManager.tableName + "." + ProprietaireListeManager.PSEUDO + "=\"" + username + "\"", null);
 
 
-        // System.out.println(cursor.getCount());
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
                 //    public ListeTache(int ID, String nom, boolean isPerso, String description,

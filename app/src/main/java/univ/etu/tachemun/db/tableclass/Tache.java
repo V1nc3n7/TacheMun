@@ -31,14 +31,14 @@ public class Tache {
         this.createur = createur;
         this.libelle = libelle;
         this.description = description;
-        this.dateHeureCreation = new Date(dateHeureCreation);
+        this.dateHeureCreation = new Date(dateHeureCreation / 1000);
         this.numero = numero;
         this.priorite = priorite;
         if (dateHeureEcheance == -1) {
             this.dateHeureEcheance = null;
             this.echeance = false;
         } else {
-            this.dateHeureEcheance = new Date(dateHeureEcheance);
+            this.dateHeureEcheance = new Date(dateHeureEcheance / 1000);
             this.echeance = true;
         }
 

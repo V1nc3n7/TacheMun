@@ -25,11 +25,11 @@ public class ListeTache {
         this.nom = nom;
         this.isPerso = isPerso;
         this.description = description;
-        this.dateHeureCreation = new Date(dateHeureCreation);
+        this.dateHeureCreation = new Date(dateHeureCreation / 1000);
         this.hasEcheance = hasEcheance;
 
         if (this.hasEcheance) {
-            this.dateHeureEcheance = new Date(dateHeureEcheance);
+            this.dateHeureEcheance = new Date(dateHeureEcheance / 1000);
         } else {
             this.dateHeureEcheance = null;
         }

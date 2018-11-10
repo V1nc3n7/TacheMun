@@ -20,7 +20,7 @@ public class RealiseTache {
         this.ID = ID;
         this.realiseurTache = realiseurTache;
         this.idTache = idTache;
-        this.dateHeurRealisation = new Date(dateHeurRealisation);
+        this.dateHeurRealisation = new Date(dateHeurRealisation / 1000);
         this.details = details;
     }
 

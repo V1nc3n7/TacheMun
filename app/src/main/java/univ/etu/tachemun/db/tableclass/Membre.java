@@ -17,7 +17,7 @@ public class Membre {
     public Membre(int ID, String pseudoUtilisteur, long dateHeureAdhesion, int idGroupe) {
         this.ID = ID;
         this.pseudoUtilisteur = pseudoUtilisteur;
-        this.dateHeureAdhesion = new Date(dateHeureAdhesion);
+        this.dateHeureAdhesion = new Date(dateHeureAdhesion / 1000);
         this.idGroupe = idGroupe;
     }
 

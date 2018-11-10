@@ -26,7 +26,7 @@ public class Groupe {
         this.createur = createur;
         this.isPrivate = isPrivate;
         this.description = description;
-        this.dateHeureCreation = new Date(dateHeureCreation);
+        this.dateHeureCreation = new Date(dateHeureCreation / 1000);
     }
 
     public int getID() {
