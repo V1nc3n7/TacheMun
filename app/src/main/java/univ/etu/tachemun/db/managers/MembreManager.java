@@ -19,7 +19,7 @@ public class MembreManager extends TableManager {
             + PSEUDO + " TEXT NOT NULL,"
 
             + DateHeure_Adhesion + " INTEGER ,"
-            + ID_GROUPE + " TEXT "
+            + ID_GROUPE + " INTEGER NOT NULL "
             + ",FOREIGN KEY (" + ID_GROUPE + ") REFERENCES " + GroupeManager.tableName + " (" + GroupeManager.ID_GROUPE + ")" +
             "  ON UPDATE CASCADE ON DELETE CASCADE"
             + ",FOREIGN KEY (" + PSEUDO + ") REFERENCES " + UtilisateurManager.tableName + " (" + UtilisateurManager.ID_UTILISATEUR + ")" +

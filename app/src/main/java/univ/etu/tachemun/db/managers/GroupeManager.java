@@ -18,7 +18,7 @@ public class GroupeManager extends TableManager {
 
     public static final String createTableScript = "CREATE TABLE " + tableName +
             " (" +
-            " " + ID_GROUPE + " TEXT PRIMARY KEY,"
+            " " + ID_GROUPE + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + ID_createur + " TEXT NOT NULL,"
             + nom_Groupe + " TEXT NOT NULL,"
             + DateHeure_Creation + " INTEGER ,"
@@ -50,7 +50,7 @@ public class GroupeManager extends TableManager {
 
     public long insert(Groupe groupe) {
         ContentValues v = putInContent(groupe);
-
+        v.remove(ID_GROUPE);
         this.open();
         long l = db.insert(tableName, null, v);
         this.close();

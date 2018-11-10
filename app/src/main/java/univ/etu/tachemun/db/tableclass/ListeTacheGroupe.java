@@ -8,11 +8,11 @@ public class ListeTacheGroupe {
   `ID_CreateurMembre` varchar(32) COLLATE utf8_unicode_ci NOT NULL
      */
     private int ID;
-    private String idGroupe;
+    private int idGroupe;
     private int idListeTache;
     private String createurListe;
 
-    public ListeTacheGroupe(int ID, String idGroupe, int idListeTache, String createurListe) {
+    public ListeTacheGroupe(int ID, int idGroupe, int idListeTache, String createurListe) {
         this.ID = ID;
         this.idGroupe = idGroupe;
         this.idListeTache = idListeTache;
@@ -27,11 +27,11 @@ public class ListeTacheGroupe {
         this.ID = ID;
     }
 
-    public String getIdGroupe() {
+    public int getIdGroupe() {
         return idGroupe;
     }
 
-    public void setIdGroupe(String idGroupe) {
+    public void setIdGroupe(int idGroupe) {
         this.idGroupe = idGroupe;
     }
 

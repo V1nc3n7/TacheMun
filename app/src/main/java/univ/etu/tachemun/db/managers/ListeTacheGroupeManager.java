@@ -19,7 +19,7 @@ public class ListeTacheGroupeManager extends TableManager {
             " (" +
 
             " " + ID_ListeTacheGroupe + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + ID_GROUPE + " TEXT NOT NULL, "
+            + ID_GROUPE + " INTEGER NOT NULL, "
             + ID_ListeTache + " INTEGER, "
             + ID_createur + " TEXT NOT NULL"
             + ",FOREIGN KEY (" + ID_GROUPE + ") REFERENCES " + GroupeManager.tableName + " (" + GroupeManager.ID_GROUPE + ")" +
