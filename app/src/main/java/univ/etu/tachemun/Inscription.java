@@ -10,8 +10,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import univ.etu.tachemun.db.managers.ListeTacheManager;
+import univ.etu.tachemun.db.managers.ProprietaireListeManager;
 import univ.etu.tachemun.db.managers.UtilisateurManager;
+import univ.etu.tachemun.db.tableclass.ListeTache;
+import univ.etu.tachemun.db.tableclass.ProprietaireListe;
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 import univ.etu.tachemun.validators.MailValidator;
 import univ.etu.tachemun.validators.PasswordValidator;
@@ -76,6 +81,17 @@ public class Inscription extends AppCompatActivity {
                     UtilisateurManager manager = new UtilisateurManager(Inscription.this);
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput(), System.currentTimeMillis());
+
+                    Random random = new Random();
+
+                    ListeTache listeTache = new ListeTache(-1, "Liste principale", true, "Liste principale contenant les tâches à réaliser", System.currentTimeMillis()
+                            , false, 0, random.nextInt(10));
+                    ListeTacheManager lm = new ListeTacheManager(Inscription.this);
+                    long id = lm.insert(listeTache);
+                    ProprietaireListe proprietaireListe = new ProprietaireListe(-1, user.getPseudo(), (int) id);
+                    ProprietaireListeManager pmanager = new ProprietaireListeManager(Inscription.this);
+                    pmanager.insert(proprietaireListe);
+
 
                     manager.open();
                     manager.insertNew(user);
