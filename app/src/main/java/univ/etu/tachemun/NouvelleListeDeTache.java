@@ -37,6 +37,9 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private Button datePicker;
 
     private int choixCouleur;
+    private ListeTacheManager listeTacheManager;
+    private ProprietaireListeManager proprietaireListeManager;
+
 
 
     @Override
@@ -49,6 +52,8 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         nomListeTache = (EditText) findViewById(R.id.nomListTache);
         descriptionListeTache = (EditText) findViewById(R.id.nouvListeTache_descr_input);
         createButton = (Button) findViewById(R.id.cree_nouvListe);
+        listeTacheManager = new ListeTacheManager(NouvelleListeDeTache.this);
+        proprietaireListeManager = new ProprietaireListeManager(NouvelleListeDeTache.this);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,12 +89,13 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     ListeTache listeTache = new ListeTache(-1, getTitreListe(), true,
                             getDescriptionListe(), System.currentTimeMillis()
                             , false, 0, random.nextInt(10));
-                    ListeTacheManager lm = new ListeTacheManager(NouvelleListeDeTache.this);
-                    long id = lm.insert(listeTache);
+                    long id = listeTacheManager.insert(listeTache);
                     ProprietaireListe proprietaireListe = new ProprietaireListe(-1, userName, (int) id);
-                    ProprietaireListeManager pmanager = new ProprietaireListeManager(NouvelleListeDeTache.this);
-                    pmanager.insert(proprietaireListe);
+                    proprietaireListeManager.insert(proprietaireListe);
+
+
                     intent.putExtra("PSEUDO", userName);
+
                     startActivity(intent);
                     finish();
                 }

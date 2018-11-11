@@ -123,4 +123,11 @@
     <string name="liste_listestache_no_lists">Vous n\'avez aucune liste de tache.</string>
     <string name="new_listetache_datepicker">date</string>
     <string name="new_listetache_hourpicker">heure</string>
+    <string name="new_tache_hourpicker">Heure</string>
+    <string name="new_tache_datepicker">Date</string>
+    <string name="nouvTache_dateHeure_txt_view">Choisir une échéance</string>
+    <string name="nouvTache_descrListe_hint">Description de la tache</string>
+    <string name="cree_nouv_Tache_nomTache_input_hint">Nom de la tâche</string>
+    <string name="nouvelle_tache">Nouvelle tâche</string>
+    <string name="cree_une_nouvelle_tache">Creer un nouvelle tâche</string>
 </resources>

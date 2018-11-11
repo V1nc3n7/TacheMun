@@ -22,7 +22,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Inscription" />
         <activity android:name=".NouvelleListeDeTache" />
-        <activity android:name=".CreationGroupe"></activity>
+        <activity android:name=".CreationGroupe" />
+        <activity android:name=".CreationTache"></activity>
     </application>
 
 </manifest>

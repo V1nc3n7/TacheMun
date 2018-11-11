@@ -35,7 +35,9 @@ public class Inscription extends AppCompatActivity {
     private EditText password2Input;
     private EditText mailInput;
     private List<String> messagesErrors;
-
+    private UtilisateurManager utilisateurManager;
+    private ProprietaireListeManager proprietaireListeManager;
+    private ListeTacheManager listeTacheManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,9 @@ public class Inscription extends AppCompatActivity {
         password1Input = (EditText) findViewById(R.id.inscription_password1_input);
         password2Input = (EditText) findViewById(R.id.inscription_password2_input);
         mailInput = (EditText) findViewById(R.id.inscription_mail_input);
+        utilisateurManager = new UtilisateurManager(this);
+        proprietaireListeManager = new ProprietaireListeManager(Inscription.this);
+        listeTacheManager = new ListeTacheManager(Inscription.this);
 
         if (getIntent().hasExtra("PSEUDO"))
             pseudoInput.setText(getIntent().getStringExtra("PSEUDO"));
@@ -55,6 +60,7 @@ public class Inscription extends AppCompatActivity {
         confirmation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // faire un aletDialog
 
                 //Utilisateur utilisateur = new Utilisateur(pseudoInput.getText().toString(),password2Input.getText().toString(),mailInput.getText().toString(),System.currentTimeMillis());
@@ -78,7 +84,7 @@ public class Inscription extends AppCompatActivity {
 
                 }
                 if (messagesErrors.isEmpty()) {
-                    UtilisateurManager manager = new UtilisateurManager(Inscription.this);
+
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput(), System.currentTimeMillis());
 
@@ -86,16 +92,13 @@ public class Inscription extends AppCompatActivity {
 
                     ListeTache listeTache = new ListeTache(-1, "Liste principale", true, "Liste principale contenant les tâches à réaliser", System.currentTimeMillis()
                             , false, 0, random.nextInt(10));
-                    ListeTacheManager lm = new ListeTacheManager(Inscription.this);
-                    long id = lm.insert(listeTache);
+
+                    long id = listeTacheManager.insert(listeTache);
                     ProprietaireListe proprietaireListe = new ProprietaireListe(-1, user.getPseudo(), (int) id);
-                    ProprietaireListeManager pmanager = new ProprietaireListeManager(Inscription.this);
-                    pmanager.insert(proprietaireListe);
-
-
-                    manager.open();
-                    manager.insertNew(user);
-                    manager.close();
+                    proprietaireListeManager.insert(proprietaireListe);
+                    utilisateurManager.open();
+                    utilisateurManager.insertNew(user);
+                    utilisateurManager.close();
 
                     Intent i = new Intent(Inscription.this, Connexion.class);
                     i.putExtra("ID_USER", user.getPseudo());
@@ -116,8 +119,8 @@ public class Inscription extends AppCompatActivity {
      * @return
      */
     public boolean pseudoAvailiable() {
-        UtilisateurManager u = new UtilisateurManager(this);
-        return !u.isPseudoInDb(getPseudoInput());
+
+        return !utilisateurManager.isPseudoInDb(getPseudoInput());
     }
 
     public String getPseudoInput() {
