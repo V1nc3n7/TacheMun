@@ -23,7 +23,6 @@ public class Connexion extends AppCompatActivity {
     private TextView messageErrorConnexion;
     private EditText inputPseudo;
     private EditText inputPassword;
-    private UtilisateurManager utilisateurManager;
 
 
     @Override
@@ -35,9 +34,6 @@ public class Connexion extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.connexion_input_password);
         messageErrorConnexion = (TextView) findViewById(R.id.connexion_message_error);
         connexionButton = (Button) findViewById(R.id.buttonConnexion);
-
-
-        utilisateurManager = new UtilisateurManager(Connexion.this);
 
 
         inscriptionButton.setOnClickListener(new View.OnClickListener() {
@@ -106,13 +102,13 @@ public class Connexion extends AppCompatActivity {
 
 
     private boolean checkPseudoReconized(String pseudo) {
-
+        UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
         return utilisateurManager.isPseudoInDb(pseudo);
     }
 
 
     private boolean checkPseudoPassword(String pseudo, String password) {
-
+        UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
         return utilisateurManager.connectUser(pseudo, password);
     }
 
