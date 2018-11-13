@@ -95,9 +95,10 @@ public class NouvelleListeDeTache extends AppCompatActivity {
 
 
                     intent.putExtra("PSEUDO", userName);
-
                     startActivity(intent);
+                    setResult(0);
                     finish();
+
                 }
             }
         });

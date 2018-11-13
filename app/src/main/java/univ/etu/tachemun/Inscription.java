@@ -102,8 +102,8 @@ public class Inscription extends AppCompatActivity {
 
                     Intent i = new Intent(Inscription.this, Connexion.class);
                     i.putExtra("ID_USER", user.getPseudo());
-
                     startActivity(i);
+                    finish();
                 } else {
                     messageErrorOutput.setText(messagesErrors.toString());
                 }

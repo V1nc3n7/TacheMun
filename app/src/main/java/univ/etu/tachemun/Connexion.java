@@ -1,12 +1,15 @@
 package univ.etu.tachemun;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +72,23 @@ public class Connexion extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 } else {
-                    messageErrorConnexion.setText(messagesErrors.toString());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Connexion.this);
+                    String mess = "";
+                    for (int i = 0; i < messagesErrors.size(); i++) {
+                        mess += "" + messagesErrors.get(i) + "\n";
+                    }
+                    builder.setMessage(mess);
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Suivant",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    //messageErrorConnexion.setText(messagesErrors.toString());
                 }
 
             }

@@ -49,9 +49,13 @@ public class Listeliste extends AppCompatActivity
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
+
                 Intent intent = new Intent(Listeliste.this, NouvelleListeDeTache.class);
                 intent.putExtra("PSEUDO", getIntent().getStringExtra("PSEUDO"));
-                startActivity(intent);
+
+                //startActivity(intent);
+
+                startActivityForResult(intent, 0);
             }
         });
 
@@ -101,6 +105,14 @@ public class Listeliste extends AppCompatActivity
                             final List<Flux> listflux2 = geneListe(listeTaches2);
                             final FluxAdapter adapter2 = new FluxAdapter(Listeliste.this, listflux2);
                             listView.setAdapter(adapter2);
+                            //finish();
+
+                            if (listeTaches2 == null || listeTaches2.size() == 0) {
+                                textView = new TextView(Listeliste.this);
+                                textView.setText(R.string.liste_listestache_no_lists);
+                                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                linearLayout.addView(textView);
+                            }
 
                             /*
                             Intent intent = new Intent(Listeliste.this,Listeliste.class);
@@ -238,5 +250,15 @@ public class Listeliste extends AppCompatActivity
             listflux.add(new Flux(color, listeTaches.get(i).getNom(), listeTaches.get(i).getDescription(), "test"));
         }
         return listflux;
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0) {
+            if (resultCode == 0) {
+                finish();
+            } else {
+                // on laisse la class B afficher
+            }
+        }
     }
 }
