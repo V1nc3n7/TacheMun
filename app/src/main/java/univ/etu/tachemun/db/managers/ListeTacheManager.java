@@ -117,7 +117,7 @@ public class ListeTacheManager extends TableManager {
             this.close();
 
         } else {
-            listes = null;
+
         }
         cursor.close();
         return listes;

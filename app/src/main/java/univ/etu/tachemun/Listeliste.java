@@ -1,23 +1,31 @@
 package univ.etu.tachemun;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import univ.etu.tachemun.FluxListeListe.Flux;
+import univ.etu.tachemun.FluxListeListe.FluxAdapter;
 import univ.etu.tachemun.db.managers.ListeTacheManager;
 import univ.etu.tachemun.db.tableclass.ListeTache;
 
@@ -58,11 +66,11 @@ public class Listeliste extends AppCompatActivity
 
         //affichage listeliste
         linearLayout = (LinearLayout) findViewById(R.id.layoutprincipal);
-        ArrayList<ListeTache> listeTaches = recupListeListe();
+        final ArrayList<ListeTache> listeTaches = recupListeListe();
 
 
         //System.out.println(listeTaches.toString());
-        if (listeTaches == null) {
+        if (listeTaches == null || listeTaches.size() == 0) {
             textView = new TextView(this);
             textView.setText(R.string.liste_listestache_no_lists);
 //            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
@@ -72,8 +80,47 @@ public class Listeliste extends AppCompatActivity
         }
         else{
             listView = new ListView(this);
-
+            final List<Flux> listflux = geneListe(listeTaches);
+            final FluxAdapter adapter = new FluxAdapter(this, listflux);
+            listView.setAdapter(adapter);
             linearLayout.addView(listView);
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Listeliste.this);
+                    builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Supprime",
+                                    Toast.LENGTH_LONG).show();
+                            deletElementListeListe(listeTaches.get(position));
+
+                            final ArrayList<ListeTache> listeTaches2 = recupListeListe();
+                            final List<Flux> listflux2 = geneListe(listeTaches2);
+                            final FluxAdapter adapter2 = new FluxAdapter(Listeliste.this, listflux2);
+                            listView.setAdapter(adapter2);
+
+                            /*
+                            Intent intent = new Intent(Listeliste.this,Listeliste.class);
+                            intent.putExtra("PSEUDO", getIntent().getStringExtra("PSEUDO"));
+                            startActivity(intent);
+                            finish();*/
+                        }
+                    });
+                    builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "retour",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return false;
+                }
+            });
         }
 
     }
@@ -142,5 +189,54 @@ public class Listeliste extends AppCompatActivity
     private ArrayList<ListeTache> recupListeListe(){
         ListeTacheManager lm = new ListeTacheManager(Listeliste.this);
         return lm.getListesOfUser(getIntent().getStringExtra("PSEUDO"));
+    }
+
+    private void deletElementListeListe(ListeTache liste) {
+        ListeTacheManager lm = new ListeTacheManager(Listeliste.this);
+        lm.delete(liste);
+    }
+
+    private List<Flux> geneListe(ArrayList<ListeTache> listeTaches) {
+        List<Flux> listflux = new ArrayList<Flux>();
+        for (int i = 0; i < listeTaches.size(); i++) {
+            int color = Color.argb(255, 0, 0, 0);
+            switch (listeTaches.get(i).getCouleur()) {
+                case 0:
+                    color = Color.argb(255, 0, 0, 0);
+                    break;
+                case 1:
+                    color = Color.argb(255, 64, 64, 64);
+                    break;
+                case 2:
+                    color = Color.argb(255, 255, 0, 0);
+                    break;
+                case 3:
+                    color = Color.argb(255, 255, 106, 0);
+                    break;
+                case 4:
+                    color = Color.argb(255, 255, 255, 0);
+                    break;
+                case 5:
+                    color = Color.argb(255, 0, 255, 0);
+                    break;
+                case 6:
+                    color = Color.argb(255, 0, 255, 255);
+                    break;
+                case 7:
+                    color = Color.argb(255, 0, 148, 255);
+                    break;
+                case 8:
+                    color = Color.argb(255, 0, 0, 255);
+                    break;
+                case 9:
+                    color = Color.argb(255, 178, 0, 255);
+                    break;
+                case 10:
+                    color = Color.argb(255, 255, 0, 255);
+                    break;
+            }
+            listflux.add(new Flux(color, listeTaches.get(i).getNom(), listeTaches.get(i).getDescription(), "test"));
+        }
+        return listflux;
     }
 }
