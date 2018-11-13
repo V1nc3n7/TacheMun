@@ -40,9 +40,12 @@ public class CreationGroupe extends AppCompatActivity {
                 GroupeManager manager = new GroupeManager(CreationGroupe.this);
                 //il faut pseudoUtilisateur
                 String pseudo = getIntent().getStringExtra("ID_USER");
+
                 long milis = System.currentTimeMillis();
+
                 Groupe g = new Groupe(-1, getNomGroupeText(), pseudo, getPriveSwitch(), getDescriptionText(), milis);
                 int idG = (int) manager.insert(g);
+
                 ListeTache listeTache = new ListeTache(-1, "Liste principale", false, "Liste contenant les tâches à réaliser par les membres du groupe", milis, false, -1, 0);
                 ListeTacheManager ltm = new ListeTacheManager(CreationGroupe.this);
                 int idl = (int) ltm.insert(listeTache);

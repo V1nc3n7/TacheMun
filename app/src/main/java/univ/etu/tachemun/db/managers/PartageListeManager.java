@@ -24,7 +24,7 @@ public class PartageListeManager extends TableManager {
             + ID_Invite + " TEXT NOT NULL,"
             + DateHeure_Partage + " INTEGER ,"
             + MESSAGE + " TEXT "
-            + ",FOREIGN KEY (" + ID_ListeTache + ") REFERENCES " + ListeTacheGroupeManager.tableName + " (" + ListeTacheGroupeManager.ID_ListeTache + ")" +
+            + ",FOREIGN KEY (" + ID_ListeTache + ") REFERENCES " + ListeTacheManager.tableName + " (" + ListeTacheManager.ID_LISTETACHE + ")" +
             "  ON UPDATE CASCADE ON DELETE CASCADE"
             + ",FOREIGN KEY (" + ID_Invite + ") REFERENCES " + UtilisateurManager.tableName + " (" + UtilisateurManager.ID_UTILISATEUR + ")" +
             "  ON UPDATE CASCADE ON DELETE CASCADE"

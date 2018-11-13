@@ -35,9 +35,7 @@ public class Inscription extends AppCompatActivity {
     private EditText password2Input;
     private EditText mailInput;
     private List<String> messagesErrors;
-    private UtilisateurManager utilisateurManager;
-    private ProprietaireListeManager proprietaireListeManager;
-    private ListeTacheManager listeTacheManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +48,6 @@ public class Inscription extends AppCompatActivity {
         password1Input = (EditText) findViewById(R.id.inscription_password1_input);
         password2Input = (EditText) findViewById(R.id.inscription_password2_input);
         mailInput = (EditText) findViewById(R.id.inscription_mail_input);
-        utilisateurManager = new UtilisateurManager(this);
-        proprietaireListeManager = new ProprietaireListeManager(Inscription.this);
-        listeTacheManager = new ListeTacheManager(Inscription.this);
 
         if (getIntent().hasExtra("PSEUDO"))
             pseudoInput.setText(getIntent().getStringExtra("PSEUDO"));
@@ -85,6 +80,9 @@ public class Inscription extends AppCompatActivity {
                 }
                 if (messagesErrors.isEmpty()) {
 
+                    UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
+                    ProprietaireListeManager proprietaireListeManager = new ProprietaireListeManager(Inscription.this);
+                    ListeTacheManager listeTacheManager = new ListeTacheManager(Inscription.this);
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput(), System.currentTimeMillis());
 
@@ -100,7 +98,7 @@ public class Inscription extends AppCompatActivity {
                     utilisateurManager.insertNew(user);
                     utilisateurManager.close();
 
-                    Intent i = new Intent(Inscription.this, Connexion.class);
+                    Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_USER", user.getPseudo());
                     startActivity(i);
                     finish();
@@ -120,6 +118,7 @@ public class Inscription extends AppCompatActivity {
      */
     public boolean pseudoAvailiable() {
 
+        UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
         return !utilisateurManager.isPseudoInDb(getPseudoInput());
     }
 
