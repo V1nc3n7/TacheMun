@@ -74,6 +74,7 @@ public class UtilisateurManager extends TableManager {
         ContentValues v = putInContent(u);
         v.remove(PASSWORD);
         v.put(PASSWORD, getSHA256(u.getMotDePasse()));
+        System.out.println("u= " + u.toString() + " " + u.getDateInscription().getTime());
         this.open();
         long r = db.insert(tableName, null, v);
         this.close();
@@ -155,7 +156,7 @@ public class UtilisateurManager extends TableManager {
             u.setPseudo(c.getString(c.getColumnIndex(ID_UTILISATEUR)));
             u.setMotDePasse(c.getString(c.getColumnIndex(PASSWORD)));
             u.setMail(c.getString(c.getColumnIndex(MAIL)));
-            u.setDateInscription(c.getInt(c.getColumnIndex(DateHeure_INSCRIPTION)));
+            u.setDateInscription(c.getLong(c.getColumnIndex(DateHeure_INSCRIPTION)));
             c.close();
             this.close();
             return u;
@@ -173,6 +174,24 @@ public class UtilisateurManager extends TableManager {
         Cursor c = db.rawQuery(
                 "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
                         ID_UTILISATEUR + "=\"" + pseudo + "\"", null);
+
+        if (c.getCount() != 0) {
+            this.close();
+            c.close();
+            return true;
+        } else {
+            this.close();
+            c.close();
+            return false;
+        }
+
+    }
+
+    public boolean isMailInDb(String mailInput) {
+        this.open();
+        Cursor c = db.rawQuery(
+                "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
+                        MAIL + "=\"" + mailInput + "\"", null);
 
         if (c.getCount() != 0) {
             this.close();

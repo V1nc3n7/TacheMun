@@ -17,7 +17,7 @@ public class EmailDisposable {
     public EmailDisposable(int ID, String domaine, long dateHeureAjout) {
         this.ID = ID;
         this.domaine = domaine;
-        this.dateHeureAjout = new Date(dateHeureAjout / 1000);
+        this.dateHeureAjout = new Date(dateHeureAjout);
     }
 
     public int getID() {
@@ -44,7 +44,7 @@ public class EmailDisposable {
         this.dateHeureAjout = dateHeureAjout;
     }
 
-    public void setDateHeureAjout(int dateHeureAjout) {
+    public void setDateHeureAjout(long dateHeureAjout) {
         this.dateHeureAjout = new Date(dateHeureAjout);
     }
 

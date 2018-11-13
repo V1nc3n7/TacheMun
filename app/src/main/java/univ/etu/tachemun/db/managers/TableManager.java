@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import univ.etu.tachemun.db.AndroidTask;
 
-public abstract class TableManager<T> {
+public abstract class TableManager {
     static String createTableScript;
     String tableName;
     SQLiteDatabase db;

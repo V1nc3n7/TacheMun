@@ -48,7 +48,7 @@ public class CreationGroupe extends AppCompatActivity {
 
                 ListeTache listeTache = new ListeTache(-1, "Liste principale", false, "Liste contenant les tâches à réaliser par les membres du groupe", milis, false, -1, 0);
                 ListeTacheManager ltm = new ListeTacheManager(CreationGroupe.this);
-                int idl = (int) ltm.insert(listeTache);
+                int idl = (int) ltm.insertNew(listeTache);
                 ListeTacheGroupeManager ltgm = new ListeTacheGroupeManager(CreationGroupe.this);
                 ListeTacheGroupe ltg = new ListeTacheGroupe(-1, idG, idl, pseudo);
                 ltgm.insert(ltg);

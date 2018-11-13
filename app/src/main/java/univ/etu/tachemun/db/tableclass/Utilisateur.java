@@ -11,7 +11,7 @@ public class Utilisateur {
 
     public Utilisateur(String pseudo, String motDePasse, String mail, long dateInscription) {
         this.pseudo = pseudo;
-        this.dateInscription = new Date(dateInscription / 1000);
+        this.dateInscription = new Date(dateInscription);
         this.motDePasse = motDePasse;
         this.mail = mail;
     }
@@ -31,7 +31,7 @@ public class Utilisateur {
         return dateInscription;
     }
 
-    public void setDateInscription(int dateInscription) {
+    public void setDateInscription(long dateInscription) {
         this.dateInscription = new Date(dateInscription);
     }
     public void setDateInscription(Date dateInscription) {
@@ -57,7 +57,7 @@ public class Utilisateur {
     @Override
     public String toString() {
         return "{" + pseudo +
-                " }, " + dateInscription.toString() +
+                "}, " + dateInscription.toString() +
                 ", " + motDePasse +
                 ", " + mail;
     }

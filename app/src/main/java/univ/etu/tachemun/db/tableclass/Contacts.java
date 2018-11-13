@@ -21,7 +21,7 @@ public class Contacts {
         this.ID = ID;
         this.pseudoProprietaire = pseudoProprietaire;
         this.peudoContact = peudoContact;
-        this.dateHeureContact = new Date(dateHeureContact / 1000);
+        this.dateHeureContact = new Date(dateHeureContact);
     }
 
     public int getID() {
@@ -56,7 +56,7 @@ public class Contacts {
         this.dateHeureContact = dateHeureContact;
     }
 
-    public void setDateHeureContact(int dateHeureContact) {
+    public void setDateHeureContact(long dateHeureContact) {
         this.dateHeureContact = new Date(dateHeureContact);
 
     }

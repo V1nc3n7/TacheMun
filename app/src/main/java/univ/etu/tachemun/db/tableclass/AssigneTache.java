@@ -27,7 +27,7 @@ public class AssigneTache {
         this.assigneur = assigneur;
         this.esclave = esclave;
         this.message = message;
-        this.dateHeureAssignation = new Date(dateHeureAssignation / 1000);
+        this.dateHeureAssignation = new Date(dateHeureAssignation);
     }
 
     public int getID() {
@@ -85,7 +85,7 @@ public class AssigneTache {
         this.dateHeureAssignation = dateHeureAssignation;
     }
 
-    public void setDateHeureAssignation(int dateHeureAssignation) {
+    public void setDateHeureAssignation(long dateHeureAssignation) {
         this.dateHeureAssignation = new Date(dateHeureAssignation);
     }
 

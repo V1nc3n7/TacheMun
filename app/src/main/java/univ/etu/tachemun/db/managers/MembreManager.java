@@ -17,7 +17,6 @@ public class MembreManager extends TableManager {
             " (" +
             ID_MEMBRE + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + PSEUDO + " TEXT NOT NULL,"
-
             + DateHeure_Adhesion + " INTEGER ,"
             + ID_GROUPE + " INTEGER NOT NULL "
             + ",FOREIGN KEY (" + ID_GROUPE + ") REFERENCES " + GroupeManager.tableName + " (" + GroupeManager.ID_GROUPE + ")" +

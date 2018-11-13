@@ -11,6 +11,7 @@ import univ.etu.tachemun.db.tableclass.ListeTache;
 public class ListeTacheManager extends TableManager {
 
     static final String tableName = "ListeTache";
+
     static final String ID_LISTETACHE = "ID_ListeTache";
     static final String nom_ListeTache = "nom";
     static final String IS_PRIVE = "is_prive";
@@ -56,9 +57,18 @@ public class ListeTacheManager extends TableManager {
         return c;
     }
 
-    public long insert(ListeTache l) {
+    public long insertNew(ListeTache l) {
         ContentValues v = putInContent(l);
         v.remove(ID_LISTETACHE);
+        long dc = v.getAsLong(DateHeure_Creation);
+        v.remove(DateHeure_Creation);
+        v.put(DateHeure_Creation, dc);
+        if (v.getAsBoolean(HAS_ECHEANCE)) {
+            long ech = v.getAsLong(ECHEANCE);
+            v.remove(DateHeure_Creation);
+            v.put(DateHeure_Creation, ech);
+        }
+
         this.open();
         long m = db.insert(tableName, null, v);
         this.close();
@@ -101,8 +111,7 @@ public class ListeTacheManager extends TableManager {
 
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
-                //    public ListeTache(int ID, String nom, boolean isPerso, String description,
-                // long dateHeureCreation, boolean hasEcheance, long dateHeureEcheance, int couleur) {
+
                 ListeTache li = new ListeTache(cursor.getInt(cursor.getColumnIndex(aliasID_LISTE_TACHE)),
                         cursor.getString(cursor.getColumnIndex(nom_ListeTache)),
                         true, cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
@@ -110,7 +119,7 @@ public class ListeTacheManager extends TableManager {
                         (cursor.getInt(cursor.getColumnIndex(HAS_ECHEANCE)) == 1)
                         , cursor.getInt(cursor.getColumnIndex(ECHEANCE))
                         , cursor.getInt(cursor.getColumnIndex(COULEUR)));
-                System.out.println(li.toString());
+                System.out.println("LT " + li.toString() + " : " + li.getDateHeureCreation().getTime());
                 listes.add(li);
 
             }

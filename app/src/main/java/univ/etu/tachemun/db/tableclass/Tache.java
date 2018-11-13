@@ -31,14 +31,14 @@ public class Tache {
         this.createur = createur;
         this.libelle = libelle;
         this.description = description;
-        this.dateHeureCreation = new Date(dateHeureCreation / 1000);
+        this.dateHeureCreation = new Date(dateHeureCreation);
         this.numero = numero;
         this.priorite = priorite;
         if (dateHeureEcheance == -1) {
             this.dateHeureEcheance = null;
             this.echeance = false;
         } else {
-            this.dateHeureEcheance = new Date(dateHeureEcheance / 1000);
+            this.dateHeureEcheance = new Date(dateHeureEcheance);
             this.echeance = true;
         }
 
@@ -97,7 +97,7 @@ public class Tache {
         this.dateHeureCreation = dateHeureCreation;
     }
 
-    public void setDateHeureCreation(int dateHeureCreation) {
+    public void setDateHeureCreation(long dateHeureCreation) {
 
         this.dateHeureCreation = new Date(dateHeureCreation);
     }
@@ -126,7 +126,7 @@ public class Tache {
         this.dateHeureEcheance = dateHeureEcheance;
     }
 
-    public void setDateHeureEcheance(int dateHeureEcheance) {
+    public void setDateHeureEcheance(long dateHeureEcheance) {
         this.dateHeureEcheance = new Date(dateHeureEcheance);
     }
 

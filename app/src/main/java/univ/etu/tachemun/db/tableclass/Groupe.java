@@ -26,7 +26,7 @@ public class Groupe {
         this.createur = createur;
         this.isPrivate = isPrivate;
         this.description = description;
-        this.dateHeureCreation = new Date(dateHeureCreation / 1000);
+        this.dateHeureCreation = new Date(dateHeureCreation);
     }
 
     public int getID() {
@@ -73,8 +73,8 @@ public class Groupe {
         return dateHeureCreation;
     }
 
-    public void setDateHeureCreation(Date dateHeureCreation) {
-        this.dateHeureCreation = dateHeureCreation;
+    public void setDateHeureCreation(long dateHeureCreation) {
+        this.dateHeureCreation = new Date(dateHeureCreation);
     }
 
     @Override

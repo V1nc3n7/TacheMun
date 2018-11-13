@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import univ.etu.tachemun.db.tableclass.Tache;
 
 public class TacheManager extends TableManager {
@@ -95,6 +98,13 @@ public class TacheManager extends TableManager {
 
     }
 
+    public List<Tache> getTachesFromListe(int idListe) {
+        ArrayList<Tache> list = new ArrayList<>();
+
+
+        return null;
+    }
+
     public Tache getFromId(int id) {
 
         Tache t = new Tache();
@@ -131,4 +141,6 @@ public class TacheManager extends TableManager {
 
 
     }
+
+
 }

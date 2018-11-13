@@ -20,7 +20,7 @@ public class RealiseTache {
         this.ID = ID;
         this.realiseurTache = realiseurTache;
         this.idTache = idTache;
-        this.dateHeurRealisation = new Date(dateHeurRealisation / 1000);
+        this.dateHeurRealisation = new Date(dateHeurRealisation);
         this.details = details;
     }
 
@@ -52,8 +52,8 @@ public class RealiseTache {
         return dateHeurRealisation;
     }
 
-    public void setDateHeurRealisation(Date dateHeurRealisation) {
-        this.dateHeurRealisation = dateHeurRealisation;
+    public void setDateHeurRealisation(long dateHeurRealisation) {
+        this.dateHeurRealisation = new Date(dateHeurRealisation);
     }
 
     public String getDetails() {

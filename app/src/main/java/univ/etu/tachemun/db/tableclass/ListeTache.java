@@ -25,11 +25,11 @@ public class ListeTache {
         this.nom = nom;
         this.isPerso = isPerso;
         this.description = description;
-        this.dateHeureCreation = new Date(dateHeureCreation / 1000);
+        this.dateHeureCreation = new Date(dateHeureCreation);
         this.hasEcheance = hasEcheance;
 
         if (this.hasEcheance) {
-            this.dateHeureEcheance = new Date(dateHeureEcheance / 1000);
+            this.dateHeureEcheance = new Date(dateHeureEcheance);
         } else {
             this.dateHeureEcheance = null;
         }
@@ -95,7 +95,7 @@ public class ListeTache {
         this.dateHeureEcheance = dateHeureEcheance;
     }
 
-    public void setDateHeureEcheance(int dateHeureEcheance) {
+    public void setDateHeureEcheance(long dateHeureEcheance) {
         this.dateHeureEcheance = new Date(dateHeureEcheance);
     }
 

@@ -64,6 +64,9 @@ public class Inscription extends AppCompatActivity {
                 if (!(pseudoAvailiable())) {
                     messagesErrors.add("Ce pseudo est deja pris");
                 }
+                if (!(mailKnown())) {
+                    messagesErrors.add("Ce pseudo est deja pris");
+                }
                 if (!(new Validator("0-9a-zA-Z@-_", 4, 32).validate(getPseudoInput()))) {
                     messagesErrors.add("Pseudo Invalide : il doit etre entre 4 et 32 carcteres, et comporter que  AZ az à-9 @ -_");
                 }
@@ -85,19 +88,15 @@ public class Inscription extends AppCompatActivity {
                     ListeTacheManager listeTacheManager = new ListeTacheManager(Inscription.this);
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput(), System.currentTimeMillis());
-
+                    utilisateurManager.insertNew(user);
                     Random random = new Random();
-
                     ListeTache listeTache = new ListeTache(-1, "Liste principale", true, "Liste principale contenant les tâches à réaliser", System.currentTimeMillis()
                             , false, 0, random.nextInt(10));
 
-                    long id = listeTacheManager.insert(listeTache);
+                    long id = listeTacheManager.insertNew(listeTache);
                     ProprietaireListe proprietaireListe = new ProprietaireListe(-1, user.getPseudo(), (int) id);
-                    proprietaireListeManager.insert(proprietaireListe);
-                    utilisateurManager.open();
-                    utilisateurManager.insertNew(user);
-                    utilisateurManager.close();
 
+                    proprietaireListeManager.insert(proprietaireListe);
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_USER", user.getPseudo());
                     startActivity(i);
@@ -110,6 +109,11 @@ public class Inscription extends AppCompatActivity {
         });
 
 
+    }
+
+    private boolean mailKnown() {
+        UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
+        return !utilisateurManager.isMailInDb(getMailInput());
     }
 
 

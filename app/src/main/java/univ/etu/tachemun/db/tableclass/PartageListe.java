@@ -23,7 +23,7 @@ public class PartageListe {
         this.proprietaireListe = proprietaireListe;
         this.idListe = idListe;
         this.utilisateurInvite = utilisateurInvite;
-        this.dateHeurePartage = new Date(dateHeurePartage / 1000);
+        this.dateHeurePartage = new Date(dateHeurePartage);
         this.message = message;
     }
 
@@ -67,7 +67,7 @@ public class PartageListe {
         this.dateHeurePartage = dateHeurePartage;
     }
 
-    public void setDateHeurePartage(int dateHeurePartage) {
+    public void setDateHeurePartage(long dateHeurePartage) {
         this.dateHeurePartage = new Date(dateHeurePartage);
     }
     public String getMessage() {

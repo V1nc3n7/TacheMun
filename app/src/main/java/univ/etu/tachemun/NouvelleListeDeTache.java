@@ -89,7 +89,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     ListeTache listeTache = new ListeTache(-1, getTitreListe(), true,
                             getDescriptionListe(), System.currentTimeMillis()
                             , false, 0, choixCouleur);
-                    long id = listeTacheManager.insert(listeTache);
+                    long id = listeTacheManager.insertNew(listeTache);
                     ProprietaireListe proprietaireListe = new ProprietaireListe(-1, userName, (int) id);
                     proprietaireListeManager.insert(proprietaireListe);
 

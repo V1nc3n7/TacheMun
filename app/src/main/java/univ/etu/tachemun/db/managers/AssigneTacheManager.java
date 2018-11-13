@@ -21,7 +21,7 @@ public class AssigneTacheManager extends TableManager {
             + ID_ASSIGNEUR + " TEXT NOT NULL,"
             + ID_TACHE + " INTEGER NOT NULL,"
             + ID_ESCLAVE + " TEXT NOT NULL,"
-            + " " + MESSAGE + " TEXT ,"
+            + MESSAGE + " TEXT ,"
             + TIMESTAMP_ASSIGNATION + " INTEGER ,"
             + "FOREIGN KEY (" + ID_ESCLAVE + ") REFERENCES " + MembreManager.tableName + " (" + MembreManager.PSEUDO + ")" +
             "  ON UPDATE CASCADE ON DELETE SET NULL ,"

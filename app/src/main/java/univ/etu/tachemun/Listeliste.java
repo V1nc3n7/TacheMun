@@ -107,7 +107,7 @@ public class Listeliste extends AppCompatActivity
                             listView.setAdapter(adapter2);
                             //finish();
 
-                            if (listeTaches2 == null || listeTaches2.size() == 0) {
+                            if (listeTaches2.size() == 0) {
                                 textView = new TextView(Listeliste.this);
                                 textView.setText(R.string.liste_listestache_no_lists);
                                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

@@ -128,12 +128,9 @@ public class AndroidTask extends SQLiteOpenHelper {
         db.execSQL(MembreManager.createTableScript);
         db.execSQL(ProprietaireListeManager.createTableScript);
         db.execSQL(DroitsManager.createTableScript);
-
         db.execSQL(PartageListeManager.createTableScript);
         db.execSQL(AssigneTacheManager.createTableScript);
         db.execSQL(ListeTacheGroupeManager.createTableScript);
-
-
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
