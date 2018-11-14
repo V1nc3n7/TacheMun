@@ -6,14 +6,14 @@ import android.database.sqlite.SQLiteDatabase;
 
 import univ.etu.tachemun.db.AndroidTask;
 
-public abstract class TableManager {
-    static String createTableScript;
-    String tableName;
+abstract class TableManager {
+    private static String createTableScript;
+    private String tableName;
     SQLiteDatabase db;
 
     private AndroidTask base;
 
-    public TableManager(Context context) {
+    TableManager(Context context) {
 
         this.base = AndroidTask.getInstance(context);
     }
@@ -26,12 +26,12 @@ public abstract class TableManager {
         return tableName;
     }
 
-    public void open() {
+    void open() {
         //on ouvre la table en lecture/écriture
         db = base.getWritableDatabase();
     }
 
-    public void close() {
+    void close() {
         //on ferme l'accès à la BDD
         db.close();
     }

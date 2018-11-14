@@ -8,11 +8,11 @@ import univ.etu.tachemun.db.tableclass.Contacts;
 public class ContactsManager extends TableManager {
 
 
-    static final String tableName = "Contacts";
-    static final String ID_CONTACT = "ID_Contact";
-    static final String ID_Proprietaire = "ID_Proprietaire";
-    static final String ID_Utilisateur = "ID_Utilisateur";
-    static final String DateHeure_Contact = "DateHeure_Contact";
+    private static final String tableName = "Contacts";
+    private static final String ID_CONTACT = "ID_Contact";
+    private static final String ID_Proprietaire = "ID_Proprietaire";
+    private static final String ID_Utilisateur = "ID_Utilisateur";
+    private static final String DateHeure_Contact = "DateHeure_Contact";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +

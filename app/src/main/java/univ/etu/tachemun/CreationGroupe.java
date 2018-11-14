@@ -72,7 +72,7 @@ public class CreationGroupe extends AppCompatActivity {
         return descriptionText.getText().toString();
     }
 
-    public boolean getPriveSwitch() {
+    private boolean getPriveSwitch() {
         return priveSwitch.isChecked();
     }
 }

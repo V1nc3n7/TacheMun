@@ -143,7 +143,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     }
 
 
-    public void creationImage() {
+    private void creationImage() {
         linearLayout = (LinearLayout) findViewById(R.id.couleurs);
         //création image
         //noir

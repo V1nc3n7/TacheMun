@@ -17,7 +17,7 @@ public class Validator {
     /**
      * @param trueregex UNE VRAIE REGEX !
      */
-    public Validator(String trueregex) {
+    Validator(String trueregex) {
         borne = false;
         this.regex = trueregex;
         pattern = Pattern.compile(regex);

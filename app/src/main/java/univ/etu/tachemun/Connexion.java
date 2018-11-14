@@ -17,7 +17,7 @@ import java.util.List;
 import univ.etu.tachemun.db.managers.UtilisateurManager;
 
 public class Connexion extends AppCompatActivity {
-    List<String> messagesErrors;
+    private List<String> messagesErrors;
     private Button inscriptionButton;
     private Button connexionButton;
     private TextView messageErrorConnexion;

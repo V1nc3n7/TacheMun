@@ -13,13 +13,13 @@ public class ListeTacheManager extends TableManager {
     static final String tableName = "ListeTache";
 
     static final String ID_LISTETACHE = "ID_ListeTache";
-    static final String nom_ListeTache = "nom";
-    static final String IS_PRIVE = "is_prive";
-    static final String DESCRIPTION = "description";
-    static final String DateHeure_Creation = "dateCreation";
-    static final String HAS_ECHEANCE = "has_echeance";
-    static final String ECHEANCE = "echeance";
-    static final String COULEUR = "couleur";
+    private static final String nom_ListeTache = "nom";
+    private static final String IS_PRIVE = "is_prive";
+    private static final String DESCRIPTION = "description";
+    private static final String DateHeure_Creation = "dateCreation";
+    private static final String HAS_ECHEANCE = "has_echeance";
+    private static final String ECHEANCE = "echeance";
+    private static final String COULEUR = "couleur";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +

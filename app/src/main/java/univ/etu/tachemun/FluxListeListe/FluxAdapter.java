@@ -47,9 +47,9 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
     }
 
     private class FluxViewHolder{
-        public TextView pseudo;
-        public TextView text;
-        public ImageView avatar;
+        TextView pseudo;
+        TextView text;
+        ImageView avatar;
     }
 
 }

@@ -7,14 +7,14 @@ import univ.etu.tachemun.db.tableclass.AssigneTache;
 
 public class AssigneTacheManager extends TableManager {
 
-    static final String ID_ASSIGNE = "ID_AssigneTache";
-    static final String ID_ASSIGNEUR = "ID_MembreAssigneur";
-    static final String ID_TACHE = "ID_Tache";
-    static final String MESSAGE = "message";
+    private static final String ID_ASSIGNE = "ID_AssigneTache";
+    private static final String ID_ASSIGNEUR = "ID_MembreAssigneur";
+    private static final String ID_TACHE = "ID_Tache";
+    private static final String MESSAGE = "message";
 
-    static final String ID_ESCLAVE = "ID_tacheur";
-    static final String TIMESTAMP_ASSIGNATION = "dateHeure_AssigneTache";
-    static final String tableName = "AssigneTache";
+    private static final String ID_ESCLAVE = "ID_tacheur";
+    private static final String TIMESTAMP_ASSIGNATION = "dateHeure_AssigneTache";
+    private static final String tableName = "AssigneTache";
     public static final String createTableScript = "CREATE TABLE " + tableName +
             " (" +
             " " + ID_ASSIGNE + " INTEGER PRIMARY KEY AUTOINCREMENT,"

@@ -13,15 +13,15 @@ public class TacheManager extends TableManager {
 
     static final String tableName = "Tache";
     static final String ID_Tache = "ID_Tache";
-    static final String ID_ListeTache = "ID_ListeTache";
-    static final String ID_Createur = "ID_Createur";
-    static final String LIBELLE = "libelle";
-    static final String DESCRIPTION = "description";
-    static final String DateHeure_Creation = "DateHeure_Creation";
-    static final String NUMERO = "numero";
-    static final String PRIORITE = "priorite";
-    static final String HAS_ECHEANCE = "has_echeance";
-    static final String ECHEANCE = "echeance";
+    private static final String ID_ListeTache = "ID_ListeTache";
+    private static final String ID_Createur = "ID_Createur";
+    private static final String LIBELLE = "libelle";
+    private static final String DESCRIPTION = "description";
+    private static final String DateHeure_Creation = "DateHeure_Creation";
+    private static final String NUMERO = "numero";
+    private static final String PRIORITE = "priorite";
+    private static final String HAS_ECHEANCE = "has_echeance";
+    private static final String ECHEANCE = "echeance";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +
@@ -100,9 +100,24 @@ public class TacheManager extends TableManager {
 
     public List<Tache> getTachesFromListe(int idListe) {
         ArrayList<Tache> list = new ArrayList<>();
+        this.open();
+        Cursor c = db.rawQuery(
+
+                "SELECT " + ID_Tache + " FROM " + tableName
+                        + " WHERE " +
+                        ID_ListeTache + "=" + idListe, null);
+
+        if (c.moveToFirst()) {
+            do {
+                list.add(getFromId(c.getInt(c.getColumnIndex(ID_Tache))));
+
+            } while (c.moveToNext());
 
 
-        return null;
+        }
+        this.close();
+        c.close();
+        return list;
     }
 
     public Tache getFromId(int id) {

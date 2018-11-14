@@ -6,8 +6,8 @@ import android.content.Context;
 import univ.etu.tachemun.db.tableclass.Droits;
 
 public class DroitsManager extends TableManager {
-    static final String tableName = "Droits";
-    static final String ID_DROIT = "ID_Droits";
+    private static final String tableName = "Droits";
+    private static final String ID_DROIT = "ID_Droits";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +

@@ -7,6 +7,8 @@ import android.database.Cursor;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Set;
+import java.util.TreeSet;
 
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 
@@ -14,9 +16,9 @@ public class UtilisateurManager extends TableManager {
 
     static final String tableName = "Utilisateur";
     static final String ID_UTILISATEUR = "pseudo_Utilisateur";
-    static final String PASSWORD = "motDePasse_Utilisateur";
-    static final String MAIL = "mail_Utilisateur";
-    static final String DateHeure_INSCRIPTION = "dateInscription_Utilisateur";
+    private static final String PASSWORD = "motDePasse_Utilisateur";
+    private static final String MAIL = "mail_Utilisateur";
+    private static final String DateHeure_INSCRIPTION = "dateInscription_Utilisateur";
 
     public static final String createTableScript = "CREATE TABLE " + tableName +
             " (" + ID_UTILISATEUR + " TEXT PRIMARY KEY NOT NULL,"
@@ -143,7 +145,8 @@ public class UtilisateurManager extends TableManager {
         }
 
     }
-    public Utilisateur getFromId(String id) {
+
+    private Utilisateur getFromId(String id) {
 
 
         Utilisateur u = new Utilisateur();
@@ -203,5 +206,22 @@ public class UtilisateurManager extends TableManager {
             return false;
         }
 
+    }
+
+    public Set<Utilisateur> getUtilisateurs() {
+        TreeSet<Utilisateur> r = new TreeSet<>();
+        this.open();
+        Cursor c = db.rawQuery(
+                "SELECT " + ID_UTILISATEUR + " FROM " + tableName, null);
+        if (c.moveToFirst()) {
+            do {
+                r.add(getFromId(c.getString(c.getColumnIndex(ID_UTILISATEUR))));
+
+            } while (c.moveToNext());
+            this.close();
+
+        }
+        c.close();
+        return r;
     }
 }

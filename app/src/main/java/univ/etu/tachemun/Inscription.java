@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import univ.etu.tachemun.db.managers.ListeTacheManager;
 import univ.etu.tachemun.db.managers.ProprietaireListeManager;
@@ -25,7 +26,7 @@ import univ.etu.tachemun.validators.Validator;
 public class Inscription extends AppCompatActivity {
 
 
-    public static final int MAX_LENGHT_PASSWORD = 120;
+    private static final int MAX_LENGHT_PASSWORD = 120;
     private static final int MIN_LENGHT_PASSWORD = 3;
     private Button confirmation;
     private TextView messageErrorOutput;
@@ -99,6 +100,11 @@ public class Inscription extends AppCompatActivity {
                     proprietaireListeManager.insert(proprietaireListe);
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());
+
+                    Set<Utilisateur> su = utilisateurManager.getUtilisateurs();
+                    for (Utilisateur userwesh : su) {
+                        System.out.println(userwesh.toString());
+                    }
                     startActivity(i);
                     finish();
                 } else {
@@ -120,33 +126,33 @@ public class Inscription extends AppCompatActivity {
     /**
      * @return
      */
-    public boolean pseudoAvailiable() {
+    private boolean pseudoAvailiable() {
 
         UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
         return !utilisateurManager.isPseudoInDb(getPseudoInput());
     }
 
-    public String getPseudoInput() {
+    private String getPseudoInput() {
         return pseudoInput.getText().toString();
     }
 
-    public String getPassword1Input() {
+    private String getPassword1Input() {
         return password1Input.getText().toString();
     }
 
-    public String getPassword2Input() {
+    private String getPassword2Input() {
         return password2Input.getText().toString();
     }
 
-    public String getMailInput() {
+    private String getMailInput() {
         return mailInput.getText().toString();
     }
 
-    public boolean checkSamePassword() {
+    private boolean checkSamePassword() {
         return getPassword1Input().equals(getPassword2Input());
     }
 
-    public boolean checkPassword() {
+    private boolean checkPassword() {
         PasswordValidator p = new PasswordValidator(MIN_LENGHT_PASSWORD, MAX_LENGHT_PASSWORD);
         return p.validate(getPassword1Input());
     }

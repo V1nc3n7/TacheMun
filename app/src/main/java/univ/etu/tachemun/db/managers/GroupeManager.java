@@ -9,11 +9,11 @@ public class GroupeManager extends TableManager {
 
     static final String tableName = "Groupe";
     static final String ID_GROUPE = "ID_Groupe";
-    static final String ID_createur = "ID_createur";
-    static final String nom_Groupe = "nom";
-    static final String DateHeure_Creation = "dateCreation";
-    static final String DESCRIPTION = "description";
-    static final String IS_PRIVE = "is_prive";
+    private static final String ID_createur = "ID_createur";
+    private static final String nom_Groupe = "nom";
+    private static final String DateHeure_Creation = "dateCreation";
+    private static final String DESCRIPTION = "description";
+    private static final String IS_PRIVE = "is_prive";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +

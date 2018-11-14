@@ -7,10 +7,10 @@ import univ.etu.tachemun.db.tableclass.EmailDisposable;
 
 public class EmailDisposableManager extends TableManager {
 
-    static final String tableName = "EmailDisposable";
-    static final String ID_EMAILDISPOSABLE = "id";
-    static final String DOMAINE = "domaine";
-    static final String DateHeure_Ajout = "ts_ajout";
+    private static final String tableName = "EmailDisposable";
+    private static final String ID_EMAILDISPOSABLE = "id";
+    private static final String DOMAINE = "domaine";
+    private static final String DateHeure_Ajout = "ts_ajout";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +

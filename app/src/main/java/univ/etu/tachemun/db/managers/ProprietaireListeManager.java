@@ -9,7 +9,7 @@ public class ProprietaireListeManager extends TableManager {
 
 
     static final String tableName = "ProprietaireListe";
-    static final String ID_ProprietaireListe = "ID_ProprietaireListe";
+    private static final String ID_ProprietaireListe = "ID_ProprietaireListe";
     static final String PSEUDO = "pseudo";
     static final String ID_ListeTache = "ID_ListeTache";
 

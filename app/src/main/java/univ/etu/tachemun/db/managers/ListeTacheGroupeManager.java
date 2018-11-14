@@ -8,11 +8,11 @@ import univ.etu.tachemun.db.tableclass.ListeTacheGroupe;
 public class ListeTacheGroupeManager extends TableManager {
 
 
-    static final String tableName = "ListeTacheGroupe";
-    static final String ID_ListeTacheGroupe = "ID_ListeTacheGroupe";
-    static final String ID_GROUPE = "ID_Groupe";
-    static final String ID_createur = "ID_createur";
-    static final String ID_ListeTache = "ID_ListeTache";
+    private static final String tableName = "ListeTacheGroupe";
+    private static final String ID_ListeTacheGroupe = "ID_ListeTacheGroupe";
+    private static final String ID_GROUPE = "ID_Groupe";
+    private static final String ID_createur = "ID_createur";
+    private static final String ID_ListeTache = "ID_ListeTache";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +

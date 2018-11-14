@@ -30,12 +30,12 @@ ALTER TABLE RealiseTache
   MODIFY ID_RealiseTache int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
     */
-    static final String tableName = "RealiseTache";
-    static final String ID_RealiseTache = "ID_RealiseTache";
-    static final String ID_Realisateur = "ID_Realisateur";
-    static final String ID_Tache = "ID_Tache";
-    static final String DateHeure_Realisation = "DateHeure_Realisation";
-    static final String DETAILS = "details";
+    private static final String tableName = "RealiseTache";
+    private static final String ID_RealiseTache = "ID_RealiseTache";
+    private static final String ID_Realisateur = "ID_Realisateur";
+    private static final String ID_Tache = "ID_Tache";
+    private static final String DateHeure_Realisation = "DateHeure_Realisation";
+    private static final String DETAILS = "details";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +

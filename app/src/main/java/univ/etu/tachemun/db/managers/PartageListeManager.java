@@ -7,13 +7,13 @@ import univ.etu.tachemun.db.tableclass.PartageListe;
 
 public class PartageListeManager extends TableManager {
 
-    static final String tableName = "PartageListe";
-    static final String ID_PartageListe = "ID_PartageListe";
-    static final String ID_Proprietaire = "ID_Proprietaire";
-    static final String ID_ListeTache = "ID_ListeTache";
-    static final String ID_Invite = "ID_Invite";
-    static final String DateHeure_Partage = "DateHeure_Partage";
-    static final String MESSAGE = "message";
+    private static final String tableName = "PartageListe";
+    private static final String ID_PartageListe = "ID_PartageListe";
+    private static final String ID_Proprietaire = "ID_Proprietaire";
+    private static final String ID_ListeTache = "ID_ListeTache";
+    private static final String ID_Invite = "ID_Invite";
+    private static final String DateHeure_Partage = "DateHeure_Partage";
+    private static final String MESSAGE = "message";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +
