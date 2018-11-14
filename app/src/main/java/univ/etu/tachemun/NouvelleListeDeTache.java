@@ -72,12 +72,15 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                         }
                     });
-                    /*builder.setNegativeButton("No, no", new DialogInterface.OnClickListener() {
+                    /*
+                    builder.setNegativeButton("No, no", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
                             }
-                    });*/
+                    });
+
+                    */
                     AlertDialog dialog = builder.create();
                     dialog.show();
 

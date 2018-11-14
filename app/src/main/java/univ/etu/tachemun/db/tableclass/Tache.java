@@ -21,7 +21,7 @@ public class Tache {
      * @param createur
      * @param description
      * @param dateHeureCreation
-     * @param numero
+     * @param numero -1 alors on doit calculer le numero
      * @param priorite
      * @param dateHeureEcheance si = -1 alors pas d'echeance
      */

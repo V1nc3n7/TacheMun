@@ -23,7 +23,7 @@
         <activity android:name=".Inscription" />
         <activity android:name=".NouvelleListeDeTache" />
         <activity android:name=".CreationGroupe" />
-        <activity android:name=".CreationTache"></activity>
+        <activity android:name=".CreationTache" />
     </application>
 
 </manifest>

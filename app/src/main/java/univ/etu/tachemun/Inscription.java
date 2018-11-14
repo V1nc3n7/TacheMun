@@ -21,7 +21,7 @@ import univ.etu.tachemun.db.tableclass.ProprietaireListe;
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 import univ.etu.tachemun.validators.MailValidator;
 import univ.etu.tachemun.validators.PasswordValidator;
-import univ.etu.tachemun.validators.Validator;
+import univ.etu.tachemun.validators.PseudoValidator;
 
 public class Inscription extends AppCompatActivity {
 
@@ -68,7 +68,7 @@ public class Inscription extends AppCompatActivity {
                 if (!(mailKnown())) {
                     messagesErrors.add("Ce pseudo est deja pris");
                 }
-                if (!(new Validator("0-9a-zA-Z@-_", 4, 32).validate(getPseudoInput()))) {
+                if (!(new PseudoValidator()).validate(getPseudoInput())) {
                     messagesErrors.add("Pseudo Invalide : il doit etre entre 4 et 32 carcteres, et comporter que  AZ az à-9 @ -_");
                 }
 
