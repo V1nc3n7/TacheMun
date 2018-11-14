@@ -83,7 +83,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
 
                 } else {
                     Intent intent = new Intent(NouvelleListeDeTache.this, Listeliste.class);
-                    String userName = getIntent().getStringExtra("PSEUDO");
+                    String userName = getIntent().getStringExtra("ID_UTILISATEUR");
                     Random random = new Random();
 
                     ListeTache listeTache = new ListeTache(-1, getTitreListe(), true,
@@ -94,7 +94,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     proprietaireListeManager.insert(proprietaireListe);
 
 
-                    intent.putExtra("PSEUDO", userName);
+                    intent.putExtra("ID_UTILISATEUR", userName);
                     startActivity(intent);
                     setResult(0);
                     finish();

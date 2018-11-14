@@ -51,7 +51,7 @@ public class Listeliste extends AppCompatActivity
                         .setAction("Action", null).show();*/
 
                 Intent intent = new Intent(Listeliste.this, NouvelleListeDeTache.class);
-                intent.putExtra("PSEUDO", getIntent().getStringExtra("PSEUDO"));
+                intent.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
 
                 //startActivity(intent);
 

@@ -39,7 +39,7 @@ public class CreationGroupe extends AppCompatActivity {
             public void onClick(View v) {
                 GroupeManager manager = new GroupeManager(CreationGroupe.this);
                 //il faut pseudoUtilisateur
-                String pseudo = getIntent().getStringExtra("ID_USER");
+                String pseudo = getIntent().getStringExtra("ID_UTILISATEUR");
 
                 long milis = System.currentTimeMillis();
 

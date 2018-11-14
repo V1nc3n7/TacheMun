@@ -49,8 +49,8 @@ public class Inscription extends AppCompatActivity {
         password2Input = (EditText) findViewById(R.id.inscription_password2_input);
         mailInput = (EditText) findViewById(R.id.inscription_mail_input);
 
-        if (getIntent().hasExtra("PSEUDO"))
-            pseudoInput.setText(getIntent().getStringExtra("PSEUDO"));
+        if (getIntent().hasExtra("ID_UTILISATEUR"))
+            pseudoInput.setText(getIntent().getStringExtra("ID_UTILISATEUR"));
 
         confirmation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +98,7 @@ public class Inscription extends AppCompatActivity {
 
                     proprietaireListeManager.insert(proprietaireListe);
                     Intent i = new Intent(Inscription.this, Listeliste.class);
-                    i.putExtra("ID_USER", user.getPseudo());
+                    i.putExtra("ID_UTILISATEUR", user.getPseudo());
                     startActivity(i);
                     finish();
                 } else {

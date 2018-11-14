@@ -44,7 +44,7 @@ public class Connexion extends AppCompatActivity {
                 //ce qui a été mis dans les champs doit etre transmis à l'activity Inscription
                 String userName = getInputPseudo();
                 if (!userName.isEmpty())
-                    i.putExtra("PSEUDO", userName);
+                    i.putExtra("ID_UTILISATEUR", userName);
                 startActivity(i);
             }
         });
