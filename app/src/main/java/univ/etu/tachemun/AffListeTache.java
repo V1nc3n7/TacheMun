@@ -54,7 +54,7 @@ public class AffListeTache extends AppCompatActivity {
             linearLayout.addView(textView);
         }
         else{
-
+//TODO
         }
     }
 

@@ -62,7 +62,8 @@ public class TacheManager extends TableManager {
         values.put(NUMERO, tache.getNumero());
         values.put(PRIORITE, tache.getPriorite());
         values.put(HAS_ECHEANCE, (tache.hasEcheance() ? 1 : 0));
-        values.put(ECHEANCE, tache.getDateHeureEcheance().getTime());
+        if (tache.hasEcheance())
+            values.put(ECHEANCE, tache.getDateHeureEcheance().getTime());
 
         return values;
     }

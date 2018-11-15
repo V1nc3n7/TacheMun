@@ -95,15 +95,18 @@ public class Inscription extends AppCompatActivity {
                     ListeTache listeTache = new ListeTache(-1, "Liste principale", true, "Liste principale contenant les tâches à réaliser", System.currentTimeMillis()
                             , false, 0, random.nextInt(10));
 
-                    long id = listeTacheManager.insertNew(listeTache);
-                    ProprietaireListe proprietaireListe = new ProprietaireListe(-1, user.getPseudo(), (int) id);
+                    int idListe = (int) listeTacheManager.insertNew(listeTache);
+                    ProprietaireListe proprietaireListe = new ProprietaireListe(-1, user.getPseudo(), (int) idListe);
 
                     proprietaireListeManager.insert(proprietaireListe);
+
+
+                    addTaches(user.getPseudo(), idListe);
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());
 
 
-                    addTaches(user.getPseudo(), id);
+
                     startActivity(i);
                     setResult(0);
                     finish();
@@ -133,29 +136,20 @@ public class Inscription extends AppCompatActivity {
 
     }
 
-    private void addTaches(String pseudo, long id) {
+    private void addTaches(String pseudo, int id) {
         TacheManager tm = new TacheManager(Inscription.this);
         int n = 0;
-        /*
-          @param ID
-          @param idLsteTache
-          @param createur
-          @param description
-          @param dateHeureCreation
-          @param numero -1 alors on doit calculer le numero
-          @param priorite
-          @param dateHeureEcheance si = -1 alors pas d'echeance
-         */
+
         n++;
-        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 1, -1));
+        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 1, -1));
         n++;
-        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 2, -1));
+        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 2, -1));
         n++;
-        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 3, -1));
+        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 3, -1));
         n++;
-        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 4, -1));
+        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 4, -1));
         n++;
-        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 5, -1));
+        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 5, -1));
     }
 
     private boolean mailKnown() {
