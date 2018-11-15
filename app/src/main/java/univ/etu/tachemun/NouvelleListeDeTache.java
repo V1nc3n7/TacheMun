@@ -79,7 +79,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                                 finish();
                             }
                     });
-
                     */
                     AlertDialog dialog = builder.create();
                     dialog.show();
