@@ -88,6 +88,16 @@ public class Listeliste extends AppCompatActivity
             final FluxAdapter adapter = new FluxAdapter(this, listflux);
             listView.setAdapter(adapter);
             linearLayout.addView(listView);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(Listeliste.this,AffListeTache.class);
+                    intent.putExtra("ID_UTILISATEUR",getIntent().getStringExtra("ID_UTILISATEUR"));
+                    intent.putExtra("NOM_LISTETACHE",listeTaches.get(i).getNom());
+                    intent.putExtra("COULEUR_LISTETACHE",listeTaches.get(i).getCouleur());
+                    startActivity(intent);
+                }
+            });
             listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {

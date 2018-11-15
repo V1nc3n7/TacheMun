@@ -24,6 +24,11 @@
         <activity android:name=".NouvelleListeDeTache" />
         <activity android:name=".CreationGroupe" />
         <activity android:name=".CreationTache" />
+        <activity
+            android:name=".AffListeTache"
+            android:label="@string/title_activity_aff_liste_tache"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

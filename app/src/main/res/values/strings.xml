@@ -131,4 +131,5 @@
     <string name="nouvelle_tache">Nouvelle tâche</string>
     <string name="cree_une_nouvelle_tache">Creer une nouvelle tâche</string>
     <string name="tache_print">Afficher</string>
+    <string name="title_activity_aff_liste_tache">AffListeTache</string>
 </resources>
