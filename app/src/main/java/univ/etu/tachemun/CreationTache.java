@@ -23,6 +23,8 @@ public class CreationTache extends AppCompatActivity {
     private Button timePicker;
     private Button datePicker;
 
+    private Button creaTache;
+
 
 
 
@@ -35,7 +37,16 @@ public class CreationTache extends AppCompatActivity {
         setContentView(R.layout.activity_creation_tache);
         nomTache = (EditText) findViewById(R.id.cree_nouv_Tache_nomTache_input);
         descriptionTache = (EditText) findViewById(R.id.nouvListeTache_descr_input);
-        ;
+
+        creaTache = (Button) findViewById(R.id.cree_nouvTache);
+        creaTache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
 
     }
 
