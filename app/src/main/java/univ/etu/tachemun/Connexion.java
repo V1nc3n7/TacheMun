@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import univ.etu.tachemun.db.managers.UtilisateurManager;
+import univ.etu.tachemun.db.tableclass.Utilisateur;
 
 public class Connexion extends AppCompatActivity {
     private List<String> messagesErrors;
@@ -52,6 +54,12 @@ public class Connexion extends AppCompatActivity {
         connexionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
+                Set<Utilisateur> su = utilisateurManager.getUtilisateurs();
+                for (Utilisateur userwesh : su) {
+                    System.out.println(userwesh.toString());
+                }
+
                 messagesErrors = new ArrayList<>();
 
 
@@ -65,6 +73,8 @@ public class Connexion extends AppCompatActivity {
                 if (messagesErrors.isEmpty()) {
                     Intent i = new Intent(Connexion.this, Listeliste.class);
                     i.putExtra("ID_UTILISATEUR", getInputPseudo());
+
+
                     startActivity(i);
                     finish();
                 } else {
@@ -82,6 +92,7 @@ public class Connexion extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Suivant",
                                     Toast.LENGTH_LONG).show();
                         }
+
                     });
                     AlertDialog dialog = builder.create();
                     dialog.show();

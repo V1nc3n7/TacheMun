@@ -14,9 +14,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
-
-import javax.xml.transform.Result;
 
 import univ.etu.tachemun.db.managers.ListeTacheManager;
 import univ.etu.tachemun.db.managers.ProprietaireListeManager;
@@ -57,13 +54,10 @@ public class Inscription extends AppCompatActivity {
 
         if (getIntent().hasExtra("ID_UTILISATEUR"))
             pseudoInput.setText(getIntent().getStringExtra("ID_UTILISATEUR"));
-
         confirmation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // faire un aletDialog
-
                 //Utilisateur utilisateur = new Utilisateur(pseudoInput.getText().toString(),password2Input.getText().toString(),mailInput.getText().toString(),System.currentTimeMillis());
 
                 messagesErrors = new ArrayList<>();
@@ -105,11 +99,7 @@ public class Inscription extends AppCompatActivity {
                     proprietaireListeManager.insert(proprietaireListe);
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());
-                    /*
-                    Set<Utilisateur> su = utilisateurManager.getUtilisateurs();
-                    for (Utilisateur userwesh : su) {
-                        System.out.println(userwesh.toString());
-                    }*/
+
                     startActivity(i);
                     setResult(0);
                     finish();

@@ -7,8 +7,8 @@ import android.database.Cursor;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 
@@ -208,18 +208,20 @@ public class UtilisateurManager extends TableManager {
     }
 
     public Set<Utilisateur> getUtilisateurs() {
-        TreeSet<Utilisateur> r = new TreeSet<>();
+        HashSet<Utilisateur> r = new HashSet<>();
         this.open();
         Cursor c = db.rawQuery(
-                "SELECT " + ID_UTILISATEUR + " FROM " + tableName, null);
-        if (c.moveToFirst()) {
-            do {
-                r.add(getFromId(c.getString(c.getColumnIndex(ID_UTILISATEUR))));
+                "SELECT " + ID_UTILISATEUR + ", " + PASSWORD + ", " + MAIL + " , " + DateHeure_INSCRIPTION + " FROM " + tableName, null);
 
-            } while (c.moveToNext());
-            this.close();
+        while (c.moveToNext()) {
+
+
+            r.add(new Utilisateur(c.getString(c.getColumnIndex(ID_UTILISATEUR)),
+                    c.getString(c.getColumnIndex(PASSWORD)), c.getString(c.getColumnIndex(MAIL)), c.getInt(c.getColumnIndex(DateHeure_INSCRIPTION))));
 
         }
+
+        this.close();
         c.close();
         return r;
     }

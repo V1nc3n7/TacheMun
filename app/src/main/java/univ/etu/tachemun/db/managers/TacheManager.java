@@ -106,7 +106,7 @@ public class TacheManager extends TableManager {
                 "SELECT " + ID_Tache + " FROM " + tableName
                         + " WHERE " +
                         ID_ListeTache + "=" + idListe, null);
-
+//retirer les taches realisées
         if (c.moveToFirst()) {
             do {
                 list.add(getFromId(c.getInt(c.getColumnIndex(ID_Tache))));
