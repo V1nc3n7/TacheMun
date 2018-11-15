@@ -140,7 +140,7 @@ public class Listeliste extends AppCompatActivity
                     });
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                    return false;
+                    return true;
                 }
             });
         }
