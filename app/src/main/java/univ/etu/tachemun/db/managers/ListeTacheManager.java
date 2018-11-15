@@ -115,9 +115,9 @@ public class ListeTacheManager extends TableManager {
                 ListeTache li = new ListeTache(cursor.getInt(cursor.getColumnIndex(aliasID_LISTE_TACHE)),
                         cursor.getString(cursor.getColumnIndex(nom_ListeTache)),
                         true, cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
-                        cursor.getInt(cursor.getColumnIndex(DateHeure_Creation)),
+                        cursor.getLong(cursor.getColumnIndex(DateHeure_Creation)),
                         (cursor.getInt(cursor.getColumnIndex(HAS_ECHEANCE)) == 1)
-                        , cursor.getInt(cursor.getColumnIndex(ECHEANCE))
+                        , cursor.getLong(cursor.getColumnIndex(ECHEANCE))
                         , cursor.getInt(cursor.getColumnIndex(COULEUR)));
                 //System.out.println("LT " + li.toString() + " : " + li.getDateHeureCreation().getTime());
                 listes.add(li);

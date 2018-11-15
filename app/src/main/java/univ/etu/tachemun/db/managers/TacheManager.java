@@ -138,13 +138,13 @@ public class TacheManager extends TableManager {
             t.setCreateur(c.getString(c.getColumnIndex(ID_Createur)));
             t.setLibelle(c.getString(c.getColumnIndex(LIBELLE)));
             t.setDescription(c.getString(c.getColumnIndex(DESCRIPTION)));
-            t.setDateHeureCreation(c.getInt(c.getColumnIndex(DateHeure_Creation)));
+            t.setDateHeureCreation(c.getLong(c.getColumnIndex(DateHeure_Creation)));
             t.setNumero(c.getInt(c.getColumnIndex(NUMERO)));
             t.setPriorite(c.getInt(c.getColumnIndex(PRIORITE)));
             if (c.getInt(c.getColumnIndex(HAS_ECHEANCE)) == 0)
                 t.setDateHeureEcheance(null);
             else
-                t.setDateHeureEcheance(c.getInt(c.getColumnIndex(ECHEANCE)));
+                t.setDateHeureEcheance(c.getLong(c.getColumnIndex(ECHEANCE)));
 
             this.close();
             c.close();
