@@ -12,6 +12,7 @@ public class Utilisateur {
     public Utilisateur(String pseudo, String motDePasse, String mail, long dateInscription) {
         this.pseudo = pseudo;
         this.dateInscription = new Date(dateInscription);
+        System.out.println(dateInscription);
         this.motDePasse = motDePasse;
         this.mail = mail;
     }

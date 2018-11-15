@@ -119,7 +119,7 @@ public class ListeTacheManager extends TableManager {
                         (cursor.getInt(cursor.getColumnIndex(HAS_ECHEANCE)) == 1)
                         , cursor.getInt(cursor.getColumnIndex(ECHEANCE))
                         , cursor.getInt(cursor.getColumnIndex(COULEUR)));
-                System.out.println("LT " + li.toString() + " : " + li.getDateHeureCreation().getTime());
+                //System.out.println("LT " + li.toString() + " : " + li.getDateHeureCreation().getTime());
                 listes.add(li);
 
             }

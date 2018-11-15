@@ -76,10 +76,11 @@ public class UtilisateurManager extends TableManager {
         ContentValues v = putInContent(u);
         v.remove(PASSWORD);
         v.put(PASSWORD, getSHA256(u.getMotDePasse()));
-        System.out.println("u= " + u.toString() + " " + u.getDateInscription().getTime());
+        System.out.println("u= " + u.toString());
         this.open();
         long r = db.insert(tableName, null, v);
         this.close();
+        System.out.println("u2= " + getFromId(u.getPseudo()).toString());
         return r;
     }
 
@@ -148,26 +149,37 @@ public class UtilisateurManager extends TableManager {
 
     private Utilisateur getFromId(String id) {
 
-
-        Utilisateur u = new Utilisateur();
+        Utilisateur u = null;
         this.open();
-        Cursor c = db.rawQuery(
-                "SELECT " + ID_UTILISATEUR + ", " + PASSWORD + ", " + MAIL + " , " + DateHeure_INSCRIPTION + " FROM " + tableName + " WHERE " +
-                        ID_UTILISATEUR + "=\"" + id + "\"", null);
-        this.close();
-        if (c.getCount() != 0) {
+        Cursor c = db.rawQuery("SELECT " + ID_UTILISATEUR
+                + " , " + PASSWORD
+                + " , " + MAIL
+                + " , " + DateHeure_INSCRIPTION
+                + " FROM " + tableName + " WHERE " +
+                ID_UTILISATEUR + "=\"" + id + "\";", null);
+
+
+        if (c.moveToFirst()) {
+            u = new Utilisateur(c.getString(c.getColumnIndex(ID_UTILISATEUR)),
+                    c.getString(c.getColumnIndex(PASSWORD)), c.getString(c.getColumnIndex(MAIL)), c.getLong(c.getColumnIndex(DateHeure_INSCRIPTION)));
+
+           /*
             u.setPseudo(c.getString(c.getColumnIndex(ID_UTILISATEUR)));
+            System.out.println("pseudo "+c.getString(c.getColumnIndex(ID_UTILISATEUR)));
             u.setMotDePasse(c.getString(c.getColumnIndex(PASSWORD)));
+            System.out.println("pseudo "+c.getString(c.getColumnIndex(PASSWORD)));
             u.setMail(c.getString(c.getColumnIndex(MAIL)));
+            System.out.println("pseudo "+c.getString(c.getColumnIndex(MAIL)));
             u.setDateInscription(c.getLong(c.getColumnIndex(DateHeure_INSCRIPTION)));
-            c.close();
-            this.close();
-            return u;
-        } else {
-            c.close();
-            this.close();
-            return null;
+            System.out.println("pseudo "+c.getInt(c.getColumnIndex(DateHeure_INSCRIPTION)));
+            */
+
+
         }
+        System.out.println("Out of cursor");
+        this.close();
+        c.close();
+        return u;
 
     }
 

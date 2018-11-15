@@ -9,16 +9,19 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
+import java.util.Date;
 
 @SuppressLint("ValidFragment")
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     private Button d;
+    private Date date;
 
     @SuppressLint("ValidFragment")
     public DatePickerFragment(Button date) {
         d = date;
+        this.date = new Date();
     }
 
     @Override
@@ -33,21 +36,19 @@ public class DatePickerFragment extends DialogFragment
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
-    public static java.util.Date getDateFromDatePicker(DatePicker datePicker) {
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth();
-        int year = datePicker.getYear();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
-
-        return calendar.getTime();
-    }
-
-    public void onDateSet(DatePicker view, int year, int month, int day) {
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         // Do something with the date chosen by the user
 
         d.setText(new StringBuilder().append("").append(day).append("/").append(month).append("/").append(year).toString());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+
+        this.date = calendar.getTime();
     }
 
+    public Date getDate() {
+        return date;
+    }
 }

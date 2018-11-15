@@ -59,15 +59,14 @@ public class Inscription extends AppCompatActivity {
         confirmation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // faire un aletDialog
-                //Utilisateur utilisateur = new Utilisateur(pseudoInput.getText().toString(),password2Input.getText().toString(),mailInput.getText().toString(),System.currentTimeMillis());
+
 
                 messagesErrors = new ArrayList<>();
                 if (!(pseudoAvailiable())) {
                     messagesErrors.add("Ce pseudo est deja pris");
                 }
                 if (!(mailKnown())) {
-                    messagesErrors.add("Ce pseudo est deja pris");
+                    messagesErrors.add(" MAil déja connu ");
                 }
                 if (!(new PseudoValidator()).validate(getPseudoInput())) {
                     messagesErrors.add("Pseudo Invalide : il doit etre entre 4 et 32 carcteres, et comporter que  AZ az à-9 @ -_");
@@ -100,8 +99,17 @@ public class Inscription extends AppCompatActivity {
 
                     proprietaireListeManager.insert(proprietaireListe);
 
-
                     addTaches(user.getPseudo(), idListe);
+/*
+                    Set<Utilisateur> su = utilisateurManager.getUtilisateurs();
+                    for (Utilisateur userwesh : su) {
+                        System.err.println(userwesh.toString());
+                    }*/
+
+
+
+
+
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());
 
