@@ -17,9 +17,11 @@ import java.util.Random;
 
 import univ.etu.tachemun.db.managers.ListeTacheManager;
 import univ.etu.tachemun.db.managers.ProprietaireListeManager;
+import univ.etu.tachemun.db.managers.TacheManager;
 import univ.etu.tachemun.db.managers.UtilisateurManager;
 import univ.etu.tachemun.db.tableclass.ListeTache;
 import univ.etu.tachemun.db.tableclass.ProprietaireListe;
+import univ.etu.tachemun.db.tableclass.Tache;
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 import univ.etu.tachemun.validators.MailValidator;
 import univ.etu.tachemun.validators.PasswordValidator;
@@ -100,6 +102,8 @@ public class Inscription extends AppCompatActivity {
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());
 
+
+                    addTaches(user.getPseudo(), id);
                     startActivity(i);
                     setResult(0);
                     finish();
@@ -127,6 +131,31 @@ public class Inscription extends AppCompatActivity {
         });
 
 
+    }
+
+    private void addTaches(String pseudo, long id) {
+        TacheManager tm = new TacheManager(Inscription.this);
+        int n = 0;
+        /*
+          @param ID
+          @param idLsteTache
+          @param createur
+          @param description
+          @param dateHeureCreation
+          @param numero -1 alors on doit calculer le numero
+          @param priorite
+          @param dateHeureEcheance si = -1 alors pas d'echeance
+         */
+        n++;
+        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 1, -1));
+        n++;
+        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 2, -1));
+        n++;
+        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 3, -1));
+        n++;
+        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 4, -1));
+        n++;
+        tm.insert(new Tache(-1, (int) id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 5, -1));
     }
 
     private boolean mailKnown() {
