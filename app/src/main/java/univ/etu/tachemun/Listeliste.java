@@ -200,7 +200,7 @@ public class Listeliste extends AppCompatActivity
 
     private ArrayList<ListeTache> recupListeListe(){
         ListeTacheManager lm = new ListeTacheManager(Listeliste.this);
-        return lm.getListesOfUser(getIntent().getStringExtra("PSEUDO"));
+        return lm.getListesOfUser(getIntent().getStringExtra("ID_UTILISATEUR"));
     }
 
     private void deletElementListeListe(ListeTache liste) {

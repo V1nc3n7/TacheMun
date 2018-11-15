@@ -45,7 +45,7 @@ public class Connexion extends AppCompatActivity {
                 String userName = getInputPseudo();
                 if (!userName.isEmpty())
                     i.putExtra("ID_UTILISATEUR", userName);
-                startActivity(i);
+                startActivityForResult(i,0);
             }
         });
 
@@ -64,10 +64,11 @@ public class Connexion extends AppCompatActivity {
 
                 if (messagesErrors.isEmpty()) {
                     Intent i = new Intent(Connexion.this, Listeliste.class);
-                    i.putExtra("PSEUDO", getInputPseudo());
+                    i.putExtra("ID_UTILISATEUR", getInputPseudo());
                     startActivity(i);
                     finish();
                 } else {
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(Connexion.this);
                     String mess = "";
                     for (int i = 0; i < messagesErrors.size(); i++) {
@@ -107,5 +108,15 @@ public class Connexion extends AppCompatActivity {
     private boolean checkPseudoPassword(String pseudo, String password) {
         UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
         return utilisateurManager.connectUser(pseudo, password);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0) {
+            if (resultCode == 0) {
+                finish();
+            } else {
+                // on laisse la class B afficher
+            }
+        }
     }
 }

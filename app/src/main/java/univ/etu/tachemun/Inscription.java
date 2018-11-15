@@ -1,17 +1,22 @@
 package univ.etu.tachemun;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import javax.xml.transform.Result;
 
 import univ.etu.tachemun.db.managers.ListeTacheManager;
 import univ.etu.tachemun.db.managers.ProprietaireListeManager;
@@ -100,15 +105,32 @@ public class Inscription extends AppCompatActivity {
                     proprietaireListeManager.insert(proprietaireListe);
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());
-
+                    /*
                     Set<Utilisateur> su = utilisateurManager.getUtilisateurs();
                     for (Utilisateur userwesh : su) {
                         System.out.println(userwesh.toString());
-                    }
+                    }*/
                     startActivity(i);
+                    setResult(0);
                     finish();
                 } else {
-                    messageErrorOutput.setText(messagesErrors.toString());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Inscription.this);
+                    String mess = "";
+                    for (int i = 0; i < messagesErrors.size(); i++) {
+                        mess += "" + messagesErrors.get(i) + "\n";
+                    }
+                    builder.setMessage(mess);
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Suivant",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    messagesErrors.clear();
                 }
 
             }

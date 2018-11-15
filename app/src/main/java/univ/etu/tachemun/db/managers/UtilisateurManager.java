@@ -153,7 +153,7 @@ public class UtilisateurManager extends TableManager {
         this.open();
         Cursor c = db.rawQuery(
                 "SELECT " + ID_UTILISATEUR + ", " + PASSWORD + ", " + MAIL + " , " + DateHeure_INSCRIPTION + " FROM " + tableName + " WHERE " +
-                        ID_UTILISATEUR + "=" + id, null);
+                        ID_UTILISATEUR + "=\"" + id + "\"", null);
         this.close();
         if (c.getCount() != 0) {
             u.setPseudo(c.getString(c.getColumnIndex(ID_UTILISATEUR)));
@@ -164,7 +164,6 @@ public class UtilisateurManager extends TableManager {
             this.close();
             return u;
         } else {
-
             c.close();
             this.close();
             return null;

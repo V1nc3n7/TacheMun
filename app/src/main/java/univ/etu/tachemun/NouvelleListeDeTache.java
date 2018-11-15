@@ -101,7 +101,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     startActivity(intent);
                     setResult(0);
                     finish();
-
                 }
             }
         });
