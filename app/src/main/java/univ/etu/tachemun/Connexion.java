@@ -95,21 +95,17 @@ public class Connexion extends AppCompatActivity {
         return inputPseudo.getText().toString();
     }
 
-
     private String getInputPassword() {
         return inputPassword.getText().toString();
     }
-
 
     private boolean checkPseudoReconized(String pseudo) {
         UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
         return utilisateurManager.isPseudoInDb(pseudo);
     }
 
-
     private boolean checkPseudoPassword(String pseudo, String password) {
         UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
         return utilisateurManager.connectUser(pseudo, password);
     }
-
 }
