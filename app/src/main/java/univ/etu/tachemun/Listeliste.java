@@ -93,6 +93,7 @@ public class Listeliste extends AppCompatActivity
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent(Listeliste.this,AffListeTache.class);
                     intent.putExtra("ID_UTILISATEUR",getIntent().getStringExtra("ID_UTILISATEUR"));
+                    intent.putExtra("ID_LISTE", listeTaches.get(i).getID());
                     intent.putExtra("NOM_LISTETACHE",listeTaches.get(i).getNom());
                     intent.putExtra("COULEUR_LISTETACHE",listeTaches.get(i).getCouleur());
                     startActivity(intent);

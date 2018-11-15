@@ -33,8 +33,20 @@ public class DatePickerFragment extends DialogFragment
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
+    public static java.util.Date getDateFromDatePicker(DatePicker datePicker) {
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year = datePicker.getYear();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+
+        return calendar.getTime();
+    }
+
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
+
         d.setText(new StringBuilder().append("").append(day).append("/").append(month).append("/").append(year).toString());
     }
 

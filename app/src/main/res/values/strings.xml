@@ -132,4 +132,5 @@
     <string name="cree_une_nouvelle_tache">Creer une nouvelle tâche</string>
     <string name="tache_print">Afficher</string>
     <string name="title_activity_aff_liste_tache">AffListeTache</string>
+    <string name="liste_listetache_no_taches">Vous navet pas de tâches</string>
 </resources>

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import univ.etu.tachemun.db.tableclass.Tache;
 
@@ -98,7 +97,7 @@ public class TacheManager extends TableManager {
 
     }
 
-    public List<Tache> getTachesFromListe(int idListe) {
+    public ArrayList<Tache> getTachesFromListe(int idListe) {
         ArrayList<Tache> list = new ArrayList<>();
         this.open();
         Cursor c = db.rawQuery(
