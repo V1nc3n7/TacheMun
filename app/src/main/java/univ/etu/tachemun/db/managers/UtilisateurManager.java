@@ -163,17 +163,6 @@ public class UtilisateurManager extends TableManager {
             u = new Utilisateur(c.getString(c.getColumnIndex(ID_UTILISATEUR)),
                     c.getString(c.getColumnIndex(PASSWORD)), c.getString(c.getColumnIndex(MAIL)), c.getLong(c.getColumnIndex(DateHeure_INSCRIPTION)));
 
-           /*
-            u.setPseudo(c.getString(c.getColumnIndex(ID_UTILISATEUR)));
-            System.out.println("pseudo "+c.getString(c.getColumnIndex(ID_UTILISATEUR)));
-            u.setMotDePasse(c.getString(c.getColumnIndex(PASSWORD)));
-            System.out.println("pseudo "+c.getString(c.getColumnIndex(PASSWORD)));
-            u.setMail(c.getString(c.getColumnIndex(MAIL)));
-            System.out.println("pseudo "+c.getString(c.getColumnIndex(MAIL)));
-            u.setDateInscription(c.getLong(c.getColumnIndex(DateHeure_INSCRIPTION)));
-            System.out.println("pseudo "+c.getInt(c.getColumnIndex(DateHeure_INSCRIPTION)));
-            */
-
 
         }
         System.out.println("Out of cursor");

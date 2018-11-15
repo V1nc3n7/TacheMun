@@ -13,10 +13,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import univ.etu.tachemun.db.managers.UtilisateurManager;
-import univ.etu.tachemun.db.tableclass.Utilisateur;
 
 public class Connexion extends AppCompatActivity {
     private List<String> messagesErrors;
@@ -54,11 +52,6 @@ public class Connexion extends AppCompatActivity {
         connexionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
-                Set<Utilisateur> su = utilisateurManager.getUtilisateurs();
-                for (Utilisateur userwesh : su) {
-                    System.out.println(userwesh.toString());
-                }
 
                 messagesErrors = new ArrayList<>();
 

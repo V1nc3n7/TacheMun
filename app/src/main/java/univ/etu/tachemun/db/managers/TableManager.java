@@ -12,10 +12,11 @@ abstract class TableManager {
     SQLiteDatabase db;
 
     private AndroidTask base;
-
+    Context context;
     TableManager(Context context) {
 
         this.base = AndroidTask.getInstance(context);
+        this.context = context;
     }
 
     public static String getCreateTableScript() {
