@@ -14,16 +14,18 @@ public class ListeTache {
     private int ID;
     private String nom;
     private boolean isPerso;
+    private String proprietaire;
     private String description;
     private Date dateHeureCreation;
     private boolean hasEcheance;
     private Date dateHeureEcheance;
     private int couleur;
 
-    public ListeTache(int ID, String nom, boolean isPerso, String description, long dateHeureCreation, boolean hasEcheance, long dateHeureEcheance, int couleur) {
+    public ListeTache(int ID, String nom, boolean isPerso, String proprio, String description, long dateHeureCreation, boolean hasEcheance, long dateHeureEcheance, int couleur) {
         this.ID = ID;
         this.nom = nom;
         this.isPerso = isPerso;
+        this.proprietaire = proprio;
         this.description = description;
         this.dateHeureCreation = new Date(dateHeureCreation);
         this.hasEcheance = hasEcheance;
@@ -76,6 +78,18 @@ public class ListeTache {
         this.dateHeureCreation = dateHeureCreation;
     }
 
+    public String getProprietaire() {
+        return proprietaire;
+    }
+
+    public void setProprietaire(String proprietaire) {
+        this.proprietaire = proprietaire;
+    }
+
+    public boolean isHasEcheance() {
+        return hasEcheance;
+    }
+
     public boolean HasEcheance() {
         return hasEcheance;
     }
@@ -112,6 +126,7 @@ public class ListeTache {
         return "{" + ID +
                 "} " + nom +
                 ", " + isPerso +
+                ", " + proprietaire +
                 ", " + description +
                 ", " + dateHeureCreation +
                 ", " + hasEcheance +

@@ -20,6 +20,7 @@ public class ListeTacheManager extends TableManager {
     private static final String HAS_ECHEANCE = "has_echeance";
     private static final String ECHEANCE = "echeance";
     private static final String COULEUR = "couleur";
+    static final String ID_ProprioListe = "ID_ProprioListe";
 
 
     public static final String createTableScript = "CREATE TABLE " + tableName +
@@ -27,12 +28,14 @@ public class ListeTacheManager extends TableManager {
             ID_LISTETACHE + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + nom_ListeTache + " TEXT NOT NULL,"
             + IS_PRIVE + " INTEGER NOT NULL,"
+            + ID_ProprioListe + " TEXT NOT NULL ,"
             + DESCRIPTION + " TEXT,"
             + DateHeure_Creation + " INTEGER ,"
             + HAS_ECHEANCE + " INTEGER ,"
             + ECHEANCE + " INTEGER ,"
             + COULEUR + " INTEGER "
-
+            + ",FOREIGN KEY (" + ID_ProprioListe + ") REFERENCES " + UtilisateurManager.tableName + " (" + UtilisateurManager.ID_UTILISATEUR + ")" +
+            "  ON UPDATE CASCADE ON DELETE CASCADE"
             + ");";
 
     public ListeTacheManager(Context context) {
@@ -45,6 +48,7 @@ public class ListeTacheManager extends TableManager {
         c.put(ID_LISTETACHE, l.getID());
         c.put(nom_ListeTache, l.getNom());
         c.put(IS_PRIVE, (l.isPerso() ? 1 : 0));
+        c.put(ID_ProprioListe, l.getProprietaire());
         c.put(DESCRIPTION, l.getDescription());
         c.put(DateHeure_Creation, l.getDateHeureCreation().getTime());
         c.put(HAS_ECHEANCE, (l.HasEcheance() ? 1 : 0));
@@ -98,23 +102,23 @@ public class ListeTacheManager extends TableManager {
     public ArrayList<ListeTache> getListesOfUser(String username) {
 //TODO
         ArrayList<ListeTache> listes = new ArrayList<>();
-
+        System.out.println("getListesOfUser " + username);
         this.open();
-        String aliasID_LISTE_TACHE = "idlstch";
 
-        Cursor cursor = db.rawQuery("SELECT " + tableName + "." + ID_LISTETACHE + " AS " + aliasID_LISTE_TACHE + " ," + nom_ListeTache + " ,"
-                + IS_PRIVE + " ," + DESCRIPTION + " ," + DateHeure_Creation + " ," + HAS_ECHEANCE + " ," + ECHEANCE +
-                " ," + COULEUR + " FROM " + tableName + " INNER JOIN " + ProprietaireListeManager.tableName
-                + " ON " + aliasID_LISTE_TACHE + " = " + ProprietaireListeManager.tableName + "." + ProprietaireListeManager.ID_ListeTache + " WHERE "
-                + ProprietaireListeManager.tableName + "." + ProprietaireListeManager.PSEUDO + "=\"" + username + "\"", null);
+        Cursor cursor = db.rawQuery("SELECT " + ID_LISTETACHE + " ," + nom_ListeTache + " ,"
+                + IS_PRIVE + " ," + ID_ProprioListe + " ," + DESCRIPTION + " ," + DateHeure_Creation + " ," + HAS_ECHEANCE + " ," + ECHEANCE +
+                " ," + COULEUR + " FROM " + tableName + " WHERE "
+                + ID_ProprioListe + "=\"" + username + "\"", null);
 
 
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
 
-                ListeTache li = new ListeTache(cursor.getInt(cursor.getColumnIndex(aliasID_LISTE_TACHE)),
+                ListeTache li = new ListeTache(cursor.getInt(cursor.getColumnIndex(ID_LISTETACHE)),
                         cursor.getString(cursor.getColumnIndex(nom_ListeTache)),
-                        true, cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
+                        (cursor.getInt(cursor.getColumnIndex(IS_PRIVE)) == 1),
+                        cursor.getString(cursor.getColumnIndex(ID_ProprioListe)),
+                        cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
                         cursor.getLong(cursor.getColumnIndex(DateHeure_Creation)),
                         (cursor.getInt(cursor.getColumnIndex(HAS_ECHEANCE)) == 1)
                         , cursor.getLong(cursor.getColumnIndex(ECHEANCE))

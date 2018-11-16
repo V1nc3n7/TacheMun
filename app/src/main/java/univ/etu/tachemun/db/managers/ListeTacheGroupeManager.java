@@ -11,7 +11,6 @@ public class ListeTacheGroupeManager extends TableManager {
     private static final String tableName = "ListeTacheGroupe";
     private static final String ID_ListeTacheGroupe = "ID_ListeTacheGroupe";
     private static final String ID_GROUPE = "ID_Groupe";
-    private static final String ID_createur = "ID_createur";
     private static final String ID_ListeTache = "ID_ListeTache";
 
 
@@ -20,11 +19,8 @@ public class ListeTacheGroupeManager extends TableManager {
 
             " " + ID_ListeTacheGroupe + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + ID_GROUPE + " INTEGER NOT NULL, "
-            + ID_ListeTache + " INTEGER, "
-            + ID_createur + " TEXT NOT NULL"
+            + ID_ListeTache + " INTEGER NOT NULL "
             + ",FOREIGN KEY (" + ID_GROUPE + ") REFERENCES " + GroupeManager.tableName + " (" + GroupeManager.ID_GROUPE + ")" +
-            "  ON UPDATE CASCADE ON DELETE CASCADE"
-            + ",FOREIGN KEY (" + ID_createur + ") REFERENCES " + UtilisateurManager.tableName + " (" + UtilisateurManager.ID_UTILISATEUR + ")" +
             "  ON UPDATE CASCADE ON DELETE CASCADE"
             + ",FOREIGN KEY (" + ID_ListeTache + ") REFERENCES " + ListeTacheGroupeManager.tableName + " (" + ListeTacheGroupeManager.ID_ListeTache + ")" +
             "  ON UPDATE CASCADE ON DELETE CASCADE"
@@ -39,7 +35,6 @@ public class ListeTacheGroupeManager extends TableManager {
         v.put(ID_ListeTacheGroupe, l.getID());
         v.put(ID_GROUPE, l.getIdGroupe());
         v.put(ID_ListeTache, l.getIdListeTache());
-        v.put(ID_createur, l.getCreateurListe());
         return v;
     }
 

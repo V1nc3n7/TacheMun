@@ -10,13 +10,11 @@ public class ListeTacheGroupe {
     private int ID;
     private int idGroupe;
     private int idListeTache;
-    private String createurListe;
 
-    public ListeTacheGroupe(int ID, int idGroupe, int idListeTache, String createurListe) {
+    public ListeTacheGroupe(int ID, int idGroupe, int idListeTache) {
         this.ID = ID;
         this.idGroupe = idGroupe;
         this.idListeTache = idListeTache;
-        this.createurListe = createurListe;
     }
 
     public int getID() {
@@ -43,19 +41,12 @@ public class ListeTacheGroupe {
         this.idListeTache = idListeTache;
     }
 
-    public String getCreateurListe() {
-        return createurListe;
-    }
 
-    public void setCreateurListe(String createurListe) {
-        this.createurListe = createurListe;
-    }
 
     @Override
     public String toString() {
         return "{" + ID +
                 "} , " + idGroupe +
-                ", " + idListeTache +
-                ", " + createurListe;
+                ", " + idListeTache;
     }
 }

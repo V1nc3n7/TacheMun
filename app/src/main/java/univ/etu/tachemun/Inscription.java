@@ -16,11 +16,9 @@ import java.util.List;
 import java.util.Random;
 
 import univ.etu.tachemun.db.managers.ListeTacheManager;
-import univ.etu.tachemun.db.managers.ProprietaireListeManager;
 import univ.etu.tachemun.db.managers.TacheManager;
 import univ.etu.tachemun.db.managers.UtilisateurManager;
 import univ.etu.tachemun.db.tableclass.ListeTache;
-import univ.etu.tachemun.db.tableclass.ProprietaireListe;
 import univ.etu.tachemun.db.tableclass.Tache;
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 import univ.etu.tachemun.validators.MailValidator;
@@ -85,30 +83,27 @@ public class Inscription extends AppCompatActivity {
                 if (messagesErrors.isEmpty()) {
 
                     UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
-                    ProprietaireListeManager proprietaireListeManager = new ProprietaireListeManager(Inscription.this);
                     ListeTacheManager listeTacheManager = new ListeTacheManager(Inscription.this);
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput(), System.currentTimeMillis());
                     utilisateurManager.insertNew(user);
                     Random random = new Random();
-                    ListeTache listeTache = new ListeTache(-1, "Liste principale", true, "Liste principale contenant les tâches à réaliser", System.currentTimeMillis()
+                    System.out.println("Liste Tache");
+                    ListeTache listeTache = new ListeTache(-1, "Liste principale", true, user.getPseudo()
+                            , "Liste principale contenant les tâches à réaliser", System.currentTimeMillis()
                             , false, 0, random.nextInt(10));
 
+                    System.out.println("Liste Tache 2");
                     int idListe = (int) listeTacheManager.insertNew(listeTache);
-                    ProprietaireListe proprietaireListe = new ProprietaireListe(-1, user.getPseudo(), (int) idListe);
 
-                    proprietaireListeManager.insert(proprietaireListe);
-
+                    System.out.println(" Taches");
                     addTaches(user.getPseudo(), idListe);
-/*
+                    /*
                     Set<Utilisateur> su = utilisateurManager.getUtilisateurs();
                     for (Utilisateur userwesh : su) {
                         System.err.println(userwesh.toString());
-                    }*/
-
-
-
-
+                    }
+                    */
 
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());

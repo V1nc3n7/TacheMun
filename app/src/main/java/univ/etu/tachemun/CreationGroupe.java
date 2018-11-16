@@ -46,11 +46,11 @@ public class CreationGroupe extends AppCompatActivity {
                 Groupe g = new Groupe(-1, getNomGroupeText(), pseudo, getPriveSwitch(), getDescriptionText(), milis);
                 int idG = (int) manager.insert(g);
 
-                ListeTache listeTache = new ListeTache(-1, "Liste principale", false, "Liste contenant les tâches à réaliser par les membres du groupe", milis, false, -1, 0);
+                ListeTache listeTache = new ListeTache(-1, "Liste principale", false, pseudo, "Liste contenant les tâches à réaliser par les membres du groupe", milis, false, -1, 0);
                 ListeTacheManager ltm = new ListeTacheManager(CreationGroupe.this);
                 int idl = (int) ltm.insertNew(listeTache);
                 ListeTacheGroupeManager ltgm = new ListeTacheGroupeManager(CreationGroupe.this);
-                ListeTacheGroupe ltg = new ListeTacheGroupe(-1, idG, idl, pseudo);
+                ListeTacheGroupe ltg = new ListeTacheGroupe(-1, idG, idl);
                 ltgm.insert(ltg);
                 MembreManager mm = new MembreManager(CreationGroupe.this);
                 Membre m = new Membre(-1, pseudo, milis, idG);

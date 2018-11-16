@@ -21,7 +21,6 @@ import univ.etu.tachemun.db.managers.ListeTacheGroupeManager;
 import univ.etu.tachemun.db.managers.ListeTacheManager;
 import univ.etu.tachemun.db.managers.MembreManager;
 import univ.etu.tachemun.db.managers.PartageListeManager;
-import univ.etu.tachemun.db.managers.ProprietaireListeManager;
 import univ.etu.tachemun.db.managers.RealiseTacheManager;
 import univ.etu.tachemun.db.managers.TacheManager;
 import univ.etu.tachemun.db.managers.UtilisateurManager;
@@ -126,7 +125,6 @@ public class AndroidTask extends SQLiteOpenHelper {
         db.execSQL(RealiseTacheManager.createTableScript);
         db.execSQL(GroupeManager.createTableScript);
         db.execSQL(MembreManager.createTableScript);
-        db.execSQL(ProprietaireListeManager.createTableScript);
         db.execSQL(DroitsManager.createTableScript);
         db.execSQL(PartageListeManager.createTableScript);
         db.execSQL(AssigneTacheManager.createTableScript);

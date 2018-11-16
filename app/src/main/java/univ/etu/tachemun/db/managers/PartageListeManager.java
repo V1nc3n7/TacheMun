@@ -28,7 +28,7 @@ public class PartageListeManager extends TableManager {
             "  ON UPDATE CASCADE ON DELETE CASCADE"
             + ",FOREIGN KEY (" + ID_Invite + ") REFERENCES " + UtilisateurManager.tableName + " (" + UtilisateurManager.ID_UTILISATEUR + ")" +
             "  ON UPDATE CASCADE ON DELETE CASCADE"
-            + ",FOREIGN KEY (" + ID_Proprietaire + ") REFERENCES " + ProprietaireListeManager.tableName + " (" + ProprietaireListeManager.PSEUDO + ")" +
+            + ",FOREIGN KEY (" + ID_Proprietaire + ") REFERENCES " + ListeTacheManager.tableName + " (" + ListeTacheManager.ID_ProprioListe + ")" +
             "  ON UPDATE CASCADE ON DELETE CASCADE"
             + ");";
 

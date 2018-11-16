@@ -16,14 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.Date;
-import java.util.Random;
 
 import univ.etu.tachemun.TimeDate.DatePickerFragment;
 import univ.etu.tachemun.TimeDate.TimePickerFragment;
 import univ.etu.tachemun.db.managers.ListeTacheManager;
-import univ.etu.tachemun.db.managers.ProprietaireListeManager;
 import univ.etu.tachemun.db.tableclass.ListeTache;
-import univ.etu.tachemun.db.tableclass.ProprietaireListe;
 
 
 public class NouvelleListeDeTache extends AppCompatActivity {
@@ -38,7 +35,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
 
     private int choixCouleur;
     private ListeTacheManager listeTacheManager;
-    private ProprietaireListeManager proprietaireListeManager;
 
 
 
@@ -53,7 +49,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         descriptionListeTache = (EditText) findViewById(R.id.nouvListeTache_descr_input);
         createButton = (Button) findViewById(R.id.cree_nouvListe);
         listeTacheManager = new ListeTacheManager(NouvelleListeDeTache.this);
-        proprietaireListeManager = new ProprietaireListeManager(NouvelleListeDeTache.this);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,14 +81,11 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(NouvelleListeDeTache.this, Listeliste.class);
                     String userName = getIntent().getStringExtra("ID_UTILISATEUR");
-                    Random random = new Random();
-
                     ListeTache listeTache = new ListeTache(-1, getTitreListe(), true,
+                            userName,
                             getDescriptionListe(), System.currentTimeMillis()
                             , false, 0, choixCouleur);
                     long id = listeTacheManager.insertNew(listeTache);
-                    ProprietaireListe proprietaireListe = new ProprietaireListe(-1, userName, (int) id);
-                    proprietaireListeManager.insert(proprietaireListe);
 
 
                     intent.putExtra("ID_UTILISATEUR", userName);

@@ -165,7 +165,6 @@ public class UtilisateurManager extends TableManager {
 
 
         }
-        System.out.println("Out of cursor");
         this.close();
         c.close();
         return u;
