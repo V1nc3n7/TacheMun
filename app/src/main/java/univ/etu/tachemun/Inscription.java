@@ -13,13 +13,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import univ.etu.tachemun.db.managers.ListeTacheManager;
-import univ.etu.tachemun.db.managers.TacheManager;
 import univ.etu.tachemun.db.managers.UtilisateurManager;
-import univ.etu.tachemun.db.tableclass.ListeTache;
-import univ.etu.tachemun.db.tableclass.Tache;
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 import univ.etu.tachemun.validators.MailValidator;
 import univ.etu.tachemun.validators.PasswordValidator;
@@ -83,21 +78,11 @@ public class Inscription extends AppCompatActivity {
                 if (messagesErrors.isEmpty()) {
 
                     UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
-                    ListeTacheManager listeTacheManager = new ListeTacheManager(Inscription.this);
+
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput(), System.currentTimeMillis());
                     utilisateurManager.insertNew(user);
-                    Random random = new Random();
-                    System.out.println("Liste Tache");
-                    ListeTache listeTache = new ListeTache(-1, "Liste principale", true, user.getPseudo()
-                            , "Liste principale contenant les tâches à réaliser", System.currentTimeMillis()
-                            , false, 0, random.nextInt(10));
 
-                    System.out.println("Liste Tache 2");
-                    int idListe = (int) listeTacheManager.insertNew(listeTache);
-
-                    System.out.println(" Taches");
-                    addTaches(user.getPseudo(), idListe);
                     /*
                     Set<Utilisateur> su = utilisateurManager.getUtilisateurs();
                     for (Utilisateur userwesh : su) {
@@ -140,19 +125,7 @@ public class Inscription extends AppCompatActivity {
     }
 
     private void addTaches(String pseudo, int id) {
-        TacheManager tm = new TacheManager(Inscription.this);
-        int n = 0;
 
-        n++;
-        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 1, -1));
-        n++;
-        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 2, -1));
-        n++;
-        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 3, -1));
-        n++;
-        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 4, -1));
-        n++;
-        tm.insert(new Tache(-1, id, pseudo, "Tache " + n, "Tache auto", System.currentTimeMillis(), n, 5, -1));
     }
 
     private boolean mailKnown() {

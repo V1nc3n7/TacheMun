@@ -8,8 +8,11 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
+import univ.etu.tachemun.db.tableclass.ListeTache;
+import univ.etu.tachemun.db.tableclass.Tache;
 import univ.etu.tachemun.db.tableclass.Utilisateur;
 
 public class UtilisateurManager extends TableManager {
@@ -80,7 +83,26 @@ public class UtilisateurManager extends TableManager {
         this.open();
         long r = db.insert(tableName, null, v);
         this.close();
+
+        ListeTacheManager listeTacheManager = new ListeTacheManager(context);
+
         System.out.println("u2= " + getFromId(u.getPseudo()).toString());
+
+
+        Random random = new Random();
+        ListeTache listeTache = new ListeTache(-1, "Liste principale", true, u.getPseudo()
+                , "Liste principale contenant les tâches à réaliser", System.currentTimeMillis()
+                , false, 0, random.nextInt(10));
+
+        int idListe = (int) listeTacheManager.insertNew(listeTache);
+        TacheManager tm = new TacheManager(context);
+        int n = 0;
+        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
+        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
+        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
+        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
+        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
+
         return r;
     }
 
