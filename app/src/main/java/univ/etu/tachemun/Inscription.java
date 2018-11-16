@@ -83,12 +83,6 @@ public class Inscription extends AppCompatActivity {
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput(), System.currentTimeMillis());
                     utilisateurManager.insertNew(user);
 
-                    /*
-                    Set<Utilisateur> su = utilisateurManager.getUtilisateurs();
-                    for (Utilisateur userwesh : su) {
-                        System.err.println(userwesh.toString());
-                    }
-                    */
 
                     Intent i = new Intent(Inscription.this, Listeliste.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());

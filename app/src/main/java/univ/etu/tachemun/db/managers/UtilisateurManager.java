@@ -79,14 +79,12 @@ public class UtilisateurManager extends TableManager {
         ContentValues v = putInContent(u);
         v.remove(PASSWORD);
         v.put(PASSWORD, getSHA256(u.getMotDePasse()));
-        System.out.println("u= " + u.toString());
         this.open();
         long r = db.insert(tableName, null, v);
         this.close();
 
         ListeTacheManager listeTacheManager = new ListeTacheManager(context);
 
-        System.out.println("u2= " + getFromId(u.getPseudo()).toString());
 
 
         Random random = new Random();

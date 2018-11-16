@@ -100,9 +100,7 @@ public class ListeTacheManager extends TableManager {
     }
 
     public ArrayList<ListeTache> getListesOfUser(String username) {
-//TODO
         ArrayList<ListeTache> listes = new ArrayList<>();
-        System.out.println("getListesOfUser " + username);
         this.open();
 
         Cursor cursor = db.rawQuery("SELECT " + ID_LISTETACHE + " ," + nom_ListeTache + " ,"
@@ -123,7 +121,6 @@ public class ListeTacheManager extends TableManager {
                         (cursor.getInt(cursor.getColumnIndex(HAS_ECHEANCE)) == 1)
                         , cursor.getLong(cursor.getColumnIndex(ECHEANCE))
                         , cursor.getInt(cursor.getColumnIndex(COULEUR)));
-                //System.out.println("LT " + li.toString() + " : " + li.getDateHeureCreation().getTime());
                 listes.add(li);
 
             }

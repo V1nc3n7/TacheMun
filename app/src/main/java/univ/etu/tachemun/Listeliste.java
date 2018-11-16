@@ -73,7 +73,6 @@ public class Listeliste extends AppCompatActivity
         final ArrayList<ListeTache> listeTaches = recupListeListe();
 
 
-        //System.out.println(listeTaches.toString());
         if (listeTaches == null || listeTaches.size() == 0) {
             textView = new TextView(this);
             textView.setText(R.string.liste_listestache_no_lists);
