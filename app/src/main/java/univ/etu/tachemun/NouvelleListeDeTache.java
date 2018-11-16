@@ -81,11 +81,11 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(NouvelleListeDeTache.this, Listeliste.class);
                     String userName = getIntent().getStringExtra("ID_UTILISATEUR");
-                    ListeTache listeTache = new ListeTache(-1, getTitreListe(), true,
+
+                    listeTacheManager.insertNew(new ListeTache(-1, getTitreListe(), true,
                             userName,
                             getDescriptionListe(), System.currentTimeMillis()
-                            , false, 0, choixCouleur);
-                    long id = listeTacheManager.insertNew(listeTache);
+                            , false, 0, choixCouleur));
 
 
                     intent.putExtra("ID_UTILISATEUR", userName);

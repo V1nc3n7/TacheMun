@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 
 import univ.etu.tachemun.db.tableclass.Groupe;
+import univ.etu.tachemun.db.tableclass.ListeTache;
+import univ.etu.tachemun.db.tableclass.ListeTacheGroupe;
+import univ.etu.tachemun.db.tableclass.Membre;
 
 public class GroupeManager extends TableManager {
 
@@ -54,6 +57,17 @@ public class GroupeManager extends TableManager {
         this.open();
         long l = db.insert(tableName, null, v);
         this.close();
+
+
+        ListeTacheManager ltm = new ListeTacheManager(context);
+        ListeTacheGroupeManager ltgm = new ListeTacheGroupeManager(context);
+        MembreManager mm = new MembreManager(context);
+        int idl = (int) ltm.insertNew(new ListeTache(-1, "Liste principale", false, groupe.getCreateur(), "Liste contenant les tâches à réaliser par les membres du groupe", groupe.getDateHeureCreation().getTime(), false, -1, 0));
+        ltgm.insert(new ListeTacheGroupe(-1, (int) l, idl));
+        mm.insert(new Membre(-1, groupe.getCreateur(), groupe.getDateHeureCreation().getTime(), (int) l));
+
+
+
         return l;
 
     }

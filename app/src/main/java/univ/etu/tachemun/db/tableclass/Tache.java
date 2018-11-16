@@ -17,7 +17,7 @@ public class Tache {
 
     /**
      * @param ID
-     * @param idLsteTache
+     * @param idListeTache
      * @param createur
      * @param description
      * @param dateHeureCreation
@@ -25,9 +25,9 @@ public class Tache {
      * @param priorite
      * @param dateHeureEcheance si = -1 alors pas d'echeance
      */
-    public Tache(int ID, int idLsteTache, String createur, String libelle, String description, long dateHeureCreation, int numero, int priorite, long dateHeureEcheance) {
+    public Tache(int ID, int idListeTache, String createur, String libelle, String description, long dateHeureCreation, int numero, int priorite, long dateHeureEcheance) {
         this.ID = ID;
-        this.idLsteTache = idLsteTache;
+        this.idLsteTache = idListeTache;
         this.createur = createur;
         this.libelle = libelle;
         this.description = description;

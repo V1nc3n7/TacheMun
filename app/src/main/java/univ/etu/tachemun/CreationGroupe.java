@@ -8,13 +8,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import univ.etu.tachemun.db.managers.GroupeManager;
-import univ.etu.tachemun.db.managers.ListeTacheGroupeManager;
-import univ.etu.tachemun.db.managers.ListeTacheManager;
-import univ.etu.tachemun.db.managers.MembreManager;
 import univ.etu.tachemun.db.tableclass.Groupe;
-import univ.etu.tachemun.db.tableclass.ListeTache;
-import univ.etu.tachemun.db.tableclass.ListeTacheGroupe;
-import univ.etu.tachemun.db.tableclass.Membre;
 
 public class CreationGroupe extends AppCompatActivity {
 
@@ -46,15 +40,6 @@ public class CreationGroupe extends AppCompatActivity {
                 Groupe g = new Groupe(-1, getNomGroupeText(), pseudo, getPriveSwitch(), getDescriptionText(), milis);
                 int idG = (int) manager.insert(g);
 
-                ListeTache listeTache = new ListeTache(-1, "Liste principale", false, pseudo, "Liste contenant les tâches à réaliser par les membres du groupe", milis, false, -1, 0);
-                ListeTacheManager ltm = new ListeTacheManager(CreationGroupe.this);
-                int idl = (int) ltm.insertNew(listeTache);
-                ListeTacheGroupeManager ltgm = new ListeTacheGroupeManager(CreationGroupe.this);
-                ListeTacheGroupe ltg = new ListeTacheGroupe(-1, idG, idl);
-                ltgm.insert(ltg);
-                MembreManager mm = new MembreManager(CreationGroupe.this);
-                Membre m = new Membre(-1, pseudo, milis, idG);
-                mm.insert(m);
 
 
 
