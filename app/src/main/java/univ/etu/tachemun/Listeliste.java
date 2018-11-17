@@ -36,6 +36,7 @@ public class Listeliste extends AppCompatActivity
     private TextView textView;
     private LinearLayout linearLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -271,4 +272,27 @@ public class Listeliste extends AppCompatActivity
             }
         }
     }
+
+    public boolean OnCreateOptionMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_test_scrolling, menu);
+        return true;
+    }
+
+    public boolean OnOptionItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_deco) {
+            Intent intent = new Intent(this, Connexion.class);
+            startActivity(intent);
+            finish();
+        }
+        if (id == R.id.action_settings) {
+
+        }
+
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

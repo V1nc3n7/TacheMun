@@ -1,11 +1,14 @@
 package univ.etu.tachemun;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -42,7 +45,23 @@ public class CreationTache extends AppCompatActivity {
         creaTache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                if (verif(nomTache)) {
+
+                    finish();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CreationTache.this);
+                    builder.setMessage("Le nom de votre tache est incorrect.");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Suivant",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
         });
 
@@ -79,5 +98,9 @@ public class CreationTache extends AppCompatActivity {
     private Date getdateHeureEcheanceFromPickers() {
 
         return null;
+    }
+
+    private boolean verif(EditText editText) {
+        return !(editText.getText().length() == 0);
     }
 }

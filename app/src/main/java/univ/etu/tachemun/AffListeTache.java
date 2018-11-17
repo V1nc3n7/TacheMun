@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import univ.etu.tachemun.db.tableclass.Tache;
 
 public class AffListeTache extends AppCompatActivity {
 
-    private ArrayList<Tache> listeTaches;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +42,11 @@ public class AffListeTache extends AppCompatActivity {
             }
         });
 
-        listeTaches = getTacheOfListe();
+        ArrayList<Tache> Taches = getTacheOfListe();
         TextView textView;
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
 
-        if (listeTaches == null || listeTaches.size() == 0) {
+        if (Taches == null || Taches.size() == 0) {
             textView = new TextView(this);
             textView.setText(R.string.liste_listetache_no_taches);
 //            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
@@ -54,7 +55,8 @@ public class AffListeTache extends AppCompatActivity {
             linearLayout.addView(textView);
         }
         else{
-//TODO
+            listView = new ListView(this);
+
         }
     }
 

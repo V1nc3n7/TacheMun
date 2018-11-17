@@ -37,13 +37,15 @@
         android:id="@+id/nouvTache_dateHeure_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
         android:text="@string/nouvTache_dateHeure_txt_view"
         android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
 
         <Button
             android:id="@+id/setdateTache"
