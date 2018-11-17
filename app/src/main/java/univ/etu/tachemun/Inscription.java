@@ -84,7 +84,7 @@ public class Inscription extends AppCompatActivity {
                     utilisateurManager.insertNew(user);
 
 
-                    Intent i = new Intent(Inscription.this, Listeliste.class);
+                    Intent i = new Intent(Inscription.this, ListeListeTaches.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());
 
 
@@ -118,9 +118,6 @@ public class Inscription extends AppCompatActivity {
 
     }
 
-    private void addTaches(String pseudo, int id) {
-
-    }
 
     private boolean mailKnown() {
         UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);

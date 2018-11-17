@@ -51,6 +51,9 @@ COMMIT;
             "  ON UPDATE CASCADE ON DELETE CASCADE"
             + ");";
 
+    public RealiseTacheManager(Context context) {
+        super(context);
+    }
     private ContentValues putInContent(RealiseTache r) {
         ContentValues c = new ContentValues();
         c.put(ID_RealiseTache, r.getID());
@@ -61,14 +64,12 @@ COMMIT;
 
         return c;
     }
-    public RealiseTacheManager(Context context) {
-        super(context);
-    }
+
 
     public long insert(RealiseTache r) {
-
         ContentValues v = putInContent(r);
         v.remove(ID_RealiseTache);
+
         this.open();
         long m = db.insert(tableName, null, v);
         this.close();
@@ -76,7 +77,6 @@ COMMIT;
     }
 
     public long update(RealiseTache r) {
-
         ContentValues values = putInContent(r);
         String where = ID_Tache + " = ?";
         String[] whereArgs = {r.getID() + ""};

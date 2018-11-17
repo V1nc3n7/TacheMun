@@ -16,7 +16,7 @@ public class RealiseTache {
     private Date dateHeurRealisation;
     private String details;
 
-    public RealiseTache(int ID, String realiseurTache, int idTache, long dateHeurRealisation, String details) {
+    RealiseTache(int ID, String realiseurTache, int idTache, long dateHeurRealisation, String details) {
         this.ID = ID;
         this.realiseurTache = realiseurTache;
         this.idTache = idTache;
@@ -24,6 +24,13 @@ public class RealiseTache {
         this.details = details;
     }
 
+    public RealiseTache(String realiseurTache, int idTache, String details) {
+        this.ID = -1;
+        this.realiseurTache = realiseurTache;
+        this.idTache = idTache;
+        this.dateHeurRealisation = new Date(System.currentTimeMillis());
+        this.details = details;
+    }
     public int getID() {
         return ID;
     }

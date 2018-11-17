@@ -17,13 +17,19 @@ public class Contacts {
 
     private Date dateHeureContact;
 
-    public Contacts(int ID, String pseudoProprietaire, String peudoContact, long dateHeureContact) {
+    Contacts(int ID, String pseudoProprietaire, String peudoContact, long dateHeureContact) {
         this.ID = ID;
         this.pseudoProprietaire = pseudoProprietaire;
         this.peudoContact = peudoContact;
         this.dateHeureContact = new Date(dateHeureContact);
     }
 
+    public Contacts(String pseudoProprietaire, String peudoContact) {
+        this.ID = -1;
+        this.pseudoProprietaire = pseudoProprietaire;
+        this.peudoContact = peudoContact;
+        this.dateHeureContact = new Date(System.currentTimeMillis());
+    }
     public int getID() {
         return ID;
     }

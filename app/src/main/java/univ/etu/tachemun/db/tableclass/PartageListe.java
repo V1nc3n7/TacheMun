@@ -18,7 +18,7 @@ public class PartageListe {
     private Date dateHeurePartage;
     private String message;
 
-    public PartageListe(int ID, String proprietaireListe, int idListe, String utilisateurInvite, long dateHeurePartage, String message) {
+    PartageListe(int ID, String proprietaireListe, int idListe, String utilisateurInvite, long dateHeurePartage, String message) {
         this.ID = ID;
         this.proprietaireListe = proprietaireListe;
         this.idListe = idListe;
@@ -27,6 +27,14 @@ public class PartageListe {
         this.message = message;
     }
 
+    public PartageListe(String proprietaireListe, int idListe, String utilisateurInvite, String message) {
+        this.ID = -1;
+        this.proprietaireListe = proprietaireListe;
+        this.idListe = idListe;
+        this.utilisateurInvite = utilisateurInvite;
+        this.dateHeurePartage = new Date(System.currentTimeMillis());
+        this.message = message;
+    }
     public int getID() {
         return ID;
     }

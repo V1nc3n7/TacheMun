@@ -29,6 +29,16 @@ public class Groupe {
         this.dateHeureCreation = new Date(dateHeureCreation);
     }
 
+    public Groupe(String nom, String createur, boolean isPrivate, String description) {
+        this.ID = -1;
+        this.nom = nom;
+        this.createur = createur;
+        this.isPrivate = isPrivate;
+        this.description = description;
+        this.dateHeureCreation = new Date(System.currentTimeMillis());
+    }
+
+
     public int getID() {
         return ID;
     }

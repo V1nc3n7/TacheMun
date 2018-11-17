@@ -78,12 +78,12 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     dialog.show();
 
                 } else {
-                    Intent intent = new Intent(NouvelleListeDeTache.this, Listeliste.class);
+                    Intent intent = new Intent(NouvelleListeDeTache.this, ListeListeTaches.class);
                     String userName = getIntent().getStringExtra("ID_UTILISATEUR");
 
-                    listeTacheManager.insertNew(new ListeTache(-1, getTitreListe(), true,
+                    listeTacheManager.insertNew(new ListeTache(getTitreListe(), true,
                             userName,
-                            getDescriptionListe(), System.currentTimeMillis()
+                            getDescriptionListe()
                             , false, 0, choixCouleur));
 
 

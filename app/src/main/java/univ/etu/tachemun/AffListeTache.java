@@ -44,11 +44,11 @@ public class AffListeTache extends AppCompatActivity {
             }
         });
 
-        ArrayList<Tache> Taches = getTacheOfListe();
+        ArrayList<Tache> taches = getTacheOfListe();
         TextView textView;
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
 
-        if (Taches == null || Taches.size() == 0) {
+        if (taches == null || taches.size() == 0) {
             textView = new TextView(this);
             textView.setText(R.string.liste_listetache_no_taches);
 //            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();

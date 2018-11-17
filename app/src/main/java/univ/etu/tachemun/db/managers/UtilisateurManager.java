@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import univ.etu.tachemun.db.tableclass.ActionUser;
 import univ.etu.tachemun.db.tableclass.ListeTache;
 import univ.etu.tachemun.db.tableclass.Tache;
 import univ.etu.tachemun.db.tableclass.Utilisateur;
@@ -82,7 +83,8 @@ public class UtilisateurManager extends TableManager {
         this.open();
         long r = db.insert(tableName, null, v);
         this.close();
-
+        ActionUserManager actionUserManager = new ActionUserManager(context);
+        actionUserManager.insertNew(new ActionUser(u.getPseudo(), "INSCRIPTION"));
         ListeTacheManager listeTacheManager = new ListeTacheManager(context);
 
 

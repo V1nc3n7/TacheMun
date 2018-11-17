@@ -48,12 +48,16 @@ public class CreationTache extends AppCompatActivity {
         creaTache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (verif(nomTache)) {
-                    Tache tache = new Tache(-1, getIntent().getIntExtra("ID_LISTE", -1)
+                if (verifTitreTache()) {
+                    Tache tache = new Tache(getIntent().getIntExtra("ID_LISTE", -1)
                             , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
-                            , getDescriptionTache(), System.currentTimeMillis(), 0, 0,
+                            , getDescriptionTache(), 0,
                             -1);
 
+                    /* Tache tache = new Tache(-1, getIntent().getIntExtra("ID_LISTE", -1)
+                            , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
+                            , getDescriptionTache(), System.currentTimeMillis(), 0, 0,
+                            -1);*/
                     Log.i(getClass().toString(), tache.toString());
 
                     TacheManager tacheManager = new TacheManager(CreationTache.this);
@@ -112,7 +116,7 @@ public class CreationTache extends AppCompatActivity {
         return null;
     }
 
-    private boolean verif(EditText editText) {
+    private boolean verifTitreTache() {
         return !(getTitreTache().length() == 0);
     }
 }

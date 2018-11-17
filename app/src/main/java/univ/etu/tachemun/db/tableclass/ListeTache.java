@@ -38,6 +38,23 @@ public class ListeTache {
         this.couleur = couleur;
     }
 
+    public ListeTache(String nom, boolean isPerso, String proprio, String description, boolean hasEcheance, long dateHeureEcheance, int couleur) {
+        this.ID = -1;
+        this.nom = nom;
+        this.isPerso = isPerso;
+        this.proprietaire = proprio;
+        this.description = description;
+        this.dateHeureCreation = new Date(System.currentTimeMillis());
+        this.hasEcheance = hasEcheance;
+
+        if (this.hasEcheance) {
+            this.dateHeureEcheance = new Date(dateHeureEcheance);
+        } else {
+            this.dateHeureEcheance = null;
+        }
+        this.couleur = couleur;
+    }
+
     public int getID() {
         return ID;
     }

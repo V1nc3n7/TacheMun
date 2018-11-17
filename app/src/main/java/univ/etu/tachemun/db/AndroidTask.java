@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import univ.etu.tachemun.db.managers.ActionUserManager;
 import univ.etu.tachemun.db.managers.AssigneTacheManager;
 import univ.etu.tachemun.db.managers.ContactsManager;
 import univ.etu.tachemun.db.managers.DroitsManager;
@@ -129,6 +130,7 @@ public class AndroidTask extends SQLiteOpenHelper {
         db.execSQL(PartageListeManager.createTableScript);
         db.execSQL(AssigneTacheManager.createTableScript);
         db.execSQL(ListeTacheGroupeManager.createTableScript);
+        db.execSQL(ActionUserManager.createTableScript);
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {

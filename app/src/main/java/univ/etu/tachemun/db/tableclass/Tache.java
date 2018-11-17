@@ -44,6 +44,23 @@ public class Tache {
 
     }
 
+
+    public Tache(int idListeTache, String createur, String libelle, String description, int priorite, long dateHeureEcheance) {
+        this.idLsteTache = idListeTache;
+        this.createur = createur;
+        this.libelle = libelle;
+        this.description = description;
+        this.dateHeureCreation = new Date(System.currentTimeMillis());
+        this.priorite = priorite;
+        if (dateHeureEcheance == -1) {
+            this.dateHeureEcheance = null;
+            this.echeance = false;
+        } else {
+            this.dateHeureEcheance = new Date(dateHeureEcheance);
+            this.echeance = true;
+        }
+
+    }
     public Tache() {
 
     }

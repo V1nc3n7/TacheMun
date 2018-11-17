@@ -14,7 +14,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import univ.etu.tachemun.db.managers.ActionUserManager;
 import univ.etu.tachemun.db.managers.UtilisateurManager;
+import univ.etu.tachemun.db.tableclass.ActionUser;
 
 public class Connexion extends AppCompatActivity {
     private List<String> messagesErrors;
@@ -40,8 +42,6 @@ public class Connexion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Connexion.this, Inscription.class);
-
-                //ce qui a été mis dans les champs doit etre transmis à l'activity Inscription
                 String userName = getInputPseudo();
                 if (!userName.isEmpty())
                     i.putExtra("ID_UTILISATEUR", userName);
@@ -64,20 +64,20 @@ public class Connexion extends AppCompatActivity {
                 }
 
                 if (messagesErrors.isEmpty()) {
-                    Intent i = new Intent(Connexion.this, Listeliste.class);
+                    Intent i = new Intent(Connexion.this, ListeListeTaches.class);
                     i.putExtra("ID_UTILISATEUR", getInputPseudo());
-
-
+                    ActionUserManager actionUserManager = new ActionUserManager(Connexion.this);
+                    actionUserManager.insertNew(new ActionUser(getInputPseudo(), "CONNEXION"));
                     startActivity(i);
                     finish();
                 } else {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(Connexion.this);
-                    String mess = "";
+                    StringBuilder mess = new StringBuilder();
                     for (int i = 0; i < messagesErrors.size(); i++) {
-                        mess += "" + messagesErrors.get(i) + "\n";
+                        mess.append("").append(messagesErrors.get(i)).append("\n");
                     }
-                    builder.setMessage(mess);
+                    builder.setMessage(mess.toString());
                     builder.setCancelable(true);
                     builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
                         @Override

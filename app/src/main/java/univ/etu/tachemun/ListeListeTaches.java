@@ -26,10 +26,12 @@ import java.util.List;
 
 import univ.etu.tachemun.FluxListeListe.Flux;
 import univ.etu.tachemun.FluxListeListe.FluxAdapter;
+import univ.etu.tachemun.db.managers.ActionUserManager;
 import univ.etu.tachemun.db.managers.ListeTacheManager;
+import univ.etu.tachemun.db.tableclass.ActionUser;
 import univ.etu.tachemun.db.tableclass.ListeTache;
 
-public class Listeliste extends AppCompatActivity
+public class ListeListeTaches extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ListView listView;
@@ -51,7 +53,7 @@ public class Listeliste extends AppCompatActivity
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
 
-                Intent intent = new Intent(Listeliste.this, NouvelleListeDeTache.class);
+                Intent intent = new Intent(ListeListeTaches.this, NouvelleListeDeTache.class);
                 intent.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
 
                 //startActivity(intent);
@@ -91,7 +93,7 @@ public class Listeliste extends AppCompatActivity
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(Listeliste.this,AffListeTache.class);
+                    Intent intent = new Intent(ListeListeTaches.this, AffListeTache.class);
                     intent.putExtra("ID_UTILISATEUR",getIntent().getStringExtra("ID_UTILISATEUR"));
                     intent.putExtra("ID_LISTE", listeTaches.get(i).getID());
                     intent.putExtra("NOM_LISTETACHE",listeTaches.get(i).getNom());
@@ -102,7 +104,7 @@ public class Listeliste extends AppCompatActivity
             listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Listeliste.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
                     builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
                     builder.setCancelable(true);
                     builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
@@ -114,19 +116,19 @@ public class Listeliste extends AppCompatActivity
 
                             final ArrayList<ListeTache> listeTaches2 = recupListeListe();
                             final List<Flux> listflux2 = geneListe(listeTaches2);
-                            final FluxAdapter adapter2 = new FluxAdapter(Listeliste.this, listflux2);
+                            final FluxAdapter adapter2 = new FluxAdapter(ListeListeTaches.this, listflux2);
                             listView.setAdapter(adapter2);
                             //finish();
 
                             if (listeTaches2.size() == 0) {
-                                textView = new TextView(Listeliste.this);
+                                textView = new TextView(ListeListeTaches.this);
                                 textView.setText(R.string.liste_listestache_no_lists);
                                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                                 linearLayout.addView(textView);
                             }
 
                             /*
-                            Intent intent = new Intent(Listeliste.this,Listeliste.class);
+                            Intent intent = new Intent(ListeListeTaches.this,ListeListeTaches.class);
                             intent.putExtra("PSEUDO", getIntent().getStringExtra("PSEUDO"));
                             startActivity(intent);
                             finish();*/
@@ -210,12 +212,12 @@ public class Listeliste extends AppCompatActivity
     }
 
     private ArrayList<ListeTache> recupListeListe(){
-        ListeTacheManager lm = new ListeTacheManager(Listeliste.this);
+        ListeTacheManager lm = new ListeTacheManager(ListeListeTaches.this);
         return lm.getListesOfUser(getIntent().getStringExtra("ID_UTILISATEUR"));
     }
 
     private void deletElementListeListe(ListeTache liste) {
-        ListeTacheManager lm = new ListeTacheManager(Listeliste.this);
+        ListeTacheManager lm = new ListeTacheManager(ListeListeTaches.this);
         lm.delete(liste);
     }
 
@@ -282,7 +284,9 @@ public class Listeliste extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.action_deco) {
-            Intent intent = new Intent(this, Connexion.class);
+            Intent intent = new Intent(ListeListeTaches.this, Connexion.class);
+            ActionUserManager a = new ActionUserManager(ListeListeTaches.this);
+            a.insertNew(new ActionUser(getIntent().getStringExtra("ID_UTILISATEUR"), "DECONEXION"));
             startActivity(intent);
             finish();
         }

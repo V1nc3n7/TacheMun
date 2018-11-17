@@ -32,12 +32,9 @@ public class CreationGroupe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 GroupeManager manager = new GroupeManager(CreationGroupe.this);
-                //il faut pseudoUtilisateur
                 String pseudo = getIntent().getStringExtra("ID_UTILISATEUR");
 
-                long milis = System.currentTimeMillis();
-
-                Groupe g = new Groupe(-1, getNomGroupeText(), pseudo, getPriveSwitch(), getDescriptionText(), milis);
+                Groupe g = new Groupe(getNomGroupeText(), pseudo, getPriveSwitch(), getDescriptionText());
                 int idG = (int) manager.insert(g);
 
 

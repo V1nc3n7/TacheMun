@@ -11,12 +11,17 @@ public class ListeTacheGroupe {
     private int idGroupe;
     private int idListeTache;
 
-    public ListeTacheGroupe(int ID, int idGroupe, int idListeTache) {
+    ListeTacheGroupe(int ID, int idGroupe, int idListeTache) {
         this.ID = ID;
         this.idGroupe = idGroupe;
         this.idListeTache = idListeTache;
     }
 
+    public ListeTacheGroupe(int idGroupe, int idListeTache) {
+        this.ID = -1;
+        this.idGroupe = idGroupe;
+        this.idListeTache = idListeTache;
+    }
     public int getID() {
         return ID;
     }

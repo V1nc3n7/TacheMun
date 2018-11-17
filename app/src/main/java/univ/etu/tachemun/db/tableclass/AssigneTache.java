@@ -21,13 +21,22 @@ public class AssigneTache {
     private Date dateHeureAssignation;
 
 
-    public AssigneTache(int ID, int idTache, String assigneur, String esclave, String message, long dateHeureAssignation) {
+    AssigneTache(int ID, int idTache, String assigneur, String esclave, String message, long dateHeureAssignation) {
         this.ID = ID;
         this.idTache = idTache;
         this.assigneur = assigneur;
         this.esclave = esclave;
         this.message = message;
         this.dateHeureAssignation = new Date(dateHeureAssignation);
+    }
+
+    public AssigneTache(int idTache, String assigneur, String esclave, String message) {
+        this.ID = -1;
+        this.idTache = idTache;
+        this.assigneur = assigneur;
+        this.esclave = esclave;
+        this.message = message;
+        this.dateHeureAssignation = new Date(System.currentTimeMillis());
     }
 
     public int getID() {

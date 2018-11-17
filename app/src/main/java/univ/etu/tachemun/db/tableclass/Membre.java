@@ -21,6 +21,13 @@ public class Membre {
         this.idGroupe = idGroupe;
     }
 
+    public Membre(String pseudoUtilisteur, int idGroupe) {
+        this.ID = -1;
+        this.pseudoUtilisteur = pseudoUtilisteur;
+        this.dateHeureAdhesion = new Date(System.currentTimeMillis());
+        this.idGroupe = idGroupe;
+    }
+
     public int getID() {
         return ID;
     }
