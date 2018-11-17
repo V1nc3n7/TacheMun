@@ -52,7 +52,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ajouter l'ajout à la base de donnee
                 if (!checkTitre(getTitreListe())) {
                     /*Snackbar.make(v, "Le nom de votre tache est invalide", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();*/

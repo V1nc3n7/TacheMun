@@ -1,6 +1,5 @@
 # TacheMun
 Gestionnaire de Tache Android
-TODO LIST
 
 - activité affichage des tâches
 - créé une tâche/modifier/supprimer 

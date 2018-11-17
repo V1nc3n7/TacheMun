@@ -68,9 +68,12 @@ public class TacheManager extends TableManager {
         return values;
     }
 
+
     public long insert(Tache t) {
         ContentValues v = putInContent(t);
         v.remove(ID_Tache);
+        v.remove(NUMERO);
+        v.put(NUMERO, getIncrNumList(t));
         this.open();
         long r = db.insert(tableName, null, v);
         this.close();
@@ -118,6 +121,27 @@ public class TacheManager extends TableManager {
         this.close();
         c.close();
         return list;
+    }
+
+    private int getIncrNumList(Tache t) {
+        int r = 0;
+        this.open();
+        String aliasnum = "NUMAL";
+        Cursor c = db.rawQuery(
+                "SELECT MAX(" + NUMERO + ") AS " + aliasnum + " FROM " + tableName
+                        + " WHERE " +
+                        ID_ListeTache + "=" + t.getIdLsteTache(), null);
+        if (c.moveToFirst()) {
+
+            r = c.getInt(c.getColumnIndex(aliasnum)) + 1;
+
+
+        }
+
+        this.close();
+        c.close();
+        return r;
+
     }
 
     public Tache getFromId(int id) {

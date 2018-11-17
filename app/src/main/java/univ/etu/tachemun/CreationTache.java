@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +15,14 @@ import java.util.Date;
 
 import univ.etu.tachemun.TimeDate.DatePickerFragment;
 import univ.etu.tachemun.TimeDate.TimePickerFragment;
+import univ.etu.tachemun.db.managers.TacheManager;
+import univ.etu.tachemun.db.tableclass.Tache;
 
 public class CreationTache extends AppCompatActivity {
 
 
     private EditText nomTache;
     private EditText descriptionTache;
-    private Button createButton;
     private Button printButton;
 
     private Button timePicker;
@@ -39,14 +41,23 @@ public class CreationTache extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creation_tache);
         nomTache = (EditText) findViewById(R.id.cree_nouv_Tache_nomTache_input);
-        descriptionTache = (EditText) findViewById(R.id.nouvListeTache_descr_input);
+        descriptionTache = (EditText) findViewById(R.id.nouvTache_descr_input);
 
         creaTache = (Button) findViewById(R.id.cree_nouvTache);
+        printButton = (Button) findViewById(R.id.tache_print_button);
         creaTache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (verif(nomTache)) {
+                    Tache tache = new Tache(-1, getIntent().getIntExtra("ID_LISTE", -1)
+                            , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
+                            , getDescriptionTache(), System.currentTimeMillis(), 0, 0,
+                            -1);
 
+                    Log.i(getClass().toString(), tache.toString());
+
+                    TacheManager tacheManager = new TacheManager(CreationTache.this);
+                    tacheManager.insert(tache);
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreationTache.this);
@@ -64,6 +75,7 @@ public class CreationTache extends AppCompatActivity {
                 }
             }
         });
+
 
 
 
@@ -101,6 +113,6 @@ public class CreationTache extends AppCompatActivity {
     }
 
     private boolean verif(EditText editText) {
-        return !(editText.getText().length() == 0);
+        return !(getTitreTache().length() == 0);
     }
 }

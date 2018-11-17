@@ -36,6 +36,8 @@ public class AffListeTache extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AffListeTache.this,CreationTache.class);
+                intent.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
+                intent.putExtra("ID_LISTE", getIntent().getIntExtra("ID_LISTE", -1));
                 startActivity(intent);
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
@@ -56,6 +58,7 @@ public class AffListeTache extends AppCompatActivity {
         }
         else{
             listView = new ListView(this);
+
 
         }
     }
@@ -104,5 +107,6 @@ public class AffListeTache extends AppCompatActivity {
         }
         return color;
     }
+
 
 }
