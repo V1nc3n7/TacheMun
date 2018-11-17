@@ -12,22 +12,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import univ.etu.tachemun.db.managers.ActionUserManager;
-import univ.etu.tachemun.db.managers.AssigneTacheManager;
-import univ.etu.tachemun.db.managers.ContactsManager;
-import univ.etu.tachemun.db.managers.DroitsManager;
-import univ.etu.tachemun.db.managers.EmailDisposableManager;
-import univ.etu.tachemun.db.managers.GroupeManager;
-import univ.etu.tachemun.db.managers.ListeTacheGroupeManager;
-import univ.etu.tachemun.db.managers.ListeTacheManager;
-import univ.etu.tachemun.db.managers.MembreManager;
-import univ.etu.tachemun.db.managers.PartageListeManager;
-import univ.etu.tachemun.db.managers.RealiseTacheManager;
-import univ.etu.tachemun.db.managers.TacheManager;
-import univ.etu.tachemun.db.managers.UtilisateurManager;
+import univ.etu.tachemun.db.tablemanagers.ActionUserManager;
+import univ.etu.tachemun.db.tablemanagers.AssigneTacheManager;
+import univ.etu.tachemun.db.tablemanagers.ContactsManager;
+import univ.etu.tachemun.db.tablemanagers.DroitsManager;
+import univ.etu.tachemun.db.tablemanagers.EmailDisposableManager;
+import univ.etu.tachemun.db.tablemanagers.GroupeManager;
+import univ.etu.tachemun.db.tablemanagers.ListeTacheGroupeManager;
+import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
+import univ.etu.tachemun.db.tablemanagers.MembreManager;
+import univ.etu.tachemun.db.tablemanagers.PartageListeManager;
+import univ.etu.tachemun.db.tablemanagers.RealiseTacheManager;
+import univ.etu.tachemun.db.tablemanagers.TacheManager;
+import univ.etu.tachemun.db.tablemanagers.UtilisateurManager;
 
 public class AndroidTask extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "androidTask";
+    private static final String DATABASE_NAME = "androidTask.db";
     private static final int DATABASE_VERSION = 1;
     private static AndroidTask sInstance;
     private final Context context;
@@ -131,6 +131,8 @@ public class AndroidTask extends SQLiteOpenHelper {
         db.execSQL(AssigneTacheManager.createTableScript);
         db.execSQL(ListeTacheGroupeManager.createTableScript);
         db.execSQL(ActionUserManager.createTableScript);
+
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {

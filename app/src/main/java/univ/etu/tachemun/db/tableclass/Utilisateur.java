@@ -16,6 +16,13 @@ public class Utilisateur {
         this.mail = mail;
     }
 
+    public Utilisateur(String pseudo, String motDePasse, String mail) {
+        this.pseudo = pseudo;
+        this.dateInscription = new Date(System.currentTimeMillis());
+        this.motDePasse = motDePasse;
+        this.mail = mail;
+    }
+
     public Utilisateur() {
     }
 

@@ -15,8 +15,8 @@ import java.util.Date;
 
 import univ.etu.tachemun.TimeDate.DatePickerFragment;
 import univ.etu.tachemun.TimeDate.TimePickerFragment;
-import univ.etu.tachemun.db.managers.TacheManager;
 import univ.etu.tachemun.db.tableclass.Tache;
+import univ.etu.tachemun.db.tablemanagers.TacheManager;
 
 public class CreationTache extends AppCompatActivity {
 
@@ -58,6 +58,7 @@ public class CreationTache extends AppCompatActivity {
                             , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
                             , getDescriptionTache(), System.currentTimeMillis(), 0, 0,
                             -1);*/
+
                     Log.i(getClass().toString(), tache.toString());
 
                     TacheManager tacheManager = new TacheManager(CreationTache.this);

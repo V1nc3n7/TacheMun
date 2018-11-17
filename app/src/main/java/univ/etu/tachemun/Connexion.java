@@ -14,9 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import univ.etu.tachemun.db.managers.ActionUserManager;
-import univ.etu.tachemun.db.managers.UtilisateurManager;
-import univ.etu.tachemun.db.tableclass.ActionUser;
+import univ.etu.tachemun.db.tablemanagers.UtilisateurManager;
 
 public class Connexion extends AppCompatActivity {
     private List<String> messagesErrors;
@@ -66,8 +64,7 @@ public class Connexion extends AppCompatActivity {
                 if (messagesErrors.isEmpty()) {
                     Intent i = new Intent(Connexion.this, ListeListeTaches.class);
                     i.putExtra("ID_UTILISATEUR", getInputPseudo());
-                    ActionUserManager actionUserManager = new ActionUserManager(Connexion.this);
-                    actionUserManager.insertNew(new ActionUser(getInputPseudo(), "CONNEXION"));
+
                     startActivity(i);
                     finish();
                 } else {

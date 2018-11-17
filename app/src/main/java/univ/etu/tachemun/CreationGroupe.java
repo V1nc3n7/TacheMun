@@ -7,8 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import univ.etu.tachemun.db.managers.GroupeManager;
 import univ.etu.tachemun.db.tableclass.Groupe;
+import univ.etu.tachemun.db.tablemanagers.GroupeManager;
 
 public class CreationGroupe extends AppCompatActivity {
 

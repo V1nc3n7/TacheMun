@@ -14,8 +14,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import univ.etu.tachemun.db.managers.UtilisateurManager;
 import univ.etu.tachemun.db.tableclass.Utilisateur;
+import univ.etu.tachemun.db.tablemanagers.EmailDisposableManager;
+import univ.etu.tachemun.db.tablemanagers.UtilisateurManager;
 import univ.etu.tachemun.validators.MailValidator;
 import univ.etu.tachemun.validators.PasswordValidator;
 import univ.etu.tachemun.validators.PseudoValidator;
@@ -59,7 +60,7 @@ public class Inscription extends AppCompatActivity {
                     messagesErrors.add("Ce pseudo est deja pris");
                 }
                 if (!(mailKnown())) {
-                    messagesErrors.add(" MAil déja connu ");
+                    messagesErrors.add(" Mail déja connu ");
                 }
                 if (!(new PseudoValidator()).validate(getPseudoInput())) {
                     messagesErrors.add("Pseudo Invalide : il doit etre entre 4 et 32 carcteres, et comporter que  AZ az à-9 @ -_");
@@ -67,6 +68,9 @@ public class Inscription extends AppCompatActivity {
 
                 if (!(new MailValidator().validate(getMailInput()))) {
                     messagesErrors.add("Mail Invalide");
+                }
+                if (!isInDisposables(getMailInput())) {
+                    messagesErrors.add("Mail Invalide car trashbox");
                 }
                 if (!checkSamePassword()) {
                     messagesErrors.add("Les mots de passe doivent etre les mêmes");
@@ -80,7 +84,7 @@ public class Inscription extends AppCompatActivity {
                     UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
 
 
-                    Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput(), System.currentTimeMillis());
+                    Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput());
                     utilisateurManager.insertNew(user);
 
 
@@ -116,6 +120,11 @@ public class Inscription extends AppCompatActivity {
         });
 
 
+    }
+
+    private boolean isInDisposables(String mailInput) {
+        EmailDisposableManager edm = new EmailDisposableManager(this);
+        return edm.mailAccepted(mailInput);
     }
 
 

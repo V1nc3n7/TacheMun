@@ -26,10 +26,10 @@ import java.util.List;
 
 import univ.etu.tachemun.FluxListeListe.Flux;
 import univ.etu.tachemun.FluxListeListe.FluxAdapter;
-import univ.etu.tachemun.db.managers.ActionUserManager;
-import univ.etu.tachemun.db.managers.ListeTacheManager;
 import univ.etu.tachemun.db.tableclass.ActionUser;
 import univ.etu.tachemun.db.tableclass.ListeTache;
+import univ.etu.tachemun.db.tablemanagers.ActionUserManager;
+import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
 
 public class ListeListeTaches extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

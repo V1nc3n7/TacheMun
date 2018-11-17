@@ -46,6 +46,7 @@ public class Tache {
 
 
     public Tache(int idListeTache, String createur, String libelle, String description, int priorite, long dateHeureEcheance) {
+        this.ID = -1;
         this.idLsteTache = idListeTache;
         this.createur = createur;
         this.libelle = libelle;

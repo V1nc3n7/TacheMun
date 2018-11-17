@@ -19,8 +19,8 @@ import java.util.Date;
 
 import univ.etu.tachemun.TimeDate.DatePickerFragment;
 import univ.etu.tachemun.TimeDate.TimePickerFragment;
-import univ.etu.tachemun.db.managers.ListeTacheManager;
 import univ.etu.tachemun.db.tableclass.ListeTache;
+import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
 
 
 public class NouvelleListeDeTache extends AppCompatActivity {

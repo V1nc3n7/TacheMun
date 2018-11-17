@@ -1,4 +1,4 @@
-package univ.etu.tachemun.db.managers;
+package univ.etu.tachemun.db.tablemanagers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -96,12 +96,13 @@ public class UtilisateurManager extends TableManager {
 
         int idListe = (int) listeTacheManager.insertNew(listeTache);
         TacheManager tm = new TacheManager(context);
-        int n = 0;
-        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
-        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
-        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
-        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
-        tm.insert(new Tache(-1, idListe, u.getPseudo(), "Tache " + n++, "Tache auto", System.currentTimeMillis(), n, n, -1));
+        int n = 1;
+        int p = 1;
+        tm.insert(new Tache(idListe, u.getPseudo(), "Tache n°" + n++, "Tache auto", p++, -1));
+        tm.insert(new Tache(idListe, u.getPseudo(), "Tache n°" + n++, "Tache auto", p++, -1));
+        tm.insert(new Tache(idListe, u.getPseudo(), "Tache n°" + n++, "Tache auto", p++, -1));
+        tm.insert(new Tache(idListe, u.getPseudo(), "Tache n°" + n++, "Tache auto", p++, -1));
+        tm.insert(new Tache(idListe, u.getPseudo(), "Tache n°" + n, "Tache auto", p, -1));
 
         return r;
     }
@@ -159,11 +160,16 @@ public class UtilisateurManager extends TableManager {
         if (c.getCount() != 0) {
             c.close();
             this.close();
+            ActionUserManager actionUserManager = new ActionUserManager(context);
+            actionUserManager.insertNew(new ActionUser(userName, "CONNEXION"));
             return true;
         } else {
 
             c.close();
             this.close();
+
+            ActionUserManager actionUserManager = new ActionUserManager(context);
+            actionUserManager.insertNew(new ActionUser(userName, "BAD PASSWORD"));
             return false;
         }
 

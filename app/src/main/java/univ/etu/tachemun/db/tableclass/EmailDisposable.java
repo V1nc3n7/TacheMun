@@ -20,6 +20,12 @@ public class EmailDisposable {
         this.dateHeureAjout = new Date(dateHeureAjout);
     }
 
+    public EmailDisposable(String domaine) {
+        this.ID = -1;
+        this.domaine = domaine;
+        this.dateHeureAjout = new Date(System.currentTimeMillis());
+    }
+
     public int getID() {
         return ID;
     }

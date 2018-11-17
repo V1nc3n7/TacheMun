@@ -1,4 +1,4 @@
-package univ.etu.tachemun.db.managers;
+package univ.etu.tachemun.db.tablemanagers;
 
 import android.content.ContentValues;
 import android.content.Context;

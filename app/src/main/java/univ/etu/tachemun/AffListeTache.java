@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import univ.etu.tachemun.db.managers.TacheManager;
 import univ.etu.tachemun.db.tableclass.Tache;
+import univ.etu.tachemun.db.tablemanagers.TacheManager;
 
 public class AffListeTache extends AppCompatActivity {
 

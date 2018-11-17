@@ -1,8 +1,9 @@
-package univ.etu.tachemun.db.managers;
+package univ.etu.tachemun.db.tablemanagers;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,7 @@ public class TacheManager extends TableManager {
         ContentValues v = putInContent(t);
         v.remove(ID_Tache);
         v.remove(NUMERO);
-        v.put(NUMERO, getIncrNumList(t));
+        v.put(NUMERO, getNextNumTask(t));
         this.open();
         long r = db.insert(tableName, null, v);
         this.close();
@@ -123,7 +124,7 @@ public class TacheManager extends TableManager {
         return list;
     }
 
-    private int getIncrNumList(Tache t) {
+    private int getNextNumTask(Tache t) {
         int r = 0;
         this.open();
         String aliasnum = "NUMAL";
@@ -132,10 +133,12 @@ public class TacheManager extends TableManager {
                         + " WHERE " +
                         ID_ListeTache + "=" + t.getIdLsteTache(), null);
         if (c.moveToFirst()) {
+            r = c.getInt(c.getColumnIndex(aliasnum));
+            Log.i(getClass().toString(), "n " + r);
 
-            r = c.getInt(c.getColumnIndex(aliasnum)) + 1;
-
-
+            // if(r!=0) {
+            r++;
+            //}
         }
 
         this.close();
