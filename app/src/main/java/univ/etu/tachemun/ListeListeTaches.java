@@ -260,7 +260,7 @@ public class ListeListeTaches extends AppCompatActivity
                     color = Color.argb(255, 255, 0, 255);
                     break;
             }
-            listflux.add(new Flux(color, listeTaches.get(i).getNom(), listeTaches.get(i).getDescription(), "test"));
+            listflux.add(new Flux(color, listeTaches.get(i).getNom(), listeTaches.get(i).getDescription()));
         }
         return listflux;
     }

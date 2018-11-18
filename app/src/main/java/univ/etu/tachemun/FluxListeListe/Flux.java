@@ -4,13 +4,11 @@ public class Flux {
     private int color;
     private String pseudo;
     private String text;
-    private String ttext;
 
-    public Flux(int color, String pseudo, String text,String t) {
+    public Flux(int color, String pseudo, String text) {
         this.color = color;
         this.pseudo = pseudo;
         this.text = text;
-        this.ttext = t;
     }
 
     public int getColor() {
@@ -37,11 +35,4 @@ public class Flux {
         this.text = text;
     }
 
-    public String getttext() {
-        return ttext;
-    }
-
-    public void setttext(String t) {
-        this.ttext = t;
-    }
 }

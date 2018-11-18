@@ -12,7 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import univ.etu.tachemun.FluxListeTache.FluxTaches;
+import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter;
 import univ.etu.tachemun.db.tableclass.Tache;
 import univ.etu.tachemun.db.tablemanagers.TacheManager;
 
@@ -36,19 +39,17 @@ public class AffListeTache extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AffListeTache.this,CreationTache.class);
-                intent.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
-                intent.putExtra("ID_LISTE", getIntent().getIntExtra("ID_LISTE", -1));
                 startActivity(intent);
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
             }
         });
 
-        ArrayList<Tache> taches = getTacheOfListe();
+        ArrayList<Tache> Taches = getTacheOfListe();
         TextView textView;
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
 
-        if (taches == null || taches.size() == 0) {
+        if (Taches == null || Taches.size() == 0) {
             textView = new TextView(this);
             textView.setText(R.string.liste_listetache_no_taches);
 //            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
@@ -58,9 +59,24 @@ public class AffListeTache extends AppCompatActivity {
         }
         else{
             listView = new ListView(this);
-
-
+            List<FluxTaches> list = gene(Taches);
+            FluxTachesAdapter adapter = new FluxTachesAdapter(this, list);
+            listView.setAdapter(adapter);
+            //TODO faire les clicks(si besoin)
+            //les interractions
+            linearLayout.addView(listView);
         }
+    }
+
+    private List<FluxTaches> gene(ArrayList<Tache> tacheArrayList) {
+        List<FluxTaches> list = new ArrayList<FluxTaches>();
+        for (int i = 0; i < tacheArrayList.size(); i++) {
+            //TODO manque d'une colonne dans la bdd pour un boolean !
+            FluxTaches fluxTaches = new FluxTaches(tacheArrayList.get(i).getDescription(), false);
+            //TODO reflechir commment faire pour la case a cocher.
+            list.add(fluxTaches);
+        }
+        return list;
     }
 
     private ArrayList<Tache> getTacheOfListe() {
@@ -107,6 +123,5 @@ public class AffListeTache extends AppCompatActivity {
         }
         return color;
     }
-
 
 }
