@@ -33,7 +33,7 @@ public class FluxTachesAdapter extends ArrayAdapter<FluxTaches> {
 
         FluxTaches fluxTaches = getItem(position);
 
-        fluxTachesViewHolder.Text.setText(fluxTaches.getText());
+        fluxTachesViewHolder.Text.setText(fluxTaches.getTitre());
         fluxTachesViewHolder.isCheck.setChecked(fluxTaches.getCheck());
 
         return convertView;

@@ -21,15 +21,15 @@
         android:layout_toRightOf="@+id/avatar"
         android:layout_alignTop="@+id/avatar"
         android:textStyle="bold"
-        tools:text="Pseudo"/>
+        tools:titre="Pseudo" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/titre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:layout_alignLeft="@+id/pseudo"
         android:layout_below="@+id/pseudo"
-        tools:text="Texte de mon tweet"/>
+        tools:titre="Texte de mon tweet" />
 
 </RelativeLayout>

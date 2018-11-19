@@ -9,7 +9,7 @@ public class ActionUserManager extends TableManager {
 
     static final String tableName = "ActionUser";
 
-    static final String ID_ActionUser = "ID_ActionUser";
+    private static final String ID_ActionUser = "ID_ActionUser";
     private static final String ID_UTILISATEUR = "ID_UTILISATEUR";
     private static final String DateHeure_ACTION = "dateHeureAction";
     private static final String LIBELLE_ACTION = "NomAction";

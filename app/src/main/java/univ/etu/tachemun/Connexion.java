@@ -86,7 +86,7 @@ public class Connexion extends AppCompatActivity {
                     });
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                    //messageErrorConnexion.setText(messagesErrors.toString());
+                    //messageErrorConnexion.setTitre(messagesErrors.toString());
                 }
 
             }

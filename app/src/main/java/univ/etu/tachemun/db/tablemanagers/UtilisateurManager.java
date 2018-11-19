@@ -121,15 +121,20 @@ public class UtilisateurManager extends TableManager {
      * permet de changer le pseudo d'un utilisateur
      *
      * @param ancienPseudo
-     * @param u
      * @return
      */
-    public long updatePseudoUser(String ancienPseudo, Utilisateur u) {
-        ContentValues values = putInContent(u);
+    public long updatePseudoUser(String ancienPseudo, String nouveauPseduo) {
+        //TODO verifier AVANT d'appeler ici que le nouveauPseduo n'est pas dans la db
+        ContentValues values = putInContent(getFromId(ancienPseudo));
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {ancienPseudo + ""};
+        values.remove(ID_UTILISATEUR);
+        values.put(ID_UTILISATEUR, nouveauPseduo);
+        ActionUserManager actionUserManager = new ActionUserManager(context);
+        actionUserManager.insertNew(new ActionUser(ancienPseudo, "CHANGMENT PSEUDO"));
         this.open();
         long r = db.update(tableName, values, where, whereArgs);
+
         this.close();
         return r;
     }

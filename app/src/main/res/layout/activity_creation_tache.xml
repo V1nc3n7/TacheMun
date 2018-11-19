@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="@string/nouvelle_tache"
+        android:titre="@string/nouvelle_tache"
         android:textAlignment="center"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:text="@string/nouvTache_dateHeure_txt_view"
+        android:titre="@string/nouvTache_dateHeure_txt_view"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="showDatePickerDialog"
-            android:text="@string/new_tache_datepicker" />
+            android:titre="@string/new_tache_datepicker" />
 
         <Button
             android:id="@+id/settimeTache"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="showTimePickerDialog"
-            android:text="@string/new_tache_hourpicker" />
+            android:titre="@string/new_tache_hourpicker" />
 
 
     </LinearLayout>
@@ -72,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/cree_une_nouvelle_tache" />
+        android:titre="@string/cree_une_nouvelle_tache" />
 
 
     <Button
@@ -80,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="printTache"
-        android:text="@string/tache_print" />
+        android:titre="@string/tache_print" />
 
     <RadioGroup
         android:layout_width="match_parent"

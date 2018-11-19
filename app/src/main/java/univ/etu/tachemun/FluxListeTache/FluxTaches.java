@@ -2,23 +2,25 @@ package univ.etu.tachemun.FluxListeTache;
 
 public class FluxTaches {
 
-    private String Text;
-    private Boolean isCheck;
+    private String titre;
+    private boolean isCheck;
+    private int prio;
+    private String desc;
 
-    public FluxTaches(String t, Boolean i) {
-        Text = t;
-        isCheck = i;
+    public FluxTaches(String titre, boolean i) {
+        this.titre = titre;
+        this.isCheck = i;
     }
 
-    public String getText() {
-        return Text;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setText(String text) {
-        Text = text;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
-    public Boolean getCheck() {
+    public boolean getCheck() {
         return isCheck;
     }
 

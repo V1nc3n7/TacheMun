@@ -81,8 +81,22 @@ public class AffListeTache extends AppCompatActivity {
 
     private ArrayList<Tache> getTacheOfListe() {
         TacheManager t = new TacheManager(AffListeTache.this);
-        return t.getTachesFromListe(getIntent().getIntExtra("ID_LISTE", -1));
+        return t.getTachesNonRealiseesFromListe(getIntent().getIntExtra("ID_LISTE", -1));
     }
+
+    private ArrayList<Tache> getTachesOfListe() {
+        TacheManager t = new TacheManager(AffListeTache.this);
+        return t.getAllTachesFromListe(getIntent().getIntExtra("ID_LISTE", -1));
+    }
+
+    private ArrayList<Tache> getTachesRealOfListe() {
+        TacheManager t = new TacheManager(AffListeTache.this);
+        return t.getTachesRealFromListe(getIntent().getIntExtra("ID_LISTE", -1));
+    }
+
+
+
+
 
     private int couleur(int i){
         int color = Color.argb(255, 255, 0, 0);
