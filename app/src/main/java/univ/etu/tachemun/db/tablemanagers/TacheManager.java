@@ -3,7 +3,6 @@ package univ.etu.tachemun.db.tablemanagers;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -194,7 +193,7 @@ public class TacheManager extends TableManager {
                         ID_ListeTache + "=" + t.getIdLsteTache(), null);
         if (c.moveToFirst()) {
             r = c.getInt(c.getColumnIndex(aliasnum));
-            Log.i(getClass().toString(), "n " + r);
+            // Log.i(getClass().toString(), "n " + r);
 
             // if(r!=0) {
             r++;

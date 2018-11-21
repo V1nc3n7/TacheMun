@@ -98,11 +98,11 @@ public class Inscription extends AppCompatActivity {
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Inscription.this);
-                    String mess = "";
+                    StringBuilder mess = new StringBuilder();
                     for (int i = 0; i < messagesErrors.size(); i++) {
-                        mess += "" + messagesErrors.get(i) + "\n";
+                        mess.append("").append(messagesErrors.get(i)).append("\n");
                     }
-                    builder.setMessage(mess);
+                    builder.setMessage(mess.toString());
                     builder.setCancelable(true);
                     builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
                         @Override

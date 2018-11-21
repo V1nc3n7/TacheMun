@@ -3,7 +3,6 @@ package univ.etu.tachemun.db.tablemanagers;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -28,7 +27,6 @@ public class UtilisateurManager extends TableManager {
     public static final String createTableScript = "CREATE TABLE " + tableName +
             " (" + ID_UTILISATEUR + " TEXT PRIMARY KEY NOT NULL,"
             + PASSWORD + " TEXT NOT NULL,"
-
             + DateHeure_INSCRIPTION + " INTEGER,"
             + MAIL + " TEXT NOT NULL"
             + ");";
@@ -43,7 +41,6 @@ public class UtilisateurManager extends TableManager {
 
 
     private String genMdpViren(Utilisateur u, String input) {
-
         String m0, m1, m2, m3, m4, m5, m6, m7;
         m0 = getSHA256("motherlode");
         m1 = getSHA256("Crypto");
@@ -54,10 +51,7 @@ public class UtilisateurManager extends TableManager {
         m6 = getSHA256("Rosebud");
         m7 = getSHA256("Primary");
         String seed = null;
-        int mod = (int) u.getDateInscription().getTime() % 8;
-        Log.i(getClass().toString(), "date = " + u.getDateInscription().getTime());
-        Log.i(getClass().toString(), "mod = " + mod);
-        switch (mod) {
+        switch ((int) u.getDateInscription().getTime() % 8) {
             case 0:
                 seed = m0;
                 break;
@@ -83,11 +77,7 @@ public class UtilisateurManager extends TableManager {
                 seed = m7;
                 break;
         }
-        Log.i(getClass().toString(), "seed  " + seed);
-
-        String r = (getSHA256(input.length() + getSHA256("" + u.getDateInscription().getTime()) + input + getSHA256("" + (seed))));
-        Log.i(getClass().toString(), "r: " + r);
-        return r;
+        return (getSHA256(input.length() + getSHA256("" + u.getDateInscription().getTime()) + input + getSHA256("" + (seed))));
     }
 
 
@@ -131,7 +121,6 @@ public class UtilisateurManager extends TableManager {
         ContentValues v = putInContent(u);
         v.remove(PASSWORD);
 
-        //v.put(PASSWORD, getSHA256(u.getMotDePasse()));
         v.put(PASSWORD, genMdpViren(u, u.getMotDePasse()));
         this.open();
         long r = db.insert(tableName, null, v);
@@ -139,9 +128,6 @@ public class UtilisateurManager extends TableManager {
         ActionUserManager actionUserManager = new ActionUserManager(context);
         actionUserManager.insertNew(new ActionUser(u.getPseudo(), "INSCRIPTION"));
         ListeTacheManager listeTacheManager = new ListeTacheManager(context);
-
-
-
         Random random = new Random();
         ListeTache listeTache = new ListeTache(-1, "Liste principale", true, u.getPseudo()
                 , "Liste principale contenant les tâches à réaliser", System.currentTimeMillis()
@@ -185,13 +171,12 @@ public class UtilisateurManager extends TableManager {
         ContentValues values = putInContent(u);
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {ancienPseudo + ""};
+
         values.remove(ID_UTILISATEUR);
         values.put(ID_UTILISATEUR, nouveauPseduo);
 
         values.remove(PASSWORD);
         values.put(PASSWORD, genMdpViren(u, clearMdp));
-
-
         ActionUserManager actionUserManager = new ActionUserManager(context);
         actionUserManager.insertNew(new ActionUser(ancienPseudo, "CHANGEMENT PSEUDO"));
 
@@ -211,7 +196,6 @@ public class UtilisateurManager extends TableManager {
     }
 
     private long delete(String pseudo) {
-
         String where = ID_UTILISATEUR + " = ?";
         String[] whereArgs = {pseudo + ""};
         this.open();
@@ -222,47 +206,17 @@ public class UtilisateurManager extends TableManager {
 
     public boolean connectUser(String userName, String password) {
         Utilisateur u = getFromId(userName);
-
         if (genMdpViren(u, password).equals(u.getMotDePasse())) {
             ActionUserManager actionUserManager = new ActionUserManager(context);
             actionUserManager.insertNew(new ActionUser(userName, "CONNEXION"));
             return true;
         } else {
-
-
             ActionUserManager actionUserManager = new ActionUserManager(context);
             actionUserManager.insertNew(new ActionUser(userName, "BAD PASSWORD"));
             return false;
         }
 
     }
-
-    /*
-    *
-    Cursor c = db.rawQuery(
-            "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +
-                    ID_UTILISATEUR + "=\"" + userName + "\" AND " + PASSWORD + "=\"" + genMdpViren(userName,password) + "\"", null);
-
-            if (c.getCount() != 0) {
-                    c.close();
-                    this.close();
-                    ActionUserManager actionUserManager = new ActionUserManager(context);
-                    actionUserManager.insertNew(new ActionUser(userName, "CONNEXION"));
-                    return true;
-                    } else {
-
-                    c.close();
-                    this.close();
-
-                    ActionUserManager actionUserManager = new ActionUserManager(context);
-                    actionUserManager.insertNew(new ActionUser(userName, "BAD PASSWORD"));
-                    return false;
-                    }
-
-                    }
-
-                    *
-    * */
     private Utilisateur getFromId(String id) {
 
         Utilisateur u = null;
@@ -327,9 +281,7 @@ public class UtilisateurManager extends TableManager {
         this.open();
         Cursor c = db.rawQuery(
                 "SELECT " + ID_UTILISATEUR + ", " + PASSWORD + ", " + MAIL + " , " + DateHeure_INSCRIPTION + " FROM " + tableName, null);
-
         while (c.moveToNext()) {
-
 
             r.add(new Utilisateur(c.getString(c.getColumnIndex(ID_UTILISATEUR)),
                     c.getString(c.getColumnIndex(PASSWORD)), c.getString(c.getColumnIndex(MAIL)), c.getInt(c.getColumnIndex(DateHeure_INSCRIPTION))));

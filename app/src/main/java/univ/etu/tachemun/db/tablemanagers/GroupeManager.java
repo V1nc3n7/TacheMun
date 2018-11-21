@@ -2,6 +2,7 @@ package univ.etu.tachemun.db.tablemanagers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import univ.etu.tachemun.db.tableclass.Groupe;
 import univ.etu.tachemun.db.tableclass.ListeTache;
@@ -57,17 +58,12 @@ public class GroupeManager extends TableManager {
         this.open();
         long l = db.insert(tableName, null, v);
         this.close();
-
-
         ListeTacheManager ltm = new ListeTacheManager(context);
         ListeTacheGroupeManager ltgm = new ListeTacheGroupeManager(context);
         MembreManager mm = new MembreManager(context);
         int idl = (int) ltm.insertNew(new ListeTache(-1, "Liste principale", false, groupe.getCreateur(), "Liste contenant les tâches à réaliser par les membres du groupe", groupe.getDateHeureCreation().getTime(), false, -1, 0));
         ltgm.insert(new ListeTacheGroupe((int) l, idl));
         mm.insert(new Membre(groupe.getCreateur(), (int) l));
-
-
-
         return l;
 
     }
@@ -90,6 +86,28 @@ public class GroupeManager extends TableManager {
 
         String where = ID_GROUPE + " = ?";
         String[] whereArgs = {groupe.getID() + ""};
+
+
+        this.open();
+        int idL = -1;
+        Cursor c = db.rawQuery(
+
+                "SELECT " + ListeTacheGroupeManager.tableName + "." + ListeTacheGroupeManager.ID_ListeTacheGroupe + " FROM " + ListeTacheGroupeManager.tableName +
+                        " INNER JOIN " + tableName + " ON " + tableName + "." + ID_GROUPE
+                        + " = " + ListeTacheGroupeManager.tableName + "." + ListeTacheGroupeManager.ID_GROUPE + " WHERE "
+                        + ListeTacheGroupeManager.tableName + "." + ListeTacheGroupeManager.ID_GROUPE + "=" + groupe.getID(), null);
+
+        if (c.moveToFirst()) {
+            idL = c.getInt(c.getColumnIndex(ListeTacheGroupeManager.ID_ListeTacheGroupe));
+
+        }
+        this.close();
+        c.close();
+        ListeTacheGroupeManager listeTacheGroupeManager = new ListeTacheGroupeManager(context);
+        listeTacheGroupeManager.delete(idL);
+
+
+
         this.open();
         long l = db.delete(tableName, where, whereArgs);
         this.close();

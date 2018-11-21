@@ -8,9 +8,9 @@ import univ.etu.tachemun.db.tableclass.ListeTacheGroupe;
 public class ListeTacheGroupeManager extends TableManager {
 
 
-    private static final String tableName = "ListeTacheGroupe";
-    private static final String ID_ListeTacheGroupe = "ID_ListeTacheGroupe";
-    private static final String ID_GROUPE = "ID_Groupe";
+    static final String tableName = "ListeTacheGroupe";
+    static final String ID_ListeTacheGroupe = "ID_ListeTacheGroupe";
+    static final String ID_GROUPE = "ID_Groupe";
     private static final String ID_ListeTache = "ID_ListeTache";
 
 
@@ -63,13 +63,21 @@ public class ListeTacheGroupeManager extends TableManager {
     }
 
     public long delete(ListeTacheGroupe e) {
+
+        return delete(e.getID());
+    }
+
+    public long delete(int id) {
         String where = ID_ListeTacheGroupe + " = ?";
-        String[] whereArgs = {e.getID() + ""};
+        String[] whereArgs = {id + ""};
         this.open();
         long l = db.delete(tableName, where, whereArgs);
         this.close();
         return l;
     }
+
+
+
 
     public ListeTacheGroupe getFromId(int id) {
         return null;
