@@ -65,6 +65,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:width="100dp"
-            android:titre="@string/inscription_confirmation_button_txt" />
+            android:text="@string/inscription_confirmation_button_txt" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

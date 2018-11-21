@@ -91,7 +91,7 @@ public class Inscription extends AppCompatActivity {
                     Intent i = new Intent(Inscription.this, ListeListeTaches.class);
                     i.putExtra("ID_UTILISATEUR", user.getPseudo());
 
-
+                    System.out.println("envoi vers lislite");
 
                     startActivity(i);
                     setResult(0);
