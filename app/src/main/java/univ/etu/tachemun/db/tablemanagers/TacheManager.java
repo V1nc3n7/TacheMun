@@ -114,7 +114,7 @@ public class TacheManager extends TableManager {
                         + " WHERE " +
                         tableName + "." + ID_Tache + " NOT IN ( SELECT " + tableName + "." + ID_Tache + " FROM " + tableName +
                         " INNER JOIN " + RealiseTacheManager.tableName + " ON " + tableName + "." + ID_Tache + "=" + RealiseTacheManager.tableName + "." +
-                        RealiseTacheManager.ID_Tache + " ) AND " + tableName + "." + ID_Tache + "=" + idListe, null);
+                        RealiseTacheManager.ID_Tache + " ) AND " + tableName + "." + ID_ListeTache + "=" + idListe, null);
 
         if (c.moveToFirst()) {
             do {

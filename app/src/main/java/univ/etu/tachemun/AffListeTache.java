@@ -22,6 +22,7 @@ import univ.etu.tachemun.db.tablemanagers.TacheManager;
 public class AffListeTache extends AppCompatActivity {
 
     private ListView listView;
+    private ListView listView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,40 +40,23 @@ public class AffListeTache extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AffListeTache.this,CreationTache.class);
+                intent.putExtra("ID_LISTE", getIntent().getIntExtra("ID_LISTE", -1));
+                intent.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
                 startActivity(intent);
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
             }
         });
 
-        ArrayList<Tache> Taches = getTacheOfListe();
-        TextView textView;
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
+        geneListe();
 
-        if (Taches == null || Taches.size() == 0) {
-            textView = new TextView(this);
-            textView.setText(R.string.liste_listetache_no_taches);
-//            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
-//            textView.setLayoutParams(lp);
-            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            linearLayout.addView(textView);
-        }
-        else{
-            listView = new ListView(this);
-            List<FluxTaches> list = gene(Taches);
-            FluxTachesAdapter adapter = new FluxTachesAdapter(this, list);
-            listView.setAdapter(adapter);
-            //TODO faire les clicks(si besoin)
-            //les interractions
-            linearLayout.addView(listView);
-        }
     }
 
     private List<FluxTaches> gene(ArrayList<Tache> tacheArrayList) {
         List<FluxTaches> list = new ArrayList<FluxTaches>();
         for (int i = 0; i < tacheArrayList.size(); i++) {
             //TODO manque d'une colonne dans la bdd pour un boolean !
-            FluxTaches fluxTaches = new FluxTaches(tacheArrayList.get(i).getDescription(), false);
+            FluxTaches fluxTaches = new FluxTaches(tacheArrayList.get(i).getLibelle(), false);
             //TODO reflechir commment faire pour la case a cocher.
             list.add(fluxTaches);
         }
@@ -94,9 +78,61 @@ public class AffListeTache extends AppCompatActivity {
         return t.getTachesRealFromListe(getIntent().getIntExtra("ID_LISTE", -1));
     }
 
+    private void geneListe() {
+        final ArrayList<Tache> allTaches = getTachesOfListe();
+        final int c = allTaches.size();
+        final ArrayList<Tache> TachesN = getTacheOfListe();
+        final int a = TachesN.size();
+        ArrayList<Tache> TachesR = getTachesRealOfListe();
+        final int d = TachesR.size();
 
+        TextView textView;
+        final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
 
+        if (TachesN == null || TachesN.size() == 0) {
+            textView = new TextView(this);
+            textView.setText(R.string.liste_listetache_no_taches);
+//            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+//            textView.setLayoutParams(lp);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            linearLayout.addView(textView);
+        } else {
+            listView = new ListView(this);
+            List<FluxTaches> list = gene(TachesN);
+            FluxTachesAdapter adapter = new FluxTachesAdapter(this, list);
+            listView.setAdapter(adapter);
+            //TODO faire les clicks(si besoin)
+            //les interractions
 
+            TextView textView1 = new TextView(this);
+            textView1.setText("Taches a faire");
+            textView1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            textView1.setTextSize(25);
+            linearLayout.addView(textView1);
+            linearLayout.addView(listView);
+
+            TextView textView3 = new TextView(this);
+            textView3.setText("Taches effectuees");
+            textView3.setTextSize(25);
+            textView3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            linearLayout.addView(textView3);
+            if (TachesR == null || TachesR.size() == 0) {
+
+                TextView textView4 = new TextView(this);
+                textView4.setText("Aucune tache effectuee");
+                textView4.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+                linearLayout.addView(textView4);
+            } else {
+                listView2 = new ListView(this);
+                List<FluxTaches> list1 = gene(TachesR);
+                FluxTachesAdapter adapter1 = new FluxTachesAdapter(this, list1);
+                listView2.setAdapter(adapter1);
+
+                linearLayout.addView(listView2);
+            }
+        }
+    }
 
     private int couleur(int i){
         int color = Color.argb(255, 255, 0, 0);

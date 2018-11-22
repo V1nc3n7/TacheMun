@@ -43,7 +43,7 @@ public class Connexion extends AppCompatActivity {
                 String userName = getInputPseudo();
                 if (!userName.isEmpty())
                     i.putExtra("ID_UTILISATEUR", userName);
-                startActivityForResult(i,0);
+                startActivityForResult(i, -1);
             }
         });
 

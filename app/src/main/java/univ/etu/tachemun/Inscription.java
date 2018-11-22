@@ -93,8 +93,8 @@ public class Inscription extends AppCompatActivity {
 
                     System.out.println("envoi vers lislite");
 
-                    startActivity(i);
                     setResult(0);
+                    startActivity(i);
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Inscription.this);
