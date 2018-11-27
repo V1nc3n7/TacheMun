@@ -3,14 +3,6 @@ package univ.etu.tachemun.db.tableclass;
 import java.util.Date;
 
 public class PartageListe {
-    /*
-     `ID_PartageListe` int(11) NOT NULL,
-  `ID_ProprietaireListe` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `ID_ListeTache` int(11) NOT NULL,
-  `ID_UtilisateurInvite` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `dateHeurePartage` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `messagePartage` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-     */
     private int ID;
     private String proprietaireListe;
     private int idListe;

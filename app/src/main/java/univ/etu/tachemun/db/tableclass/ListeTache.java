@@ -3,14 +3,7 @@ package univ.etu.tachemun.db.tableclass;
 import java.util.Date;
 
 public class ListeTache {
-    /*
-    `ID_ListeTache` int(11) NOT NULL,
-  `nom_ListeTache` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `boolPerso_ListeTache` tinyint(1) NOT NULL COMMENT '1= liste Perso ,0=liste groupe',
-  `description_ListeTache` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dateHeureCreation_ListeTache` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `echeanceTotale_ListeTache` datetime DEFAULT NULL
-    */
+
     private int ID;
     private String nom;
     private boolean isPerso;

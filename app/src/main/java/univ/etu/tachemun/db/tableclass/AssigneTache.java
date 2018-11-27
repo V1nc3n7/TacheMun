@@ -3,14 +3,6 @@ package univ.etu.tachemun.db.tableclass;
 import java.util.Date;
 
 public class AssigneTache {
-    /*
-      `ID_AssigneTache` int(11) NOT NULL,
-  `ID_MembreAssigneur` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `ID_Tache` int(11) DEFAULT NULL,
-  `message` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ID_tacheur` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT 'qui realisera la tache',
-  `dateHeure_AssigneTache` timestamp NULL DEFAULT NULL
-     */
 
 
     private int ID;
