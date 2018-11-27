@@ -268,7 +268,7 @@ public class ListeListeTaches extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
             if (resultCode == 0) {
-                finish();
+                onRestart();
             } else {
                 // on laisse la class B afficher
             }

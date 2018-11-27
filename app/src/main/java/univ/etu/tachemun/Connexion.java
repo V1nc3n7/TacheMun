@@ -43,7 +43,7 @@ public class Connexion extends AppCompatActivity {
                 String userName = getInputPseudo();
                 if (!userName.isEmpty())
                     i.putExtra("ID_UTILISATEUR", userName);
-                startActivityForResult(i, -1);
+                startActivityForResult(i, 0);
             }
         });
 
@@ -114,7 +114,7 @@ public class Connexion extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
             if (resultCode == 0) {
-                finish();
+                onRestart();
             } else {
                 // on laisse la class B afficher
             }

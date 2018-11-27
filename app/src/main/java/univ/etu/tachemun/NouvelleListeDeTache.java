@@ -1,7 +1,6 @@
 package univ.etu.tachemun;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -78,7 +77,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     dialog.show();
 
                 } else {
-                    Intent intent = new Intent(NouvelleListeDeTache.this, ListeListeTaches.class);
                     String userName = getIntent().getStringExtra("ID_UTILISATEUR");
 
                     listeTacheManager.insertNew(new ListeTache(getTitreListe(), true,
@@ -86,9 +84,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                             getDescriptionListe()
                             , false, 0, choixCouleur));
 
-
-                    intent.putExtra("ID_UTILISATEUR", userName);
-                    startActivity(intent);
                     setResult(0);
                     finish();
                 }

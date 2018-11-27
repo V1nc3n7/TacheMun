@@ -1,7 +1,6 @@
 package univ.etu.tachemun;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -87,14 +86,7 @@ public class Inscription extends AppCompatActivity {
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput());
                     utilisateurManager.insertNew(user);
 
-
-                    Intent i = new Intent(Inscription.this, ListeListeTaches.class);
-                    i.putExtra("ID_UTILISATEUR", user.getPseudo());
-
-                    System.out.println("envoi vers lislite");
-
                     setResult(0);
-                    startActivity(i);
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Inscription.this);
