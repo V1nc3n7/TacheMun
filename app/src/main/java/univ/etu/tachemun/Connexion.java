@@ -114,9 +114,10 @@ public class Connexion extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
             if (resultCode == 0) {
-                onRestart();
+                //ce passe rien
             } else {
-                // on laisse la class B afficher
+                inputPseudo = (EditText) findViewById(R.id.connexion_input_pseudo);
+                inputPseudo.setText(data.getStringExtra("ID_UTILISATEUR"));
             }
         }
     }

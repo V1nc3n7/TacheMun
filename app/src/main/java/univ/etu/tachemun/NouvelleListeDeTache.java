@@ -1,6 +1,7 @@
 package univ.etu.tachemun;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -84,7 +85,9 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                             getDescriptionListe()
                             , false, 0, choixCouleur));
 
-                    setResult(0);
+                    //data ne sert a rien c'est un test
+                    Intent data = new Intent();
+                    setResult(1,data);
                     finish();
                 }
             }

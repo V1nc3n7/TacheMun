@@ -37,6 +37,7 @@ public class ListeListeTaches extends AppCompatActivity
     private ListView listView;
     private TextView textView;
     private LinearLayout linearLayout;
+    private ArrayList<ListeTache> listeTaches;
 
 
     @Override
@@ -71,82 +72,9 @@ public class ListeListeTaches extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //affichage listeliste
-        linearLayout = (LinearLayout) findViewById(R.id.layoutprincipal);
-        final ArrayList<ListeTache> listeTaches = recupListeListe();
+        //affichage de la liste
 
-
-        if (listeTaches == null || listeTaches.size() == 0) {
-            textView = new TextView(this);
-            textView.setText(R.string.liste_listestache_no_lists);
-//            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
-//            textView.setLayoutParams(lp);
-            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            linearLayout.addView(textView);
-        }
-        else{
-            listView = new ListView(this);
-            final List<Flux> listflux = geneListe(listeTaches);
-            final FluxAdapter adapter = new FluxAdapter(this, listflux);
-            listView.setAdapter(adapter);
-            linearLayout.addView(listView);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(ListeListeTaches.this, AffListeTache.class);
-                    intent.putExtra("ID_UTILISATEUR",getIntent().getStringExtra("ID_UTILISATEUR"));
-                    intent.putExtra("ID_LISTE", listeTaches.get(i).getID());
-                    intent.putExtra("NOM_LISTETACHE",listeTaches.get(i).getNom());
-                    intent.putExtra("COULEUR_LISTETACHE",listeTaches.get(i).getCouleur());
-                    startActivity(intent);
-                }
-            });
-            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
-                    builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
-                    builder.setCancelable(true);
-                    builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "Supprime",
-                                    Toast.LENGTH_LONG).show();
-                            deletElementListeListe(listeTaches.get(position));
-
-                            final ArrayList<ListeTache> listeTaches2 = recupListeListe();
-                            final List<Flux> listflux2 = geneListe(listeTaches2);
-                            final FluxAdapter adapter2 = new FluxAdapter(ListeListeTaches.this, listflux2);
-                            listView.setAdapter(adapter2);
-                            //finish();
-
-                            if (listeTaches2.size() == 0) {
-                                textView = new TextView(ListeListeTaches.this);
-                                textView.setText(R.string.liste_listestache_no_lists);
-                                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                linearLayout.addView(textView);
-                            }
-
-                            /*
-                            Intent intent = new Intent(ListeListeTaches.this,ListeListeTaches.class);
-                            intent.putExtra("PSEUDO", getIntent().getStringExtra("PSEUDO"));
-                            startActivity(intent);
-                            finish();*/
-                        }
-                    });
-                    builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "retour",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    return true;
-                }
-            });
-        }
+        affichage(0);
 
     }
 
@@ -268,13 +196,22 @@ public class ListeListeTaches extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
             if (resultCode == 0) {
-                onRestart();
+                //rien ce passe
             } else {
-                // on laisse la class B afficher
+                //actualisation
+                listView = (ListView) findViewById(R.id.listeListeView);
+                listeTaches = recupListeListe();
+
+                List<Flux> listflux = geneListe(listeTaches);
+                FluxAdapter adapter = new FluxAdapter(this, listflux);
+                listView.setAdapter(adapter);
+
             }
         }
     }
 
+
+    //Menu de deconnexion + option
     public boolean OnCreateOptionMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.listeliste, menu);
         return true;
@@ -297,6 +234,89 @@ public class ListeListeTaches extends AppCompatActivity
         Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //affichage et actualisation
+    public void affichage(int a){
+
+        //affichage listeliste
+        linearLayout = (LinearLayout) findViewById(R.id.layoutprincipal);
+        listeTaches = recupListeListe();
+        textView =new TextView(this);
+        textView.setId(R.id.textmessagepasdelisteliste);
+
+        if (listeTaches == null || listeTaches.size() == 0) {
+
+            textView.setText(R.string.liste_listestache_no_lists);
+//            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+//            textView.setLayoutParams(lp);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            linearLayout.addView(textView);
+        }
+        else{
+            listView = new ListView(this);
+            listView.setId(R.id.listeListeView);
+            final List<Flux> listflux = geneListe(listeTaches);
+            final FluxAdapter adapter = new FluxAdapter(this, listflux);
+            listView.setAdapter(adapter);
+            linearLayout.addView(listView);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(ListeListeTaches.this, AffListeTache.class);
+                    intent.putExtra("ID_UTILISATEUR",getIntent().getStringExtra("ID_UTILISATEUR"));
+                    intent.putExtra("ID_LISTE", listeTaches.get(i).getID());
+                    intent.putExtra("NOM_LISTETACHE",listeTaches.get(i).getNom());
+                    intent.putExtra("COULEUR_LISTETACHE",listeTaches.get(i).getCouleur());
+                    startActivity(intent);
+                }
+            });
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
+                    builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Supprime",
+                                    Toast.LENGTH_LONG).show();
+                            deletElementListeListe(listeTaches.get(position));
+
+                            ArrayList<ListeTache> listeTaches2 = recupListeListe();
+                            List<Flux> listflux2 = geneListe(listeTaches2);
+                            FluxAdapter adapter2 = new FluxAdapter(ListeListeTaches.this, listflux2);
+                            listView.setAdapter(adapter2);
+                            //finish();
+
+                            if (listeTaches2.size() == 0) {
+                                textView = new TextView(ListeListeTaches.this);
+                                textView.setText(R.string.liste_listestache_no_lists);
+                                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                                linearLayout.addView(textView);
+                            }
+
+                            /*
+                            Intent intent = new Intent(ListeListeTaches.this,ListeListeTaches.class);
+                            intent.putExtra("PSEUDO", getIntent().getStringExtra("PSEUDO"));
+                            startActivity(intent);
+                            finish();*/
+                        }
+                    });
+                    builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "retour",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return true;
+                }
+            });
+        }
     }
 
 }

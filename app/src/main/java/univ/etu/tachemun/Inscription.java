@@ -1,6 +1,7 @@
 package univ.etu.tachemun;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -86,7 +87,9 @@ public class Inscription extends AppCompatActivity {
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput());
                     utilisateurManager.insertNew(user);
 
-                    setResult(0);
+                    Intent data = new Intent();
+                    data.putExtra("ID_UTILISATEUR",getPseudoInput());
+                    setResult(1,data);
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Inscription.this);
