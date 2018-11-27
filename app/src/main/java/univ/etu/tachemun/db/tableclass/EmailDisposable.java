@@ -3,12 +3,6 @@ package univ.etu.tachemun.db.tableclass;
 import java.util.Date;
 
 public class EmailDisposable {
-    /*
- `id` int(10) UNSIGNED NOT NULL,
-  `domaine` varchar(255) DEFAULT NULL
-
-
-*/
 
     private int ID;
     private String domaine;

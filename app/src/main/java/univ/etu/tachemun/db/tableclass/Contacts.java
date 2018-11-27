@@ -3,12 +3,6 @@ package univ.etu.tachemun.db.tableclass;
 import java.util.Date;
 
 public class Contacts {
-    /*
-     `ID_Contact` int(11) NOT NULL,
-  `ID_Proprietaire` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `ID_Utilisateur` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `DateHeure_Contact` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-     */
 
     private int ID;
 

@@ -105,9 +105,11 @@ public class TacheManager extends TableManager {
      * @param idListe
      * @return les taches de la liste id_liste qui restent à faire
      */
+
     public ArrayList<Tache> getTachesNonRealiseesFromListe(int idListe) {
         ArrayList<Tache> list = new ArrayList<>();
         this.open();
+
         Cursor c = db.rawQuery(
 
                 "SELECT " + tableName + "." + ID_Tache + " FROM " + tableName
@@ -168,7 +170,7 @@ public class TacheManager extends TableManager {
                         + " WHERE " +
                         tableName + "." + ID_Tache + " IN ( SELECT " + tableName + "." + ID_Tache + " FROM " + tableName +
                         " INNER JOIN " + RealiseTacheManager.tableName + " ON " + tableName + "." + ID_Tache + "=" + RealiseTacheManager.tableName + "." +
-                        RealiseTacheManager.ID_Tache + " ) AND " + tableName + "." + ID_Tache + "=" + id_liste, null);
+                        RealiseTacheManager.ID_Tache + " ) AND " + tableName + "." + ID_ListeTache + "=" + id_liste, null);
 
         if (c.moveToFirst()) {
             do {
@@ -193,11 +195,8 @@ public class TacheManager extends TableManager {
                         ID_ListeTache + "=" + t.getIdLsteTache(), null);
         if (c.moveToFirst()) {
             r = c.getInt(c.getColumnIndex(aliasnum));
-            // Log.i(getClass().toString(), "n " + r);
 
-            // if(r!=0) {
             r++;
-            //}
         }
 
         this.close();

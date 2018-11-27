@@ -3,13 +3,6 @@ package univ.etu.tachemun.db.tableclass;
 import java.util.Date;
 
 public class RealiseTache {
-    /*
-    `ID_RealiseTache` int(11) NOT NULL,
-  `ID_realiseurTache` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `ID_Tache` int(11) NOT NULL,
-  `dateHeureRealisation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `details_RealiseTache` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-     */
     private int ID;
     private String realiseurTache;
     private int idTache;

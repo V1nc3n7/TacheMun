@@ -50,6 +50,28 @@ public class AffListeTache extends AppCompatActivity {
 
         geneListe();
 
+        ArrayList<Tache> Taches = getTacheOfListe();
+        System.out.println(Taches.toString());
+        TextView textView;
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
+
+        if (Taches == null || Taches.size() == 0) {
+            textView = new TextView(this);
+            textView.setText(R.string.liste_listetache_no_taches);
+//            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+//            textView.setLayoutParams(lp);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            linearLayout.addView(textView);
+        } else {
+            listView = new ListView(this);
+            List<FluxTaches> list = gene(Taches);
+            FluxTachesAdapter adapter = new FluxTachesAdapter(this, list);
+            listView.setAdapter(adapter);
+            //TODO faire les clicks(si besoin)
+            //les interractions
+            linearLayout.addView(listView);
+        }
+
     }
 
     private List<FluxTaches> gene(ArrayList<Tache> tacheArrayList) {
@@ -134,6 +156,10 @@ public class AffListeTache extends AppCompatActivity {
         }
     }
 
+    private void supprTache(Tache t) {
+        TacheManager tacheManager = new TacheManager(AffListeTache.this);
+        tacheManager.delete(t);
+    }
     private int couleur(int i){
         int color = Color.argb(255, 255, 0, 0);
         switch (i) {

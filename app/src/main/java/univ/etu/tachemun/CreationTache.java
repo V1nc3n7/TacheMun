@@ -53,10 +53,6 @@ public class CreationTache extends AppCompatActivity {
                             , getDescriptionTache(), 0,
                             -1);
 
-                    /* Tache tache = new Tache(-1, getIntent().getIntExtra("ID_LISTE", -1)
-                            , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
-                            , getDescriptionTache(), System.currentTimeMillis(), 0, 0,
-                            -1);*/
 
                     //Log.i(getClass().toString(), tache.toString());
 
@@ -64,6 +60,7 @@ public class CreationTache extends AppCompatActivity {
                     tacheManager.insert(tache);
 
                     //TODO modification
+
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreationTache.this);

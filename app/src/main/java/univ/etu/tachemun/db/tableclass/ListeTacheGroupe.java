@@ -1,12 +1,7 @@
 package univ.etu.tachemun.db.tableclass;
 
 public class ListeTacheGroupe {
-    /*
-    `ID_ListeTacheGroupe` int(11) NOT NULL,
-  `ID_Groupe` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
-  `ID_ListeTache` int(11) NOT NULL,
-  `ID_CreateurMembre` varchar(32) COLLATE utf8_unicode_ci NOT NULL
-     */
+
     private int ID;
     private int idGroupe;
     private int idListeTache;
