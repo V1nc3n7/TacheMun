@@ -193,14 +193,23 @@ public class ListeListeTaches extends AppCompatActivity
         return listflux;
     }
 
+    //retours de nouvelle tache
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0) {
             if (resultCode == 0) {
                 //rien ce passe
             } else {
                 //actualisation
+                textView = (TextView) findViewById(R.id.textmessagepasdelisteliste);
+
+
                 listView = (ListView) findViewById(R.id.listeListeView);
                 listeTaches = recupListeListe();
+                if (listeTaches.size() == 0) {
+                    textView.setVisibility(View.VISIBLE);
+                } else {
+                    textView.setVisibility(View.INVISIBLE);
+                }
 
                 List<Flux> listflux = geneListe(listeTaches);
                 FluxAdapter adapter = new FluxAdapter(this, listflux);
@@ -242,24 +251,27 @@ public class ListeListeTaches extends AppCompatActivity
         //affichage listeliste
         linearLayout = (LinearLayout) findViewById(R.id.layoutprincipal);
         listeTaches = recupListeListe();
+
         textView =new TextView(this);
         textView.setId(R.id.textmessagepasdelisteliste);
+        textView.setText(R.string.liste_listestache_no_lists);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        linearLayout.addView(textView);
+
+        listView = new ListView(this);
+        listView.setId(R.id.listeListeView);
+        linearLayout.addView(listView);
 
         if (listeTaches == null || listeTaches.size() == 0) {
-
-            textView.setText(R.string.liste_listestache_no_lists);
-//            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
-//            textView.setLayoutParams(lp);
-            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            linearLayout.addView(textView);
+            textView.setVisibility(View.VISIBLE);
         }
         else{
-            listView = new ListView(this);
+            textView.setVisibility(View.INVISIBLE);
+
             listView.setId(R.id.listeListeView);
             final List<Flux> listflux = geneListe(listeTaches);
             final FluxAdapter adapter = new FluxAdapter(this, listflux);
             listView.setAdapter(adapter);
-            linearLayout.addView(listView);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -291,17 +303,8 @@ public class ListeListeTaches extends AppCompatActivity
                             //finish();
 
                             if (listeTaches2.size() == 0) {
-                                textView = new TextView(ListeListeTaches.this);
-                                textView.setText(R.string.liste_listestache_no_lists);
-                                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                                linearLayout.addView(textView);
+                                textView.setVisibility(View.VISIBLE);
                             }
-
-                            /*
-                            Intent intent = new Intent(ListeListeTaches.this,ListeListeTaches.class);
-                            intent.putExtra("PSEUDO", getIntent().getStringExtra("PSEUDO"));
-                            startActivity(intent);
-                            finish();*/
                         }
                     });
                     builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {

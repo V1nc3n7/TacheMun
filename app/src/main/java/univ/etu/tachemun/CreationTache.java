@@ -1,6 +1,7 @@
 package univ.etu.tachemun;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -59,8 +60,9 @@ public class CreationTache extends AppCompatActivity {
                     TacheManager tacheManager = new TacheManager(CreationTache.this);
                     tacheManager.insert(tache);
 
-                    //TODO modification
-
+                    //data ne sert a rien c'est un test
+                    Intent data = new Intent();
+                    setResult(1, data);
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreationTache.this);

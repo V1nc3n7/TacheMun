@@ -2,4 +2,11 @@
 <resources>
     <item type="id" name="listeListeView"/>
     <item type="id" name="textmessagepasdelisteliste"/>
+    <item name="textmessagepasdelistet1" type="id" />
+    <item name="textmessagepasdelistet2" type="id" />
+    <item name="textmessagepasdelistet3" type="id" />
+    <item name="textmessagepasdelistet4" type="id" />
+    <item name="listetacheAF" type="id" />
+    <item name="listetacheF" type="id" />
+
 </resources>
