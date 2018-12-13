@@ -30,6 +30,17 @@
         android:textColor="@android:color/black"
         android:layout_alignLeft="@+id/pseudo"
         android:layout_below="@+id/pseudo"
-        tools:titre="Texte de mon tweet" />
+        tools:titre="" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="72dp" />
+
 
 </RelativeLayout>

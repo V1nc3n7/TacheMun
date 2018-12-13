@@ -185,6 +185,12 @@ public class TacheManager extends TableManager {
         return list;
     }
 
+    /**
+     * incement du numero de la tache dans la liste
+     *
+     * @param t
+     * @return
+     */
     private int getNextNumTask(Tache t) {
         int r = 0;
         this.open();
@@ -204,6 +210,7 @@ public class TacheManager extends TableManager {
         return r;
 
     }
+
 
     public Tache getFromId(int id) {
 

@@ -11,10 +11,10 @@ public class AssigneTacheManager extends TableManager {
     private static final String ID_ASSIGNEUR = "ID_MembreAssigneur";
     private static final String ID_TACHE = "ID_Tache";
     private static final String MESSAGE = "message";
-
     private static final String ID_ESCLAVE = "ID_tacheur";
     private static final String TIMESTAMP_ASSIGNATION = "dateHeure_AssigneTache";
     private static final String tableName = "AssigneTache";
+
     public static final String createTableScript = "CREATE TABLE " + tableName +
             " (" +
             " " + ID_ASSIGNE + " INTEGER PRIMARY KEY AUTOINCREMENT,"

@@ -1,15 +1,20 @@
 package univ.etu.tachemun;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +22,7 @@ import java.util.List;
 import univ.etu.tachemun.FluxListeTache.FluxTaches;
 import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter;
 import univ.etu.tachemun.db.tableclass.Tache;
+import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
 import univ.etu.tachemun.db.tablemanagers.TacheManager;
 
 public class AffListeTache extends AppCompatActivity {
@@ -129,13 +135,13 @@ public class AffListeTache extends AppCompatActivity {
                 TachesN = getTacheOfListe();
                 TachesR = getTachesRealOfListe();
 
-                if (TachesN.size() == 0) {
+                if (TachesN.isEmpty()) {
                     textView2.setVisibility(View.VISIBLE);
                 } else {
                     textView2.setVisibility(View.INVISIBLE);
                 }
 
-                if (TachesR.size() == 0) {
+                if (TachesR.isEmpty()) {
                     textView4.setVisibility(View.VISIBLE);
                 } else {
                     textView4.setVisibility(View.INVISIBLE);
@@ -162,9 +168,12 @@ public class AffListeTache extends AppCompatActivity {
         final int d = TachesR.size();
 
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
+        ListeTacheManager listeTacheManager = new ListeTacheManager(AffListeTache.this);
 
+        Log.i(getClass().getName() + "testget done", listeTacheManager.getDoneAndSizeOfList(getIntent().getIntExtra("ID_LISTE", -1)).first.toString());
+        Log.i(getClass().getName() + "testget size", listeTacheManager.getDoneAndSizeOfList(getIntent().getIntExtra("ID_LISTE", -1)).second.toString());
         textView1 = new TextView(this);
-        textView1.setText("Taches a faire");
+        textView1.setText(R.string.aff_listetache_taches_a_faire_str);
         textView1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView1.setTextSize(25);
         textView1.setId(R.id.textmessagepasdelistet1);
@@ -178,6 +187,29 @@ public class AffListeTache extends AppCompatActivity {
 
         listView = new ListView(this);
         listView.setId(R.id.listetacheAF);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AffListeTache.this);
+                builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
+                builder.setCancelable(true);
+                builder.setPositiveButton("Modifier", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "retour",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
         linearLayout.addView(listView);
 
         textView3 = new TextView(this);
@@ -199,8 +231,7 @@ public class AffListeTache extends AppCompatActivity {
         linearLayout.addView(listView2);
 
 
-
-        if (TachesN == null || TachesN.size() == 0) {
+        if (TachesN.isEmpty()) {
             textView2.setVisibility(View.VISIBLE);
         } else {
             textView2.setVisibility(View.INVISIBLE);
@@ -210,8 +241,7 @@ public class AffListeTache extends AppCompatActivity {
             listView.setAdapter(adapter);
 
 
-
-            if (TachesR == null || TachesR.size() == 0) {
+            if (TachesR.isEmpty()) {
                 textView4.setVisibility(View.VISIBLE);
             } else {
                 textView4.setVisibility(View.INVISIBLE);

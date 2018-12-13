@@ -9,7 +9,6 @@ public class DroitsManager extends TableManager {
     private static final String tableName = "Droits";
     private static final String ID_DROIT = "ID_Droits";
 
-
     public static final String createTableScript = "CREATE TABLE " + tableName +
             "(" +
             ID_DROIT + " INTEGER PRIMARY KEY AUTOINCREMENT"

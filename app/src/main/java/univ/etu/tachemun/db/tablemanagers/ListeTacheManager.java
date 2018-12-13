@@ -3,6 +3,7 @@ package univ.etu.tachemun.db.tablemanagers;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Pair;
 
 import java.util.ArrayList;
 
@@ -97,6 +98,11 @@ public class ListeTacheManager extends TableManager {
         long m = db.delete(tableName, where, whereArgs);
         this.close();
         return m;
+    }
+
+    public Pair<Integer, Integer> getDoneAndSizeOfList(int idListe) {
+        TacheManager tacheManager = new TacheManager(context);
+        return new Pair<>(tacheManager.getTachesRealFromListe(idListe).size(), tacheManager.getAllTachesFromListe(idListe).size());
     }
 
     public ArrayList<ListeTache> getListesOfUser(String username) {

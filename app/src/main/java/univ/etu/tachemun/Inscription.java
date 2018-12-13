@@ -129,9 +129,6 @@ public class Inscription extends AppCompatActivity {
     }
 
 
-    /**
-     * @return
-     */
     private boolean pseudoAvailiable() {
 
         UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
