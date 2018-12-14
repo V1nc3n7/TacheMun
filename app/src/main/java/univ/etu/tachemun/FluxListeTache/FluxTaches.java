@@ -3,11 +3,17 @@ package univ.etu.tachemun.FluxListeTache;
 public class FluxTaches {
 
     private String Text;
-    private Boolean isCheck;
+    //private Boolean isCheck;
 
+
+/*
     public FluxTaches(String t, Boolean i) {
         Text = t;
         isCheck = i;
+    }
+*/
+    public FluxTaches(String t) {
+        Text = t;
     }
 
     public String getText() {
@@ -17,7 +23,7 @@ public class FluxTaches {
     public void setText(String text) {
         Text = text;
     }
-
+/*
     public Boolean getCheck() {
         return isCheck;
     }
@@ -25,4 +31,5 @@ public class FluxTaches {
     public void setCheck(Boolean check) {
         isCheck = check;
     }
+*/
 }

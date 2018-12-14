@@ -26,22 +26,26 @@ public class FluxTachesAdapter extends ArrayAdapter<FluxTaches> {
 
         if (fluxTachesViewHolder == null) {
             fluxTachesViewHolder = new FluxTachesViewHolder();
-            fluxTachesViewHolder.isCheck = (CheckBox) convertView.findViewById(R.id.checkBox);
+            //fluxTachesViewHolder.isCheck = (CheckBox) convertView.findViewById(R.id.checkBox);
             fluxTachesViewHolder.Text = (TextView) convertView.findViewById(R.id.TEXT_TACHE);
             convertView.setTag(fluxTachesViewHolder);
         }
 
         FluxTaches fluxTaches = getItem(position);
-
         fluxTachesViewHolder.Text.setText(fluxTaches.getText());
-        fluxTachesViewHolder.isCheck.setChecked(fluxTaches.getCheck());
-
+        /*
+        fluxTachesViewHolder.isCheck.setChecked(list.get (position).getCheck());
+        fluxTachesViewHolder.isCheck.setClickable(false);
+        fluxTachesViewHolder.isCheck.setEnabled(true);
+        fluxTachesViewHolder.isCheck.setTag(fluxTachesViewHolder);
+        */
+        convertView.setTag (fluxTachesViewHolder);
         return convertView;
     }
 
     private class FluxTachesViewHolder {
         TextView Text;
-        CheckBox isCheck;
+        //CheckBox isCheck;
     }
 }
 

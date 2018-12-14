@@ -7,27 +7,14 @@
     android:padding="10dp"
     tools:layout_editor_absoluteY="81dp">
 
-    <CheckBox
-        android:id="@+id/checkBox"
+    <TextView
+        android:id="@+id/TEXT_TACHE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="4dp"
-        android:text="" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/TEXT_TACHE"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="25dp" />
-    </LinearLayout>
+        android:layout_alignParentEnd="true"
+        android:text=""
+        android:textSize="25dp" />
 
 </LinearLayout>

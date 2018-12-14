@@ -1,5 +1,6 @@
 package univ.etu.tachemun;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,23 +8,32 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.AccessControlContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import univ.etu.tachemun.FluxListeListe.Flux;
+import univ.etu.tachemun.FluxListeListe.FluxAdapter;
 import univ.etu.tachemun.FluxListeTache.FluxTaches;
 import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter;
+import univ.etu.tachemun.db.tableclass.ListeTache;
 import univ.etu.tachemun.db.tableclass.Tache;
-import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
 import univ.etu.tachemun.db.tablemanagers.TacheManager;
+
+import static java.security.AccessController.getContext;
 
 public class AffListeTache extends AppCompatActivity {
 
@@ -64,27 +74,6 @@ public class AffListeTache extends AppCompatActivity {
         });
 
         geneListe();
-
-        /*
-        ArrayList<Tache> Taches = getTacheOfListe();
-        System.out.println(Taches.toString());
-        TextView textView;
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
-
-        if (Taches == null || Taches.size() == 0) {
-            textView = new TextView(this);
-            textView.setText(R.string.liste_listetache_no_taches);
-            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            linearLayout.addView(textView);
-        } else {
-            listView = new ListView(this);
-            List<FluxTaches> list = gene(Taches);
-            FluxTachesAdapter adapter = new FluxTachesAdapter(this, list);
-            listView.setAdapter(adapter);
-            //les interractions
-            linearLayout.addView(listView);
-        }
-        */
     }
 
     private List<FluxTaches> gene(ArrayList<Tache> tacheArrayList, int val) {
@@ -92,11 +81,12 @@ public class AffListeTache extends AppCompatActivity {
         for (int i = 0; i < tacheArrayList.size(); i++) {
             FluxTaches fluxTaches = null;
             if (val == 0) {
-                fluxTaches = new FluxTaches(tacheArrayList.get(i).getLibelle(), false);
+                //fluxTaches = new FluxTaches(tacheArrayList.get(i).getLibelle(), false);
+                fluxTaches = new FluxTaches(tacheArrayList.get(i).getLibelle());
             } else {
-                fluxTaches = new FluxTaches(tacheArrayList.get(i).getLibelle(), true);
+                //fluxTaches = new FluxTaches(tacheArrayList.get(i).getLibelle(), true);
+                fluxTaches = new FluxTaches(tacheArrayList.get(i).getLibelle());
             }
-
             list.add(fluxTaches);
         }
         return list;
@@ -135,13 +125,13 @@ public class AffListeTache extends AppCompatActivity {
                 TachesN = getTacheOfListe();
                 TachesR = getTachesRealOfListe();
 
-                if (TachesN.isEmpty()) {
+                if (TachesN.size() == 0) {
                     textView2.setVisibility(View.VISIBLE);
                 } else {
                     textView2.setVisibility(View.INVISIBLE);
                 }
 
-                if (TachesR.isEmpty()) {
+                if (TachesR.size() == 0) {
                     textView4.setVisibility(View.VISIBLE);
                 } else {
                     textView4.setVisibility(View.INVISIBLE);
@@ -150,6 +140,68 @@ public class AffListeTache extends AppCompatActivity {
                 List<FluxTaches> listflux = gene(TachesN, 0);
                 FluxTachesAdapter adapter = new FluxTachesAdapter(this, listflux);
                 listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AffListeTache.this);
+                        builder.setTitle("Resumer tache :");
+                        View viewInflated = LayoutInflater.from(AffListeTache.this).inflate(R.layout.tache_view_compl, (ViewGroup) view, false);
+                        builder.setView(viewInflated);
+                        builder.setCancelable(true);
+                        builder.setPositiveButton("modifié", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(), "modifié",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(), "retour",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+                });
+                listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AffListeTache.this);
+                        builder.setMessage("Voulez-vous supprimez la tâche ?");
+                        builder.setCancelable(true);
+                        builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(), "Supprime",
+                                        Toast.LENGTH_LONG).show();
+                                supprTache(TachesN.get(i));
+
+                                TachesN = getTacheOfListe();
+                                final List<FluxTaches> list = gene(TachesN, 0);
+                                final FluxTachesAdapter adapter = new FluxTachesAdapter(AffListeTache.this, list);
+                                listView.setAdapter(adapter);
+
+                                if(list.size() == 0){
+                                    textView2.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(), "retour",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        return true;
+                    }
+                });
 
                 List<FluxTaches> listflux2 = gene(TachesR, 1);
                 FluxTachesAdapter adapter2 = new FluxTachesAdapter(this, listflux2);
@@ -168,12 +220,9 @@ public class AffListeTache extends AppCompatActivity {
         final int d = TachesR.size();
 
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
-        ListeTacheManager listeTacheManager = new ListeTacheManager(AffListeTache.this);
 
-        Log.i(getClass().getName() + "testget done", listeTacheManager.getDoneAndSizeOfList(getIntent().getIntExtra("ID_LISTE", -1)).first.toString());
-        Log.i(getClass().getName() + "testget size", listeTacheManager.getDoneAndSizeOfList(getIntent().getIntExtra("ID_LISTE", -1)).second.toString());
         textView1 = new TextView(this);
-        textView1.setText(R.string.aff_listetache_taches_a_faire_str);
+        textView1.setText("Taches a faire");
         textView1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView1.setTextSize(25);
         textView1.setId(R.id.textmessagepasdelistet1);
@@ -187,29 +236,7 @@ public class AffListeTache extends AppCompatActivity {
 
         listView = new ListView(this);
         listView.setId(R.id.listetacheAF);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AffListeTache.this);
-                builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
-                builder.setCancelable(true);
-                builder.setPositiveButton("Modifier", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "retour",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
+        listView.setPadding(10,10,10,20);
         linearLayout.addView(listView);
 
         textView3 = new TextView(this);
@@ -228,20 +255,86 @@ public class AffListeTache extends AppCompatActivity {
 
         listView2 = new ListView(this);
         listView2.setId(R.id.listetacheF);
+        listView2.setPadding(10,10,10,10);
         linearLayout.addView(listView2);
 
 
-        if (TachesN.isEmpty()) {
+
+        if (TachesN == null || TachesN.size() == 0) {
             textView2.setVisibility(View.VISIBLE);
         } else {
-            textView2.setVisibility(View.INVISIBLE);
 
-            List<FluxTaches> list = gene(TachesN, 0);
-            FluxTachesAdapter adapter = new FluxTachesAdapter(this, list);
+            textView2.setVisibility(View.INVISIBLE);
+            final List<FluxTaches> list = gene(TachesN, 0);
+            final FluxTachesAdapter adapter = new FluxTachesAdapter(this, list);
             listView.setAdapter(adapter);
 
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-            if (TachesR.isEmpty()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AffListeTache.this);
+                    builder.setTitle("Resumer tache :");
+                    View viewInflated = LayoutInflater.from(AffListeTache.this).inflate(R.layout.tache_view_compl, (ViewGroup) view, false);
+                    builder.setView(viewInflated);
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("modifié", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "modifié",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "retour",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            });
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AffListeTache.this);
+                    builder.setMessage("Voulez-vous supprimez la tâche ?");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Supprime",
+                                    Toast.LENGTH_LONG).show();
+                            supprTache(TachesN.get(i));
+
+                            TachesN = getTacheOfListe();
+                            final List<FluxTaches> list = gene(TachesN, 0);
+                            final FluxTachesAdapter adapter = new FluxTachesAdapter(AffListeTache.this, list);
+                            listView.setAdapter(adapter);
+
+                            if(list.size() == 0){
+                                textView2.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "retour",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return true;
+                }
+            });
+
+
+
+            if (TachesR == null || TachesR.size() == 0) {
                 textView4.setVisibility(View.VISIBLE);
             } else {
                 textView4.setVisibility(View.INVISIBLE);

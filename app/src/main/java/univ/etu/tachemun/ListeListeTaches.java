@@ -275,6 +275,7 @@ public class ListeListeTaches extends AppCompatActivity
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    listeTaches = recupListeListe();
                     Intent intent = new Intent(ListeListeTaches.this, AffListeTache.class);
                     intent.putExtra("ID_UTILISATEUR",getIntent().getStringExtra("ID_UTILISATEUR"));
                     intent.putExtra("ID_LISTE", listeTaches.get(i).getID());
