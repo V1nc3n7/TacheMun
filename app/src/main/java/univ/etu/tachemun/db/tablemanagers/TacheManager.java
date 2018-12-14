@@ -88,7 +88,6 @@ public class TacheManager extends TableManager {
         long r = db.update(tableName, values, where, whereArgs);
         this.close();
         return r;
-
     }
 
     public long delete(Tache t) {

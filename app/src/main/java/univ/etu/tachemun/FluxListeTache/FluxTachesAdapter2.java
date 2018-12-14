@@ -8,30 +8,27 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import univ.etu.tachemun.AffListeTache;
 import univ.etu.tachemun.R;
 
-public class FluxTachesAdapter extends ArrayAdapter<FluxTaches> {
+public class FluxTachesAdapter2 extends ArrayAdapter<FluxTaches> {
 
-
-    public FluxTachesAdapter(Context context, List<FluxTaches> list) {
+    public FluxTachesAdapter2(Context context, List<FluxTaches> list) {
         super(context, 0, list);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.tache_view_nocheck, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.tache_view_check, parent, false);
         }
         FluxTachesViewHolder fluxTachesViewHolder = (FluxTachesViewHolder) convertView.getTag();
 
         if (fluxTachesViewHolder == null) {
             fluxTachesViewHolder = new FluxTachesViewHolder();
             //fluxTachesViewHolder.isCheck = (CheckBox) convertView.findViewById(R.id.checkBox);
-            fluxTachesViewHolder.nocheck = (ImageView) convertView.findViewById(R.id.nocheck);
             fluxTachesViewHolder.Text = (TextView) convertView.findViewById(R.id.TEXT_TACHE);
             convertView.setTag(fluxTachesViewHolder);
         }
@@ -48,11 +45,8 @@ public class FluxTachesAdapter extends ArrayAdapter<FluxTaches> {
         return convertView;
     }
 
-
     private class FluxTachesViewHolder {
         TextView Text;
-        ImageView nocheck;
         //CheckBox isCheck;
     }
 }
-

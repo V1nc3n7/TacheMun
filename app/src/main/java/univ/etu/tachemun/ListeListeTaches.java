@@ -28,8 +28,10 @@ import univ.etu.tachemun.FluxListeListe.Flux;
 import univ.etu.tachemun.FluxListeListe.FluxAdapter;
 import univ.etu.tachemun.db.tableclass.ActionUser;
 import univ.etu.tachemun.db.tableclass.ListeTache;
+import univ.etu.tachemun.db.tableclass.Tache;
 import univ.etu.tachemun.db.tablemanagers.ActionUserManager;
 import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
+import univ.etu.tachemun.db.tablemanagers.TacheManager;
 
 public class ListeListeTaches extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -296,6 +298,10 @@ public class ListeListeTaches extends AppCompatActivity
                             Toast.makeText(getApplicationContext(), "Supprime",
                                     Toast.LENGTH_LONG).show();
                             deletElementListeListe(listeTaches.get(position));
+                            ArrayList<Tache> list = getTachesOfListe(listeTaches.get(position).getID());
+                            for(int i = 0;i<list.size();i++) {
+                                supprTache(list.get(i));
+                            }
 
                             ArrayList<ListeTache> listeTaches2 = recupListeListe();
                             List<Flux> listflux2 = geneListe(listeTaches2);
@@ -321,6 +327,17 @@ public class ListeListeTaches extends AppCompatActivity
                 }
             });
         }
+    }
+
+
+    private ArrayList<Tache> getTachesOfListe(int id) {
+        TacheManager t = new TacheManager(ListeListeTaches.this);
+        return t.getAllTachesFromListe(id);
+    }
+
+    private void supprTache(Tache t) {
+        TacheManager tacheManager = new TacheManager(ListeListeTaches.this);
+        tacheManager.delete(t);
     }
 
 }

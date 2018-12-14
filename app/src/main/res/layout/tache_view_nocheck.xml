@@ -9,7 +9,7 @@
     tools:layout_editor_absoluteY="81dp">
 
     <ImageView
-        android:id="@+id/check"
+        android:id="@+id/nocheck"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentStart="true"
@@ -18,8 +18,8 @@
         android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/cocher"
-        android:clickable="true"/>
+        android:clickable="true"
+        app:srcCompat="@drawable/pascocher" />
 
     <TextView
         android:id="@+id/TEXT_TACHE"
@@ -30,7 +30,7 @@
         android:layout_marginStart="7dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="10dp"
-        android:layout_toEndOf="@+id/check"
+        android:layout_toEndOf="@+id/nocheck"
         android:text=""
         android:textSize="25dp" />
 
