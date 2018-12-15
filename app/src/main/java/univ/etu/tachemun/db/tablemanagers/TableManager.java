@@ -8,11 +8,11 @@ import univ.etu.tachemun.db.AndroidTask;
 
 abstract class TableManager {
     private static String createTableScript;
-    private String tableName;
     SQLiteDatabase db;
-
-    private AndroidTask base;
     Context context;
+    private String tableName;
+    private AndroidTask base;
+
     TableManager(Context context) {
 
         this.base = AndroidTask.getInstance(context);

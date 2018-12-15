@@ -5,14 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import univ.etu.tachemun.AffListeTache;
 import univ.etu.tachemun.R;
 
 public class FluxTachesAdapter extends ArrayAdapter<FluxTaches> {
@@ -44,7 +41,7 @@ public class FluxTachesAdapter extends ArrayAdapter<FluxTaches> {
         fluxTachesViewHolder.isCheck.setEnabled(true);
         fluxTachesViewHolder.isCheck.setTag(fluxTachesViewHolder);
         */
-        convertView.setTag (fluxTachesViewHolder);
+        convertView.setTag(fluxTachesViewHolder);
         return convertView;
     }
 

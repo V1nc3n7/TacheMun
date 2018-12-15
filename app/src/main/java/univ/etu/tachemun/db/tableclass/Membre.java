@@ -43,12 +43,12 @@ public class Membre {
         return dateHeureAdhesion;
     }
 
-    public void setDateHeureAdhesion(Date dateHeureAdhesion) {
-        this.dateHeureAdhesion = dateHeureAdhesion;
-    }
-
     public void setDateHeureAdhesion(long dateHeureAdhesion) {
         this.dateHeureAdhesion = new Date(dateHeureAdhesion);
+    }
+
+    public void setDateHeureAdhesion(Date dateHeureAdhesion) {
+        this.dateHeureAdhesion = dateHeureAdhesion;
     }
 
     public int getIdGroupe() {

@@ -88,8 +88,8 @@ public class Inscription extends AppCompatActivity {
                     utilisateurManager.insertNew(user);
 
                     Intent data = new Intent();
-                    data.putExtra("ID_UTILISATEUR",getPseudoInput());
-                    setResult(1,data);
+                    data.putExtra("ID_UTILISATEUR", getPseudoInput());
+                    setResult(1, data);
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Inscription.this);
@@ -124,14 +124,14 @@ public class Inscription extends AppCompatActivity {
 
 
     private boolean mailKnown() {
-        UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
+        UtilisateurManager utilisateurManager = new UtilisateurManager(this);
         return !utilisateurManager.isMailInDb(getMailInput());
     }
 
 
     private boolean pseudoAvailiable() {
 
-        UtilisateurManager utilisateurManager = new UtilisateurManager(Inscription.this);
+        UtilisateurManager utilisateurManager = new UtilisateurManager(this);
         return !utilisateurManager.isPseudoInDb(getPseudoInput());
     }
 

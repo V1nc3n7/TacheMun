@@ -6,12 +6,12 @@ public class FluxTaches {
     //private Boolean isCheck;
 
 
-/*
-    public FluxTaches(String t, Boolean i) {
-        Text = t;
-        isCheck = i;
-    }
-*/
+    /*
+        public FluxTaches(String t, Boolean i) {
+            Text = t;
+            isCheck = i;
+        }
+    */
     public FluxTaches(String t) {
         Text = t;
     }

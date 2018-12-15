@@ -41,6 +41,7 @@ public class ContactsManager extends TableManager {
         content.put(DateHeure_Contact, c.getDateHeureContact().getTime());
         return content;
     }
+
     public long insert(Contacts c) {
         ContentValues v = putInContent(c);
         v.remove(ID_CONTACT);

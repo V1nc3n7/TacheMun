@@ -1,6 +1,5 @@
 package univ.etu.tachemun;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,34 +7,27 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.security.AccessControlContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import univ.etu.tachemun.FluxListeListe.Flux;
-import univ.etu.tachemun.FluxListeListe.FluxAdapter;
 import univ.etu.tachemun.FluxListeTache.FluxTaches;
 import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter;
 import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter3;
 import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter4;
-import univ.etu.tachemun.db.tableclass.ListeTache;
 import univ.etu.tachemun.db.tableclass.Tache;
+import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
 import univ.etu.tachemun.db.tablemanagers.TacheManager;
-
-import static java.security.AccessController.getContext;
 
 public class AffListeTache extends AppCompatActivity {
 
@@ -70,6 +62,13 @@ public class AffListeTache extends AppCompatActivity {
                 intent.putExtra("ID_LISTE", getIntent().getIntExtra("ID_LISTE", -1));
                 intent.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
                 startActivityForResult(intent, 0);
+                ListeTacheManager listeTacheManager = new ListeTacheManager(AffListeTache.this);
+                int faites = listeTacheManager.getDoneAndSizeOfList(getIntent().getIntExtra("ID_LISTE", -1)).first;
+                int toutestaches = listeTacheManager.getDoneAndSizeOfList(getIntent().getIntExtra("ID_LISTE", -1)).second;
+
+                int todo = toutestaches - faites;
+                Log.i(getClass().getName(), "ToDo " + todo + ", done " + faites + " toutes " + toutestaches);
+
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
             }
@@ -127,13 +126,13 @@ public class AffListeTache extends AppCompatActivity {
                 TachesN = getTacheOfListe();
                 TachesR = getTachesRealOfListe();
 
-                if (TachesN.size() == 0) {
+                if (TachesN.isEmpty()) {
                     textView2.setVisibility(View.VISIBLE);
                 } else {
                     textView2.setVisibility(View.INVISIBLE);
                 }
 
-                if (TachesR.size() == 0) {
+                if (TachesR.isEmpty()) {
                     textView4.setVisibility(View.VISIBLE);
                 } else {
                     textView4.setVisibility(View.INVISIBLE);
@@ -190,7 +189,7 @@ public class AffListeTache extends AppCompatActivity {
                                 final FluxTachesAdapter adapter = new FluxTachesAdapter(AffListeTache.this, list);
                                 listView.setAdapter(adapter);
 
-                                if(list.size() == 0){
+                                if (list.isEmpty()) {
                                     textView2.setVisibility(View.VISIBLE);
                                 }
                             }
@@ -269,10 +268,10 @@ public class AffListeTache extends AppCompatActivity {
         Toast.makeText(this, "listN "+ getTacheOfListe().size()+", listR "+ getTachesRealOfListe().size(),
                 Toast.LENGTH_LONG).show();
 
-        if ((TachesN == null || TachesN.size() == 0) && TachesR.size() == 0) {
+        if (TachesN.isEmpty() && TachesR.isEmpty()) {
             textView2.setVisibility(View.VISIBLE);
         } else {
-            if(TachesN.size() == 0){
+            if (TachesN.isEmpty()) {
                 textView2.setVisibility(View.VISIBLE);
             }
             else{
@@ -329,7 +328,7 @@ public class AffListeTache extends AppCompatActivity {
 
                             listView.setAdapter(adapter3);
 
-                            if(TachesN.size() == 0){
+                            if (TachesN.isEmpty()) {
                                 textView2.setVisibility(View.VISIBLE);
                             }
                         }
@@ -348,8 +347,7 @@ public class AffListeTache extends AppCompatActivity {
             });
 
 
-
-            if (TachesR == null || TachesR.size() == 0) {
+            if (TachesR.isEmpty()) {
                 textView4.setVisibility(View.VISIBLE);
             } else {
                 textView4.setVisibility(View.INVISIBLE);
@@ -406,7 +404,7 @@ public class AffListeTache extends AppCompatActivity {
 
                                 listView2.setAdapter(adapter4);
 
-                                if(TachesR.size() == 0){
+                                if (TachesR.isEmpty()) {
                                     textView4.setVisibility(View.VISIBLE);
                                 }
                             }

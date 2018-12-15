@@ -24,6 +24,7 @@ public class RealiseTache {
         this.dateHeurRealisation = new Date(System.currentTimeMillis());
         this.details = details;
     }
+
     public int getID() {
         return ID;
     }

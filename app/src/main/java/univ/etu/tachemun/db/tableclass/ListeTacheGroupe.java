@@ -17,6 +17,7 @@ public class ListeTacheGroupe {
         this.idGroupe = idGroupe;
         this.idListeTache = idListeTache;
     }
+
     public int getID() {
         return ID;
     }
@@ -40,7 +41,6 @@ public class ListeTacheGroupe {
     public void setIdListeTache(int idListeTache) {
         this.idListeTache = idListeTache;
     }
-
 
 
     @Override

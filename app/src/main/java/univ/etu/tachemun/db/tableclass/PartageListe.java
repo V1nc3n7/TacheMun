@@ -27,6 +27,7 @@ public class PartageListe {
         this.dateHeurePartage = new Date(System.currentTimeMillis());
         this.message = message;
     }
+
     public int getID() {
         return ID;
     }
@@ -63,13 +64,14 @@ public class PartageListe {
         return dateHeurePartage;
     }
 
+    public void setDateHeurePartage(long dateHeurePartage) {
+        this.dateHeurePartage = new Date(dateHeurePartage);
+    }
+
     public void setDateHeurePartage(Date dateHeurePartage) {
         this.dateHeurePartage = dateHeurePartage;
     }
 
-    public void setDateHeurePartage(long dateHeurePartage) {
-        this.dateHeurePartage = new Date(dateHeurePartage);
-    }
     public String getMessage() {
         return message;
     }

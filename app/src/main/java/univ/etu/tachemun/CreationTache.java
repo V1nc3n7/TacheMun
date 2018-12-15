@@ -31,11 +31,6 @@ public class CreationTache extends AppCompatActivity {
     private Button creaTache;
 
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,8 +77,6 @@ public class CreationTache extends AppCompatActivity {
         });
 
 
-
-
     }
 
     public void showTimePickerDialog(View v) {
@@ -118,6 +111,6 @@ public class CreationTache extends AppCompatActivity {
     }
 
     private boolean verifTitreTache() {
-        return !(getTitreTache().length() == 0);
+        return !(getTitreTache().isEmpty());
     }
 }

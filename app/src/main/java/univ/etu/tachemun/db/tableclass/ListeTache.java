@@ -100,12 +100,12 @@ public class ListeTache {
         return hasEcheance;
     }
 
-    public boolean HasEcheance() {
-        return hasEcheance;
-    }
-
     public void setHasEcheance(boolean hasEcheance) {
         this.hasEcheance = hasEcheance;
+    }
+
+    public boolean HasEcheance() {
+        return hasEcheance;
     }
 
     /**
@@ -115,12 +115,12 @@ public class ListeTache {
         return dateHeureEcheance;
     }
 
-    public void setDateHeureEcheance(Date dateHeureEcheance) {
-        this.dateHeureEcheance = dateHeureEcheance;
-    }
-
     public void setDateHeureEcheance(long dateHeureEcheance) {
         this.dateHeureEcheance = new Date(dateHeureEcheance);
+    }
+
+    public void setDateHeureEcheance(Date dateHeureEcheance) {
+        this.dateHeureEcheance = dateHeureEcheance;
     }
 
     public int getCouleur() {

@@ -24,6 +24,7 @@ public class Contacts {
         this.peudoContact = peudoContact;
         this.dateHeureContact = new Date(System.currentTimeMillis());
     }
+
     public int getID() {
         return ID;
     }
@@ -52,13 +53,13 @@ public class Contacts {
         return dateHeureContact;
     }
 
-    public void setDateHeureContact(Date dateHeureContact) {
-        this.dateHeureContact = dateHeureContact;
-    }
-
     public void setDateHeureContact(long dateHeureContact) {
         this.dateHeureContact = new Date(dateHeureContact);
 
+    }
+
+    public void setDateHeureContact(Date dateHeureContact) {
+        this.dateHeureContact = dateHeureContact;
     }
 
     @Override

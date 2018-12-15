@@ -31,9 +31,9 @@ ALTER TABLE RealiseTache
 COMMIT;
     */
     static final String tableName = "RealiseTache";
+    static final String ID_Tache = "ID_Tache";
     private static final String ID_RealiseTache = "ID_RealiseTache";
     private static final String ID_Realisateur = "ID_Realisateur";
-    static final String ID_Tache = "ID_Tache";
     private static final String DateHeure_Realisation = "DateHeure_Realisation";
     private static final String DETAILS = "details";
 
@@ -54,6 +54,7 @@ COMMIT;
     public RealiseTacheManager(Context context) {
         super(context);
     }
+
     private ContentValues putInContent(RealiseTache r) {
         ContentValues c = new ContentValues();
         c.put(ID_RealiseTache, r.getID());

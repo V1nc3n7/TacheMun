@@ -14,6 +14,7 @@ public class ListeTacheManager extends TableManager {
     static final String tableName = "ListeTache";
 
     static final String ID_LISTETACHE = "ID_ListeTache";
+    static final String ID_ProprioListe = "ID_ProprioListe";
     private static final String nom_ListeTache = "nom";
     private static final String IS_PRIVE = "is_prive";
     private static final String DESCRIPTION = "description";
@@ -21,9 +22,6 @@ public class ListeTacheManager extends TableManager {
     private static final String HAS_ECHEANCE = "has_echeance";
     private static final String ECHEANCE = "echeance";
     private static final String COULEUR = "couleur";
-    static final String ID_ProprioListe = "ID_ProprioListe";
-
-
     public static final String createTableScript = "CREATE TABLE " + tableName +
             " (" +
             ID_LISTETACHE + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -94,6 +92,7 @@ public class ListeTacheManager extends TableManager {
     public long delete(ListeTache l) {
         String where = ID_LISTETACHE + " = ?";
         String[] whereArgs = {l.getID() + ""};
+
         this.open();
         long m = db.delete(tableName, where, whereArgs);
         this.close();
@@ -132,12 +131,11 @@ public class ListeTacheManager extends TableManager {
             }
             this.close();
 
-        } else {
-
         }
         cursor.close();
         return listes;
     }
+
     public ListeTache getFromId(int id) {
         return null;
     }

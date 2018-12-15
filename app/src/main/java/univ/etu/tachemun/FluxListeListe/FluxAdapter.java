@@ -22,12 +22,12 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.flux_view,parent, false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.flux_view, parent, false);
         }
 
         FluxViewHolder viewHolder = (FluxViewHolder) convertView.getTag();
-        if(viewHolder == null){
+        if (viewHolder == null) {
             viewHolder = new FluxViewHolder();
             viewHolder.pseudo = (TextView) convertView.findViewById(R.id.pseudo);
             viewHolder.text = (TextView) convertView.findViewById(R.id.text);
@@ -46,7 +46,7 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
         return convertView;
     }
 
-    private class FluxViewHolder{
+    private class FluxViewHolder {
         TextView pseudo;
         TextView text;
         ImageView avatar;

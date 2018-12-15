@@ -38,8 +38,6 @@ public class CreationGroupe extends AppCompatActivity {
                 int idG = (int) manager.insert(g);
 
 
-
-
             }
         });
 

@@ -217,6 +217,7 @@ public class UtilisateurManager extends TableManager {
         }
 
     }
+
     private Utilisateur getFromId(String id) {
 
         Utilisateur u = null;

@@ -37,7 +37,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private ListeTacheManager listeTacheManager;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +86,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
 
                     //data ne sert a rien c'est un test
                     Intent data = new Intent();
-                    setResult(1,data);
+                    setResult(1, data);
                     finish();
                 }
             }

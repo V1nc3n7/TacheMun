@@ -77,8 +77,6 @@ public class ListeTacheGroupeManager extends TableManager {
     }
 
 
-
-
     public ListeTacheGroupe getFromId(int id) {
         return null;
     }

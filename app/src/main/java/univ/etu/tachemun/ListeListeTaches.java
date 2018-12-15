@@ -148,6 +148,8 @@ public class ListeListeTaches extends AppCompatActivity
 
     private void deletElementListeListe(ListeTache liste) {
         ListeTacheManager lm = new ListeTacheManager(ListeListeTaches.this);
+        ActionUserManager actionUserManager = new ActionUserManager(ListeListeTaches.this);
+        actionUserManager.insertNew(new ActionUser(getIntent().getStringExtra("ID_UTILISATEUR"), "SUPPRESSION DE LISTE : " + liste.getNom()));
         lm.delete(liste);
     }
 
@@ -207,7 +209,7 @@ public class ListeListeTaches extends AppCompatActivity
 
                 listView = (ListView) findViewById(R.id.listeListeView);
                 listeTaches = recupListeListe();
-                if (listeTaches.size() == 0) {
+                if (listeTaches.isEmpty()) {
                     textView.setVisibility(View.VISIBLE);
                 } else {
                     textView.setVisibility(View.INVISIBLE);
@@ -264,7 +266,7 @@ public class ListeListeTaches extends AppCompatActivity
         listView.setId(R.id.listeListeView);
         linearLayout.addView(listView);
 
-        if (listeTaches == null || listeTaches.size() == 0) {
+        if (listeTaches.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
         }
         else{
@@ -312,7 +314,7 @@ public class ListeListeTaches extends AppCompatActivity
                             listView.setAdapter(adapter2);
                             //finish();
 
-                            if (listeTaches2.size() == 0) {
+                            if (listeTaches2.isEmpty()) {
                                 textView.setVisibility(View.VISIBLE);
                             }
                         }

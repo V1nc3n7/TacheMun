@@ -21,7 +21,7 @@ public class Tache {
      * @param createur
      * @param description
      * @param dateHeureCreation
-     * @param numero -1 alors on doit calculer le numero
+     * @param numero            -1 alors on doit calculer le numero
      * @param priorite
      * @param dateHeureEcheance si = -1 alors pas d'echeance
      */
@@ -62,6 +62,7 @@ public class Tache {
         }
 
     }
+
     public Tache() {
 
     }
@@ -111,13 +112,13 @@ public class Tache {
         return dateHeureCreation;
     }
 
-    public void setDateHeureCreation(Date dateHeureCreation) {
-        this.dateHeureCreation = dateHeureCreation;
-    }
-
     public void setDateHeureCreation(long dateHeureCreation) {
 
         this.dateHeureCreation = new Date(dateHeureCreation);
+    }
+
+    public void setDateHeureCreation(Date dateHeureCreation) {
+        this.dateHeureCreation = dateHeureCreation;
     }
 
     public int getNumero() {
@@ -140,12 +141,12 @@ public class Tache {
         return dateHeureEcheance;
     }
 
-    public void setDateHeureEcheance(Date dateHeureEcheance) {
-        this.dateHeureEcheance = dateHeureEcheance;
-    }
-
     public void setDateHeureEcheance(long dateHeureEcheance) {
         this.dateHeureEcheance = new Date(dateHeureEcheance);
+    }
+
+    public void setDateHeureEcheance(Date dateHeureEcheance) {
+        this.dateHeureEcheance = dateHeureEcheance;
     }
 
     public boolean hasEcheance() {

@@ -6,6 +6,7 @@ import android.database.Cursor;
 
 import java.util.ArrayList;
 
+import univ.etu.tachemun.db.tableclass.RealiseTache;
 import univ.etu.tachemun.db.tableclass.Tache;
 
 public class TacheManager extends TableManager {
@@ -131,7 +132,6 @@ public class TacheManager extends TableManager {
     }
 
     /**
-     *
      * @param id_liste
      * @return TOUTES les taches de la liste id_liste
      */
@@ -183,6 +183,13 @@ public class TacheManager extends TableManager {
         c.close();
         return list;
     }
+
+
+    public long realiseTache(Tache t, String username, String message) {
+        RealiseTacheManager realiseTacheManager = new RealiseTacheManager(context);
+        return realiseTacheManager.insert(new RealiseTache(username, t.getID(), message));
+    }
+
 
     /**
      * incement du numero de la tache dans la liste
@@ -247,7 +254,6 @@ public class TacheManager extends TableManager {
 
 
     }
-
 
 
 }

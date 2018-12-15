@@ -107,7 +107,6 @@ public class GroupeManager extends TableManager {
         listeTacheGroupeManager.delete(idL);
 
 
-
         this.open();
         long l = db.delete(tableName, where, whereArgs);
         this.close();
