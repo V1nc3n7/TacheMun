@@ -142,7 +142,7 @@ public class AffListeTache extends AppCompatActivity {
                 //List<FluxTaches> listflux = gene(TachesN, 0);
                 //FluxTachesAdapter adapter = new FluxTachesAdapter(this, listflux);
 
-                FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN,this,getIntent().getIntExtra("ID_LISTE", -1));
+                FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN,this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
 
                 listView.setAdapter(adapter3);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -211,7 +211,7 @@ public class AffListeTache extends AppCompatActivity {
                 //List<FluxTaches> listflux2 = gene(TachesR, 1);
                 //FluxTachesAdapter adapter2 = new FluxTachesAdapter(this, listflux2);
 
-                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR,this,getIntent().getIntExtra("ID_LISTE", -1));
+                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR,this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
 
                 listView2.setAdapter(adapter4);
 
@@ -281,7 +281,7 @@ public class AffListeTache extends AppCompatActivity {
             //final List<FluxTaches> list = gene(TachesN, 0);
             //final FluxTachesAdapter adapter = new FluxTachesAdapter(this, list);
 
-            FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN,this,getIntent().getIntExtra("ID_LISTE", -1));
+            FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN,this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
 
             listView.setAdapter(adapter3);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -325,7 +325,7 @@ public class AffListeTache extends AppCompatActivity {
                             supprTache(TachesN.get(i));
 
                             TachesN = getTacheOfListe();
-                            FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN,AffListeTache.this,getIntent().getIntExtra("ID_LISTE", -1));
+                            FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN,AffListeTache.this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
 
                             listView.setAdapter(adapter3);
 
@@ -357,7 +357,7 @@ public class AffListeTache extends AppCompatActivity {
                 //List<FluxTaches> list1 = gene(TachesR, 1);
                 //FluxTachesAdapter adapter1 = new FluxTachesAdapter(this, list1);
 
-                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR,this,getIntent().getIntExtra("ID_LISTE", -1));
+                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR,this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
 
                 listView2.setAdapter(adapter4);
                 listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -402,7 +402,7 @@ public class AffListeTache extends AppCompatActivity {
 
                                 TachesR = getTachesRealOfListe();
 
-                                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR,AffListeTache.this,getIntent().getIntExtra("ID_LISTE", -1));
+                                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR,AffListeTache.this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
 
                                 listView2.setAdapter(adapter4);
 

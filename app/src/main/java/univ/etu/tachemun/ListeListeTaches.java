@@ -298,11 +298,14 @@ public class ListeListeTaches extends AppCompatActivity
                             Toast.makeText(getApplicationContext(), "Supprime",
                                     Toast.LENGTH_LONG).show();
                             deletElementListeListe(listeTaches.get(position));
-                            ArrayList<Tache> list = getTachesOfListe(listeTaches.get(position).getID());
-                            for(int i = 0;i<list.size();i++) {
-                                supprTache(list.get(i));
-                            }
+                            listeTaches = recupListeListe();
 
+                            /*if(listeTaches.size() != 0){
+                                ArrayList<Tache> list = getTachesOfListe(listeTaches.get(position).getID());
+                                for(int i = 0;i<list.size();i++) {
+                                    supprTache(list.get(i));
+                                }
+                            }*/
                             ArrayList<ListeTache> listeTaches2 = recupListeListe();
                             List<Flux> listflux2 = geneListe(listeTaches2);
                             FluxAdapter adapter2 = new FluxAdapter(ListeListeTaches.this, listflux2);

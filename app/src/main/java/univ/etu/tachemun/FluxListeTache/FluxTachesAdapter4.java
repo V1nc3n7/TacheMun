@@ -25,11 +25,19 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
     private ArrayList<Tache> list = new ArrayList<Tache>();
     private Context context;
     private int idListe;
+    private ListView LN;
+    private ListView LR;
+    private TextView TN;
+    private TextView TR;
 
-    public  FluxTachesAdapter4(ArrayList<Tache> list,Context context , int idListe){
+    public  FluxTachesAdapter4(ArrayList<Tache> list,Context context , int idListe , ListView LN, ListView LR, TextView TN, TextView TR){
         this.list = list;
         this.context = context;
         this.idListe = idListe;
+        this.LN = LN;
+        this.LR = LR;
+        this.TN = TN;
+        this.TR = TR;
     }
 
     @Override

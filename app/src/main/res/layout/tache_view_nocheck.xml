@@ -10,15 +10,16 @@
 
     <ImageView
         android:id="@+id/nocheck"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:clickable="true"
+        android:padding="5dp"
         app:srcCompat="@drawable/pascocher" />
 
     <TextView
@@ -28,7 +29,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="7dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="10dp"
         android:layout_toEndOf="@+id/nocheck"
         android:text=""

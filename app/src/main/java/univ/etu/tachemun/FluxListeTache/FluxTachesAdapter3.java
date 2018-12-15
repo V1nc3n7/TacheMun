@@ -25,11 +25,19 @@ public class FluxTachesAdapter3 extends BaseAdapter implements ListAdapter {
     private ArrayList<Tache> list = new ArrayList<Tache>();
     private Context context;
     private int idListe;
+    private ListView LN;
+    private ListView LR;
+    private TextView TN;
+    private TextView TR;
 
-    public  FluxTachesAdapter3(ArrayList<Tache> list,Context context , int idListe){
+    public  FluxTachesAdapter3(ArrayList<Tache> list,Context context , int idListe , ListView LN, ListView LR, TextView TN, TextView TR){
         this.list = list;
         this.context = context;
         this.idListe = idListe;
+        this.LN = LN;
+        this.LR = LR;
+        this.TN = TN;
+        this.TR = TR;
     }
 
     @Override
@@ -68,7 +76,20 @@ public class FluxTachesAdapter3 extends BaseAdapter implements ListAdapter {
                 switchTache(list.get(i),i);
                 Toast.makeText(context, "listN "+ getTacheOfListe().size()+", listR "+ getTachesRealOfListe().size(),
                         Toast.LENGTH_LONG).show();
-
+                LN.setAdapter(new FluxTachesAdapter3(getTacheOfListe(),context,idListe,LN,LR,TN,TR));
+                LR.setAdapter(new FluxTachesAdapter4(getTachesRealOfListe(),context,idListe,LN,LR,TN,TR));
+                if(getTacheOfListe().size() == 0){
+                    TN.setVisibility(View.VISIBLE);
+                }
+                else{
+                    TN.setVisibility(View.INVISIBLE);
+                }
+                if(getTachesRealOfListe().size() == 0){
+                    TR.setVisibility(View.VISIBLE);
+                }
+                else{
+                    TR.setVisibility(View.INVISIBLE);
+                }
             }
         });
         return view;
