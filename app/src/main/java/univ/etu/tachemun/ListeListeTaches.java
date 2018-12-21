@@ -12,9 +12,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -74,6 +76,11 @@ public class ListeListeTaches extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //View viewInflated = LayoutInflater.from(ListeListeTaches.this).inflate(R.layout.nav_header_listeliste, (ViewGroup) view, false);
+
+        //TextView Pseudo = (TextView) findViewById(R.id.YNAME);
+        //Pseudo.setText(getIntent().getStringExtra("ID_UTILISATEUR"));
+
         //affichage de la liste
 
         affichage(0);
@@ -106,7 +113,14 @@ public class ListeListeTaches extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(ListeListeTaches.this,Parametres.class);
+            startActivity(intent);
             return true;
+        }
+        if(id == R.id.action_deco){
+            Intent intent = new Intent(ListeListeTaches.this,Connexion.class);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -116,12 +130,13 @@ public class ListeListeTaches extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
         switch (item.getItemId()) {
             case R.id.nav_camera:
                 break;
 
-
+            /*
             case R.id.nav_gallery:
                 // Handle the camera action
                 break;
@@ -132,7 +147,7 @@ public class ListeListeTaches extends AppCompatActivity
             case R.id.nav_share:
                 break;
             case R.id.nav_send:
-                break;
+                break;*/
 
         }
 
@@ -216,9 +231,9 @@ public class ListeListeTaches extends AppCompatActivity
                 }
 
                 List<Flux> listflux = geneListe(listeTaches);
-                FluxAdapter adapter = new FluxAdapter(this, listflux);
+                FluxAdapter adapter = new FluxAdapter(this, listflux,listeTaches);
                 listView.setAdapter(adapter);
-
+                list(listView);
             }
         }
     }
@@ -274,33 +289,38 @@ public class ListeListeTaches extends AppCompatActivity
 
             listView.setId(R.id.listeListeView);
             final List<Flux> listflux = geneListe(listeTaches);
-            final FluxAdapter adapter = new FluxAdapter(this, listflux);
+            final FluxAdapter adapter = new FluxAdapter(this, listflux,listeTaches);
             listView.setAdapter(adapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    listeTaches = recupListeListe();
-                    Intent intent = new Intent(ListeListeTaches.this, AffListeTache.class);
-                    intent.putExtra("ID_UTILISATEUR",getIntent().getStringExtra("ID_UTILISATEUR"));
-                    intent.putExtra("ID_LISTE", listeTaches.get(i).getID());
-                    intent.putExtra("NOM_LISTETACHE",listeTaches.get(i).getNom());
-                    intent.putExtra("COULEUR_LISTETACHE",listeTaches.get(i).getCouleur());
-                    startActivity(intent);
-                }
-            });
-            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
-                    builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
-                    builder.setCancelable(true);
-                    builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "Supprime",
-                                    Toast.LENGTH_LONG).show();
-                            deletElementListeListe(listeTaches.get(position));
-                            listeTaches = recupListeListe();
+            list(listView);
+        }
+    }
+
+    private void list(ListView l){
+        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                listeTaches = recupListeListe();
+                Intent intent = new Intent(ListeListeTaches.this, AffListeTache.class);
+                intent.putExtra("ID_UTILISATEUR",getIntent().getStringExtra("ID_UTILISATEUR"));
+                intent.putExtra("ID_LISTE", listeTaches.get(i).getID());
+                intent.putExtra("NOM_LISTETACHE",listeTaches.get(i).getNom());
+                intent.putExtra("COULEUR_LISTETACHE",listeTaches.get(i).getCouleur());
+                startActivity(intent);
+            }
+        });
+        l.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
+                builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
+                builder.setCancelable(true);
+                builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Supprime",
+                                Toast.LENGTH_LONG).show();
+                        deletElementListeListe(listeTaches.get(position));
+                        listeTaches = recupListeListe();
 
                             /*if(listeTaches.size() != 0){
                                 ArrayList<Tache> list = getTachesOfListe(listeTaches.get(position).getID());
@@ -308,36 +328,29 @@ public class ListeListeTaches extends AppCompatActivity
                                     supprTache(list.get(i));
                                 }
                             }*/
-                            ArrayList<ListeTache> listeTaches2 = recupListeListe();
-                            List<Flux> listflux2 = geneListe(listeTaches2);
-                            FluxAdapter adapter2 = new FluxAdapter(ListeListeTaches.this, listflux2);
-                            listView.setAdapter(adapter2);
-                            //finish();
+                        ArrayList<ListeTache> listeTaches2 = recupListeListe();
+                        List<Flux> listflux2 = geneListe(listeTaches2);
+                        FluxAdapter adapter2 = new FluxAdapter(ListeListeTaches.this, listflux2,listeTaches);
+                        listView.setAdapter(adapter2);
+                        //finish();
 
-                            if (listeTaches2.isEmpty()) {
-                                textView.setVisibility(View.VISIBLE);
-                            }
+                        if (listeTaches2.isEmpty()) {
+                            textView.setVisibility(View.VISIBLE);
                         }
-                    });
-                    builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "retour",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    return true;
-                }
-            });
-        }
-    }
-
-
-    private ArrayList<Tache> getTachesOfListe(int id) {
-        TacheManager t = new TacheManager(ListeListeTaches.this);
-        return t.getAllTachesFromListe(id);
+                    }
+                });
+                builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "retour",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return true;
+            }
+        });
     }
 
     private void supprTache(Tache t) {

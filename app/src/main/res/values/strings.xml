@@ -134,4 +134,5 @@
     <string name="title_activity_aff_liste_tache">AffListeTache</string>
     <string name="liste_listetache_no_taches">Vous navet pas de tâches</string>
     <string name="aff_listetache_taches_a_faire_str">Taches a faire</string>
+    <string name="title_activity_parametres">Parametres</string>
 </resources>

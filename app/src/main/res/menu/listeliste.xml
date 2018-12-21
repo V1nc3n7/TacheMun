@@ -5,11 +5,13 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="Paramètres"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        />
 
     <item
         android:id="@+id/action_deco"
         android:orderInCategory="100"
         android:title="Deconnexion"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        />
 </menu>

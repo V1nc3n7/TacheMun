@@ -12,6 +12,7 @@
         <activity android:name=".Connexion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,8 +27,11 @@
         <activity
             android:name=".AffListeTache"
             android:label="@string/title_activity_aff_liste_tache"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Parametres"
+            android:label="@string/title_activity_parametres"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
