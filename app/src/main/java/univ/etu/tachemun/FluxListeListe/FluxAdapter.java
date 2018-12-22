@@ -81,17 +81,6 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
         return t.getTachesRealFromListe(list.get(i).getID());
     }
 
-    private int pourcent(int i){
-        ArrayList<Tache> arrayList = getTachesRealOfListe(i);
-        ArrayList<Tache> arrayList2 = getTachesOfListe(i);
-        if(arrayList2.size() == 0){
-            return 100;
-        }
-        int a = arrayList.size();
-        int b = arrayList2.size();
-        return (a/b)*100;
-    }
-
     private class FluxViewHolder {
         TextView pseudo;
         TextView text;
