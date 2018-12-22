@@ -288,6 +288,7 @@ public class AffListeTache extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "Supprime",
                                 Toast.LENGTH_LONG).show();
+                        TachesN = getTacheOfListe();
                         supprTache(TachesN.get(i));
 
                         TachesN = getTacheOfListe();
@@ -357,6 +358,7 @@ public class AffListeTache extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "Supprime",
                                 Toast.LENGTH_LONG).show();
+                        TachesR = getTachesRealOfListe();
                         supprTache(TachesR.get(i));
 
                         TachesR = getTachesRealOfListe();

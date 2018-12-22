@@ -14,22 +14,32 @@
 
     <TextView
         android:id="@+id/pseudo"
-        android:layout_width="wrap_content"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/avatar"
         android:layout_alignTop="@+id/avatar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@+id/DATE_LISTE"
+        android:layout_toRightOf="@+id/avatar"
+        android:textColor="@android:color/black"
         android:textStyle="bold"
         tools:titre="Pseudo" />
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="wrap_content"
+        android:layout_width="238dp"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:layout_alignLeft="@+id/pseudo"
         android:layout_below="@+id/pseudo"
+        android:layout_alignLeft="@+id/pseudo"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="18dp"
+        android:layout_toStartOf="@+id/DATE_LISTE"
+        android:textColor="@android:color/black"
         tools:titre="" />
 
     <ProgressBar
@@ -54,6 +64,14 @@
         android:text="50%"
         android:textAlignment="center"
         android:textSize="10dp" />
+
+    <TextView
+        android:id="@+id/DATE_LISTE"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/avatar"
+        android:layout_alignEnd="@+id/progressBar"
+        android:text="12/\n12/\n2012" />
 
 
 </RelativeLayout>
