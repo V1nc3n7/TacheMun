@@ -47,11 +47,11 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/avatar"
+        android:layout_below="@+id/text"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="17dp" />
 
     <TextView
         android:id="@+id/pourcent"
@@ -68,10 +68,12 @@
     <TextView
         android:id="@+id/DATE_LISTE"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/avatar"
         android:layout_alignEnd="@+id/progressBar"
-        android:text="12/\n12/\n2012" />
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:text="12/12/2012" />
 
 
 </RelativeLayout>

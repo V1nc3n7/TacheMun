@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import univ.etu.tachemun.FluxListeTache.FluxTaches;
-import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter;
 import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter3;
 import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter4;
 import univ.etu.tachemun.db.tableclass.Tache;
@@ -166,44 +165,51 @@ public class AffListeTache extends AppCompatActivity {
         TachesR = getTachesRealOfListe();
         final int d = TachesR.size();
 
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layoutafflistetache);
+        LinearLayout linearLayout1 = (LinearLayout) findViewById(R.id.layoutafflistetache1);
+        LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.layoutafflistetache2);
+
+        //DisplayMetrics metrics = new DisplayMetrics();
+        //getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        //Log.d(TAG, "largeur : " + metrics.widthPixels);
+        //Log.d(TAG, "hauteur : " + metrics.heightPixels);
 
         textView1 = new TextView(this);
         textView1.setText("Taches a faire");
         textView1.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView1.setTextSize(25);
         textView1.setId(R.id.textmessagepasdelistet1);
-        linearLayout.addView(textView1);
+        linearLayout1.addView(textView1);
 
         textView2 = new TextView(this);
         textView2.setText(R.string.liste_listetache_no_taches);
         textView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView2.setId(R.id.textmessagepasdelistet2);
-        linearLayout.addView(textView2);
+        linearLayout1.addView(textView2);
 
         listView = new ListView(this);
         listView.setId(R.id.listetacheAF);
         listView.setPadding(10,10,10,20);
-        linearLayout.addView(listView);
+        linearLayout1.addView(listView);
 
         textView3 = new TextView(this);
         textView3.setText("Taches effectuees");
         textView3.setTextSize(25);
         textView3.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView3.setId(R.id.textmessagepasdelistet3);
-        linearLayout.addView(textView3);
+        linearLayout2.addView(textView3);
 
 
         textView4 = new TextView(this);
         textView4.setText("Aucune tache effectuee");
         textView4.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView4.setId(R.id.textmessagepasdelistet4);
-        linearLayout.addView(textView4);
+        linearLayout2.addView(textView4);
 
         listView2 = new ListView(this);
         listView2.setId(R.id.listetacheF);
         listView2.setPadding(10,10,10,10);
-        linearLayout.addView(listView2);
+        linearLayout2.addView(listView2);
 
         //Toast.makeText(this, "listN "+ getTacheOfListe().size()+", listR "+ getTachesRealOfListe().size(), Toast.LENGTH_LONG).show();
         list(listView,listView2);

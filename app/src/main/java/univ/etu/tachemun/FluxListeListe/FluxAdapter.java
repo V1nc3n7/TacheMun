@@ -13,7 +13,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import univ.etu.tachemun.ListeListeTaches;
 import univ.etu.tachemun.R;
 import univ.etu.tachemun.db.tableclass.ListeTache;
 import univ.etu.tachemun.db.tableclass.Tache;
@@ -45,6 +44,7 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
             viewHolder.avatar = (ImageView) convertView.findViewById(R.id.avatar);
             viewHolder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
             viewHolder.pourcent = (TextView) convertView.findViewById(R.id.pourcent);
+            viewHolder.date = (TextView) convertView.findViewById(R.id.DATE_LISTE);
             convertView.setTag(viewHolder);
         }
 
@@ -57,6 +57,13 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
         viewHolder.pseudo.setText(flux.getPseudo());
         viewHolder.text.setText(flux.getText());
         viewHolder.avatar.setImageDrawable(new ColorDrawable(flux.getColor()));
+        viewHolder.date.setText(flux.getDate());
+
+        if (flux.getDate() == "") {
+            viewHolder.date.setVisibility(View.INVISIBLE);
+        } else {
+            viewHolder.date.setVisibility(View.VISIBLE);
+        }
 
         if(a == 0){
             viewHolder.pourcent.setText(100+"%");
@@ -87,6 +94,7 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
         ImageView avatar;
         ProgressBar progressBar;
         TextView pourcent;
+        TextView date;
     }
 
 }

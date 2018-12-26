@@ -12,18 +12,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import univ.etu.tachemun.FluxListeListe.Flux;
@@ -85,6 +86,26 @@ public class ListeListeTaches extends AppCompatActivity
 
         affichage(0);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        textView = (TextView) findViewById(R.id.textmessagepasdelisteliste);
+
+
+        listView = (ListView) findViewById(R.id.listeListeView);
+        listeTaches = recupListeListe();
+        if (listeTaches.isEmpty()) {
+            textView.setVisibility(View.VISIBLE);
+        } else {
+            textView.setVisibility(View.INVISIBLE);
+        }
+
+        List<Flux> listflux = geneListe(listeTaches);
+        FluxAdapter adapter = new FluxAdapter(this, listflux, listeTaches);
+        listView.setAdapter(adapter);
+        list(listView);
     }
 
     @Override
@@ -207,7 +228,16 @@ public class ListeListeTaches extends AppCompatActivity
                     color = Color.argb(255, 255, 0, 255);
                     break;
             }
-            listflux.add(new Flux(color, listeTaches.get(i).getNom(), listeTaches.get(i).getDescription()));
+
+            DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy\nHH:mm:ss");
+            Date date = listeTaches.get(i).getDateHeureEcheance();
+            String d = "";
+            if (date == null) {
+                d = "";
+            } else {
+                d = df.format(date.getTime());
+            }
+            listflux.add(new Flux(color, listeTaches.get(i).getNom(), listeTaches.get(i).getDescription(), d));
         }
         return listflux;
     }
