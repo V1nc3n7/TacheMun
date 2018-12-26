@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,18 +14,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import univ.etu.tachemun.FluxListeTache.FluxTaches;
 import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter3;
 import univ.etu.tachemun.FluxListeTache.FluxTachesAdapter4;
+import univ.etu.tachemun.TimeDate.DatePickerFragment;
+import univ.etu.tachemun.TimeDate.TimePickerFragment;
 import univ.etu.tachemun.db.tableclass.Tache;
 import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
 import univ.etu.tachemun.db.tablemanagers.TacheManager;
@@ -249,26 +256,113 @@ public class AffListeTache extends AppCompatActivity {
         }
     }
 
+    public void actu() {
+        listView = (ListView) findViewById(R.id.listetacheAF);
+        listView2 = (ListView) findViewById(R.id.listetacheF);
+        list(listView, listView2);
+        TachesN = getTacheOfListe();
+        TachesR = getTachesRealOfListe();
+
+        if (TachesN.isEmpty()) {
+            textView2.setVisibility(View.VISIBLE);
+        } else {
+            textView2.setVisibility(View.INVISIBLE);
+        }
+
+        if (TachesR.isEmpty()) {
+            textView4.setVisibility(View.VISIBLE);
+        } else {
+            textView4.setVisibility(View.INVISIBLE);
+        }
+
+        FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN, this, getIntent().getIntExtra("ID_LISTE", -1), listView, listView2, textView2, textView4);
+        listView.setAdapter(adapter3);
+
+        FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR, this, getIntent().getIntExtra("ID_LISTE", -1), listView, listView2, textView2, textView4);
+        listView2.setAdapter(adapter4);
+    }
+
+    public void showTimePickerDialog(View v) {
+        TextView heure = (TextView) v.findViewById(R.id.heure);
+        Button timePicker = (Button) v.findViewById(R.id.settimeTache);
+        DialogFragment newFragment = new TimePickerFragment(timePicker, heure);
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+
+    }
+
+    public void showDatePickerDialog(View v) {
+        TextView date = (TextView) v.findViewById(R.id.date);
+        Button datePicker = (Button) v.findViewById(R.id.setdateTache);
+        DialogFragment newFragment = new DatePickerFragment(datePicker, date);
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
     public void list(ListView l1, ListView l2){
         //l1
         l1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, final View view, final int i, long l) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AffListeTache.this);
                 builder.setTitle("Resumé tâche :");
-                View viewInflated = LayoutInflater.from(AffListeTache.this).inflate(R.layout.tache_view_compl, (ViewGroup) view, false);
-                EditText t = (EditText) viewInflated.findViewById(R.id.NOM_T);
-                EditText d = (EditText) viewInflated.findViewById(R.id.DESCRIPTION_T);
+                final View viewInflated = LayoutInflater.from(AffListeTache.this).inflate(R.layout.tache_view_compl, (ViewGroup) view, false);
+                final EditText t = (EditText) viewInflated.findViewById(R.id.NOM_T);
+                final EditText d = (EditText) viewInflated.findViewById(R.id.DESCRIPTION_T);
+                Button setDate = (Button) viewInflated.findViewById(R.id.setdateTache);
+                Button setTime = (Button) viewInflated.findViewById(R.id.settimeTache);
+                final TextView date = (TextView) viewInflated.findViewById(R.id.date);
+                final TextView heure = (TextView) viewInflated.findViewById(R.id.heure);
+
                 TachesN = getTacheOfListe();
                 t.setText(TachesN.get(i).getLibelle());
                 d.setText(TachesN.get(i).getDescription());
+                Date date1 = TachesN.get(i).getDateHeureEcheance();
+                DateFormat df1 = new SimpleDateFormat("EEE, d MMM yyyy");
+                DateFormat df2 = new SimpleDateFormat("HH:mm");
+
+                if (date1 != null) {
+                    setDate.setText(df1.format(date1));
+                    date.setText("" + date1.getTime());
+                    setTime.setText(df2.format(date1));
+                    heure.setText("" + date1.getHours() + ":" + date1.getMinutes());
+                }
+                setDate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showDatePickerDialog(viewInflated);
+                    }
+                });
+                setTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showTimePickerDialog(viewInflated);
+                    }
+                });
+
+                final int pos = i;
                 builder.setView(viewInflated);
                 builder.setCancelable(true);
                 builder.setPositiveButton("modifié", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Date e = new Date();
+                        e.setTime(Long.parseLong("" + date.getText()));
+                        String a = (String) heure.getText();
+                        String[] z = a.split(":");
+                        String h = z[0];
+                        String m = z[1];
+                        e.setHours(Integer.parseInt(h));
+                        e.setMinutes(Integer.parseInt(m));
+                        e.setSeconds(0);
 
+                        Tache tache = TachesN.get(pos);
+                        TacheManager tacheManager = new TacheManager(AffListeTache.this);
+                        tache.setLibelle("" + t.getText());
+                        tache.setDescription("" + d.getText());
+                        tache.setDateHeureEcheance(e.getTime());
+                        tache.setEcheance(true);
+                        tacheManager.update(tache);
+                        actu();
                         Toast.makeText(getApplicationContext(), "modifié",
                                 Toast.LENGTH_LONG).show();
                     }
@@ -336,13 +430,13 @@ public class AffListeTache extends AppCompatActivity {
                 d.setText(TachesR.get(i).getDescription());
                 builder.setView(viewInflated);
                 builder.setCancelable(true);
-                builder.setPositiveButton("modifié", new DialogInterface.OnClickListener() {
+                /*builder.setPositiveButton("modifié", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "modifié",
                                 Toast.LENGTH_LONG).show();
                     }
-                });
+                });*/
                 builder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
