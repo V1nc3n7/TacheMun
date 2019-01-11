@@ -35,7 +35,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private Button checkButton;
     private Button timePicker;
     private Button datePicker;
-    public static final long MAGIC = 86400000L;
+    public static final long MAGIC = 86400000L; //24 * 60**2
     private TextView date;
     private TextView heure;
 

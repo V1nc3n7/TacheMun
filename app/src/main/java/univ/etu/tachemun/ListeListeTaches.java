@@ -172,18 +172,7 @@ public class ListeListeTaches extends AppCompatActivity
                 go.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
                 startActivity(go);
                 break;
-            /*
-            case R.id.nav_gallery:
-                // Handle the camera action
-                break;
-            case R.id.nav_slideshow:
-                break;
-            case R.id.nav_manage:
-                break;
-            case R.id.nav_share:
-                break;
-            case R.id.nav_send:
-                break;*/
+
 
         }
 
@@ -357,14 +346,16 @@ public class ListeListeTaches extends AppCompatActivity
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
-                builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
-                builder.setCancelable(true);
+                builder.setMessage("Voulez-vous supprimez la liste de tâche ?\nPartager ?");
+                builder.setCancelable(true);//ajouter un bouton partage
                 builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "Supprime",
                                 Toast.LENGTH_LONG).show();
                         deletElementListeListe(listeTaches.get(position));
+
+                        partageListe(listeTaches.get(position));
                         listeTaches = recupListeListe();
 
                             /*if(listeTaches.size() != 0){
@@ -396,6 +387,14 @@ public class ListeListeTaches extends AppCompatActivity
                 return true;
             }
         });
+    }
+
+    private void partageListe(ListeTache listeTache) {
+        Intent i = new Intent(ListeListeTaches.this, PartageListeActivity.class);
+        i.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
+        i.putExtra("ID_LISTETACHE", listeTache.getID());
+
+        startActivity(i);
     }
 
     private void supprTache(Tache t) {

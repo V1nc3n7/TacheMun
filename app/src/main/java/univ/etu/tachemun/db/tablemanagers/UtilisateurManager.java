@@ -244,6 +244,7 @@ public class UtilisateurManager extends TableManager {
     }
 
     public boolean isPseudoInDb(String pseudo) {
+        if (pseudo.equals("")) return false;
         this.open();
         Cursor c = db.rawQuery(
                 "SELECT " + ID_UTILISATEUR + " FROM " + tableName + " WHERE " +

@@ -36,10 +36,8 @@
             android:name=".AffGroupes"
             android:label="@string/title_activity_aff_groupes"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".GestionGroupe"
-            android:label="@string/title_activity_gestion_groupe"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GestionGroupe" />
+        <activity android:name=".PartageListeActivity"></activity>
     </application>
 
 </manifest>

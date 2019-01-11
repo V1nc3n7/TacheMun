@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/partage_titre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/partage_txt"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/partage_input_pseudo_invite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="@string/partage_pseudo_hint"
+        android:inputType="textPersonName" />
+
+
+    <Button
+        android:id="@+id/buttonPartageListe"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/invitation_button_txt" />
+
+</LinearLayout>
