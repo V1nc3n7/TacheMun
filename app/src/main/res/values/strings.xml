@@ -139,4 +139,7 @@
     <string name="nav_rech_groupe_title">Recherche groupe</string>
     <string name="title_activity_menu">Menu</string>
     <string name="title_activity_aff_groupes">AffGroupes</string>
+    <string name="nav_new_groupe_title">Creer groupe</string>
+    <string name="nav_groupe_title">Groupe</string>
+    <string name="title_activity_gestion_groupe">GestionGroupe</string>
 </resources>

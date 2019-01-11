@@ -1,5 +1,6 @@
 package univ.etu.tachemun;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,7 +37,10 @@ public class CreationGroupe extends AppCompatActivity {
 
                 Groupe g = new Groupe(getNomGroupeText(), pseudo, getPriveSwitch(), getDescriptionText());
                 int idG = (int) manager.insert(g);
-
+                Intent go = new Intent(CreationGroupe.this, GestionGroupe.class);
+                go.putExtra("ID_UTILISATEUR", pseudo);
+                startActivity(go);
+                finish();
 
             }
         });
@@ -55,4 +59,6 @@ public class CreationGroupe extends AppCompatActivity {
     private boolean getPriveSwitch() {
         return priveSwitch.isChecked();
     }
+
+
 }

@@ -154,12 +154,23 @@ public class ListeListeTaches extends AppCompatActivity
         // Handle navigation view item clicks here.
 
         int id = item.getItemId();
+        Intent go;
         switch (item.getItemId()) {
+
             case R.id.nav_accueil:
                 Log.i(this.getClass().getName(), "Go accueil");
+                go = new Intent(ListeListeTaches.this, ListeListeTaches.class);
+                go.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
+                startActivity(go);
                 break;
             case R.id.nav_rech_groupe:
                 Log.i(this.getClass().getName(), "Go rechGroupe");
+                break;
+            case R.id.nav_new_groupe:
+                Log.i(this.getClass().getName(), "Go new Groupe");
+                go = new Intent(ListeListeTaches.this, CreationGroupe.class);
+                go.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
+                startActivity(go);
                 break;
             /*
             case R.id.nav_gallery:
