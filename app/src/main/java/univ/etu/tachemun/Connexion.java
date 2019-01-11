@@ -56,8 +56,7 @@ public class Connexion extends AppCompatActivity {
 
                 if (!(checkPseudoReconized(getInputPseudo()))) {
                     messagesErrors.add("Pseudo inconnu");
-                }
-                if (!(checkPseudoPassword(getInputPseudo(), getInputPassword()))) {
+                } else if (!(checkPseudoPassword(getInputPseudo(), getInputPassword()))) {
                     messagesErrors.add("Le pseudo/mot de passe ne concordent pas");
                 }
 

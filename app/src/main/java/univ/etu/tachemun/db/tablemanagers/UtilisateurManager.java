@@ -206,6 +206,8 @@ public class UtilisateurManager extends TableManager {
 
     public boolean connectUser(String userName, String password) {
         Utilisateur u = getFromId(userName);
+        if (!isPseudoInDb(userName)) return false;
+
         if (genMdpViren(u, password).equals(u.getMotDePasse())) {
             ActionUserManager actionUserManager = new ActionUserManager(context);
             actionUserManager.insertNew(new ActionUser(userName, "CONNEXION"));
