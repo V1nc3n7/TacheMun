@@ -133,6 +133,36 @@ public class ListeTacheManager extends TableManager {
 
         }
         cursor.close();
+        this.open();
+        String alias = "idlistetache";
+        Cursor cursorZ = db.rawQuery("SELECT " + tableName + "." + ID_LISTETACHE + " AS " + alias + " ," + nom_ListeTache + " ,"
+                + IS_PRIVE + " ," + ID_ProprioListe + " ," + DESCRIPTION + " ," + DateHeure_Creation + " ," + HAS_ECHEANCE + " ," + ECHEANCE +
+                " ," + COULEUR + " FROM " + tableName + " INNER JOIN " + PartageListeManager.tableName + " ON " +
+                PartageListeManager.tableName + "." + PartageListeManager.ID_ListeTache + " = " + tableName + "." + ID_LISTETACHE
+
+                + " WHERE "
+                + PartageListeManager.tableName + "." + PartageListeManager.ID_Invite + "=\"" + username + "\"", null);
+
+
+        if (cursorZ.getCount() != 0) {
+            while (cursorZ.moveToNext()) {
+
+                ListeTache li = new ListeTache(cursorZ.getInt(cursorZ.getColumnIndex(alias)),
+                        cursorZ.getString(cursorZ.getColumnIndex(nom_ListeTache)),
+                        (cursorZ.getInt(cursorZ.getColumnIndex(IS_PRIVE)) == 1),
+                        cursorZ.getString(cursorZ.getColumnIndex(ID_ProprioListe)),
+                        cursorZ.getString(cursorZ.getColumnIndex(DESCRIPTION)),
+                        cursorZ.getLong(cursorZ.getColumnIndex(DateHeure_Creation)),
+                        (cursorZ.getInt(cursorZ.getColumnIndex(HAS_ECHEANCE)) == 1)
+                        , cursorZ.getLong(cursorZ.getColumnIndex(ECHEANCE))
+                        , cursorZ.getInt(cursorZ.getColumnIndex(COULEUR)));
+                listes.add(li);
+
+            }
+        }
+
+        this.close();
+        cursorZ.close();
         return listes;
     }
 

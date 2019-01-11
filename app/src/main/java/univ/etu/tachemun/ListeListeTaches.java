@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -154,9 +155,12 @@ public class ListeListeTaches extends AppCompatActivity
 
         int id = item.getItemId();
         switch (item.getItemId()) {
-            case R.id.nav_camera:
+            case R.id.nav_accueil:
+                Log.i(this.getClass().getName(), "Go accueil");
                 break;
-
+            case R.id.nav_rech_groupe:
+                Log.i(this.getClass().getName(), "Go rechGroupe");
+                break;
             /*
             case R.id.nav_gallery:
                 // Handle the camera action

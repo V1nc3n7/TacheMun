@@ -135,4 +135,8 @@
     <string name="liste_listetache_no_taches">Vous navet pas de tâches</string>
     <string name="aff_listetache_taches_a_faire_str">Taches a faire</string>
     <string name="title_activity_parametres">Parametres</string>
+    <string name="nav_accueil_titile">Accueil</string>
+    <string name="nav_rech_groupe_title">Recherche groupe</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_aff_groupes">AffGroupes</string>
 </resources>

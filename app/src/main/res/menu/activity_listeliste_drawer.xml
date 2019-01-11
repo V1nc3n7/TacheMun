@@ -7,9 +7,14 @@
         android:id="@+id/GROUPE"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_accueil"
+            android:title="@string/nav_accueil_titile" />
+        <item
+            android:id="@+id/nav_rech_groupe"
+            android:title="@string/nav_rech_groupe_title" />
+        <item
+            android:id="@+id/nav_groupe"
+            android:title="@string/nav_rech_groupe_title" />
     </group>
 
 </menu>
