@@ -86,16 +86,18 @@ public class Inscription extends AppCompatActivity {
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput());
                     utilisateurManager.insertNew(user);
+                    Intent data = new Intent(Inscription.this, ListeListeTaches.class);
+                    //   Intent data = new Intent();
 
-                    Intent data = new Intent();
                     data.putExtra("ID_UTILISATEUR", getPseudoInput());
                     setResult(1, data);
+                    startActivity(data);
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Inscription.this);
                     StringBuilder mess = new StringBuilder();
-                    for (int i = 0; i < messagesErrors.size(); i++) {
-                        mess.append("").append(messagesErrors.get(i)).append("\n");
+                    for (String message : messagesErrors) {
+                        mess.append("").append(message).append("\n");
                     }
                     builder.setMessage(mess.toString());
                     builder.setCancelable(true);

@@ -3,7 +3,6 @@ package univ.etu.tachemun.db.tablemanagers;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import univ.etu.tachemun.db.tableclass.EmailDisposable;
 
@@ -71,7 +70,6 @@ public class EmailDisposableManager extends TableManager {
         Cursor c = db.rawQuery(
                 "SELECT " + DOMAINE + " FROM " + tableName, null);
 
-        Log.i(getClass().toString(), "c.size " + c.getCount());
         if (c.getCount() == 0) {
 
             insert(new EmailDisposable("0815.ru0clickemail.com"));
