@@ -8,28 +8,6 @@ import univ.etu.tachemun.db.tableclass.RealiseTache;
 public class RealiseTacheManager extends TableManager {
 
 
-    /*
-
-
-CREATE TABLE RealiseTache (
-  ID_RealiseTache int(11) NOT NULL,
-  ID_realiseurTache varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  ID_Tache int(11) NOT NULL,
-  dateHeureRealisation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  details_RealiseTache varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-ALTER TABLE RealiseTache
-  ADD PRIMARY KEY (ID_RealiseTache),
-  ADD KEY fk_RealiseTache_Utilisateur_idx (ID_realiseurTache),
-  ADD KEY fk_RealiseTache_Tache_idx (ID_Tache);
-
-
-ALTER TABLE RealiseTache
-  MODIFY ID_RealiseTache int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-    */
     static final String tableName = "RealiseTache";
     static final String ID_Tache = "ID_Tache";
     private static final String ID_RealiseTache = "ID_RealiseTache";
