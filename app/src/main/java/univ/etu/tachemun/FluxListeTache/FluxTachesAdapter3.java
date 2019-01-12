@@ -70,12 +70,13 @@ public class FluxTachesAdapter3 extends BaseAdapter implements ListAdapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "click "+i,
+                /*Toast.makeText(context, "click "+i,
                         Toast.LENGTH_LONG).show();
-                //supprTache(list.get(i));
+                //supprTache(list.get(i));*/
                 switchTache(list.get(i),i);
-                Toast.makeText(context, "listN "+ getTacheOfListe().size()+", listR "+ getTachesRealOfListe().size(),
-                        Toast.LENGTH_LONG).show();
+
+                /*Toast.makeText(context, "listN "+ getTacheOfListe().size()+", listR "+ getTachesRealOfListe().size(),
+                        Toast.LENGTH_LONG).show();*/
                 LN.setAdapter(new FluxTachesAdapter3(getTacheOfListe(),context,idListe,LN,LR,TN,TR));
                 LR.setAdapter(new FluxTachesAdapter4(getTachesRealOfListe(),context,idListe,LN,LR,TN,TR));
                 if(getTacheOfListe().size() == 0){

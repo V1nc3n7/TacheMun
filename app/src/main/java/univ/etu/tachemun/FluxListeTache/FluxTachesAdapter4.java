@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import univ.etu.tachemun.CreationTache;
 import univ.etu.tachemun.R;
 import univ.etu.tachemun.db.tableclass.RealiseTache;
 import univ.etu.tachemun.db.tableclass.Tache;
@@ -72,8 +73,23 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
             public void onClick(View view) {
                 Toast.makeText(context, "click "+i,
                         Toast.LENGTH_LONG).show();
-                //supprTache(list.get(i));
-                //switchTache(list.get(i),i);
+                supprTache(list.get(i));
+                rswitchTache(i);
+
+                LN.setAdapter(new FluxTachesAdapter3(getTacheOfListe(),context,idListe,LN,LR,TN,TR));
+                LR.setAdapter(new FluxTachesAdapter4(getTachesRealOfListe(),context,idListe,LN,LR,TN,TR));
+                if(getTacheOfListe().size() == 0){
+                    TN.setVisibility(View.VISIBLE);
+                }
+                else{
+                    TN.setVisibility(View.INVISIBLE);
+                }
+                if(getTachesRealOfListe().size() == 0){
+                    TR.setVisibility(View.VISIBLE);
+                }
+                else{
+                    TR.setVisibility(View.INVISIBLE);
+                }
 
             }
         });
@@ -101,5 +117,15 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
     private ArrayList<Tache> getTacheOfListe() {
         TacheManager t = new TacheManager(context);
         return t.getTachesNonRealiseesFromListe(idListe);
+    }
+
+    private ArrayList<Tache> getTachesRealOfListe() {
+        TacheManager t = new TacheManager(context);
+        return t.getTachesRealFromListe(idListe);
+    }
+
+    private void rswitchTache(int i){
+        TacheManager tacheManager = new TacheManager(context);
+        tacheManager.insert(list.get(i));
     }
 }
