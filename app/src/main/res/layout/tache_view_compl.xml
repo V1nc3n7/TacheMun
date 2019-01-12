@@ -67,6 +67,20 @@
     </LinearLayout>
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Modifiez la priorité de votre tâche :"
+        android:textSize="18dp"
+        android:textColor="@color/colorAccent"/>
+
+    <Spinner
+        android:id="@+id/spinner_priorité"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" />
+
+    <TextView
         android:id="@+id/date"
         android:layout_width="0dp"
         android:layout_height="0dp"

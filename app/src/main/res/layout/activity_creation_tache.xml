@@ -39,7 +39,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:text="@string/nouvTache_dateHeure_txt_view"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@color/colorAccent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,6 +67,20 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Définissez la priorité de votre tâche :"
+        android:textSize="18dp"
+        android:textColor="@color/colorAccent"/>
+
+    <Spinner
+        android:id="@+id/spinner_priorité"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" />
+
     <Button
         android:id="@+id/cree_nouvTache"
         style="@style/Widget.AppCompat.Button.Colored"
@@ -73,6 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/cree_une_nouvelle_tache" />
+
 
 
     <TextView

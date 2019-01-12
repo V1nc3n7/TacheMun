@@ -14,13 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -102,7 +105,9 @@ public class AffListeTache extends AppCompatActivity {
 
     private ArrayList<Tache> getTacheOfListe() {
         TacheManager t = new TacheManager(AffListeTache.this);
-        return t.getTachesNonRealiseesFromListe(getIntent().getIntExtra("ID_LISTE", -1));
+        ArrayList<Tache> list = t.getTachesNonRealiseesFromListe(getIntent().getIntExtra("ID_LISTE", -1));
+        list = trie(list);
+        return list;
     }
 
     private ArrayList<Tache> getTachesOfListe() {
@@ -113,6 +118,20 @@ public class AffListeTache extends AppCompatActivity {
     private ArrayList<Tache> getTachesRealOfListe() {
         TacheManager t = new TacheManager(AffListeTache.this);
         return t.getTachesRealFromListe(getIntent().getIntExtra("ID_LISTE", -1));
+    }
+
+    private ArrayList<Tache> trie(ArrayList<Tache> list){
+        ArrayList<Tache> list2 = new ArrayList<>();
+        int priot = 9;
+        while(list.size() != list2.size() || priot != -1){
+            for(int i = 0;i<list.size();i++){
+                if(list.get(i).getPriorite() == priot){
+                    list2.add(list.get(i));
+                }
+            }
+            priot--;
+        }
+        return list2;
     }
 
     //retours de nouvelle tache
@@ -312,6 +331,36 @@ public class AffListeTache extends AppCompatActivity {
                 Button setTime = (Button) viewInflated.findViewById(R.id.settimeTache);
                 final TextView date = (TextView) viewInflated.findViewById(R.id.date);
                 final TextView heure = (TextView) viewInflated.findViewById(R.id.heure);
+                Spinner spinner = (Spinner) viewInflated.findViewById(R.id.spinner_priorité);
+
+                List<String> list = new ArrayList<String>();
+                list.add("0");
+                list.add("1");
+                list.add("2");
+                list.add("3");
+                list.add("4");
+                list.add("5");
+                list.add("6");
+                list.add("7");
+                list.add("8");
+                list.add("9");
+
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(AffListeTache.this, android.R.layout.simple_spinner_item, list);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(dataAdapter);
+                spinner.setSelection(TachesN.get(i).getPriorite());
+                final int[] prio = {TachesN.get(i).getPriorite()};
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        prio[0] = i;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
 
                 TachesN = getTacheOfListe();
                 t.setText(TachesN.get(i).getLibelle());
@@ -345,22 +394,33 @@ public class AffListeTache extends AppCompatActivity {
                 builder.setPositiveButton("modifié", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         Date e = new Date();
-                        e.setTime(Long.parseLong("" + date.getText()));
-                        String a = (String) heure.getText();
-                        String[] z = a.split(":");
-                        String h = z[0];
-                        String m = z[1];
-                        e.setHours(Integer.parseInt(h));
-                        e.setMinutes(Integer.parseInt(m));
-                        e.setSeconds(0);
+                        if(date.getText().equals("0") == false){
+                            e.setTime(Long.parseLong("" + date.getText()));
+                            String a = (String) heure.getText();
+                            String[] z = a.split(":");
+                            String h = z[0];
+                            String m = z[1];
+                            e.setHours(Integer.parseInt(h));
+                            e.setMinutes(Integer.parseInt(m));
+                            e.setSeconds(0);
+                        }
+
 
                         Tache tache = TachesN.get(pos);
                         TacheManager tacheManager = new TacheManager(AffListeTache.this);
                         tache.setLibelle("" + t.getText());
                         tache.setDescription("" + d.getText());
-                        tache.setDateHeureEcheance(e.getTime());
-                        tache.setEcheance(true);
+                        tache.setPriorite(prio[0]);
+                        if(date.getText().equals("0") == false){
+                            tache.setDateHeureEcheance(e.getTime());
+                            tache.setEcheance(true);
+                        }
+                        else{
+                            tache.setEcheance(false);
+                        }
+
                         tacheManager.update(tache);
                         actu();
                         Toast.makeText(getApplicationContext(), "modifié",

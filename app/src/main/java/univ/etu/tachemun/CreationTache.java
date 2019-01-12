@@ -7,12 +7,17 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import univ.etu.tachemun.TimeDate.DatePickerFragment;
 import univ.etu.tachemun.TimeDate.TimePickerFragment;
@@ -34,6 +39,9 @@ public class CreationTache extends AppCompatActivity {
     private TextView date;
     private TextView heure;
 
+    private Spinner spinnerP;
+    private int priorite;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,41 @@ public class CreationTache extends AppCompatActivity {
         setContentView(R.layout.activity_creation_tache);
         nomTache = (EditText) findViewById(R.id.cree_nouv_Tache_nomTache_input);
         descriptionTache = (EditText) findViewById(R.id.nouvTache_descr_input);
+
+        priorite = 0;
+
+        spinnerP = (Spinner) findViewById(R.id.spinner_priorité);
+        List<String> list = new ArrayList<String>();
+        list.add("0");
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        list.add("6");
+        list.add("7");
+        list.add("8");
+        list.add("9");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinnerP.setAdapter(dataAdapter);
+
+        spinnerP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                priorite = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                priorite = 0;
+            }
+        });
 
 
         date = (TextView) findViewById(R.id.date);
@@ -67,16 +110,14 @@ public class CreationTache extends AppCompatActivity {
                     if (date.getText().equals("0")) {
                         tache = new Tache(getIntent().getIntExtra("ID_LISTE", -1)
                                 , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
-                                , getDescriptionTache(), 0,
+                                , getDescriptionTache(), priorite,
                                 -1);
                     } else {
                         tache = new Tache(getIntent().getIntExtra("ID_LISTE", -1)
                                 , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
-                                , getDescriptionTache(), 0,
+                                , getDescriptionTache(), priorite,
                                 d.getTime());
                     }
-
-
 
                     //Log.i(getClass().toString(), tache.toString());
 
@@ -103,6 +144,7 @@ public class CreationTache extends AppCompatActivity {
                 }
             }
         });
+
 
 
     }
