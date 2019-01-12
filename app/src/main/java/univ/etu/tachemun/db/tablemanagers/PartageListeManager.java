@@ -7,7 +7,7 @@ import univ.etu.tachemun.db.tableclass.PartageListe;
 
 public class PartageListeManager extends TableManager {
 
-    static final String tableName = "PartageListeActivity";
+    static final String tableName = "PartageListe";
     private static final String ID_PartageListe = "ID_PartageListe";
     private static final String ID_Proprietaire = "ID_Proprietaire";
     static final String ID_ListeTache = "ID_ListeTache";
