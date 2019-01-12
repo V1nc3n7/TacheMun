@@ -27,11 +27,17 @@
         <activity
             android:name=".AffListeTache"
             android:label="@string/title_activity_aff_liste_tache"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Parametres"
             android:label="@string/title_activity_parametres"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AffGroupes"
+            android:label="@string/title_activity_aff_groupes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GestionGroupe" />
+        <activity android:name=".PartageListeActivity"></activity>
     </application>
 
 </manifest>

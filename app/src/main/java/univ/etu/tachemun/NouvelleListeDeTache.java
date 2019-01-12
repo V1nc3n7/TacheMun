@@ -13,8 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import univ.etu.tachemun.TimeDate.DatePickerFragment;
@@ -32,10 +35,13 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private Button checkButton;
     private Button timePicker;
     private Button datePicker;
+    public static final long MAGIC = 86400000L; //24 * 60**2
+    private TextView date;
+    private TextView heure;
+
 
     private int choixCouleur;
     private ListeTacheManager listeTacheManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,10 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         setContentView(R.layout.activity_nouvelle_liste_de_tache);
 
         creationImage();
+
+        date = (TextView) findViewById(R.id.date);
+        heure = (TextView) findViewById(R.id.heure);
+
 
         nomListeTache = (EditText) findViewById(R.id.nomListTache);
         descriptionListeTache = (EditText) findViewById(R.id.nouvListeTache_descr_input);
@@ -65,14 +75,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                         }
                     });
-                    /*
-                    builder.setNegativeButton("No, no", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                    });
-                    */
                     AlertDialog dialog = builder.create();
                     dialog.show();
 
@@ -80,10 +82,29 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     String userName = getIntent().getStringExtra("ID_UTILISATEUR");
 
                     //TODO rajouter l'heure
-                    long idNewListe = listeTacheManager.insertNew(new ListeTache(getTitreListe(), true,
-                            userName,
-                            getDescriptionListe()
-                            , false, 0, choixCouleur));
+                    Date d = new Date();
+                    d.setTime(Long.parseLong("" + date.getText()));
+                    String a = (String) heure.getText();
+                    String[] t = a.split(":");
+                    String h = t[0];
+                    String m = t[1];
+                    d.setHours(Integer.parseInt(h));
+                    d.setMinutes(Integer.parseInt(m));
+                    d.setSeconds(0);
+
+                    if (date.getText().equals("0")) {
+                        long idNewListe = listeTacheManager.insertNew(new ListeTache(getTitreListe(), true,
+                                userName,
+                                getDescriptionListe()
+                                , false, 0, choixCouleur));
+                    } else {
+                        long idNewListe = listeTacheManager.insertNew(new ListeTache(getTitreListe(), true,
+                                userName,
+                                getDescriptionListe()
+                                , true, d.getTime(), choixCouleur));
+                    }
+
+
 
                     //data ne sert a rien c'est un test
                     Intent data = new Intent();
@@ -97,7 +118,18 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "info : " + nomListeTache.getText().toString() + " et " + choixCouleur, Snackbar.LENGTH_LONG)
+                DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+
+                Date d = new Date();
+                d.setTime(Long.parseLong("" + date.getText()));
+                String a = (String) heure.getText();
+                String[] t = a.split(":");
+                String h = t[0];
+                String m = t[1];
+                d.setHours(Integer.parseInt(h));
+                d.setMinutes(Integer.parseInt(m));
+                d.setSeconds(0);
+                Snackbar.make(v, "info : " + df.format(d.getTime()), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -119,16 +151,22 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         return this.descriptionListeTache.getText().toString();
     }
 
+    public Date getDate(int days) {
+        return new Date((long) days * MAGIC);
+    }
+
     public void showTimePickerDialog(View v) {
+        heure = (TextView) findViewById(R.id.heure);
         timePicker = (Button) findViewById(R.id.settime);
-        DialogFragment newFragment = new TimePickerFragment(timePicker);
+        DialogFragment newFragment = new TimePickerFragment(timePicker, heure);
         newFragment.show(getSupportFragmentManager(), "timePicker");
 
     }
 
     public void showDatePickerDialog(View v) {
+        date = (TextView) findViewById(R.id.date);
         datePicker = (Button) findViewById(R.id.setdate);
-        DialogFragment newFragment = new DatePickerFragment(datePicker);
+        DialogFragment newFragment = new DatePickerFragment(datePicker, date);
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
@@ -30,6 +31,9 @@ public class CreationTache extends AppCompatActivity {
 
     private Button creaTache;
 
+    private TextView date;
+    private TextView heure;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +42,40 @@ public class CreationTache extends AppCompatActivity {
         nomTache = (EditText) findViewById(R.id.cree_nouv_Tache_nomTache_input);
         descriptionTache = (EditText) findViewById(R.id.nouvTache_descr_input);
 
+
+        date = (TextView) findViewById(R.id.date);
+        heure = (TextView) findViewById(R.id.heure);
+
         creaTache = (Button) findViewById(R.id.cree_nouvTache);
-        printButton = (Button) findViewById(R.id.tache_print_button);
         creaTache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (verifTitreTache()) {
-                    Tache tache = new Tache(getIntent().getIntExtra("ID_LISTE", -1)
-                            , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
-                            , getDescriptionTache(), 0,
-                            -1);
+
+                    Date d = new Date();
+                    d.setTime(Long.parseLong("" + date.getText()));
+                    String a = (String) heure.getText();
+                    String[] t = a.split(":");
+                    String h = t[0];
+                    String m = t[1];
+                    d.setHours(Integer.parseInt(h));
+                    d.setMinutes(Integer.parseInt(m));
+                    d.setSeconds(0);
+
+                    Tache tache;
+
+                    if (date.getText().equals("0")) {
+                        tache = new Tache(getIntent().getIntExtra("ID_LISTE", -1)
+                                , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
+                                , getDescriptionTache(), 0,
+                                -1);
+                    } else {
+                        tache = new Tache(getIntent().getIntExtra("ID_LISTE", -1)
+                                , getIntent().getStringExtra("ID_UTILISATEUR"), getTitreTache()
+                                , getDescriptionTache(), 0,
+                                d.getTime());
+                    }
+
 
 
                     //Log.i(getClass().toString(), tache.toString());
@@ -80,15 +108,17 @@ public class CreationTache extends AppCompatActivity {
     }
 
     public void showTimePickerDialog(View v) {
+        heure = (TextView) findViewById(R.id.heure);
         timePicker = (Button) findViewById(R.id.settimeTache);
-        DialogFragment newFragment = new TimePickerFragment(timePicker);
+        DialogFragment newFragment = new TimePickerFragment(timePicker, heure);
         newFragment.show(getSupportFragmentManager(), "timePicker");
 
     }
 
     public void showDatePickerDialog(View v) {
+        date = (TextView) findViewById(R.id.date);
         datePicker = (Button) findViewById(R.id.setdateTache);
-        DialogFragment newFragment = new DatePickerFragment(datePicker);
+        DialogFragment newFragment = new DatePickerFragment(datePicker, date);
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 

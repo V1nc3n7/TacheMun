@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,11 +20,13 @@ public class DatePickerFragment extends DialogFragment
 
     private Button d;
     private Date date;
+    private TextView textView;
 
     @SuppressLint("ValidFragment")
-    public DatePickerFragment(Button date) {
+    public DatePickerFragment(Button date, TextView textView) {
         d = date;
         this.date = new Date();
+        this.textView = textView;
     }
 
     @Override
@@ -40,15 +45,14 @@ public class DatePickerFragment extends DialogFragment
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         // Do something with the date chosen by the user
 
-        d.setText(new StringBuilder().append("").append(day).append("/").append(month).append("/").append(year).toString());
-
         Calendar calendar = Calendar.getInstance();
         calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
 
-        this.date = calendar.getTime();
-    }
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy");
 
-    public Date getDate() {
-        return date;
+        d.setText(df.format(calendar.getTime()));
+        textView.setText("" + calendar.getTime().getTime());
+
+        this.date = calendar.getTime();
     }
 }

@@ -12,18 +12,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import univ.etu.tachemun.FluxListeListe.Flux;
@@ -88,6 +90,26 @@ public class ListeListeTaches extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        textView = (TextView) findViewById(R.id.textmessagepasdelisteliste);
+
+
+        listView = (ListView) findViewById(R.id.listeListeView);
+        listeTaches = recupListeListe();
+        if (listeTaches.isEmpty()) {
+            textView.setVisibility(View.VISIBLE);
+        } else {
+            textView.setVisibility(View.INVISIBLE);
+        }
+
+        List<Flux> listflux = geneListe(listeTaches);
+        FluxAdapter adapter = new FluxAdapter(this, listflux, listeTaches);
+        listView.setAdapter(adapter);
+        list(listView);
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -132,22 +154,25 @@ public class ListeListeTaches extends AppCompatActivity
         // Handle navigation view item clicks here.
 
         int id = item.getItemId();
+        Intent go;
         switch (item.getItemId()) {
-            case R.id.nav_camera:
+
+            case R.id.nav_accueil:
+                Log.i(this.getClass().getName(), "Go accueil");
+                go = new Intent(ListeListeTaches.this, ListeListeTaches.class);
+                go.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
+                startActivity(go);
+                break;
+            case R.id.nav_rech_groupe:
+                Log.i(this.getClass().getName(), "Go rechGroupe");
+                break;
+            case R.id.nav_new_groupe:
+                Log.i(this.getClass().getName(), "Go new Groupe");
+                go = new Intent(ListeListeTaches.this, CreationGroupe.class);
+                go.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
+                startActivity(go);
                 break;
 
-            /*
-            case R.id.nav_gallery:
-                // Handle the camera action
-                break;
-            case R.id.nav_slideshow:
-                break;
-            case R.id.nav_manage:
-                break;
-            case R.id.nav_share:
-                break;
-            case R.id.nav_send:
-                break;*/
 
         }
 
@@ -207,7 +232,16 @@ public class ListeListeTaches extends AppCompatActivity
                     color = Color.argb(255, 255, 0, 255);
                     break;
             }
-            listflux.add(new Flux(color, listeTaches.get(i).getNom(), listeTaches.get(i).getDescription()));
+
+            DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy\nHH:mm:ss");
+            Date date = listeTaches.get(i).getDateHeureEcheance();
+            String d = "";
+            if (date == null) {
+                d = "";
+            } else {
+                d = df.format(date.getTime());
+            }
+            listflux.add(new Flux(color, listeTaches.get(i).getNom(), listeTaches.get(i).getDescription(), d));
         }
         return listflux;
     }
@@ -312,14 +346,16 @@ public class ListeListeTaches extends AppCompatActivity
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
-                builder.setMessage("Voulez-vous supprimez la liste de tâche ?");
-                builder.setCancelable(true);
+                builder.setMessage("Voulez-vous supprimez la liste de tâche ?\nPartager ?");
+                builder.setCancelable(true);//ajouter un bouton partage
                 builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "Supprime",
                                 Toast.LENGTH_LONG).show();
                         deletElementListeListe(listeTaches.get(position));
+
+                        partageListe(listeTaches.get(position));
                         listeTaches = recupListeListe();
 
                             /*if(listeTaches.size() != 0){
@@ -351,6 +387,14 @@ public class ListeListeTaches extends AppCompatActivity
                 return true;
             }
         });
+    }
+
+    private void partageListe(ListeTache listeTache) {
+        Intent i = new Intent(ListeListeTaches.this, PartageListeActivity.class);
+        i.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
+        i.putExtra("ID_LISTETACHE", listeTache.getID());
+
+        startActivity(i);
     }
 
     private void supprTache(Tache t) {

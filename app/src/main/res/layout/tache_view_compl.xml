@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="30dp">
+    android:padding="30dp"
+    tools:ignore="MissingDefaultResource">
 
     <TextView
         android:id="@+id/TITRE_TACHE"
@@ -40,4 +42,39 @@
         android:inputType="textPersonName"
         android:padding="10dp"
         android:text="description" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <Button
+            android:id="@+id/setdateTache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/new_tache_datepicker" />
+
+        <Button
+            android:id="@+id/settimeTache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/new_tache_hourpicker" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/heure"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="0:0" />
 </LinearLayout>

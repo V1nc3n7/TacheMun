@@ -4,11 +4,14 @@ public class Flux {
     private int color;
     private String pseudo;
     private String text;
+    private String date;
 
-    public Flux(int color, String pseudo, String text) {
+    public Flux(int color, String pseudo, String text, String date) {
         this.color = color;
         this.pseudo = pseudo;
         this.text = text;
+        this.date = date;
+
     }
 
     public int getColor() {
@@ -33,6 +36,14 @@ public class Flux {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
 }

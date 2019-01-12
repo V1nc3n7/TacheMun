@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import univ.etu.tachemun.db.tableclass.Groupe;
 import univ.etu.tachemun.db.tableclass.ListeTache;
 import univ.etu.tachemun.db.tableclass.ListeTacheGroupe;
@@ -81,6 +84,37 @@ public class GroupeManager extends TableManager {
 
     }
 
+    public List<Groupe> getGroupesOfUser(String username) {
+        ArrayList<Groupe> list = new ArrayList<>();
+        this.open();
+
+        Cursor cursor = db.rawQuery("SELECT " + ID_GROUPE + " ," + ID_createur + " ,"
+                + IS_PRIVE + " ," + nom_Groupe + " ," + DESCRIPTION + " ," + DateHeure_Creation + " FROM " + tableName + " INNER JOIN " + MembreManager.tableName + " ON "
+                + tableName + "." + ID_GROUPE + " = " + MembreManager.tableName + "." + MembreManager.ID_GROUPE + " WHERE " + MembreManager.tableName + "." + MembreManager.PSEUDO + "=\"" + username + "\"", null);
+
+//select ID_Groupe,nom from Groupe inner join Membre on Membre.ID_GROUPE =Groupe.ID_Groupe where Membre.pseudo ='fred'
+
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+
+                Groupe li = new Groupe(cursor.getInt(cursor.getColumnIndex(ID_GROUPE)),
+                        cursor.getString(cursor.getColumnIndex(ID_createur)),
+                        cursor.getString(cursor.getColumnIndex(nom_Groupe)),
+                        (cursor.getInt(cursor.getColumnIndex(IS_PRIVE)) == 1),
+
+                        cursor.getString(cursor.getColumnIndex(DESCRIPTION)),
+                        cursor.getLong(cursor.getColumnIndex(DateHeure_Creation)));
+                list.add(li);
+
+            }
+            this.close();
+
+        }
+
+        cursor.close();
+
+        return list;
+    }
     public long delete(Groupe groupe) {
 
 

@@ -11,10 +11,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
-import univ.etu.tachemun.AffListeTache;
 import univ.etu.tachemun.R;
 import univ.etu.tachemun.db.tableclass.RealiseTache;
 import univ.etu.tachemun.db.tableclass.Tache;
@@ -77,6 +77,14 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
 
             }
         });
+
+        TextView date = (TextView) view.findViewById(R.id.DATE_TACHE);
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy\nHH:mm:ss");
+        if (list.get(i).getDateHeureEcheance() == null) {
+            date.setText("");
+        } else {
+            date.setText(df.format(list.get(i).getDateHeureEcheance()));
+        }
         return view;
     }
 

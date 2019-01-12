@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 @SuppressLint("ValidFragment")
 public class TimePickerFragment extends DialogFragment
@@ -18,12 +21,14 @@ public class TimePickerFragment extends DialogFragment
     private Button t;
     private int mins;
     private int hours;
+    private TextView textView;
 
     @SuppressLint("ValidFragment")
-    public TimePickerFragment(Button time) {
+    public TimePickerFragment(Button time, TextView textView) {
         t = time;
         mins = 0;
         hours = 0;
+        this.textView = textView;
     }
 
     @Override
@@ -44,7 +49,12 @@ public class TimePickerFragment extends DialogFragment
         hours = hourOfDay;
         mins = minute;
 
+        java.text.DateFormat df = new SimpleDateFormat("HH:mm");
+        Date d = new Date();
+        d.setHours(hours);
+        d.setMinutes(mins);
 
+        textView.setText(df.format(d));
     }
 
     public long getTime() {

@@ -28,6 +28,7 @@ public class ListeTache {
         } else {
             this.dateHeureEcheance = null;
         }
+
         this.couleur = couleur;
     }
 
