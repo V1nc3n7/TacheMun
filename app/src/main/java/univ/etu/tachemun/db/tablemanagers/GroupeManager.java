@@ -92,7 +92,6 @@ public class GroupeManager extends TableManager {
                 + IS_PRIVE + " ," + nom_Groupe + " ," + DESCRIPTION + " ," + DateHeure_Creation + " FROM " + tableName + " INNER JOIN " + MembreManager.tableName + " ON "
                 + tableName + "." + ID_GROUPE + " = " + MembreManager.tableName + "." + MembreManager.ID_GROUPE + " WHERE " + MembreManager.tableName + "." + MembreManager.PSEUDO + "=\"" + username + "\"", null);
 
-//select ID_Groupe,nom from Groupe inner join Membre on Membre.ID_GROUPE =Groupe.ID_Groupe where Membre.pseudo ='fred'
 
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
