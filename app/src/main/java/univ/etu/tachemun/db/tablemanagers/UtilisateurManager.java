@@ -296,4 +296,9 @@ public class UtilisateurManager extends TableManager {
         c.close();
         return r;
     }
+
+    public void autoConnectUser(String username) {
+        ActionUserManager actionUserManager = new ActionUserManager(context);
+        actionUserManager.insertNew(new ActionUser(username, "AUTOCONNEXION"));
+    }
 }

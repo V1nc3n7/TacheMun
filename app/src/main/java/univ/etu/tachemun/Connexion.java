@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import univ.etu.tachemun.db.tablemanagers.ActionUserManager;
 import univ.etu.tachemun.db.tablemanagers.UtilisateurManager;
 
 public class Connexion extends AppCompatActivity {
@@ -34,8 +35,19 @@ public class Connexion extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.connexion_input_password);
         messageErrorConnexion = (TextView) findViewById(R.id.connexion_message_error);
         connexionButton = (Button) findViewById(R.id.buttonConnexion);
+        ActionUserManager actionUserManager = new ActionUserManager(this);
+
+        String iduserco = actionUserManager.getLastCo();
+        if (iduserco != null) {
+            UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
+            utilisateurManager.autoConnectUser(iduserco);
+            Intent i = new Intent(Connexion.this, ListeListeTaches.class);
+            i.putExtra("ID_UTILISATEUR", iduserco);
+            startActivity(i);
+            finish();
 
 
+        }
         inscriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

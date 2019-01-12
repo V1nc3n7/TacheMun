@@ -2,6 +2,7 @@ package univ.etu.tachemun.db.tablemanagers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import univ.etu.tachemun.db.tableclass.ActionUser;
 
@@ -53,6 +54,27 @@ public class ActionUserManager extends TableManager {
         this.close();
         return r;
     }
+
+    public String getLastCo() {
+
+        String u = null;
+        this.open();
+        Cursor c = db.rawQuery("SELECT " + ID_UTILISATEUR
+                + " , " + "MAX(" + DateHeure_ACTION + ") "
+
+                + " FROM " + tableName + " WHERE " +
+                LIBELLE_ACTION + "=\"" + "CONNEXION" + "\";", null);
+
+        if (c.moveToFirst()) {
+            u = c.getString(c.getColumnIndex(ID_UTILISATEUR));
+            System.out.println("user co  " + u);
+        }
+
+        this.close();
+        c.close();
+        return u;
+    }
+
 
 
 }

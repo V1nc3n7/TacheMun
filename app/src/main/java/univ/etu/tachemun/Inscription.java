@@ -86,7 +86,7 @@ public class Inscription extends AppCompatActivity {
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput());
                     utilisateurManager.insertNew(user);
-                    Intent data = new Intent(Inscription.this, ListeListeTaches.class);
+                    Intent data = new Intent(Inscription.this, Connexion.class);
                     //   Intent data = new Intent();
 
                     data.putExtra("ID_UTILISATEUR", getPseudoInput());
