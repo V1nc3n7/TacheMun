@@ -38,15 +38,13 @@ public class Connexion extends AppCompatActivity {
         ActionUserManager actionUserManager = new ActionUserManager(this);
 
         String iduserco = actionUserManager.getLastCo();
-        if (iduserco != null) {
+        if (iduserco != null && getIntent().getStringExtra("ID_UTILISATEUR") == null && getIntent().getIntExtra("deco",0) == 0) {
             UtilisateurManager utilisateurManager = new UtilisateurManager(Connexion.this);
             utilisateurManager.autoConnectUser(iduserco);
             Intent i = new Intent(Connexion.this, ListeListeTaches.class);
             i.putExtra("ID_UTILISATEUR", iduserco);
             startActivity(i);
             finish();
-
-
         }
         inscriptionButton.setOnClickListener(new View.OnClickListener() {
             @Override

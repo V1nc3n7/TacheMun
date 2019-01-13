@@ -1,6 +1,7 @@
 package univ.etu.tachemun.FluxListeTache;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import univ.etu.tachemun.R;
 import univ.etu.tachemun.db.tableclass.RealiseTache;
@@ -65,6 +67,23 @@ public class FluxTachesAdapter3 extends BaseAdapter implements ListAdapter {
 
         TextView textView = (TextView) view.findViewById(R.id.TEXT_TACHE);
         textView.setText(list.get(i).getLibelle());
+
+
+        Date d = new Date();
+        d.setMonth(d.getMonth()+1);
+        Date dactu = new Date();
+
+        if(list.get(i).getDateHeureEcheance()!=null){
+            if(list.get(i).getDateHeureEcheance().before(d) && list.get(i).getDateHeureEcheance().after(dactu)){
+                textView.setTextColor(Color.argb(200, 255, 106, 0));
+            }
+            else{
+                if(list.get(i).getDateHeureEcheance().before(dactu)){
+                    textView.setTextColor(Color.argb(200, 255, 0, 0));
+                }
+            }
+        }
+
 
         ImageView imageView = (ImageView)view.findViewById(R.id.nocheck);
         imageView.setOnClickListener(new View.OnClickListener() {

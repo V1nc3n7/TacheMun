@@ -488,6 +488,26 @@ public class AffListeTache extends AppCompatActivity {
                 TachesR = getTachesRealOfListe();
                 t.setText(TachesR.get(i).getLibelle());
                 d.setText(TachesR.get(i).getDescription());
+
+                Spinner spinner = (Spinner) viewInflated.findViewById(R.id.spinner_priorité);
+
+                List<String> list = new ArrayList<String>();
+                list.add("0");
+                list.add("1");
+                list.add("2");
+                list.add("3");
+                list.add("4");
+                list.add("5");
+                list.add("6");
+                list.add("7");
+                list.add("8");
+                list.add("9");
+
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(AffListeTache.this, android.R.layout.simple_spinner_item, list);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(dataAdapter);
+                spinner.setSelection(TachesR.get(i).getPriorite());
+
                 builder.setView(viewInflated);
                 builder.setCancelable(true);
                 /*builder.setPositiveButton("modifié", new DialogInterface.OnClickListener() {
@@ -568,13 +588,13 @@ public class AffListeTache extends AppCompatActivity {
                 color = Color.argb(255, 255, 106, 0);
                 break;
             case 4:
-                color = Color.argb(255, 255, 255, 0);
+                color = Color.argb(50, 255, 255, 0);
                 break;
             case 5:
-                color = Color.argb(255, 0, 255, 0);
+                color = Color.argb(50, 0, 255, 0);
                 break;
             case 6:
-                color = Color.argb(255, 0, 255, 255);
+                color = Color.argb(50, 0, 255, 255);
                 break;
             case 7:
                 color = Color.argb(255, 0, 148, 255);
@@ -586,7 +606,7 @@ public class AffListeTache extends AppCompatActivity {
                 color = Color.argb(255, 178, 0, 255);
                 break;
             case 10:
-                color = Color.argb(255, 255, 0, 255);
+                color = Color.argb(50, 255, 0, 255);
                 break;
         }
         return color;

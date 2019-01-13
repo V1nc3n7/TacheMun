@@ -1,6 +1,7 @@
 package univ.etu.tachemun.FluxListeListe;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import univ.etu.tachemun.R;
@@ -56,6 +58,23 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
         double b = getTachesRealOfListe(position).size();
         viewHolder.pseudo.setText(flux.getPseudo());
         viewHolder.text.setText(flux.getText());
+
+        Date d = new Date();
+        d.setMonth(d.getMonth()+1);
+        Date dactu = new Date();
+
+        if(list.get(position).getDateHeureEcheance()!=null){
+            if(list.get(position).getDateHeureEcheance().before(d) && list.get(position).getDateHeureEcheance().after(dactu)){
+                viewHolder.pseudo.setTextColor(Color.argb(200, 255, 106, 0));
+            }
+            else{
+                if(list.get(position).getDateHeureEcheance().before(dactu)){
+                    viewHolder.pseudo.setTextColor(Color.argb(200, 255, 0, 0));
+                }
+            }
+        }
+
+
         viewHolder.avatar.setImageDrawable(new ColorDrawable(flux.getColor()));
         viewHolder.date.setText(flux.getDate());
 

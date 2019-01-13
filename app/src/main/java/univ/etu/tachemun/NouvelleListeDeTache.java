@@ -206,21 +206,21 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         final ImageView imageView4 = new ImageView(this);
         imageView4.setImageResource(R.drawable.carreblanc);
         imageView4.setClickable(true);
-        imageView4.setColorFilter(Color.argb(255, 255, 255, 0));
+        imageView4.setColorFilter(Color.argb(50, 255, 255, 0));
 
 
         //vert
         final ImageView imageView5 = new ImageView(this);
         imageView5.setImageResource(R.drawable.carreblanc);
         imageView5.setClickable(true);
-        imageView5.setColorFilter(Color.argb(255, 0, 255, 0));
+        imageView5.setColorFilter(Color.argb(50, 0, 255, 0));
 
 
         //tur
         final ImageView imageView6 = new ImageView(this);
         imageView6.setImageResource(R.drawable.carreblanc);
         imageView6.setClickable(true);
-        imageView6.setColorFilter(Color.argb(255, 0, 255, 255));
+        imageView6.setColorFilter(Color.argb(50, 0, 255, 255));
 
 
         //bleu cobalte
@@ -248,7 +248,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
         final ImageView imageView10 = new ImageView(this);
         imageView10.setImageResource(R.drawable.carreblanc);
         imageView10.setClickable(true);
-        imageView10.setColorFilter(Color.argb(255, 255, 0, 255));
+        imageView10.setColorFilter(Color.argb(50, 255, 0, 255));
 
         //click image
 

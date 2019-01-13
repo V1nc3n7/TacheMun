@@ -127,5 +127,8 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
     private void rswitchTache(int i){
         TacheManager tacheManager = new TacheManager(context);
         tacheManager.insert(list.get(i));
+        //list.get(i).setEcheance(list.get(i).getDateHeureEcheance() != null);
+        //tacheManager.update(list.get(i));
+
     }
 }

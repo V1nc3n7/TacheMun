@@ -1,11 +1,19 @@
 package univ.etu.tachemun;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,6 +33,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +46,9 @@ import univ.etu.tachemun.db.tablemanagers.ActionUserManager;
 import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
 import univ.etu.tachemun.db.tablemanagers.TacheManager;
 
+import static univ.etu.tachemun.Appnoti.CHANNEL_1_ID;
+import static univ.etu.tachemun.Appnoti.CHANNEL_2_ID;
+
 public class ListeListeTaches extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,6 +57,8 @@ public class ListeListeTaches extends AppCompatActivity
     private LinearLayout linearLayout;
     private ArrayList<ListeTache> listeTaches;
 
+    private NotificationManagerCompat notificationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +66,9 @@ public class ListeListeTaches extends AppCompatActivity
         setContentView(R.layout.activity_listeliste);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        notificationManager = NotificationManagerCompat.from(this);
+        sendOnChannel1();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +158,7 @@ public class ListeListeTaches extends AppCompatActivity
         }
         if(id == R.id.action_deco){
             Intent intent = new Intent(ListeListeTaches.this,Connexion.class);
+            intent.putExtra("deco",1);
             startActivity(intent);
             finish();
         }
@@ -213,13 +231,13 @@ public class ListeListeTaches extends AppCompatActivity
                     color = Color.argb(255, 255, 106, 0);
                     break;
                 case 4:
-                    color = Color.argb(255, 255, 255, 0);
+                    color = Color.argb(150, 255, 255, 0);
                     break;
                 case 5:
-                    color = Color.argb(255, 0, 255, 0);
+                    color = Color.argb(150, 0, 255, 0);
                     break;
                 case 6:
-                    color = Color.argb(255, 0, 255, 255);
+                    color = Color.argb(150, 0, 255, 255);
                     break;
                 case 7:
                     color = Color.argb(255, 0, 148, 255);
@@ -231,7 +249,7 @@ public class ListeListeTaches extends AppCompatActivity
                     color = Color.argb(255, 178, 0, 255);
                     break;
                 case 10:
-                    color = Color.argb(255, 255, 0, 255);
+                    color = Color.argb(150, 255, 0, 255);
                     break;
             }
 
@@ -356,8 +374,6 @@ public class ListeListeTaches extends AppCompatActivity
                         Toast.makeText(getApplicationContext(), "Supprime",
                                 Toast.LENGTH_LONG).show();
                         deletElementListeListe(listeTaches.get(position));
-
-                        partageListe(listeTaches.get(position));
                         listeTaches = recupListeListe();
 
                             /*if(listeTaches.size() != 0){
@@ -384,6 +400,12 @@ public class ListeListeTaches extends AppCompatActivity
                                 Toast.LENGTH_LONG).show();
                     }
                 });
+                builder.setNeutralButton("Partager", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        partageListe(listeTaches.get(position));
+                    }
+                });
                 AlertDialog dialog = builder.create();
                 dialog.show();
                 return true;
@@ -395,7 +417,6 @@ public class ListeListeTaches extends AppCompatActivity
         Intent i = new Intent(ListeListeTaches.this, PartageListeActivity.class);
         i.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
         i.putExtra("ID_LISTETACHE", listeTache.getID());
-
         startActivity(i);
     }
 
@@ -403,5 +424,81 @@ public class ListeListeTaches extends AppCompatActivity
         TacheManager tacheManager = new TacheManager(ListeListeTaches.this);
         tacheManager.delete(t);
     }
+
+    public void sendOnChannel1(){
+        Intent intent = new Intent(this,ListeListeTaches.class);
+
+        PendingIntent intent1 = PendingIntent.getBroadcast(this,0,intent,0);
+
+
+        listeTaches = recupListeListe();
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy\nHH:mm:ss");
+        //ArrayList<String> message = new ArrayList<>();
+        String message = "";
+        String message2 = "";
+        String messagef = "";
+        Date d = new Date();
+        d.setMonth(d.getMonth()+1);
+        Date dactu = new Date();
+
+        message += "Echénace(s) d'épassée(s) : \n";
+        for(int i = 0 ; i<listeTaches.size();i++){
+            if(listeTaches.get(i).getDateHeureEcheance() != null) {
+                if (listeTaches.get(i).getDateHeureEcheance().before(dactu)) {
+                    message += "" + listeTaches.get(i).getNom() + "\n" + "Ce terminait le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
+                }
+            }
+        }
+
+        if(message.equals("Echénace(s) d'épassée(s) : \n")){
+            message = "";
+        }
+
+        message2 += "Echénace(s) dans un mois : \n";
+        for(int i = 0 ; i<listeTaches.size();i++){
+            if(listeTaches.get(i).getDateHeureEcheance() != null) {
+                if (listeTaches.get(i).getDateHeureEcheance().before(d) && listeTaches.get(i).getDateHeureEcheance().after(dactu)) {
+                    //message.add("" + listeTaches.get(i).getNom() + "\n" + "Ce termine le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n");
+                    message2 += "" + listeTaches.get(i).getNom() + "\n" + "Ce termine le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
+                }
+            }
+        }
+
+        if(message2.equals("Echénace(s) dans un mois : \n")){
+            message2 = "";
+        }
+
+        if(message.equals("") == false){
+            Notification notification = new NotificationCompat.Builder(this,CHANNEL_1_ID)
+                    .setSmallIcon(R.drawable.ic_rappelle)
+                    .setContentTitle("Vos échéances de date sont dépasées ")
+                    .setContentText("Echéance ...")
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setCategory(NotificationCompat.CATEGORY_ALARM)
+                    .setContentIntent(intent1)
+                    /*.setStyle(new NotificationCompat.MessagingStyle("...")
+                        .addMessage(message))*/
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(message))
+                    .build();
+            notificationManager.notify(1,notification);
+        }
+        if(message2.equals("") == false){
+            Notification notification = new NotificationCompat.Builder(this,CHANNEL_2_ID)
+                    .setSmallIcon(R.drawable.ic_rappelle)
+                    .setContentTitle("Vos listes de tâches arrivent à échéance : ")
+                    .setContentText("Echéance ...")
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setCategory(NotificationCompat.CATEGORY_ALARM)
+                    .setContentIntent(intent1)
+                    /*.setStyle(new NotificationCompat.MessagingStyle("...")
+                        .addMessage(message))*/
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(message2))
+                    .build();
+            notificationManager.notify(2,notification);
+        }
+    }
+
 
 }
