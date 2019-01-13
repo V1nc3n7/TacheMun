@@ -129,6 +129,5 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
         tacheManager.insert(list.get(i));
         //list.get(i).setEcheance(list.get(i).getDateHeureEcheance() != null);
         //tacheManager.update(list.get(i));
-
     }
 }

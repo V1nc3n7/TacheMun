@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
@@ -21,10 +22,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,6 +45,8 @@ import java.util.List;
 
 import univ.etu.tachemun.FluxListeListe.Flux;
 import univ.etu.tachemun.FluxListeListe.FluxAdapter;
+import univ.etu.tachemun.TimeDate.DatePickerFragment;
+import univ.etu.tachemun.TimeDate.TimePickerFragment;
 import univ.etu.tachemun.db.tableclass.ActionUser;
 import univ.etu.tachemun.db.tableclass.ListeTache;
 import univ.etu.tachemun.db.tableclass.Tache;
@@ -58,6 +66,7 @@ public class ListeListeTaches extends AppCompatActivity
     private ArrayList<ListeTache> listeTaches;
 
     private NotificationManagerCompat notificationManager;
+    private int choixCouleur;
 
 
     @Override
@@ -365,8 +374,18 @@ public class ListeListeTaches extends AppCompatActivity
         l.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final View v = view;
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
-                builder.setMessage("Voulez-vous supprimez la liste de tâche ?\nPartager ?");
+                View viewInflated = LayoutInflater.from(ListeListeTaches.this).inflate(R.layout.listetache_view_compl, (ViewGroup) view, false);
+                Button button = (Button) viewInflated.findViewById(R.id.modifliste);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        modiflist(v,position);
+                    }
+                });
+
+                builder.setView(viewInflated);
                 builder.setCancelable(true);//ajouter un bouton partage
                 builder.setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                     @Override
@@ -375,18 +394,10 @@ public class ListeListeTaches extends AppCompatActivity
                                 Toast.LENGTH_LONG).show();
                         deletElementListeListe(listeTaches.get(position));
                         listeTaches = recupListeListe();
-
-                            /*if(listeTaches.size() != 0){
-                                ArrayList<Tache> list = getTachesOfListe(listeTaches.get(position).getID());
-                                for(int i = 0;i<list.size();i++) {
-                                    supprTache(list.get(i));
-                                }
-                            }*/
                         ArrayList<ListeTache> listeTaches2 = recupListeListe();
                         List<Flux> listflux2 = geneListe(listeTaches2);
                         FluxAdapter adapter2 = new FluxAdapter(ListeListeTaches.this, listflux2,listeTaches);
                         listView.setAdapter(adapter2);
-                        //finish();
 
                         if (listeTaches2.isEmpty()) {
                             textView.setVisibility(View.VISIBLE);
@@ -445,7 +456,20 @@ public class ListeListeTaches extends AppCompatActivity
         for(int i = 0 ; i<listeTaches.size();i++){
             if(listeTaches.get(i).getDateHeureEcheance() != null) {
                 if (listeTaches.get(i).getDateHeureEcheance().before(dactu)) {
-                    message += "" + listeTaches.get(i).getNom() + "\n" + "Ce terminait le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
+                    double a = getTachesOfListe(i).size();
+                    double b = getTachesRealOfListe(i).size();
+                    double c = 0;
+
+                    if(a == 0){
+                        c = 100;
+                    }
+                    else{
+                        c = (b/a)*100;
+                    }
+                    if(c != 100){
+                        message += "" + listeTaches.get(i).getNom() + "\n" + "Ce terminait le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
+                    }
+
                 }
             }
         }
@@ -458,8 +482,19 @@ public class ListeListeTaches extends AppCompatActivity
         for(int i = 0 ; i<listeTaches.size();i++){
             if(listeTaches.get(i).getDateHeureEcheance() != null) {
                 if (listeTaches.get(i).getDateHeureEcheance().before(d) && listeTaches.get(i).getDateHeureEcheance().after(dactu)) {
-                    //message.add("" + listeTaches.get(i).getNom() + "\n" + "Ce termine le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n");
-                    message2 += "" + listeTaches.get(i).getNom() + "\n" + "Ce termine le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
+                    double a = getTachesOfListe(i).size();
+                    double b = getTachesRealOfListe(i).size();
+                    double c = 0;
+
+                    if(a == 0){
+                        c = 100;
+                    }
+                    else{
+                        c = (b/a)*100;
+                    }
+                    if(c != 100) {
+                        message2 += "" + listeTaches.get(i).getNom() + "\n" + "Ce termine le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
+                    }
                 }
             }
         }
@@ -467,6 +502,18 @@ public class ListeListeTaches extends AppCompatActivity
         if(message2.equals("Echénace(s) dans un mois : \n")){
             message2 = "";
         }
+
+        /*
+        double a = getTachesOfListe(position).size();
+        double b = getTachesRealOfListe(position).size();
+        double c = 0;
+
+        if(a == 0){
+            c = 100;
+        }
+        else{
+            c = (b/a)*100;
+        }*/
 
         if(message.equals("") == false){
             Notification notification = new NotificationCompat.Builder(this,CHANNEL_1_ID)
@@ -498,6 +545,496 @@ public class ListeListeTaches extends AppCompatActivity
                     .build();
             notificationManager.notify(2,notification);
         }
+    }
+
+    private ArrayList<Tache> getTachesOfListe(int i) {
+        TacheManager t = new TacheManager(this);
+        return t.getAllTachesFromListe(listeTaches.get(i).getID());
+    }
+
+    private ArrayList<Tache> getTachesRealOfListe(int i) {
+        TacheManager t = new TacheManager(this);
+        return t.getTachesRealFromListe(listeTaches.get(i).getID());
+    }
+
+    private void modiflist(final View view, int i){
+        listeTaches = recupListeListe();
+        final int position = i;
+        AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
+        final View viewInflated = LayoutInflater.from(ListeListeTaches.this).inflate(R.layout.listetache_view_modif, (ViewGroup) view, false);
+        creationImage(viewInflated,listeTaches.get(i).getCouleur());
+        choixCouleur = listeTaches.get(i).getCouleur();
+
+        final EditText nt = (EditText) viewInflated.findViewById(R.id.nomListTache);
+        final EditText dest = (EditText) viewInflated.findViewById(R.id.nouvListeTache_descr_input);
+        final Button date = (Button) viewInflated.findViewById(R.id.setdate);
+        Button time = (Button) viewInflated.findViewById(R.id.settime);
+        nt.setText(listeTaches.get(i).getNom());
+        dest.setText(listeTaches.get(i).getDescription());
+
+        if(listeTaches.get(i).getDateHeureCreation() != null){
+            Date d = listeTaches.get(i).getDateHeureCreation();
+            DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy");
+            DateFormat dt = new SimpleDateFormat("HH:mm:ss");
+
+            String da= df.format(d);
+            String ti = dt.format(d);
+
+            date.setText(da);
+            time.setText(ti);
+        }
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(viewInflated);
+            }
+        });
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimePickerDialog(viewInflated);
+            }
+        });
+
+
+        builder.setView(viewInflated);
+        builder.setPositiveButton("Modifier", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                TextView date = (TextView) viewInflated.findViewById(R.id.date);
+                TextView heure = (TextView) viewInflated.findViewById(R.id.heure);
+                Date e = new Date();
+                if(date.getText().equals("0") == false){
+                    e.setTime(Long.parseLong("" + date.getText()));
+                    String a = (String) heure.getText();
+                    String[] z = a.split(":");
+                    String h = z[0];
+                    String m = z[1];
+                    e.setHours(Integer.parseInt(h));
+                    e.setMinutes(Integer.parseInt(m));
+                    e.setSeconds(0);
+                }
+
+                ListeTache listeTache = listeTaches.get(position);
+                listeTache.setNom(nt.getText().toString());
+                listeTache.setDescription(dest.getText().toString());
+                listeTache.setCouleur(choixCouleur);
+                if(date.getText().equals("0") == false){
+                    listeTache.setDateHeureEcheance(e.getTime());
+                    listeTache.setHasEcheance(true);
+                }
+                else{
+                    listeTache.setHasEcheance(false);
+                }
+
+                ListeTacheManager listeTacheManager = new ListeTacheManager(ListeListeTaches.this);
+                listeTacheManager.update(listeTache);
+                onResume();
+
+            }
+        });
+        builder.setNegativeButton("retour", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void showTimePickerDialog(View v) {
+        TextView heure = (TextView) v.findViewById(R.id.heure);
+        Button timePicker = (Button) v.findViewById(R.id.settime);
+        DialogFragment newFragment = new TimePickerFragment(timePicker, heure);
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+
+    }
+
+    public void showDatePickerDialog(View v) {
+        TextView date = (TextView) v.findViewById(R.id.date);
+        Button datePicker = (Button) v.findViewById(R.id.setdate);
+        DialogFragment newFragment = new DatePickerFragment(datePicker, date);
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    private void creationImage(View v,int i) {
+        LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.couleurs);
+        //création image
+        //noir
+        final ImageView imageView0 = new ImageView(this);
+        imageView0.setImageResource(R.drawable.carreblanc);
+        imageView0.setClickable(true);
+        imageView0.setColorFilter(Color.argb(255, 0, 0, 0));
+
+
+        //gris
+        final ImageView imageView1 = new ImageView(this);
+        imageView1.setImageResource(R.drawable.carreblanc);
+        imageView1.setClickable(true);
+        imageView1.setColorFilter(Color.argb(255, 64, 64, 64));
+
+
+        //rouge
+        final ImageView imageView2 = new ImageView(this);
+        imageView2.setImageResource(R.drawable.carreblanc);
+        imageView2.setClickable(true);
+        imageView2.setColorFilter(Color.argb(255, 255, 0, 0));
+
+
+        //orange
+        final ImageView imageView3 = new ImageView(this);
+        imageView3.setImageResource(R.drawable.carreblanc);
+        imageView3.setClickable(true);
+        imageView3.setColorFilter(Color.argb(255, 255, 106, 0));
+
+
+        //jaune
+        final ImageView imageView4 = new ImageView(this);
+        imageView4.setImageResource(R.drawable.carreblanc);
+        imageView4.setClickable(true);
+        imageView4.setColorFilter(Color.argb(50, 255, 255, 0));
+
+
+        //vert
+        final ImageView imageView5 = new ImageView(this);
+        imageView5.setImageResource(R.drawable.carreblanc);
+        imageView5.setClickable(true);
+        imageView5.setColorFilter(Color.argb(50, 0, 255, 0));
+
+
+        //tur
+        final ImageView imageView6 = new ImageView(this);
+        imageView6.setImageResource(R.drawable.carreblanc);
+        imageView6.setClickable(true);
+        imageView6.setColorFilter(Color.argb(50, 0, 255, 255));
+
+
+        //bleu cobalte
+        final ImageView imageView7 = new ImageView(this);
+        imageView7.setImageResource(R.drawable.carreblanc);
+        imageView7.setClickable(true);
+        imageView7.setColorFilter(Color.argb(255, 0, 148, 255));
+
+
+        //bleu
+        final ImageView imageView8 = new ImageView(this);
+        imageView8.setImageResource(R.drawable.carreblanc);
+        imageView8.setClickable(true);
+        imageView8.setColorFilter(Color.argb(255, 0, 0, 255));
+
+
+        //violet
+        final ImageView imageView9 = new ImageView(this);
+        imageView9.setImageResource(R.drawable.carreblanc);
+        imageView9.setClickable(true);
+        imageView9.setColorFilter(Color.argb(255, 178, 0, 255));
+
+
+        //magenta
+        final ImageView imageView10 = new ImageView(this);
+        imageView10.setImageResource(R.drawable.carreblanc);
+        imageView10.setClickable(true);
+        imageView10.setColorFilter(Color.argb(50, 255, 0, 255));
+
+        //click image
+
+        imageView0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 0;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView0.setPadding(10, 10, 10, 10);
+
+            }
+        });
+
+        imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 1;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView1.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 2;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView2.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 3;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView3.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 4;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView4.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        imageView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 5;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView5.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        imageView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 6;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView6.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        imageView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 7;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView7.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        imageView8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 8;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView8.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        imageView9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 9;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView9.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        imageView10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choixCouleur = 10;
+                //deselection autre image
+                imageView0.setPadding(0, 0, 0, 0);
+                imageView1.setPadding(0, 0, 0, 0);
+                imageView2.setPadding(0, 0, 0, 0);
+                imageView3.setPadding(0, 0, 0, 0);
+                imageView4.setPadding(0, 0, 0, 0);
+                imageView5.setPadding(0, 0, 0, 0);
+                imageView6.setPadding(0, 0, 0, 0);
+                imageView7.setPadding(0, 0, 0, 0);
+                imageView8.setPadding(0, 0, 0, 0);
+                imageView9.setPadding(0, 0, 0, 0);
+                imageView10.setPadding(0, 0, 0, 0);
+                //selection de l'image
+                imageView10.setPadding(10, 10, 10, 10);
+            }
+        });
+
+        switch (i){
+            case 0:
+                imageView0.setPadding(10, 10, 10, 10);
+                break;
+            case 1:
+                imageView1.setPadding(10, 10, 10, 10);
+                break;
+            case 2:
+                imageView2.setPadding(10, 10, 10, 10);
+                break;
+            case 3:
+                imageView3.setPadding(10, 10, 10, 10);
+                break;
+            case 4:
+                imageView4.setPadding(10, 10, 10, 10);
+                break;
+            case 5:
+                imageView5.setPadding(10, 10, 10, 10);
+                break;
+            case 6:
+                imageView6.setPadding(10, 10, 10, 10);
+                break;
+            case 7:
+                imageView7.setPadding(10, 10, 10, 10);
+                break;
+            case 8:
+                imageView8.setPadding(10, 10, 10, 10);
+                break;
+            case 9:
+                imageView9.setPadding(10, 10, 10, 10);
+                break;
+            case 10:
+                imageView10.setPadding(10, 10, 10, 10);
+                break;
+
+
+        }
+
+        imageView0.setAdjustViewBounds(true);
+        linearLayout.addView(imageView0);
+        imageView1.setAdjustViewBounds(true);
+        linearLayout.addView(imageView1);
+        imageView2.setAdjustViewBounds(true);
+        linearLayout.addView(imageView2);
+        imageView3.setAdjustViewBounds(true);
+        linearLayout.addView(imageView3);
+        imageView4.setAdjustViewBounds(true);
+        linearLayout.addView(imageView4);
+        imageView5.setAdjustViewBounds(true);
+        linearLayout.addView(imageView5);
+        imageView6.setAdjustViewBounds(true);
+        linearLayout.addView(imageView6);
+        imageView7.setAdjustViewBounds(true);
+        linearLayout.addView(imageView7);
+        imageView8.setAdjustViewBounds(true);
+        linearLayout.addView(imageView8);
+        imageView9.setAdjustViewBounds(true);
+        linearLayout.addView(imageView9);
+        imageView10.setAdjustViewBounds(true);
+        linearLayout.addView(imageView10);
+
+
     }
 
 

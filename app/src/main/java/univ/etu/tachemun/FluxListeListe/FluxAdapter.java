@@ -63,13 +63,23 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
         d.setMonth(d.getMonth()+1);
         Date dactu = new Date();
 
+
+
         if(list.get(position).getDateHeureEcheance()!=null){
             if(list.get(position).getDateHeureEcheance().before(d) && list.get(position).getDateHeureEcheance().after(dactu)){
-                viewHolder.pseudo.setTextColor(Color.argb(200, 255, 106, 0));
+                if(a != 0){
+                    if( ((b/a)*100) != 100){
+                        viewHolder.pseudo.setTextColor(Color.argb(200, 255, 106, 0));
+                    }
+                }
             }
             else{
                 if(list.get(position).getDateHeureEcheance().before(dactu)){
-                    viewHolder.pseudo.setTextColor(Color.argb(200, 255, 0, 0));
+                    if(a != 0) {
+                        if ( ((b / a) * 100) != 100) {
+                            viewHolder.pseudo.setTextColor(Color.argb(200, 255, 0, 0));
+                        }
+                    }
                 }
             }
         }

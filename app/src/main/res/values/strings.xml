@@ -16,7 +16,7 @@
     <string name="label_pseudo">Entrez un pseudo</string>
     <string name="pseudo_input_hint">Entrez un pseudo</string>
     <string name="password1_input_hint">Entrez un mot de passe</string>
-    <string name="password2_input_hint">Reppetez le mot de passe</string>
+    <string name="password2_input_hint">Confirmer le mot de passe</string>
     <string name="inscription_mail_input_hint">Entrez un mail</string>
     <string name="inscription_confirmation_button_txt">Confirmer</string>
     <string name="cree_nouv_listeTache_nomTache_input_hint">Nom de votre liste</string>
