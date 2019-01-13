@@ -185,21 +185,22 @@ public class ListeListeTaches extends AppCompatActivity
         switch (item.getItemId()) {
 
             case R.id.nav_accueil:
-                Log.i(this.getClass().getName(), "Go accueil");
+                //Log.i(this.getClass().getName(), "Go accueil");
                 go = new Intent(ListeListeTaches.this, ListeListeTaches.class);
                 go.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
                 startActivity(go);
                 finish();
                 break;
             case R.id.nav_rech_groupe:
-                Log.i(this.getClass().getName(), "Go rechGroupe");
+                //Log.i(this.getClass().getName(), "Go rechGroupe");
+                break;
+            case R.id.nav_groupe:
                 break;
             case R.id.nav_new_groupe:
-                Log.i(this.getClass().getName(), "Go new Groupe");
+                //Log.i(this.getClass().getName(), "Go new Groupe");
                 go = new Intent(ListeListeTaches.this, CreationGroupe.class);
                 go.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
                 startActivity(go);
-                finish();
                 break;
 
 
