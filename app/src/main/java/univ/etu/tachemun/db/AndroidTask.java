@@ -41,9 +41,7 @@ public class AndroidTask extends SQLiteOpenHelper {
         DATABASE_PATH = filesDir.substring(0, filesDir.lastIndexOf("/")) + "/databases/";
         // /data/data/com.package.nom/databases/
 
-        // Si la bdd n'existe pas dans le dossier de l'app
         if (!checkdatabase()) {
-            // copy db de 'assets' vers DATABASE_PATH
             copydatabase();
         }
     }
@@ -61,18 +59,14 @@ public class AndroidTask extends SQLiteOpenHelper {
         return dbfile.exists();
     }
 
-    // On copie la base de "assets" vers "/data/data/com.package.nom/databases"
-    // ceci est fait au premier lancement de l'application
     private void copydatabase() {
 
         final String outFileName = DATABASE_PATH + DATABASE_NAME;
 
         InputStream myInput;
         try {
-            // Ouvre la bdd de 'assets' en lecture
             myInput = context.getAssets().open(DATABASE_NAME);
 
-            // dossier de destination
             File pathFile = new File(DATABASE_PATH
             );
             if (!pathFile.exists
@@ -84,11 +78,9 @@ public class AndroidTask extends SQLiteOpenHelper {
                 }
             }
 
-            // Ouverture en écriture du fichier bdd de destination
             OutputStream myOutput = new FileOutputStream(
                     outFileName);
 
-            // transfert de inputfile vers outputfile
             byte[] buffer = new byte[1024];
             int length;
             while ((length = myInput.read(buffer)) > 0) {
@@ -101,10 +93,8 @@ public class AndroidTask extends SQLiteOpenHelper {
             myInput.close();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(context, "Erreur : copydatabase()", Toast.LENGTH_SHORT).show();
         }
 
-        // on greffe le numéro de version
         try {
             SQLiteDatabase checkdb = SQLiteDatabase.openDatabase(
                     DATABASE_PATH + DATABASE_NAME, null, SQLiteDatabase
@@ -138,9 +128,6 @@ public class AndroidTask extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
 
-        // Mise à jour de la base de données
-        // méthode appelée sur incrémentation de DATABASE_VERSION
-        // on peut faire ce qu'on veut ici, comme recréer la base :
 
         onCreate(sqLiteDatabase);
     }

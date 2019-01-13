@@ -76,5 +76,4 @@ public class ActionUserManager extends TableManager {
     }
 
 
-
 }

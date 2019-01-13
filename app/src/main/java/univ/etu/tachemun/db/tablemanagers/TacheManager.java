@@ -192,7 +192,7 @@ public class TacheManager extends TableManager {
 
 
     /**
-     * incement du numero de la tache dans la liste
+     * increment du numero de la tache dans la liste
      *
      * @param t
      * @return

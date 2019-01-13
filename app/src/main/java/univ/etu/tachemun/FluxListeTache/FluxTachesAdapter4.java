@@ -15,7 +15,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import univ.etu.tachemun.CreationTache;
 import univ.etu.tachemun.R;
 import univ.etu.tachemun.db.tableclass.RealiseTache;
 import univ.etu.tachemun.db.tableclass.Tache;
@@ -31,7 +30,7 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
     private TextView TN;
     private TextView TR;
 
-    public  FluxTachesAdapter4(ArrayList<Tache> list,Context context , int idListe , ListView LN, ListView LR, TextView TN, TextView TR){
+    public FluxTachesAdapter4(ArrayList<Tache> list, Context context, int idListe, ListView LN, ListView LR, TextView TN, TextView TR) {
         this.list = list;
         this.context = context;
         this.idListe = idListe;
@@ -59,7 +58,7 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
     @Override
     public View getView(final int i, View convertview, ViewGroup viewGroup) {
         View view = convertview;
-        if(view == null){
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.tache_view_check, null);
         }
@@ -67,27 +66,25 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
         TextView textView = (TextView) view.findViewById(R.id.TEXT_TACHE);
         textView.setText(list.get(i).getLibelle());
 
-        ImageView imageView = (ImageView)view.findViewById(R.id.check);
+        ImageView imageView = (ImageView) view.findViewById(R.id.check);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "click "+i,
+                Toast.makeText(context, "click " + i,
                         Toast.LENGTH_LONG).show();
                 supprTache(list.get(i));
                 rswitchTache(i);
 
-                LN.setAdapter(new FluxTachesAdapter3(getTacheOfListe(),context,idListe,LN,LR,TN,TR));
-                LR.setAdapter(new FluxTachesAdapter4(getTachesRealOfListe(),context,idListe,LN,LR,TN,TR));
-                if(getTacheOfListe().size() == 0){
+                LN.setAdapter(new FluxTachesAdapter3(getTacheOfListe(), context, idListe, LN, LR, TN, TR));
+                LR.setAdapter(new FluxTachesAdapter4(getTachesRealOfListe(), context, idListe, LN, LR, TN, TR));
+                if (getTacheOfListe().size() == 0) {
                     TN.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     TN.setVisibility(View.INVISIBLE);
                 }
-                if(getTachesRealOfListe().size() == 0){
+                if (getTachesRealOfListe().size() == 0) {
                     TR.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     TR.setVisibility(View.INVISIBLE);
                 }
 
@@ -109,9 +106,9 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
         tacheManager.delete(t);
     }
 
-    private void switchTache(Tache t,int i){
+    private void switchTache(Tache t, int i) {
         RealiseTacheManager realiseTacheManager = new RealiseTacheManager(context);
-        realiseTacheManager.insert(new RealiseTache(list.get(i).getCreateur(),list.get(i).getID(),""));
+        realiseTacheManager.insert(new RealiseTache(list.get(i).getCreateur(), list.get(i).getID(), ""));
     }
 
     private ArrayList<Tache> getTacheOfListe() {
@@ -124,7 +121,7 @@ public class FluxTachesAdapter4 extends BaseAdapter implements ListAdapter {
         return t.getTachesRealFromListe(idListe);
     }
 
-    private void rswitchTache(int i){
+    private void rswitchTache(int i) {
         TacheManager tacheManager = new TacheManager(context);
         tacheManager.insert(list.get(i));
         //list.get(i).setEcheance(list.get(i).getDateHeureEcheance() != null);

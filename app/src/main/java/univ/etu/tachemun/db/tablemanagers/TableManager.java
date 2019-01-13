@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import univ.etu.tachemun.db.AndroidTask;
 
 abstract class TableManager {
+
     private static String createTableScript;
     SQLiteDatabase db;
     Context context;

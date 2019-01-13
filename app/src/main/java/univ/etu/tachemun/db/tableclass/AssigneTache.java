@@ -82,12 +82,12 @@ public class AssigneTache {
         return dateHeureAssignation;
     }
 
-    public void setDateHeureAssignation(long dateHeureAssignation) {
-        this.dateHeureAssignation = new Date(dateHeureAssignation);
-    }
-
     public void setDateHeureAssignation(Date dateHeureAssignation) {
         this.dateHeureAssignation = dateHeureAssignation;
+    }
+
+    public void setDateHeureAssignation(long dateHeureAssignation) {
+        this.dateHeureAssignation = new Date(dateHeureAssignation);
     }
 
     @Override

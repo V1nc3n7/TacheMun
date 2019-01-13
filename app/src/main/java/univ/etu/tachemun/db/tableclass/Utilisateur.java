@@ -38,12 +38,12 @@ public class Utilisateur {
         return dateInscription;
     }
 
-    public void setDateInscription(Date dateInscription) {
-        this.dateInscription = dateInscription;
-    }
-
     public void setDateInscription(long dateInscription) {
         this.dateInscription = new Date(dateInscription);
+    }
+
+    public void setDateInscription(Date dateInscription) {
+        this.dateInscription = dateInscription;
     }
 
     public String getMotDePasse() {

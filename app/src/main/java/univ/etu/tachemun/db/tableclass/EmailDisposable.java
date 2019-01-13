@@ -40,12 +40,12 @@ public class EmailDisposable {
         return dateHeureAjout;
     }
 
-    public void setDateHeureAjout(long dateHeureAjout) {
-        this.dateHeureAjout = new Date(dateHeureAjout);
-    }
-
     public void setDateHeureAjout(Date dateHeureAjout) {
         this.dateHeureAjout = dateHeureAjout;
+    }
+
+    public void setDateHeureAjout(long dateHeureAjout) {
+        this.dateHeureAjout = new Date(dateHeureAjout);
     }
 
     @Override

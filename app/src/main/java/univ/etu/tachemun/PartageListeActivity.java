@@ -52,7 +52,6 @@ public class PartageListeActivity extends AppCompatActivity {
                     int id_liste = getIntent().getIntExtra("ID_LISTETACHE", -1);
                     String userName = getIntent().getStringExtra("ID_UTILISATEUR");
                     partageListeManager.insert(new PartageListe(userName, id_liste, invite, ""));
-                    //TODO mettre un message 'liste partagée'
                     Intent i = new Intent(PartageListeActivity.this, ListeListeTaches.class);
                     i.putExtra("ID_UTILISATEUR", userName);
                     startActivity(i);

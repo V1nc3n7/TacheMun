@@ -25,7 +25,7 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
     private Context context;
 
     //flux est la liste des models à afficher
-    public FluxAdapter(Context context, List<Flux> flux,ArrayList<ListeTache> arrayList) {
+    public FluxAdapter(Context context, List<Flux> flux, ArrayList<ListeTache> arrayList) {
         super(context, 0, flux);
         this.list = arrayList;
         this.context = context;
@@ -60,23 +60,21 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
         viewHolder.text.setText(flux.getText());
 
         Date d = new Date();
-        d.setMonth(d.getMonth()+1);
+        d.setMonth(d.getMonth() + 1);
         Date dactu = new Date();
 
 
-
-        if(list.get(position).getDateHeureEcheance()!=null){
-            if(list.get(position).getDateHeureEcheance().before(d) && list.get(position).getDateHeureEcheance().after(dactu)){
-                if(a != 0){
-                    if( ((b/a)*100) != 100){
+        if (list.get(position).getDateHeureEcheance() != null) {
+            if (list.get(position).getDateHeureEcheance().before(d) && list.get(position).getDateHeureEcheance().after(dactu)) {
+                if (a != 0) {
+                    if (((b / a) * 100) != 100) {
                         viewHolder.pseudo.setTextColor(Color.argb(200, 255, 106, 0));
                     }
                 }
-            }
-            else{
-                if(list.get(position).getDateHeureEcheance().before(dactu)){
-                    if(a != 0) {
-                        if ( ((b / a) * 100) != 100) {
+            } else {
+                if (list.get(position).getDateHeureEcheance().before(dactu)) {
+                    if (a != 0) {
+                        if (((b / a) * 100) != 100) {
                             viewHolder.pseudo.setTextColor(Color.argb(200, 255, 0, 0));
                         }
                     }
@@ -94,14 +92,13 @@ public class FluxAdapter extends ArrayAdapter<Flux> {
             viewHolder.date.setVisibility(View.VISIBLE);
         }
 
-        if(a == 0){
-            viewHolder.pourcent.setText(100+"%");
+        if (a == 0) {
+            viewHolder.pourcent.setText(100 + "%");
             viewHolder.progressBar.setProgress(100);
-        }
-        else{
-            double c = (b/a)*100;
-            viewHolder.pourcent.setText((int)c+"%");
-            viewHolder.progressBar.setProgress((int)c);
+        } else {
+            double c = (b / a) * 100;
+            viewHolder.pourcent.setText((int) c + "%");
+            viewHolder.progressBar.setProgress((int) c);
         }
 
         return convertView;

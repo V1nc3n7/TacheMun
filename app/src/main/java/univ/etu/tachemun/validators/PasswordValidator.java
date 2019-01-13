@@ -1,5 +1,8 @@
 package univ.etu.tachemun.validators;
 
+/**
+ * Validateur de mot de passe
+ */
 public class PasswordValidator extends Validator {
 
     public PasswordValidator(int min, int max) {

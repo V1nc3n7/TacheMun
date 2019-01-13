@@ -1,14 +1,10 @@
 package univ.etu.tachemun;
 
 import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,7 +17,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +34,6 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -161,13 +155,13 @@ public class ListeListeTaches extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(ListeListeTaches.this,Parametres.class);
+            Intent intent = new Intent(ListeListeTaches.this, Parametres.class);
             startActivity(intent);
             return true;
         }
-        if(id == R.id.action_deco){
-            Intent intent = new Intent(ListeListeTaches.this,Connexion.class);
-            intent.putExtra("deco",1);
+        if (id == R.id.action_deco) {
+            Intent intent = new Intent(ListeListeTaches.this, Connexion.class);
+            intent.putExtra("deco", 1);
             startActivity(intent);
             finish();
         }
@@ -211,7 +205,7 @@ public class ListeListeTaches extends AppCompatActivity
         return true;
     }
 
-    private ArrayList<ListeTache> recupListeListe(){
+    private ArrayList<ListeTache> recupListeListe() {
         ListeTacheManager lm = new ListeTacheManager(ListeListeTaches.this);
         return lm.getListesOfUser(getIntent().getStringExtra("ID_UTILISATEUR"));
     }
@@ -295,7 +289,7 @@ public class ListeListeTaches extends AppCompatActivity
                 }
 
                 List<Flux> listflux = geneListe(listeTaches);
-                FluxAdapter adapter = new FluxAdapter(this, listflux,listeTaches);
+                FluxAdapter adapter = new FluxAdapter(this, listflux, listeTaches);
                 listView.setAdapter(adapter);
                 list(listView);
             }
@@ -329,13 +323,13 @@ public class ListeListeTaches extends AppCompatActivity
     }
 
     //affichage et actualisation
-    public void affichage(int a){
+    public void affichage(int a) {
 
         //affichage listeliste
         linearLayout = (LinearLayout) findViewById(R.id.layoutprincipal);
         listeTaches = recupListeListe();
 
-        textView =new TextView(this);
+        textView = new TextView(this);
         textView.setId(R.id.textmessagepasdelisteliste);
         textView.setText(R.string.liste_listestache_no_lists);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -347,28 +341,27 @@ public class ListeListeTaches extends AppCompatActivity
 
         if (listeTaches.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             textView.setVisibility(View.INVISIBLE);
 
             listView.setId(R.id.listeListeView);
             final List<Flux> listflux = geneListe(listeTaches);
-            final FluxAdapter adapter = new FluxAdapter(this, listflux,listeTaches);
+            final FluxAdapter adapter = new FluxAdapter(this, listflux, listeTaches);
             listView.setAdapter(adapter);
             list(listView);
         }
     }
 
-    private void list(ListView l){
+    private void list(ListView l) {
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 listeTaches = recupListeListe();
                 Intent intent = new Intent(ListeListeTaches.this, AffListeTache.class);
-                intent.putExtra("ID_UTILISATEUR",getIntent().getStringExtra("ID_UTILISATEUR"));
+                intent.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
                 intent.putExtra("ID_LISTE", listeTaches.get(i).getID());
-                intent.putExtra("NOM_LISTETACHE",listeTaches.get(i).getNom());
-                intent.putExtra("COULEUR_LISTETACHE",listeTaches.get(i).getCouleur());
+                intent.putExtra("NOM_LISTETACHE", listeTaches.get(i).getNom());
+                intent.putExtra("COULEUR_LISTETACHE", listeTaches.get(i).getCouleur());
                 startActivity(intent);
             }
         });
@@ -382,7 +375,7 @@ public class ListeListeTaches extends AppCompatActivity
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        modiflist(v,position);
+                        modiflist(v, position);
                     }
                 });
 
@@ -397,7 +390,7 @@ public class ListeListeTaches extends AppCompatActivity
                         listeTaches = recupListeListe();
                         ArrayList<ListeTache> listeTaches2 = recupListeListe();
                         List<Flux> listflux2 = geneListe(listeTaches2);
-                        FluxAdapter adapter2 = new FluxAdapter(ListeListeTaches.this, listflux2,listeTaches);
+                        FluxAdapter adapter2 = new FluxAdapter(ListeListeTaches.this, listflux2, listeTaches);
                         listView.setAdapter(adapter2);
 
                         if (listeTaches2.isEmpty()) {
@@ -437,10 +430,10 @@ public class ListeListeTaches extends AppCompatActivity
         tacheManager.delete(t);
     }
 
-    public void sendOnChannel1(){
-        Intent intent = new Intent(this,ListeListeTaches.class);
+    public void sendOnChannel1() {
+        Intent intent = new Intent(this, ListeListeTaches.class);
 
-        PendingIntent intent1 = PendingIntent.getBroadcast(this,0,intent,0);
+        PendingIntent intent1 = PendingIntent.getBroadcast(this, 0, intent, 0);
 
 
         listeTaches = recupListeListe();
@@ -450,24 +443,23 @@ public class ListeListeTaches extends AppCompatActivity
         String message2 = "";
         String messagef = "";
         Date d = new Date();
-        d.setMonth(d.getMonth()+1);
+        d.setMonth(d.getMonth() + 1);
         Date dactu = new Date();
 
         message += "Echéance(s) dépassée(s) : \n";
-        for(int i = 0 ; i<listeTaches.size();i++){
-            if(listeTaches.get(i).getDateHeureEcheance() != null) {
+        for (int i = 0; i < listeTaches.size(); i++) {
+            if (listeTaches.get(i).getDateHeureEcheance() != null) {
                 if (listeTaches.get(i).getDateHeureEcheance().before(dactu)) {
                     double a = getTachesOfListe(i).size();
                     double b = getTachesRealOfListe(i).size();
                     double c = 0;
 
-                    if(a == 0){
+                    if (a == 0) {
                         c = 100;
+                    } else {
+                        c = (b / a) * 100;
                     }
-                    else{
-                        c = (b/a)*100;
-                    }
-                    if(c != 100){
+                    if (c != 100) {
                         message += "" + listeTaches.get(i).getNom() + "\n" + "Se terminait le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
                     }
 
@@ -475,32 +467,31 @@ public class ListeListeTaches extends AppCompatActivity
             }
         }
 
-        if(message.equals("Echéance(s) dépassée(s) : \n")){
+        if (message.equals("Echéance(s) dépassée(s) : \n")) {
             message = "";
         }
 
         message2 += "Echéance(s) dans un mois : \n";
-        for(int i = 0 ; i<listeTaches.size();i++){
-            if(listeTaches.get(i).getDateHeureEcheance() != null) {
+        for (int i = 0; i < listeTaches.size(); i++) {
+            if (listeTaches.get(i).getDateHeureEcheance() != null) {
                 if (listeTaches.get(i).getDateHeureEcheance().before(d) && listeTaches.get(i).getDateHeureEcheance().after(dactu)) {
                     double a = getTachesOfListe(i).size();
                     double b = getTachesRealOfListe(i).size();
                     double c = 0;
 
-                    if(a == 0){
+                    if (a == 0) {
                         c = 100;
+                    } else {
+                        c = (b / a) * 100;
                     }
-                    else{
-                        c = (b/a)*100;
-                    }
-                    if(c != 100) {
+                    if (c != 100) {
                         message2 += "" + listeTaches.get(i).getNom() + "\n" + "Se termine le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
                     }
                 }
             }
         }
 
-        if(message2.equals("Echéance(s) dans un mois : \n")){
+        if (message2.equals("Echéance(s) dans un mois : \n")) {
             message2 = "";
         }
 
@@ -516,8 +507,8 @@ public class ListeListeTaches extends AppCompatActivity
             c = (b/a)*100;
         }*/
 
-        if(message.equals("") == false){
-            Notification notification = new NotificationCompat.Builder(this,CHANNEL_1_ID)
+        if (!message.equals("")) {
+            Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                     .setSmallIcon(R.drawable.ic_rappelle)
                     .setContentTitle("Vos échéances de date sont dépasées ")
                     .setContentText("Echéance ...")
@@ -529,10 +520,10 @@ public class ListeListeTaches extends AppCompatActivity
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText(message))
                     .build();
-            notificationManager.notify(1,notification);
+            notificationManager.notify(1, notification);
         }
-        if(message2.equals("") == false){
-            Notification notification = new NotificationCompat.Builder(this,CHANNEL_2_ID)
+        if (!message2.equals("")) {
+            Notification notification = new NotificationCompat.Builder(this, CHANNEL_2_ID)
                     .setSmallIcon(R.drawable.ic_rappelle)
                     .setContentTitle("Vos listes de tâches arrivent à échéance : ")
                     .setContentText("Echéance ...")
@@ -544,7 +535,7 @@ public class ListeListeTaches extends AppCompatActivity
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText(message2))
                     .build();
-            notificationManager.notify(2,notification);
+            notificationManager.notify(2, notification);
         }
     }
 
@@ -558,12 +549,12 @@ public class ListeListeTaches extends AppCompatActivity
         return t.getTachesRealFromListe(listeTaches.get(i).getID());
     }
 
-    private void modiflist(final View view, int i){
+    private void modiflist(final View view, int i) {
         listeTaches = recupListeListe();
         final int position = i;
         AlertDialog.Builder builder = new AlertDialog.Builder(ListeListeTaches.this);
         final View viewInflated = LayoutInflater.from(ListeListeTaches.this).inflate(R.layout.listetache_view_modif, (ViewGroup) view, false);
-        creationImage(viewInflated,listeTaches.get(i).getCouleur());
+        creationImage(viewInflated, listeTaches.get(i).getCouleur());
         choixCouleur = listeTaches.get(i).getCouleur();
 
         final EditText nt = (EditText) viewInflated.findViewById(R.id.nomListTache);
@@ -573,12 +564,12 @@ public class ListeListeTaches extends AppCompatActivity
         nt.setText(listeTaches.get(i).getNom());
         dest.setText(listeTaches.get(i).getDescription());
 
-        if(listeTaches.get(i).getDateHeureCreation() != null){
+        if (listeTaches.get(i).getDateHeureCreation() != null) {
             Date d = listeTaches.get(i).getDateHeureCreation();
             DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy");
             DateFormat dt = new SimpleDateFormat("HH:mm:ss");
 
-            String da= df.format(d);
+            String da = df.format(d);
             String ti = dt.format(d);
 
             date.setText(da);
@@ -607,7 +598,7 @@ public class ListeListeTaches extends AppCompatActivity
                 TextView date = (TextView) viewInflated.findViewById(R.id.date);
                 TextView heure = (TextView) viewInflated.findViewById(R.id.heure);
                 Date e = new Date();
-                if(date.getText().equals("0") == false){
+                if (!date.getText().equals("0")) {
                     e.setTime(Long.parseLong("" + date.getText()));
                     String a = (String) heure.getText();
                     String[] z = a.split(":");
@@ -622,11 +613,10 @@ public class ListeListeTaches extends AppCompatActivity
                 listeTache.setNom(nt.getText().toString());
                 listeTache.setDescription(dest.getText().toString());
                 listeTache.setCouleur(choixCouleur);
-                if(date.getText().equals("0") == false){
+                if (!date.getText().equals("0")) {
                     listeTache.setDateHeureEcheance(e.getTime());
                     listeTache.setHasEcheance(true);
-                }
-                else{
+                } else {
                     listeTache.setHasEcheance(false);
                 }
 
@@ -661,7 +651,7 @@ public class ListeListeTaches extends AppCompatActivity
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-    private void creationImage(View v,int i) {
+    private void creationImage(View v, int i) {
         LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.couleurs);
         //création image
         //noir
@@ -974,7 +964,7 @@ public class ListeListeTaches extends AppCompatActivity
             }
         });
 
-        switch (i){
+        switch (i) {
             case 0:
                 imageView0.setPadding(10, 10, 10, 10);
                 break;

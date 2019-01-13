@@ -114,6 +114,7 @@ public class GroupeManager extends TableManager {
 
         return list;
     }
+
     public long delete(Groupe groupe) {
 
 

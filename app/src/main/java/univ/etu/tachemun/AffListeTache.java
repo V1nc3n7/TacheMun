@@ -23,7 +23,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,13 +61,13 @@ public class AffListeTache extends AppCompatActivity {
 
         this.setTitle(getIntent().getStringExtra("NOM_LISTETACHE"));
         Toolbar toolbar1 = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(couleur(getIntent().getIntExtra("COULEUR_LISTETACHE",0)));
+        toolbar.setBackgroundColor(couleur(getIntent().getIntExtra("COULEUR_LISTETACHE", 0)));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AffListeTache.this,CreationTache.class);
+                Intent intent = new Intent(AffListeTache.this, CreationTache.class);
                 intent.putExtra("ID_LISTE", getIntent().getIntExtra("ID_LISTE", -1));
                 intent.putExtra("ID_UTILISATEUR", getIntent().getStringExtra("ID_UTILISATEUR"));
                 startActivityForResult(intent, 0);
@@ -120,12 +119,12 @@ public class AffListeTache extends AppCompatActivity {
         return t.getTachesRealFromListe(getIntent().getIntExtra("ID_LISTE", -1));
     }
 
-    private ArrayList<Tache> trie(ArrayList<Tache> list){
+    private ArrayList<Tache> trie(ArrayList<Tache> list) {
         ArrayList<Tache> list2 = new ArrayList<>();
         int priot = 9;
-        while(list.size() != list2.size() || priot != -1){
-            for(int i = 0;i<list.size();i++){
-                if(list.get(i).getPriorite() == priot){
+        while (list.size() != list2.size() || priot != -1) {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getPriorite() == priot) {
                     list2.add(list.get(i));
                 }
             }
@@ -149,7 +148,7 @@ public class AffListeTache extends AppCompatActivity {
 
                 listView = (ListView) findViewById(R.id.listetacheAF);
                 listView2 = (ListView) findViewById(R.id.listetacheF);
-                list(listView,listView2);
+                list(listView, listView2);
                 TachesN = getTacheOfListe();
                 TachesR = getTachesRealOfListe();
 
@@ -168,14 +167,14 @@ public class AffListeTache extends AppCompatActivity {
                 //List<FluxTaches> listflux = gene(TachesN, 0);
                 //FluxTachesAdapter adapter = new FluxTachesAdapter(this, listflux);
 
-                FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN,this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
+                FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN, this, getIntent().getIntExtra("ID_LISTE", -1), listView, listView2, textView2, textView4);
 
                 listView.setAdapter(adapter3);
 
                 //List<FluxTaches> listflux2 = gene(TachesR, 1);
                 //FluxTachesAdapter adapter2 = new FluxTachesAdapter(this, listflux2);
 
-                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR,this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
+                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR, this, getIntent().getIntExtra("ID_LISTE", -1), listView, listView2, textView2, textView4);
 
                 listView2.setAdapter(adapter4);
 
@@ -215,7 +214,7 @@ public class AffListeTache extends AppCompatActivity {
 
         listView = new ListView(this);
         listView.setId(R.id.listetacheAF);
-        listView.setPadding(10,10,10,20);
+        listView.setPadding(10, 10, 10, 20);
         linearLayout1.addView(listView);
 
         textView3 = new TextView(this);
@@ -234,11 +233,11 @@ public class AffListeTache extends AppCompatActivity {
 
         listView2 = new ListView(this);
         listView2.setId(R.id.listetacheF);
-        listView2.setPadding(10,10,10,10);
+        listView2.setPadding(10, 10, 10, 10);
         linearLayout2.addView(listView2);
 
         //Toast.makeText(this, "listN "+ getTacheOfListe().size()+", listR "+ getTachesRealOfListe().size(), Toast.LENGTH_LONG).show();
-        list(listView,listView2);
+        list(listView, listView2);
 
 
         if (TachesN.isEmpty() && TachesR.isEmpty()) {
@@ -246,17 +245,15 @@ public class AffListeTache extends AppCompatActivity {
         } else {
             if (TachesN.isEmpty()) {
                 textView2.setVisibility(View.VISIBLE);
-            }
-            else{
+            } else {
                 textView2.setVisibility(View.INVISIBLE);
             }
             //final List<FluxTaches> list = gene(TachesN, 0);
             //final FluxTachesAdapter adapter = new FluxTachesAdapter(this, list);
 
-            FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN,this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
+            FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN, this, getIntent().getIntExtra("ID_LISTE", -1), listView, listView2, textView2, textView4);
 
             listView.setAdapter(adapter3);
-
 
 
             if (TachesR.isEmpty()) {
@@ -267,7 +264,7 @@ public class AffListeTache extends AppCompatActivity {
                 //List<FluxTaches> list1 = gene(TachesR, 1);
                 //FluxTachesAdapter adapter1 = new FluxTachesAdapter(this, list1);
 
-                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR,this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
+                FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR, this, getIntent().getIntExtra("ID_LISTE", -1), listView, listView2, textView2, textView4);
 
                 listView2.setAdapter(adapter4);
 
@@ -316,7 +313,7 @@ public class AffListeTache extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-    public void list(ListView l1, ListView l2){
+    public void list(ListView l1, ListView l2) {
         //l1
         l1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -396,7 +393,7 @@ public class AffListeTache extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         Date e = new Date();
-                        if(date.getText().equals("0") == false){
+                        if (date.getText().equals("0") == false) {
                             e.setTime(Long.parseLong("" + date.getText()));
                             String a = (String) heure.getText();
                             String[] z = a.split(":");
@@ -413,11 +410,10 @@ public class AffListeTache extends AppCompatActivity {
                         tache.setLibelle("" + t.getText());
                         tache.setDescription("" + d.getText());
                         tache.setPriorite(prio[0]);
-                        if(date.getText().equals("0") == false){
+                        if (date.getText().equals("0") == false) {
                             tache.setDateHeureEcheance(e.getTime());
                             tache.setEcheance(true);
-                        }
-                        else{
+                        } else {
                             tache.setEcheance(false);
                         }
 
@@ -453,7 +449,7 @@ public class AffListeTache extends AppCompatActivity {
                         supprTache(TachesN.get(i));
 
                         TachesN = getTacheOfListe();
-                        FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN,AffListeTache.this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
+                        FluxTachesAdapter3 adapter3 = new FluxTachesAdapter3(TachesN, AffListeTache.this, getIntent().getIntExtra("ID_LISTE", -1), listView, listView2, textView2, textView4);
 
                         listView.setAdapter(adapter3);
 
@@ -544,7 +540,7 @@ public class AffListeTache extends AppCompatActivity {
 
                         TachesR = getTachesRealOfListe();
 
-                        FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR,AffListeTache.this,getIntent().getIntExtra("ID_LISTE", -1),listView,listView2,textView2,textView4);
+                        FluxTachesAdapter4 adapter4 = new FluxTachesAdapter4(TachesR, AffListeTache.this, getIntent().getIntExtra("ID_LISTE", -1), listView, listView2, textView2, textView4);
 
                         listView2.setAdapter(adapter4);
 
@@ -572,7 +568,7 @@ public class AffListeTache extends AppCompatActivity {
         tacheManager.delete(t);
     }
 
-    private int couleur(int i){
+    private int couleur(int i) {
         int color = Color.argb(255, 255, 0, 0);
         switch (i) {
             case 0:

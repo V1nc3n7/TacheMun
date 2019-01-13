@@ -116,12 +116,12 @@ public class ListeTache {
         return dateHeureEcheance;
     }
 
-    public void setDateHeureEcheance(long dateHeureEcheance) {
-        this.dateHeureEcheance = new Date(dateHeureEcheance);
-    }
-
     public void setDateHeureEcheance(Date dateHeureEcheance) {
         this.dateHeureEcheance = dateHeureEcheance;
+    }
+
+    public void setDateHeureEcheance(long dateHeureEcheance) {
+        this.dateHeureEcheance = new Date(dateHeureEcheance);
     }
 
     public int getCouleur() {

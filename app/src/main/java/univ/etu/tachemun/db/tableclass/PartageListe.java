@@ -64,12 +64,12 @@ public class PartageListe {
         return dateHeurePartage;
     }
 
-    public void setDateHeurePartage(long dateHeurePartage) {
-        this.dateHeurePartage = new Date(dateHeurePartage);
-    }
-
     public void setDateHeurePartage(Date dateHeurePartage) {
         this.dateHeurePartage = dateHeurePartage;
+    }
+
+    public void setDateHeurePartage(long dateHeurePartage) {
+        this.dateHeurePartage = new Date(dateHeurePartage);
     }
 
     public String getMessage() {

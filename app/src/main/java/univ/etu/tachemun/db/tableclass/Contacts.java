@@ -53,13 +53,13 @@ public class Contacts {
         return dateHeureContact;
     }
 
+    public void setDateHeureContact(Date dateHeureContact) {
+        this.dateHeureContact = dateHeureContact;
+    }
+
     public void setDateHeureContact(long dateHeureContact) {
         this.dateHeureContact = new Date(dateHeureContact);
 
-    }
-
-    public void setDateHeureContact(Date dateHeureContact) {
-        this.dateHeureContact = dateHeureContact;
     }
 
     @Override

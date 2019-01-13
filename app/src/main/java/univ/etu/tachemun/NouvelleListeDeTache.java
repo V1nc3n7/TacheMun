@@ -28,6 +28,7 @@ import univ.etu.tachemun.db.tablemanagers.ListeTacheManager;
 
 public class NouvelleListeDeTache extends AppCompatActivity {
 
+    public static final long MAGIC = 86400000L; //24 * 60**2
     private LinearLayout linearLayout;
     private EditText nomListeTache;
     private EditText descriptionListeTache;
@@ -35,7 +36,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
     private Button checkButton;
     private Button timePicker;
     private Button datePicker;
-    public static final long MAGIC = 86400000L; //24 * 60**2
     private TextView date;
     private TextView heure;
 
@@ -81,7 +81,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                 } else {
                     String userName = getIntent().getStringExtra("ID_UTILISATEUR");
 
-                    //TODO rajouter l'heure
                     Date d = new Date();
                     d.setTime(Long.parseLong("" + date.getText()));
                     String a = (String) heure.getText();
@@ -103,7 +102,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                                 getDescriptionListe()
                                 , true, d.getTime(), choixCouleur));
                     }
-
 
 
                     //data ne sert a rien c'est un test

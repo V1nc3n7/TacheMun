@@ -39,7 +39,13 @@ public class UtilisateurManager extends TableManager {
         super(context);
     }
 
-
+    /**
+     * Génération du hash du mot de passe
+     *
+     * @param u
+     * @param input
+     * @return
+     */
     private String genMdpViren(Utilisateur u, String input) {
         String m0, m1, m2, m3, m4, m5, m6, m7;
         m0 = getSHA256("motherlode");
@@ -243,6 +249,12 @@ public class UtilisateurManager extends TableManager {
 
     }
 
+    /**
+     * Teste si le pseudo est connu
+     *
+     * @param pseudo Le pseudo à rechercher
+     * @return true / false
+     */
     public boolean isPseudoInDb(String pseudo) {
         if (pseudo.equals("")) return false;
         this.open();
@@ -262,6 +274,12 @@ public class UtilisateurManager extends TableManager {
 
     }
 
+    /**
+     * Teste si le mail est connu
+     *
+     * @param mailInput Le pseudo à rechercher
+     * @return true / false
+     */
     public boolean isMailInDb(String mailInput) {
         this.open();
         Cursor c = db.rawQuery(
@@ -297,6 +315,11 @@ public class UtilisateurManager extends TableManager {
         return r;
     }
 
+    /**
+     * Connection de l'utilisateur automatique
+     *
+     * @param username
+     */
     public void autoConnectUser(String username) {
         ActionUserManager actionUserManager = new ActionUserManager(context);
         actionUserManager.insertNew(new ActionUser(username, "AUTOCONNEXION"));

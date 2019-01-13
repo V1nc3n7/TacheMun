@@ -9,10 +9,8 @@ public class MembreManager extends TableManager {
     static final String tableName = "Membre";
     static final String PSEUDO = "pseudo";
     static final String ID_MEMBRE = "ID_Membre";
-    private static final String DateHeure_Adhesion = "dateAdhesion";
     static final String ID_GROUPE = "ID_GROUPE";
-
-
+    private static final String DateHeure_Adhesion = "dateAdhesion";
     public static final String createTableScript = "CREATE TABLE " + tableName +
             " (" +
             ID_MEMBRE + " INTEGER PRIMARY KEY AUTOINCREMENT,"

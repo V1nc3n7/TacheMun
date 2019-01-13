@@ -112,13 +112,13 @@ public class Tache {
         return dateHeureCreation;
     }
 
+    public void setDateHeureCreation(Date dateHeureCreation) {
+        this.dateHeureCreation = dateHeureCreation;
+    }
+
     public void setDateHeureCreation(long dateHeureCreation) {
 
         this.dateHeureCreation = new Date(dateHeureCreation);
-    }
-
-    public void setDateHeureCreation(Date dateHeureCreation) {
-        this.dateHeureCreation = dateHeureCreation;
     }
 
     public int getNumero() {
@@ -141,12 +141,12 @@ public class Tache {
         return dateHeureEcheance;
     }
 
-    public void setDateHeureEcheance(long dateHeureEcheance) {
-        this.dateHeureEcheance = new Date(dateHeureEcheance);
-    }
-
     public void setDateHeureEcheance(Date dateHeureEcheance) {
         this.dateHeureEcheance = dateHeureEcheance;
+    }
+
+    public void setDateHeureEcheance(long dateHeureEcheance) {
+        this.dateHeureEcheance = new Date(dateHeureEcheance);
     }
 
     public boolean hasEcheance() {
