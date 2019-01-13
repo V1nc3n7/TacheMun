@@ -89,12 +89,6 @@
         android:text="@string/cree_une_nouvelle_liste" />
 
 
-    <Button
-            android:id="@+id/check"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        android:text="@string/check" />
-
     <TextView
         android:id="@+id/date"
         android:layout_width="0dp"

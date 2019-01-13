@@ -317,7 +317,7 @@ public class ListeListeTaches extends AppCompatActivity
 
         }
 
-        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+
 
         return super.onOptionsItemSelected(item);
     }

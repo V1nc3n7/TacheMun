@@ -86,12 +86,12 @@ public class Inscription extends AppCompatActivity {
 
                     Utilisateur user = new Utilisateur(getPseudoInput(), getPassword1Input(), getMailInput());
                     utilisateurManager.insertNew(user);
-                    Intent data = new Intent(Inscription.this, Connexion.class);
-                    //   Intent data = new Intent();
+                    //Intent data = new Intent(Inscription.this, Connexion.class);
+                    Intent data = new Intent();
 
                     data.putExtra("ID_UTILISATEUR", getPseudoInput());
                     setResult(1, data);
-                    startActivity(data);
+                    //startActivity(data);
                     finish();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Inscription.this);

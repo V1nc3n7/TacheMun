@@ -71,7 +71,7 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "Activity will continue",
+                            Toast.makeText(getApplicationContext(), "Suivant",
                                     Toast.LENGTH_LONG).show();
                         }
                     });
@@ -109,26 +109,6 @@ public class NouvelleListeDeTache extends AppCompatActivity {
                     setResult(1, data);
                     finish();
                 }
-            }
-        });
-
-        checkButton = (Button) findViewById(R.id.check);
-        checkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
-
-                Date d = new Date();
-                d.setTime(Long.parseLong("" + date.getText()));
-                String a = (String) heure.getText();
-                String[] t = a.split(":");
-                String h = t[0];
-                String m = t[1];
-                d.setHours(Integer.parseInt(h));
-                d.setMinutes(Integer.parseInt(m));
-                d.setSeconds(0);
-                Snackbar.make(v, "info : " + df.format(d.getTime()), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
     }

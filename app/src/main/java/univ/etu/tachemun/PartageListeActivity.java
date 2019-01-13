@@ -40,7 +40,7 @@ public class PartageListeActivity extends AppCompatActivity {
                     builder.setPositiveButton("Suivant", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "Activity will continue",
+                            Toast.makeText(getApplicationContext(), "Suivant",
                                     Toast.LENGTH_LONG).show();
                         }
                     });
