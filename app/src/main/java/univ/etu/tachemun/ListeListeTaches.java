@@ -453,7 +453,7 @@ public class ListeListeTaches extends AppCompatActivity
         d.setMonth(d.getMonth()+1);
         Date dactu = new Date();
 
-        message += "Echénace(s) d'épassée(s) : \n";
+        message += "Echéance(s) dépassée(s) : \n";
         for(int i = 0 ; i<listeTaches.size();i++){
             if(listeTaches.get(i).getDateHeureEcheance() != null) {
                 if (listeTaches.get(i).getDateHeureEcheance().before(dactu)) {
@@ -468,18 +468,18 @@ public class ListeListeTaches extends AppCompatActivity
                         c = (b/a)*100;
                     }
                     if(c != 100){
-                        message += "" + listeTaches.get(i).getNom() + "\n" + "Ce terminait le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
+                        message += "" + listeTaches.get(i).getNom() + "\n" + "Se terminait le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
                     }
 
                 }
             }
         }
 
-        if(message.equals("Echénace(s) d'épassée(s) : \n")){
+        if(message.equals("Echéance(s) dépassée(s) : \n")){
             message = "";
         }
 
-        message2 += "Echénace(s) dans un mois : \n";
+        message2 += "Echéance(s) dans un mois : \n";
         for(int i = 0 ; i<listeTaches.size();i++){
             if(listeTaches.get(i).getDateHeureEcheance() != null) {
                 if (listeTaches.get(i).getDateHeureEcheance().before(d) && listeTaches.get(i).getDateHeureEcheance().after(dactu)) {
@@ -494,13 +494,13 @@ public class ListeListeTaches extends AppCompatActivity
                         c = (b/a)*100;
                     }
                     if(c != 100) {
-                        message2 += "" + listeTaches.get(i).getNom() + "\n" + "Ce termine le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
+                        message2 += "" + listeTaches.get(i).getNom() + "\n" + "Se termine le : " + df.format(listeTaches.get(i).getDateHeureEcheance()) + "\n\n";
                     }
                 }
             }
         }
 
-        if(message2.equals("Echénace(s) dans un mois : \n")){
+        if(message2.equals("Echéance(s) dans un mois : \n")){
             message2 = "";
         }
 

@@ -391,7 +391,7 @@ public class AffListeTache extends AppCompatActivity {
                 final int pos = i;
                 builder.setView(viewInflated);
                 builder.setCancelable(true);
-                builder.setPositiveButton("modifié", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("modifier", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
